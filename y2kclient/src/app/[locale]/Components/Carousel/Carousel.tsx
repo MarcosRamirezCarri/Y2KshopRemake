@@ -20,7 +20,7 @@ export default function Carousel() {
         className='h-80 w-[100%]'
       >
         {mockCarousel.map((mock, index) => <SwiperSlide key={index} className=' flex flex-col p-2 '>
-          <Image  src={mock.img} className='h-[100%] w-[100%]' width={780} height={700} alt='PhCarousel' />
+          <Image  src={mock.img} className='h-[100%] w-[100%]' width={980} height={800} alt='PhCarousel' />
         </SwiperSlide>
 )}  
       </Swiper>
