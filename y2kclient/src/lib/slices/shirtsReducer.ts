@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface shirts{
+    id: number,
+    title: string,
+    price: number,
+
+}
+
 export const shirtsReducer = createSlice({
     name: "shirts",
     initialState:{

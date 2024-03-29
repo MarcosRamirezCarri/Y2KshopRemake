@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-col h-[1000vh] items-center content-around">
       <Navbar/>
-      <div>
       <Carousel/>
-        </div>
     </div>
   );
 }
