@@ -1,6 +1,6 @@
 'use client';
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { getAllProducts } from "@/lib/actions/getAllProducts";
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
+import { fetchData } from '@/lib/slices/shirtsReducer';
 import { useEffect, useState } from "react";
 
 interface Product{
@@ -12,9 +12,11 @@ interface Product{
 
 export default function ShowCards() {
     const [stateProducts, setStateProducts] = useState<Product[]>([]);
+    const { loading, error } = useAppSelector((state) => state.shirts)
     const products = useAppSelector((state) => state.shirts)
 
     const dispatch = useAppDispatch()
+   
    
     useEffect(() => {
       const fetchData = async () => {
