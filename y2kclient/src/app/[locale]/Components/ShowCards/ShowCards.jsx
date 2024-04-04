@@ -1,19 +1,14 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
-import { fetchData } from '@/lib/slices/shirtsReducer';
+import { getAllProducts } from '@/lib/actions/getAllProducts';
 import { useEffect, useState } from "react";
 
-interface Product{
-    id: number,
-    title: string,
-    price: number,
 
-}
 
 export default function ShowCards() {
-    const [stateProducts, setStateProducts] = useState<Product[]>([]);
-    const { loading, error } = useAppSelector((state) => state.shirts)
-    const products = useAppSelector((state) => state.shirts)
+    const [stateProducts, setStateProducts] = useState([]);
+    const products = useAppSelector((state) => state.shirts.shirts)
+    
 
     const dispatch = useAppDispatch()
    
@@ -24,7 +19,7 @@ export default function ShowCards() {
       }
       fetchData();      
     }, [dispatch]);
-   
+   console.log(products)
 
 
   return (

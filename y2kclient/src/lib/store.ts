@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import shirtsReducer from './slices/shirtsReducer';
 import pantsReducer from './slices/pantsReducer';
-// ...
+
 
 export const store = configureStore({
   reducer: {

@@ -1,53 +1,39 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-interface Shirts{
-    id: number,
-    title: string,
-    price: number,
-    description: string,
-    category: string,
-    image: string,
-
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { getAllProducts } from '../actions/getAllProducts';
 
 
-export const fetchData = createAsyncThunk(
-    'data/fetchData',
-    async (apiUrl: string) => {
-      const response = await axios.get<Shirts>(apiUrl);
-      return response.data;
-    }
-  );
+
 
 export const shirtsReducer = createSlice({
     name: "shirts",
     initialState:{
+        isLoading: false,
+        status: "",
         shirts: [],
-        loading: false,
-        error: null,
     },
     reducers:{
-       
+      setShirts: (state, action) => {
+        state.shirts = action.payload
+    }, 
     },
-    extraReducers: (builder) => {
-        builder
-          .addCase(fetchData.pending, (state) => {
-            state.loading = true;
-          })
-          .addCase(fetchData.fulfilled, (state, action) => {
-            state.loading = false;
-            state.shirts = action.payload
-
-          })
-          .addCase(fetchData.rejected, (state, action) => {
-            state.loading = false;
-          });
+    extraReducers: {
+      getAllProducts.pending.type: (state, action) => {
+          state.status = "pending";
+          state.isLoading = true;
       },
+      getEmployees.fulfilled.type: (state, { payload }) => {
+          state.status = "success";
+          state.values = payload;
+          state.isLoading = false;
+      },
+      etEmployees.rejected.type: (state, action) => {
+          state.status = "failed"
+          state.isLoading = false
+      }
+    }
     
     });
-    
-    export const { reducer } = shirtsReducer;
+    export const { setShirts } = shirtsReducer.actions;;
     
     export default shirtsReducer.reducer;
     
