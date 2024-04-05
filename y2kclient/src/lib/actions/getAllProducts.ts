@@ -1,8 +1,9 @@
 import { setShirts } from "../slices/shirtsReducer";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Server } from "@/helpers/server";
-import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
+import axios from "axios";
+
 
 interface Shirt {
   id: number,
@@ -14,12 +15,15 @@ interface Shirt {
 
 }
 
-export const getAllProducts = createAsyncThunk('shirts/GetShirts' ,  async()  => {
+export const getAllProducts = () => async(Dispatch: Dispatch)  => {
     try {
         const { data } = await axios.get<Shirt[]>(`${Server}/products`);
-        console.log(data)
+        const shirtsWithShortenedTitles = data.map(shirt => ({
+          ...shirt,
+          title: shirt.title.length > 10 ? `${shirt.title.substring(0, 10)}...` : shirt.title,
+        }));
         
-       return data;
+        Dispatch(setShirts(shirtsWithShortenedTitles));
       } catch (error) {
         if (error instanceof Error) {
             console.log(error.message); 
@@ -27,4 +31,4 @@ export const getAllProducts = createAsyncThunk('shirts/GetShirts' ,  async()  =>
             console.log('Error desconocido:', error); 
           }
     }
-})
+}
