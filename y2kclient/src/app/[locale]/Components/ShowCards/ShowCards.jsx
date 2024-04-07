@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import CardProduct from "./Card";
+import CardProduct from "./Card/Card";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ export default function ShowCards() {
   console.log(all);
 
   return (
-    <div className="flex flex-col h-[60vh] w-full bg-gray-300 items-center relative content-around">
+    <div className="grid grid-cols-4 gap-12 h-[60vh] w-[85%] items-center relative content-around">
       {all.length === 0 ? (
         <div>
           <p>loading</p>

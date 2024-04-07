@@ -5,10 +5,13 @@ import Carousel from "./[locale]/Components/Carousel/Carousel";
 
 export default function Home() {
   return (
-    <div className="flex flex-col h-[1000vh] items-center content-around">
+    <div className="flex flex-col w-full h-full gap-5">
       <Navbar/>
-      <ShowCards/>
+      <div className="flex flex-col w-full h-full justify-around gap-10 items-center">
       <Carousel/>
+      <ShowCards/>
+      </div>
+ 
     </div>
   );
 }

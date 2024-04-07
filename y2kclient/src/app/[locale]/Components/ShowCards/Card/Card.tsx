@@ -19,7 +19,7 @@ const CardProduct: React.FC<CardProductProps> = ({ id, title, price, image }) =>
             className="rounded-full w-[8.25rem] h-[8.25rem] bg-transparent"
             alt="no image"
           />
-          <p>{price}</p>
+          <p>${price}</p>
         </div>
     );
   }
