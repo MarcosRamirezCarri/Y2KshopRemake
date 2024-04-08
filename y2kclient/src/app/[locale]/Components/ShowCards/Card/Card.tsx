@@ -10,16 +10,16 @@ interface CardProductProps {
 const CardProduct: React.FC<CardProductProps> = ({ id, title, price, image }) => {
     return (
       
-        <div className="p-4 bg-gray-400 rounded-md gap-3 z-5 select-none flex flex-col min-h-68">
-          <p>{title}</p>
+        <div className="p-4 max-w-[11rem] bg-blue-100 gap-3 z-5 select-none flex flex-col min-h-68 transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-color-blue-200" >
+          
           <Image
             width={680}
             height={400}
             src={image}
-            className="rounded-full w-[8.25rem] h-[8.25rem] bg-transparent"
+            className="rounded w-[10.25rem] ring-2 ring-blue-200 h-[10.25rem] bg-transparent"
             alt="no image"
           />
-          <p>${price}</p>
+          <p className="font-titilium text-xl text-blue-900 font-semibold">{title}</p>
         </div>
     );
   }

@@ -5,9 +5,9 @@ import Carousel from "./[locale]/Components/Carousel/Carousel";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-full gap-5">
+    <div className="flex flex-col w-full h-full ">
       <Navbar/>
-      <div className="flex flex-col w-full h-full justify-around gap-10 items-center">
+      <div className="flex flex-col w-full h-full justify-around gap-[17rem] items-center">
       <Carousel/>
       <ShowCards/>
       </div>

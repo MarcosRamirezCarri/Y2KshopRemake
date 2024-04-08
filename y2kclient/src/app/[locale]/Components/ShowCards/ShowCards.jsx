@@ -19,10 +19,9 @@ export default function ShowCards() {
   const all = [];
   if (Array.isArray(products) && products.length > 0) all.push(...products);
 
-  console.log(all);
 
   return (
-    <div className="grid grid-cols-4 gap-12 h-[60vh] w-[85%] items-center relative content-around">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 h-[60vh] w-[85%] items-center relative content-around">
       {all.length === 0 ? (
         <div>
           <p>loading</p>
