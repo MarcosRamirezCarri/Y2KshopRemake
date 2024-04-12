@@ -66,6 +66,7 @@ const config: Config = {
       
       fontFamily: {
         titilium: ["Titilium", "sans-serif"],
+        tiltneon: ["Tiltneon", "sans-serif"]
 
       },
       backgroundImage: {

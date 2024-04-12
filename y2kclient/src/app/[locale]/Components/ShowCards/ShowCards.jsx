@@ -19,7 +19,6 @@ export default function ShowCards() {
   const all = [];
   if (Array.isArray(products) && products.length > 0) all.push(...products);
 
-
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 h-[60vh] w-[85%] items-center relative content-around">
       {all.length === 0 ? (
@@ -27,14 +26,16 @@ export default function ShowCards() {
           <p>loading</p>
         </div>
       ) : null}
-       {all.map((item, index) => <div key={index}>
-    <CardProduct
-    title={item.title}
-    image={item.image}
-    price={item.price}
-    id={item.id}
-    />
-  </div>)}
+      {all.map((item, index) => (
+        <div key={index}>
+          <CardProduct
+            title={item.title}
+            image={item.image}
+            price={item.price}
+            id={item.id}
+          />
+        </div>
+      ))}
     </div>
   );
 }

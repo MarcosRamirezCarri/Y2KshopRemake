@@ -35,3 +35,8 @@ body {
   font-family: "Titilium";
   src: url('../../public/fonts/TitilliumWeb-Regular.ttf');
 }
+@font-face {
+  font-family: "Tiltneon";
+  src: url('../../public/fonts/TiltNeon-Regular.ttf');
+}
+

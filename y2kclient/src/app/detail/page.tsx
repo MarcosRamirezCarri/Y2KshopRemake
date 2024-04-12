@@ -38,12 +38,12 @@ const DetailProduct = () => {
   }, []);
 console.log(stateDetail)
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full items-center">
       <Navbar />
-      <div className="grid grid-cols-3 w-[90%] top-[20rem] relative justify-around items-center">
+      <div className="grid grid-cols-3 w-[90%] top-[10rem] relative justify-around items-center">
         {stateDetail.length === 0 ? null : stateDetail.map((i, index) => (
-            <div key={index}>
               <FirstView
+              key={index}
                 id={i.id}
                 image={i.image}
                 title={i.title}
@@ -51,7 +51,7 @@ console.log(stateDetail)
                 description={i.description}
                 category={i.category}
               />
-            </div>
+        
           ))}
       </div>
     </div>
