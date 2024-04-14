@@ -26,17 +26,19 @@ const DetailProduct = () => {
         const { data } = await axios.get<DetailProductProps[]>(
           `${Server}/products/${productId}`
         );
-
         let arrayData = [];
         arrayData.push(data);
-        setStateDetail(arrayData);
+        const shirtsWithShortenedTitles = arrayData.map(shirt => ({
+          ...shirt,
+          title: shirt.title.length > 20 ? `${shirt.title.substring(0, 20)}...` : shirt.title,
+        }));
+        setStateDetail(shirtsWithShortenedTitles);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     };
     fetchProduct(searchId);
   }, []);
-console.log(stateDetail)
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />

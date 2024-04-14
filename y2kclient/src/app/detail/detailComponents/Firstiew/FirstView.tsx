@@ -18,27 +18,27 @@ const FirstView: React.FC<DetailProducts> = ({
   category,
 }) => {
   return (
-    <div className="grid grid-cols-5 col-span-3 w-[100%] gap-3">
+    <div className="grid grid-cols-3 grid-rows-3 lg:grid-rows-1 lg:grid-cols-5 col-span-3 w-[100%] gap-3">
       <div className="col-span-1 flex flex-col items-center py-10 gap-5">
         <Image
           width={880}
           height={800}
           src={image}
-          className="rounded w-[7.25rem] ring-2 ring-pink-200 h-[7.25rem] bg-transparent"
+          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
           alt="no image"
         />
         <Image
           width={880}
           height={800}
           src={image}
-          className="rounded w-[7.25rem] ring-2 ring-pink-200 h-[7.25rem] bg-transparent"
+          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
           alt="no image"
         />
         <Image
           width={880}
           height={800}
           src={image}
-          className="rounded w-[7.25rem] ring-2 ring-pink-200 h-[7.25rem] bg-transparent"
+          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
           alt="no image"
         />
       </div>
@@ -55,7 +55,7 @@ const FirstView: React.FC<DetailProducts> = ({
         />
       </div>
 
-      <div className="flex flex-col p-6 place-content-center items-left col-span-2 gap-5">
+      <div className="flex flex-col p-6 place-content-center items-left col-span-3 lg:col-span-2 gap-5">
         <p className="font-tiltneon text-xl text-blue-900 font-normal flex flex-row">
           Category:{" "}
           <p className="font-tiltneon text-lg text-gray-800 text-justify font-light px-2">
