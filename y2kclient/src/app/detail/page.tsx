@@ -29,9 +29,12 @@ const DetailProduct = () => {
         );
         let arrayData = [];
         arrayData.push(data);
-        const shirtsWithShortenedTitles = arrayData.map(shirt => ({
+        const shirtsWithShortenedTitles = arrayData.map((shirt) => ({
           ...shirt,
-          title: shirt.title.length > 20 ? `${shirt.title.substring(0, 20)}...` : shirt.title,
+          title:
+            shirt.title.length > 20
+              ? `${shirt.title.substring(0, 20)}...`
+              : shirt.title,
         }));
         setStateDetail(shirtsWithShortenedTitles);
       } catch (error) {
@@ -39,28 +42,26 @@ const DetailProduct = () => {
       }
     };
     fetchProduct(searchId);
-  }, []);
+  }, [searchId]);
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />
       <div className="grid grid-rows-2 w-[90%] top-[10rem] relative justify-around items-center">
-        {stateDetail.length === 0 ? null : stateDetail.map((i, index) => (
+        {stateDetail.length === 0
+          ? null
+          : stateDetail.map((i, index) => (
               <div>
-<FirstView
-              key={index}
-          
-                image={i.image}
-                title={i.title}
-                price={i.price}
-                description={i.description}
-                category={i.category}
-              />
-              <SecondView category={i.category} id={i.id}/>
+                <FirstView
+                  key={index}
+                  image={i.image}
+                  title={i.title}
+                  price={i.price}
+                  description={i.description}
+                  category={i.category}
+                />
+                <SecondView category={i.category} id={i.id} />
               </div>
-              
-              
-        
-          ))}
+            ))}
       </div>
     </div>
   );
