@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import FirstView from "./detailComponents/Firstiew/FirstView";
+import SecondView from "./detailComponents/SecondView/SecondView";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
 import { useEffect, useState } from "react";
 import { Server } from "@/helpers/server";
@@ -42,17 +43,22 @@ const DetailProduct = () => {
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />
-      <div className="grid grid-cols-3 w-[90%] top-[10rem] relative justify-around items-center">
+      <div className="grid grid-rows-2 w-[90%] top-[10rem] relative justify-around items-center">
         {stateDetail.length === 0 ? null : stateDetail.map((i, index) => (
-              <FirstView
+              <div>
+<FirstView
               key={index}
-                id={i.id}
+          
                 image={i.image}
                 title={i.title}
                 price={i.price}
                 description={i.description}
                 category={i.category}
               />
+              <SecondView category={i.category} id={i.id}/>
+              </div>
+              
+              
         
           ))}
       </div>

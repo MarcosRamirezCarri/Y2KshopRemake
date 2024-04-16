@@ -1,5 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import AOS from "aos";
+import '../../../../../node_modules/aos/dist/aos.css'
 import CardProduct from "./Card/Card";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
 import { useEffect, useState } from "react";
@@ -14,6 +16,7 @@ export default function ShowCards() {
       await dispatch(getAllProducts());
     };
     fetchData();
+    AOS.init({duration: 1000})
   }, [dispatch]);
 
   const all = [];
@@ -27,7 +30,7 @@ export default function ShowCards() {
         </div>
       ) : null}
       {all.map((item, index) => (
-        <div key={index}>
+        <div data-aos='fade-up' key={index}>
           <CardProduct
             title={item.title}
             image={item.image}

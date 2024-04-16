@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.ts", "src/app/[locale]/Components/ShowCards/ShowCards.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.ts", "src/app/[locale]/Components/ShowCards/ShowCards.jsx", "src/app/detail/detailComponents/SecondView/SecondView.jsx"],
   "exclude": ["node_modules"]
 }
