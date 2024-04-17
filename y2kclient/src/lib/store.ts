@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import shirtsReducer from './slices/shirtsReducer';
-import pantsReducer from './slices/pantsReducer';
+import cartReducer from './slices/cartReducer';
 
 
 export const store = configureStore({
   reducer: {
     shirts: shirtsReducer,
-    pants: pantsReducer,
+    pants: cartReducer,
 
   }
 })
