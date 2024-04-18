@@ -6,7 +6,7 @@ import cartReducer from './slices/cartReducer';
 export const store = configureStore({
   reducer: {
     shirts: shirtsReducer,
-    pants: cartReducer,
+    cart: cartReducer,
 
   }
 })

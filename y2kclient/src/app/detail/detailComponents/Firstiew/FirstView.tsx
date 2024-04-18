@@ -6,6 +6,7 @@ interface DetailProducts {
   description: string;
   category: string;
   image: string;
+  handleAddToCart: any
 }
 
 const FirstView: React.FC<DetailProducts> = ({
@@ -14,6 +15,7 @@ const FirstView: React.FC<DetailProducts> = ({
   image,
   description,
   category,
+  handleAddToCart
 }) => {
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 w-[100%] gap-3">
@@ -74,7 +76,7 @@ const FirstView: React.FC<DetailProducts> = ({
           </p>
           
         </p>
-        <button className="relative self-end bg-pink-400 px-10 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">Add to cart</button>
+        <button onClick={(()=>handleAddToCart())} className="relative self-end bg-pink-400 px-10 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">Add to cart</button>
       </div>
     </div>
   );

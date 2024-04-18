@@ -22,7 +22,7 @@ interface RecomendArrray {
   title: string;
 }
 
-const SecondView: React.FC<PropOfRecomned> = ({ category, id }) => {
+const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
   const products = useAppSelector((state) => state.shirts.shirts);
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useAppDispatch();

@@ -23,11 +23,11 @@ interface Product {
 
 
 export const cartReducer = createSlice({
-    name: "pants",
+    name: "cart",
     initialState,
     reducers:{
         saveToCart: (state, action: PayloadAction<Product[]>) => {
-            state.products = action.payload
+            state.products.push(action.payload)
         }, 
     }
     
