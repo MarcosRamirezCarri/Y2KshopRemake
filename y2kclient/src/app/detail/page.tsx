@@ -51,7 +51,7 @@ const DetailProduct = () => {
     fetchProduct(searchId);
   }, [searchId]);
 
-  console.log(stateCart);
+
 
   const handleAddToCart = () => {
     const productExists = stateCart.some(
@@ -89,9 +89,9 @@ const DetailProduct = () => {
         {stateDetail.length === 0
           ? null
           : stateDetail.map((i, index) => (
-              <div>
+              <div key={index}>
                 <FirstView
-                  key={index}
+                  
                   image={i.image}
                   title={i.title}
                   price={i.price}

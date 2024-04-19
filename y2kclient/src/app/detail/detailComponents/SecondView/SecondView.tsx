@@ -57,9 +57,7 @@ const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
       <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">Related Products</p>
       <div className="grid grid-cols-3 w-[90%] lg:w-[80%] gap-3 ">
         <Swiper   slidesPerView={isMobile ? 1 : 3}
-        centeredSlides={true}
         navigation={true}
-        loop={true}
         pagination={{
           clickable: true,
         }}

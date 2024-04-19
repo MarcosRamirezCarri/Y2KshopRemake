@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.2",
+    "@reduxjs/toolkit": "^2.2.3",
     "aos": "^2.3.4",
     "atropos": "^2.0.2",
     "axios": "^1.6.8",
