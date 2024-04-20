@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper/modules';
-import { useAppDispatch, useAppSelector } from "@/app/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import CardProduct from "@/app/[locale]/Components/ShowCards/Card/Card";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ interface RecomendArrray {
 }
 
 const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
-  const products = useAppSelector((state) => state.shirts.shirts);
+  const products = useAppSelector((state) => state.products.product);
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useAppDispatch();
 

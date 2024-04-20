@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../lib/hooks/hooks";
 import { Server } from "@/helpers/server";
 import axios from "axios";
 import { useEffect, useState } from "react";

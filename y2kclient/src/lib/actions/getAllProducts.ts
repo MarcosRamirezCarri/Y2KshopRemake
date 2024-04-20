@@ -1,4 +1,4 @@
-import { setShirts } from "../slices/shirtsReducer";
+import { setShirts } from "../slices/productsReducer";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Server } from "@/helpers/server";
 import { Dispatch } from "@reduxjs/toolkit";

@@ -1,5 +1,5 @@
 "use client";
-import { useAppSelector, useAppDispatch } from "../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../lib/hooks/hooks";
 import CartCard from "./CartCard/CartCard";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
 
