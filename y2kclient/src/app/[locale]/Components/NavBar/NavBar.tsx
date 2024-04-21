@@ -8,7 +8,7 @@ export default function Navbar() {
         <Link href={{pathname:'/'}} ><button className={style.Title}>Y2K Shop</button></Link>
         <div className="gap-3 lg:gap-10 flex flex-row">
         <Link href={{pathname:'/cart'}} ><button className="font-titilium text-lg lg:text-2xl text-pink-50 font-normal">Carrito</button></Link>
-        <button className="font-titilium text-lg lg:text-2xl text-pink-50 font-normal">Comprar</button>
+        <Link href={{pathname:'/products'}} ><button className="font-titilium text-lg lg:text-2xl text-pink-50 font-normal">Comprar</button></Link>
         <button className="font-titilium text-lg lg:text-2xl text-pink-50 font-normal">cuenta</button>
           </div>
        
