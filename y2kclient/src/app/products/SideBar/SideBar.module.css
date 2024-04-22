@@ -1,0 +1,18 @@
+.animate{
+    padding: 1rem;
+    position: fixed;
+    top: 6rem;
+    z-index: 999;
+    animation: l9 1s infinite linear alternate;
+}
+@keyframes l9 {
+    0% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(11px);
+    }
+    100%{
+        transform: translateX(12px);
+    }
+  }

@@ -29,7 +29,13 @@ export const productsReducer = createSlice({
   reducers: {
     setShirts: (state, action: PayloadAction<Product[]>) => {
       state.product = action.payload;
+      state.sortProducts = action.payload 
     },
+    sortByCategory: (state, action) =>{
+      let sorted = action.payload === 'all' state.sortProducts : state.product.filter((el) =>
+        el.category.includes(action.payload));
+
+    }
   },
 });
     export const { setShirts } = productsReducer.actions;;
