@@ -14,13 +14,15 @@ interface ProductState {
   status: string;
   product: Product[];
   sortProducts: Product[];
+  selectedCategory: string
 }
 
 const initialState: ProductState = {
   isLoading: false,
   status: "",
   product: [],
-  sortProducts: []
+  sortProducts: [],
+  selectedCategory: 'all'
 };
 
 export const productsReducer = createSlice({
@@ -31,14 +33,18 @@ export const productsReducer = createSlice({
       state.product = action.payload;
       state.sortProducts = action.payload 
     },
-    sortByCategory: (state, action) =>{
-      let sorted = action.payload === 'all' state.sortProducts : state.product.filter((el) =>
-        el.category.includes(action.payload));
-
+    sortByCategory: (state, action: PayloadAction<string>) =>{
+      let copyState = [...state.sortProducts]
+      state.selectedCategory = action.payload;
+      if (action.payload === 'all') {
+        state.product = copyState;
+      } else {
+        state.product = state.sortProducts.filter(item => item.category === action.payload);
+      }
     }
   },
 });
-    export const { setShirts } = productsReducer.actions;;
+    export const { setShirts, sortByCategory } = productsReducer.actions;;
     
     export default productsReducer.reducer;
     

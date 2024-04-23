@@ -76,6 +76,22 @@ const FirstView: React.FC<DetailProducts> = ({
           </p>
           
         </p>
+        <select className="relative self-end bg-pink-400 px-3 py-2 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+          <option value="">select an talle</option>
+            <option> 
+              S
+            </option>
+            <option> 
+              M
+            </option>
+            <option> 
+              L
+            </option>
+            <option> 
+              XL
+            </option>
+
+        </select>
         <button onClick={(()=>handleAddToCart())} className="relative self-end bg-pink-400 px-10 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">Add to cart</button>
       </div>
     </div>

@@ -8,13 +8,14 @@ export default function CardsContainer() {
 const dispatch = useAppDispatch();
 const stateProducts = useAppSelector((state) => state.products.product);
 
+
+
 useEffect(()=>{
   const fetchData = async () => {
     await dispatch(getAllProducts());
   };
   fetchData();
 }, []);
-console.log(stateProducts)
 
     return (
       <div className="grid grid-cols-1 lg:grid-cols-4 relative gap-[2rem] top-[10rem] w-[90%] justify-items-center">
