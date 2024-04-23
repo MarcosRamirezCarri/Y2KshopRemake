@@ -16,6 +16,7 @@ interface ProductCategory{
   description: string;
   category: string;
   image: string;
+  sizes: string[]
 }
 
 export default function SideBar() {
@@ -44,8 +45,6 @@ export default function SideBar() {
   };
 
   const allCategories = getUniqueCategories(stateProducts)
-
-  console.log(allCategories)
 
   const handleBar = () => {
     setStatusBar(!statusBar);

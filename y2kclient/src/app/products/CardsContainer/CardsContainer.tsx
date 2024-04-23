@@ -25,7 +25,9 @@ useEffect(()=>{
             title={a.title}
             image={a.image}
             category={a.category}
-            price={a.price}/>
+            price={a.price}
+            sizes={a.sizes}
+            />
         </div>
         )
 

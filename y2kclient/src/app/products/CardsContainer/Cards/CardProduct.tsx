@@ -7,6 +7,7 @@ interface CartProductsProps {
   price: number;
   category: string;
   image: string;
+  sizes: string[]
 }
 
 const CardProductComplete: React.FC<CartProductsProps> = ({
@@ -15,6 +16,7 @@ const CardProductComplete: React.FC<CartProductsProps> = ({
   category,
   price,
   image,
+  sizes
 }) => {
   return (
     <div className="p-5 rounded-md max-w-[20rem] bg-blue-200 gap-4 z-5 select-none flex flex-col transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-color-blue-300">

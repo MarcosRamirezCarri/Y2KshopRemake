@@ -7,6 +7,7 @@ interface Product {
   description: string;
   category: string;
   image: string;
+  sizes: string[];
 }
 
 interface ProductState {

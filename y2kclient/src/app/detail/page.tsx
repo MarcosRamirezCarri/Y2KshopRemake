@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks/hooks";
+import { getSizesForCategory } from "@/helpers/functions";
 import { Server } from "@/helpers/server";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -17,10 +18,12 @@ interface DetailProductProps {
   description: string;
   category: string;
   image: string;
+  sizes: string[]
 }
 
 const DetailProduct = () => {
   const [stateDetail, setStateDetail] = useState<DetailProductProps[]>([]);
+  const [selectedSize, setSelectedSize] = useState<string>('')
   const stateCart: DetailProductProps[] = useAppSelector(
     (state) => state.cart.products
   );
@@ -36,20 +39,30 @@ const DetailProduct = () => {
         );
         let arrayData: DetailProductProps[] = [];
         arrayData.push(data);
-        const shirtsWithShortenedTitles = arrayData.map((shirt) => ({
+        const formatedProduct = arrayData.map((shirt) => ({
           ...shirt,
           title:
             shirt.title.length > 20
               ? `${shirt.title.substring(0, 20)}...`
               : shirt.title,
+              sizes: getSizesForCategory(shirt.category)
         }));
-        setStateDetail(shirtsWithShortenedTitles);
+        setStateDetail(formatedProduct);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     };
     fetchProduct(searchId);
   }, [searchId]);
+
+  const handleChangeSize = (event: React.ChangeEvent<HTMLSelectElement>) =>{
+    const newSize = event.target.value;
+    setSelectedSize(newSize);
+    // Modificar el objeto de producto para incluir solo el tamaño seleccionado
+    const updatedProduct = { ...stateDetail, sizes: [newSize] };
+    setStateDetail(updatedProduct)
+
+  }
 
 
 
@@ -98,6 +111,9 @@ const DetailProduct = () => {
                   description={i.description}
                   category={i.category}
                   handleAddToCart={handleAddToCart}
+                  sizes={i.sizes}
+                  selectedSize={selectedSize}
+                  handleChangeSize={handleChangeSize}
                 />
                 <SecondView category={i.category} id={i.id} />
               </div>
