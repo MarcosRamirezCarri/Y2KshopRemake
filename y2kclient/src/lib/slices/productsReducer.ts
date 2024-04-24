@@ -42,10 +42,19 @@ export const productsReducer = createSlice({
       } else {
         state.product = state.sortProducts.filter(item => item.category === action.payload);
       }
+    },
+    sortBySize: (state, action: PayloadAction<string>) =>{
+      let copyState = [...state.sortProducts]
+      state.selectedCategory = action.payload;
+      if (action.payload === 'all') {
+        state.product = copyState;
+      } else {
+        state.product = state.sortProducts.filter(item => item.sizes.includes(action.payload));
+      }
     }
   },
 });
-    export const { setShirts, sortByCategory } = productsReducer.actions;;
+    export const { setShirts, sortByCategory, sortBySize } = productsReducer.actions;;
     
     export default productsReducer.reducer;
     

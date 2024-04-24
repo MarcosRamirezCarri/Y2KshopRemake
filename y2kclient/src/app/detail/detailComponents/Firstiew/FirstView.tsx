@@ -8,8 +8,8 @@ interface DetailProducts {
   image: string;
   sizes: string[];
   handleAddToCart: any;
-  handleChangeSize: any
-  selectedSize: string
+  handleChangeSize: any;
+  selectedSize: string;
 }
 
 const FirstView: React.FC<DetailProducts> = ({
@@ -21,7 +21,7 @@ const FirstView: React.FC<DetailProducts> = ({
   sizes,
   handleAddToCart,
   selectedSize,
-  handleChangeSize
+  handleChangeSize,
 }) => {
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 w-[100%] gap-3">
@@ -81,8 +81,12 @@ const FirstView: React.FC<DetailProducts> = ({
             - ${price}
           </p>
         </p>
-        <select value={selectedSize} onChange={handleChangeSize} className="relative self-end bg-pink-400 px-3 py-2 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
-          <option disabled >Select Size</option>
+        <select
+          value={selectedSize}
+          onChange={handleChangeSize}
+          className="relative self-end bg-pink-400 px-3 py-2 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
+        >
+          <option disabled>Select Size</option>
           {sizes.map((size, index) => (
             <option key={index} value={size}>
               {size}

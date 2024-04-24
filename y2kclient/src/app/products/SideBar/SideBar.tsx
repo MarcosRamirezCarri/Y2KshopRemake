@@ -44,6 +44,16 @@ export default function SideBar() {
     return Array.from(categoriesSet);
   };
 
+  const getUniqueSizes = (items: ProductCategory[]) =>{
+    const sizesSet = new Set<string>();
+    items.forEach(product => {
+      product.sizes.forEach(category => {
+        sizesSet.add(sizes.sizes);
+      });
+    });
+    return Array.from(categoriesSet);
+  }
+
   const allCategories = getUniqueCategories(stateProducts)
 
   const handleBar = () => {

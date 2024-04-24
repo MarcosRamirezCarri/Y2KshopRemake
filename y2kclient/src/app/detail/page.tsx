@@ -18,12 +18,12 @@ interface DetailProductProps {
   description: string;
   category: string;
   image: string;
-  sizes: string[]
+  sizes: string[];
 }
 
 const DetailProduct = () => {
   const [stateDetail, setStateDetail] = useState<DetailProductProps[]>([]);
-  const [selectedSize, setSelectedSize] = useState<string>('')
+  const [selectedSize, setSelectedSize] = useState<string>("");
   const stateCart: DetailProductProps[] = useAppSelector(
     (state) => state.cart.products
   );
@@ -45,7 +45,7 @@ const DetailProduct = () => {
             shirt.title.length > 20
               ? `${shirt.title.substring(0, 20)}...`
               : shirt.title,
-              sizes: getSizesForCategory(shirt.category)
+          sizes: getSizesForCategory(shirt.category),
         }));
         setStateDetail(formatedProduct);
       } catch (error) {
@@ -55,16 +55,11 @@ const DetailProduct = () => {
     fetchProduct(searchId);
   }, [searchId]);
 
-  const handleChangeSize = (event: React.ChangeEvent<HTMLSelectElement>) =>{
+  const handleChangeSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newSize = event.target.value;
     setSelectedSize(newSize);
-    // Modificar el objeto de producto para incluir solo el tamaño seleccionado
-    const updatedProduct = { ...stateDetail, sizes: [newSize] };
-    setStateDetail(updatedProduct)
-
-  }
-
-
+  };
+  console.log(selectedSize);
 
   const handleAddToCart = () => {
     const productExists = stateCart.some(
@@ -77,6 +72,13 @@ const DetailProduct = () => {
         title: "Oops...",
         text: "This product is already in your cart!",
       });
+    }
+    if (selectedSize === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select a size",
+      });
     } else {
       Swal.fire({
         title: "Do you want to add this product to your cart?",
@@ -87,7 +89,11 @@ const DetailProduct = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Saved!", "", "success");
-          dispatch(addToCart(stateDetail[0]));
+          const updatedProduct = stateDetail.map((product) => ({
+            ...product,
+            sizes: [selectedSize],
+          }));
+          dispatch(addToCart(updatedProduct[0]));
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
         }
@@ -104,7 +110,6 @@ const DetailProduct = () => {
           : stateDetail.map((i, index) => (
               <div key={index}>
                 <FirstView
-                  
                   image={i.image}
                   title={i.title}
                   price={i.price}
