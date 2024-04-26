@@ -39,25 +39,4 @@ body {
   font-family: "Tiltneon";
   src: url('../../public/fonts/TiltNeon-Regular.ttf');
 }
-select {
-  appearance: none; /* Oculta la flecha del cuadro de selección en otros navegadores */
-  -webkit-appearance: none; /* Para navegadores WebKit */
-}
 
-/* Estilo para el cuadro que aparece al hacer clic en el select */
-select::-ms-value {
-  color: blue; /* Cambia el color del texto seleccionado en Internet Explorer */
-}
-
-select::after {
-  content: ''; /* Agrega contenido vacío */
-  position: absolute; /* Posición absoluta */
-  top: 50%; /* Coloca en la mitad superior */
-  right: 12px; /* Alinea a la derecha */
-  transform: translateY(-50%); /* Centra verticalmente */
-  width: 0; /* Ancho cero */
-  height: 0; /* Alto cero */
-  border-left: 6px solid transparent; /* Borde izquierdo transparente */
-  border-right: 6px solid transparent; /* Borde derecho transparente */
-  border-top: 6px solid #000; /* Borde superior de color negro */
-}
