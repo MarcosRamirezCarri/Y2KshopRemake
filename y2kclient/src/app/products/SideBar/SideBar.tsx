@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { sortByCategory, sortBySize } from "@/lib/slices/productsReducer";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
+import SideBarFilters from "./SideBarFilters/SideBarFilters";
 import style from "./SideBar.module.css";
 import {
   IoIosArrowDroprightCircle,
@@ -20,8 +21,10 @@ interface ProductCategory {
 }
 
 export default function SideBar() {
-  const [statusBar, setStatusBar] = useState(true);
-  const [statusFilter, setStatusFilter] = useState(false)
+  const [statusBar, setStatusBar] = useState<boolean>(true);
+  const [statusFilter2, setStatusFilter2] = useState<boolean>(false);
+  const [statusFilter1, setStatusFilter1] = useState<boolean>(false);
+  const [statusSelectedFilter, setStatusSelectedFilter] = useState<string>("");
   const dispatch = useAppDispatch();
 
   const stateProducts = useAppSelector((state) => state.products.sortProducts);
@@ -64,55 +67,41 @@ export default function SideBar() {
 
   const handleBar = () => {
     setStatusBar(!statusBar);
+    
   };
-  const handleFilter1 = () =>{
-    setStatusFilter(!statusFilter);
-  }
+  const handleFilter1 = () => {
+    setStatusFilter1(!statusFilter1);
+    if(statusFilter2 === true){
+      setStatusFilter2(false)
+    }
+  };
+  const handleFilter2 = () => {
+    setStatusFilter2(!statusFilter2);
+    if(statusFilter1 === true){
+      setStatusFilter1(false)
+    }
+  };
 
   return (
     <div>
       <div
-        className={`flex flex-col bg-gray-800 gap-2 p-2 top-[8rem] transition-all duration-300 z-[100] left-0 fixed self-start w-[15%] h-[100vh] ${
+        className={`flex flex-col bg-gray-800 gap-2 p-2 top-[8rem] transition-all duration-300 z-[100] left-0 fixed self-start w-[40%] lg:w-[15%] h-[100vh] ${
           statusBar ? "translate-x-0" : "translate-x-[-50vw]"
         } `}
       >
         <button className="text-3xl text-gray-100 p-5" onClick={handleBar}>
           <IoIosArrowDropleftCircle />
         </button>
-        <p>Select category</p>
-        <select onChange={(e) => handleFilterCategory(e.target.value)}>
-          <option value="all">All Categories</option>
-          {allCategories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-
-      
-        <div className="relative flex flex-col items-center p-2 rounded-[1.25rem] bg-blue-200 font-tiltneon text-xl text-blue-950 font-normal">
-          <button className="underline decoration-blue-200 hover:decoration-blue-900 transition-colors duration-200" onClick={handleFilter1} >Select Size</button>
-        {statusFilter ? 
-        <div className="relative flex flex-col downTo gap-2">
-          <div
-          className="relative caret-blue-200 p-2 bg-blue-300 rounded-[1.25rem] font-tiltneon text-xl text-blue-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-blue-200"
-          onClick={() => handleSizeCategory("all")}
-        >
-          All Sizes
-        </div>
-        {allSizes.map((size, index) => (
-          <div
-            className="relative caret-blue-200 p-2 bg-blue-300 rounded-[1.25rem] font-tiltneon text-lg text-blue-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-blue-200"
-            key={index}
-            onClick={() => handleSizeCategory(size)}
-          >
-            {size}
-          </div>
-        ))}
-        </div> : null}
-        </div>
-        
-       
+        <SideBarFilters
+          handleFilter1={handleFilter1}
+          handleFilter2={handleFilter2}
+          handleFilterCategory={handleFilterCategory}
+          handleSizeCategory={handleSizeCategory}
+          allCategories={allCategories}
+          allSizes={allSizes}
+          statusFilter1={statusFilter1}
+          statusFilter2={statusFilter2}
+        />
       </div>
       {!statusBar ? (
         <div className={style.animate}>

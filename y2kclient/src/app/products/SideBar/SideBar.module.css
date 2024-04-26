@@ -5,6 +5,27 @@
     z-index: 999;
     animation: l9 1s infinite linear alternate;
 }
+
+.OnlyDropDown{
+  animation: downTo 0.6s linear both
+}
+
+
+@keyframes downTo{
+0%{
+  opacity: 0;
+  transform: translateY(0);
+}
+50%{
+opacity: 0.5;
+transform: translateY(0.5);
+}
+100%{
+  opacity: 1;
+  transform: translateY(1);
+}
+}
+
 @keyframes l9 {
     0% {
       transform: translateX(-10px);

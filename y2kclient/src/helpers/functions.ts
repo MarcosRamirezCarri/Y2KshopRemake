@@ -6,6 +6,6 @@ export const getSizesForCategory = (category: string): string[] => {
         return ['S', 'M', 'L'];
      
       default:
-        return ['Does not have categories'];
+        return ['Dont have'];
     }
   };
