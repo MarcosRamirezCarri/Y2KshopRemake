@@ -55,9 +55,9 @@ const DetailProduct = () => {
     fetchProduct(searchId);
   }, [searchId]);
 
-  const handleChangeSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newSize = event.target.value;
-    setSelectedSize(newSize);
+  const handleChangeSize = (size: string) => {
+
+    setSelectedSize(size);
   };
   console.log(selectedSize);
 
@@ -65,21 +65,24 @@ const DetailProduct = () => {
     const productExists = stateCart.some(
       (item) => item.id === stateDetail[0]?.id
     );
+    console.log(productExists)
 
-    if (productExists) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "This product is already in your cart!",
-      });
-    }
-    if (selectedSize === "") {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please select a size",
-      });
-    } else {
+    if (productExists === true || selectedSize === "") {
+      if(productExists === true){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "This product is already in your cart!",
+        });
+      }
+      if(selectedSize === ""){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Select a Size!",
+        });
+      }
+      } else {
       Swal.fire({
         title: "Do you want to add this product to your cart?",
         showDenyButton: true,

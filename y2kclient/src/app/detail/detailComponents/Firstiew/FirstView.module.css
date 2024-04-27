@@ -1,0 +1,39 @@
+.animate{
+    padding: 1rem;
+    position: fixed;
+    top: 6rem;
+    z-index: 999;
+    animation: l9 1s infinite linear alternate;
+}
+
+.OnlyDropDown{
+  animation: downTo 0.4s linear both
+}
+
+
+@keyframes downTo{
+0%{
+  opacity: 0;
+ 
+}
+50%{
+opacity: 0.5;
+
+}
+100%{
+  opacity: 1;
+}
+}
+
+@keyframes l9 {
+    0% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(11px);
+    }
+    100%{
+        transform: translateX(12px);
+    }
+  }
+  

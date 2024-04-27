@@ -48,7 +48,7 @@ const SideBarFilters: React.FC<PropsFilters> = ({
               <div
                 className="relative caret-blue-200 p-2 bg-blue-300 rounded-[1.25rem] font-tiltneon text-md lg:text-lg text-blue-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-blue-200"
                 key={index}
-                onClick={() => handleSizeCategory(category)}
+                onClick={() => handleFilterCategory(category)}
               >
                 {category}
               </div>
