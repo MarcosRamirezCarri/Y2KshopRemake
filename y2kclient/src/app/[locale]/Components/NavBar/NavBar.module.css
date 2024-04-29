@@ -2,7 +2,7 @@
     font-family: Titilium;
     font-size: 2.20rem;
     font-weight: 700;
-    animation: colorchange 50s infinite alternate;;
+    animation: colorchange 20s infinite alternate;;
 
 }
 
@@ -60,4 +60,15 @@
       
       color: #984208;
     }
+  }
+  .scaleBottom{
+    position: absolute;
+    padding: 0.5rem;
+    justify-self: center;
+    animation:scale-down-vertical-bottom 0.4s linear both
+  } 
+  
+  @keyframes scale-down-vertical-bottom{
+    0%{opacity: 0;}
+    100%{opacity: 1; }
   }
