@@ -34,6 +34,10 @@ export const productsReducer = createSlice({
       state.product = action.payload;
       state.sortProducts = action.payload 
     },
+    setSearch: (state, action: PayloadAction<Product[]>) =>{
+      state.product = action.payload
+
+    },
     sortByCategory: (state, action: PayloadAction<string>) =>{
       let copyState = [...state.sortProducts]
       state.selectedCategory = action.payload;
@@ -54,7 +58,7 @@ export const productsReducer = createSlice({
     }
   },
 });
-    export const { setShirts, sortByCategory, sortBySize } = productsReducer.actions;;
+    export const { setShirts, sortByCategory, sortBySize, setSearch } = productsReducer.actions;;
     
     export default productsReducer.reducer;
     

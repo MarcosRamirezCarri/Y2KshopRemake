@@ -11,36 +11,39 @@ const ButtonsNavBar = () => {
 
   return (
     <div className="gap-3 lg:gap-[5rem] flex flex-row">
-      <Link className="flex flex-col items-center justify-center"
+      <Link
+        className="flex flex-col items-center justify-center"
         onMouseLeave={() => setStateButton("none")}
         onMouseEnter={() => setStateButton("cart")}
         href={{ pathname: "/cart" }}
       >
-        <button className="flex flex-col items-center justify-center font-titilium text-4xl lg:text-5xl text-pink-50 font-normal">
+        <button className="flex flex-col items-center justify-center font-titilium text-4xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
           <FaCartShopping />
         </button>
         {stateButton === "cart" ? (
           <span className={style.scaleBottom}>Cart</span>
         ) : null}
       </Link>
-      <Link className="flex flex-col items-center justify-center"
+      <Link
+        className="flex flex-col items-center justify-center"
         onMouseEnter={() => setStateButton("product")}
         onMouseLeave={() => setStateButton("none")}
         href={{ pathname: "/products" }}
       >
-        <button className="flex flex-col font-titilium text-4xl lg:text-5xl text-pink-50 font-normal">
+        <button className="flex flex-col font-titilium text-4xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
           <FaBagShopping />
         </button>
         {stateButton === "product" ? (
           <span className={style.scaleBottom}>Buy</span>
         ) : null}
       </Link>
-      <Link className="flex flex-col items-center justify-center"
+      <Link
+        className="flex flex-col items-center justify-center"
         onMouseEnter={() => setStateButton("account")}
         onMouseLeave={() => setStateButton("none")}
         href={{ pathname: "/" }}
       >
-        <button className=" flex flex-col font-titilium text-4xl lg:text-5xl text-pink-50 font-normal">
+        <button className=" flex flex-col font-titilium text-4xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
           <FaIdBadge />
         </button>
         {stateButton === "account" ? (
