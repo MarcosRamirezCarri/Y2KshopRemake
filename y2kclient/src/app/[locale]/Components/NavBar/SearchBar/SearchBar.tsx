@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { usePathname } from "next/navigation";
-import { HiMagnifyingGlass } from "react-icons/hi2";
 import setSearchBar from "@/lib/actions/SearchBar/searchFunction";
 
 interface Recomended {
@@ -43,13 +42,13 @@ if(path === '/products')
     <div className="flex flex-col absolute top-[90%] left-[50%] lg:left-0 lg:top-0 lg:translate-x-0 lg:translate-y-0 translate-x-[-50%] translate-y-[-30%] self-center lg:relative w-[70%] lg:w-[40%] h-[80%] ">
       <form className="grid p-2 rounded-xl grid-cols-3 bg-pink-100 gap-2" onSubmit={onSubmitSearch}>
         <input
-          className="bg-pink-50 w-full col-span-2 rounded-xl ring-2 ring-pink-200 focus:outline-pink-300"
+          className="bg-pink-50 w-full font-tiltneon text-lg col-span-2 rounded-xl ring-2 ring-pink-200 focus:outline-pink-300"
           type="text"
           placeholder="Search Products..."
           value={input}
           onChange={onHandleChange}
         ></input>
-        <button className="col-span-1" type="submit">
+        <button className="font-tiltneon text-lg col-span-1" type="submit">
           search
         </button>
       </form>
@@ -57,7 +56,7 @@ if(path === '/products')
         <div className="bg-pink-50 flex flex-col mt-1 gap-2 p-2 rounded-md">
           {recommend.map((a, index) => (
             <div className="" key={index}>
-              <p onClick={() => setInput(a.title)}>{a.title}</p>
+              <p className="font-tiltneon text-lg" onClick={() => setInput(a.title)}>{a.title}</p>
             </div>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import style from "./NavBar.module.css";
+
 import Link from "next/link";
 import ButtonsNavBar from "./Buttons/Buttons";
 import SearchBar from "./SearchBar/SearchBar";
