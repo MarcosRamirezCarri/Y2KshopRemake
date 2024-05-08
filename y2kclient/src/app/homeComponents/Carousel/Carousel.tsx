@@ -1,6 +1,6 @@
 'use client';
 import Image from "next/image";
-import mockCarousel from "../../Mocks/mock";
+import mockCarousel from "../../[locale]/Mocks/mock";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper/modules';
 import 'swiper/css';

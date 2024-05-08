@@ -2,10 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Account {
     id: number;
+    password: string;
     name: string;
     email: number;
     image: string;
-    phone: string
+    phoneNumber: string
   }
   
   interface ProductState{

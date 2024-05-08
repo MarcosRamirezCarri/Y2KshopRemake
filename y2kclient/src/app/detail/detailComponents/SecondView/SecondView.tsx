@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper/modules';
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import CardProduct from "@/app/[locale]/Components/ShowCards/Card/Card";
+import CardProduct from '../../../homeComponents/ShowCards/Card/Card'
 import { useEffect, useState } from "react";
 
 interface PropOfRecomned {
