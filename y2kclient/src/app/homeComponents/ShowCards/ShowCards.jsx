@@ -1,7 +1,7 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "../../../../lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import AOS from "aos";
-import '../../../../../node_modules/aos/dist/aos.css'
+import '../../../../node_modules/aos/dist/aos.css'
 import CardProduct from "./Card/Card";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
 import { useEffect, useState } from "react";
