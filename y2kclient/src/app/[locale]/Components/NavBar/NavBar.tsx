@@ -14,13 +14,13 @@ export default function Navbar() {
           <p className="font-titilium text-3xl lg:text-5xl font-bold text-pink-300 [text-shadow:_7px_0px_6px_#80dde0;] ">
             Y
           </p>
-          <p className="font-titilium text-3xl lg:text-5xl font-bold text-blue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
+          <p className="font-titilium text-3xl lg:text-5xl font-bold text-Lightblue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
             2
           </p>
           <p className="font-titilium text-3xl lg:text-5xl font-bold text-pink-300 [text-shadow:_7px_0px_6px_#80dde0;]">
             K
           </p>
-          <p className="font-titilium text-3xl lg:text-5xl font-bold text-blue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
+          <p className="font-titilium text-3xl lg:text-5xl font-bold text-Lightblue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
             Fashion
           </p>
         </div>

@@ -6,6 +6,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     colors:{
@@ -35,7 +36,7 @@ const config: Config = {
         '900': '#474f61',
         '950': '#2e323d',
     },
-    blue: {
+    Lightblue: {
       '50': '#effcfc',
       '100': '#d3f5f5',
       '200': '#b4eced',
@@ -78,6 +79,8 @@ const config: Config = {
    
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 };
 export default config;

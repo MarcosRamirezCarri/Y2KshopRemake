@@ -62,7 +62,7 @@ const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
           clickable: true,
         }}
         modules={[Pagination, Navigation]}
-        className="col-span-3 w-[95%] border-2  rounded-md border-blue-800">
+        className="col-span-3 w-[95%] border-2  rounded-md border-Lightblue-800">
         {AllProducts.map((related, index) => (
           <SwiperSlide className=" p-5 "   key={index}>
             <CardProduct

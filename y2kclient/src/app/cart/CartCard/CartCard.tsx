@@ -16,27 +16,27 @@ const CartCard: React.FC<CartProductsProps> = ({
   image,
 }) => {
   return (
-    <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-blue-100 border-2 border-blue-800">
+    <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
       <div className="col-span-2">
         <Image
           width={680}
           height={680}
           src={image}
-          className="rounded w-[10.25rem] ring-2 ring-blue-200 h-[10.25rem] bg-transparent"
+          className="rounded w-[10.25rem] ring-2 ring-Lightblue-200 h-[10.25rem] bg-transparent"
           alt="no image"
         />
       </div>
       <div className="col-span-4 lg:col-span-2 flex flex-col gap-3">
-        <p className="font-tiltneon text-lg lg:text-2xl text-blue-950 font-bold">
+        <p className="font-tiltneon text-lg lg:text-2xl text-Lightblue-950 font-bold">
           Product Details:
         </p>
-        <p className="font-tiltneon text-md lg:text-xl text-blue-950 font-semibold">
+        <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           {title}
         </p>
-        <p className="font-tiltneon text-md lg:text-xl text-blue-950 font-semibold">
+        <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           {category}
         </p>
-        <p className="font-tiltneon text-md lg:text-xl text-blue-950 font-semibold">
+        <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           ${price}
         </p>
         <div className="flex flex-row gap-2 lg:hidden">

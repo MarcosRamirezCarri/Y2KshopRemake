@@ -1,4 +1,4 @@
-interface RegisterData {
+export interface RegisterData {
     name: string;
     password: string;
     phoneNumber: string;
@@ -6,13 +6,19 @@ interface RegisterData {
   }
   
   interface ValidationErrors {
-    email?: string;
-    password?: string;
-    phoneNumber?: string;
+    email: string;
+    password: string;
+    phoneNumber: string;
+    name: string
   }
   
   export default function Validate(register: RegisterData): ValidationErrors {
-    let errors: ValidationErrors = {};
+    let errors: ValidationErrors = {
+      email: '',
+      password: '',
+      phoneNumber: '',
+      name: '',
+    };
     let regexEmail =
       /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/;
     let regexPassword = /^(?=\w*\d)(?=\w*)(?=\w*[a-z])\S{8,16}$/;
