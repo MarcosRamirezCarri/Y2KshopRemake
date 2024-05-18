@@ -1,3 +1,4 @@
+import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
 export default function AccountFirstPanel() {
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[2rem] gap-5 ">
@@ -13,6 +14,7 @@ export default function AccountFirstPanel() {
         <button className="relative self-center col-start-2 col-end-2 bg-pink-400 px-6 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Modify
         </button>
+        <LoginModal/>
       </div>
     </div>
   );
