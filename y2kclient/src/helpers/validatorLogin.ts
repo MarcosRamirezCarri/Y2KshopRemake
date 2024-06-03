@@ -19,12 +19,11 @@ export interface RegisterData {
       phoneNumber: '',
       name: '',
     };
-    let regexEmail =
-      /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/;
+    let regexEmail = /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/;
     let regexPassword = /^(?=\w*\d)(?=\w*)(?=\w*[a-z])\S{8,16}$/;
     let regexPhone = /^\d{10}$/; 
   
-    if (!regexEmail.test(register.name)) {
+    if (!regexEmail.test(register.email)) {
       errors.email = "Invalid Email";
     }
     if (!regexPassword.test(register.password)) {

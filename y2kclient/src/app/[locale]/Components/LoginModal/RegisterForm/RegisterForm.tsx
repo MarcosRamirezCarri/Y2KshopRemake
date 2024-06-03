@@ -8,9 +8,18 @@ interface Errors {
   name: string;
   phoneNumber: string;
 }
+interface PropModal {
+  setModal: (modal: boolean) => void;
+  modal: boolean;
+}
 
-const RegisterForm = () => {
-  const [modal, setModal] = useState<boolean>(false);
+const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
+  const [formData, setFormData] = useState<RegisterData>({
+    email: "",
+    password: "",
+    phoneNumber: "",
+    name: "",
+  });
   const [error, setError] = useState<Errors>({
     email: "",
     password: "",
@@ -19,6 +28,10 @@ const RegisterForm = () => {
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     setError((prevErrors) => ({
       ...prevErrors,
       [name]: "",
@@ -29,22 +42,31 @@ const RegisterForm = () => {
     e.preventDefault();
     const { email, password, phoneNumber, name } = error; // Extraer los valores del estado de error
     const registerData: RegisterData = { email, password, phoneNumber, name };
-    const errors = Validate(registerData)
+    const errors = Validate(registerData);
     setError(errors);
-    if (
-      !errors.email &&
-      !errors.password &&
-      !errors.phoneNumber
-    ) {
+    if (!errors.email && !errors.password && !errors.phoneNumber) {
       // Aquí puedes manejar el envío del formulario si no hay errores
     }
   };
 
-
   return (
-    <div className="flex flex-col gap-5 w-fit h-fit p-5">
-      <ul>
-        <p>Login</p>
+    <div
+      className={`
+    fixed inset-0 flex justify-center items-center transition-colors duration-500
+    ${modal ? "visible bg-gray-950/[0.4]" : "invisible"}
+  `}
+    >
+      <button onClick={() => setModal(!modal)} className="bg-Lightblue-100 p-2">
+        X
+      </button>
+      <ul
+        onClick={(e) => e.stopPropagation()}
+        className={`
+          bg-Lightblue-50  gap-3 rounded-xl flex flex-col shadow p-6 transition-all duration-500 p-10
+          ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
+        `}
+      >
+        <p>Register</p>
 
         <form onSubmit={handleSubmit}>
           <li>
@@ -52,37 +74,44 @@ const RegisterForm = () => {
             <input
               name="name"
               type="text"
-              value={error.name}
+              value={formData.name}
               onChange={handleChange}
-            ></input>
+            />
+            {error.name && <span className="text-red-500">{error.name}</span>}
           </li>
           <li>
             <p>Email</p>
-
             <input
               name="email"
               type="text"
-              value={error.email}
+              value={formData.email}
               onChange={handleChange}
-            ></input>
+            />
+            {error.email && <span className="text-red-500">{error.email}</span>}
           </li>
           <li>
             <p>Password</p>
             <input
               name="password"
-              type="text"
-              value={error.password}
+              type="password"
+              value={formData.password}
               onChange={handleChange}
-            ></input>
+            />
+            {error.password && (
+              <span className="text-red-500">{error.password}</span>
+            )}
           </li>
           <li>
             <p>Phone</p>
             <input
-              name="phone"
+              name="phoneNumber"
               type="text"
-              value={error.phoneNumber}
+              value={formData.phoneNumber}
               onChange={handleChange}
-            ></input>
+            />
+            {error.phoneNumber && (
+              <span className="text-red-500">{error.phoneNumber}</span>
+            )}
           </li>
           <button type="submit">Submit</button>
         </form>
@@ -91,4 +120,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm
+export default RegisterForm;
