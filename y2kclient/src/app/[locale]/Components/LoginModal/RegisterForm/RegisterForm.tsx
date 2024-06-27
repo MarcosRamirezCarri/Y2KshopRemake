@@ -26,8 +26,10 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
     phoneNumber: "",
     name: "",
   });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -40,12 +42,9 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { email, password, phoneNumber, name } = error; // Extraer los valores del estado de error
-    const registerData: RegisterData = { email, password, phoneNumber, name };
-    const errors = Validate(registerData);
+    const errors = Validate(formData);
     setError(errors);
     if (!errors.email && !errors.password && !errors.phoneNumber) {
-      // Aquí puedes manejar el envío del formulario si no hay errores
     }
   };
 
@@ -56,16 +55,17 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
     ${modal ? "visible bg-gray-950/[0.4]" : "invisible"}
   `}
     >
-      <button onClick={() => setModal(!modal)} className="bg-Lightblue-100 p-2">
-        X
-      </button>
+   
       <ul
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-Lightblue-50  gap-3 rounded-xl flex flex-col shadow p-6 transition-all duration-500 p-10
+          bg-Lightblue-100  gap-3 rounded-xl flex flex-col shadow p-6 transition-all duration-500 p-10
           ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
       >
+           <button onClick={() => setModal(!modal)} className="bg-Lightblue-100 p-2">
+        X
+      </button>
         <p>Register</p>
 
         <form onSubmit={handleSubmit}>
