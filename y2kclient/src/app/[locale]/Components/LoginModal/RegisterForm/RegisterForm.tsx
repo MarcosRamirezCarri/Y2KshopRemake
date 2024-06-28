@@ -50,34 +50,40 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
 
   return (
     <div
+      onClick={() => setModal(!modal)}
       className={`
-    fixed inset-0 flex justify-center items-center transition-colors duration-500
+    fixed inset-0 flex justify-center items-center transition-colors duration-500 z-[101]
     ${modal ? "visible bg-gray-950/[0.4]" : "invisible"}
   `}
     >
-   
       <ul
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-Lightblue-100  gap-3 rounded-xl flex flex-col shadow p-6 transition-all duration-500 p-10
+          bg-Lightblue-100 w-[35%] gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-500 p-10
           ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
       >
-           <button onClick={() => setModal(!modal)} className="bg-Lightblue-100 p-2">
-        X
-      </button>
-        <p>Register</p>
+        <div className="flex flex-col">
+        <p className="font-titilium text-2xl self-center font-medium">
+          Create a new Account
+        </p>
+        <p className="font-titilium text-md self-center font-normal text-gray-600">
+          Enter your details to register
+        </p>
 
-        <form onSubmit={handleSubmit}>
+        </div>
+      
+        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <li>
-            <p>Name</p>
+            <p>Full Name</p>
             <input
               name="name"
               type="text"
               value={formData.name}
               onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
             />
-            {error.name && <span className="text-red-500">{error.name}</span>}
+            {error.name && <span className="text-gray-400">{error.name}</span>}
           </li>
           <li>
             <p>Email</p>
@@ -86,8 +92,11 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
               type="text"
               value={formData.email}
               onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
             />
-            {error.email && <span className="text-red-500">{error.email}</span>}
+            {error.email && (
+              <span className="text-gray-400">{error.email}</span>
+            )}
           </li>
           <li>
             <p>Password</p>
@@ -96,9 +105,10 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
               type="password"
               value={formData.password}
               onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
             />
             {error.password && (
-              <span className="text-red-500">{error.password}</span>
+              <span className="text-gray-400">{error.password}</span>
             )}
           </li>
           <li>
@@ -108,13 +118,15 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
               type="text"
               value={formData.phoneNumber}
               onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
             />
             {error.phoneNumber && (
-              <span className="text-red-500">{error.phoneNumber}</span>
+              <span className="text-gray-400">{error.phoneNumber}</span>
             )}
           </li>
           <button type="submit">Submit</button>
         </form>
+        
       </ul>
     </div>
   );

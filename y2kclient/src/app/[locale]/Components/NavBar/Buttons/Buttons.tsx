@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
-import style from "../NavBar.module.css";
+import style from "./Buttons.module.css";
 import { FaBagShopping } from "react-icons/fa6";
 import { FaIdBadge } from "react-icons/fa";
 
