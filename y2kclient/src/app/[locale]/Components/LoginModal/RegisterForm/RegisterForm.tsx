@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Validate from "@/helpers/validatorLogin";
-import { RegisterData } from "@/helpers/validatorLogin";
+import ValidateRegister from "@/helpers/validatorRegister";
+import { RegisterData } from "@/helpers/validatorRegister";
+import Swal from "sweetalert2";
 
 interface Errors {
   email: string;
@@ -42,9 +43,18 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = Validate(formData);
+    const errors = ValidateRegister(formData);
     setError(errors);
     if (!errors.email && !errors.password && !errors.phoneNumber) {
+      Swal.fire({
+        title: "Account Registered!",
+        icon: 'success' ,
+        confirmButtonText: "Ok",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setModal(!modal)
+    }});
+
     }
   };
 
@@ -124,7 +134,7 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
               <span className="text-gray-400">{error.phoneNumber}</span>
             )}
           </li>
-          <button type="submit">Submit</button>
+          <button className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300" type="submit">Register Now</button>
         </form>
         
       </ul>
