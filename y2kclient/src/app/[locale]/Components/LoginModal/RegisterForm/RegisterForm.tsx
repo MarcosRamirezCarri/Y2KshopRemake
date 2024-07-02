@@ -69,7 +69,7 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
       <ul
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-Lightblue-100 w-[35%] gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-500 p-10
+          bg-Lightblue-100 w-[80%] lg:w-[35%]  gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-500 p-10
           ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
       >
