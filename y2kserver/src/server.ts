@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 //import routes from './routes/index';
 import cors from 'cors';
-import sequelize from './config/database'; // Asegúrate de que la ruta sea correcta
+// Asegúrate de que la ruta sea correcta
 
 const server = express();
 
@@ -20,7 +20,7 @@ server.use(cors({
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
 }));
 
-server.use('/', routes);
+//server.use('/', routes);
 
 // Error catching endware.
 server.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -30,11 +30,6 @@ server.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-sequelize.sync({ force: false }).then(() => {
-  const PORT = process.env.PORT || 3000;
-  server.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  });
-});
+
 
 export default server;
