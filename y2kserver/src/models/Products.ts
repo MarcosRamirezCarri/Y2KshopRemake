@@ -11,8 +11,8 @@ const ProductModel = sequelize.define('Product', {
     type: new DataTypes.STRING(128),
     allowNull: false,
   },
-  image:{
-    type: DataTypes.STRING,
+  images:{
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
   },
   price: {
@@ -27,7 +27,7 @@ const ProductModel = sequelize.define('Product', {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
   },
-  clasificacion: {
+  clasification: {
     type: DataTypes.STRING(128),
     allowNull: true,
   },
