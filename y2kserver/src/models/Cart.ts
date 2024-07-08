@@ -5,12 +5,12 @@ import ProductModel from './Products';
 
 const CartModel = sequelize.define('Cart', {
   id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
   userId: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     references: {
       model: UserModel,
       key: 'id',
@@ -18,7 +18,7 @@ const CartModel = sequelize.define('Cart', {
     allowNull: false,
   },
   products: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER.UNSIGNED),
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
     references: {
       model: ProductModel,
       key: 'id',

@@ -3,7 +3,7 @@ import sequelize from '../config/database';
 
 const ProductModel = sequelize.define('Product', {
   id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
