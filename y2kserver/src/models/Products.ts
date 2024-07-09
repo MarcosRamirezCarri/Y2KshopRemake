@@ -1,6 +1,27 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database';
 
+const SizeQuantity = {
+  size: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+};
+const ColorSizes = {
+  color: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
+  sizes: {
+    type: DataTypes.ARRAY(DataTypes.JSONB),
+    allowNull: false,
+  },
+};
+
 const ProductModel = sequelize.define('Product', {
   id: {
     type: DataTypes.INTEGER,
@@ -20,11 +41,7 @@ const ProductModel = sequelize.define('Product', {
     allowNull: false,
   },
   colors: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    allowNull: true,
-  },
-  sizes: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.ARRAY(DataTypes.JSONB),
     allowNull: true,
   },
   clasification: {
