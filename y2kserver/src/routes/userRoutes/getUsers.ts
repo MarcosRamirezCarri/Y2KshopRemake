@@ -5,8 +5,8 @@ const getUsers = async (req: Request, res: Response) => {
     try {
         const products = await UserModel.findAll();
         res.status(201).json(products);
-    } catch (error) {
-        res.status(500).json({ error: error });
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
     }
 };
 

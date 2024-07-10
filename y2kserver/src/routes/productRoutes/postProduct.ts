@@ -6,8 +6,8 @@ const postProduct = async(req: Request, res: Response) =>{
     try{
         const product = ProductModel.create({name, price, sizes, colors, clasification, images})
         res.status(201).json(product)
-    }catch(error){
-        res.status(500).json(error)
+    }catch (error: any) {
+        res.status(500).json({ error: error.message });
     }
 
 }

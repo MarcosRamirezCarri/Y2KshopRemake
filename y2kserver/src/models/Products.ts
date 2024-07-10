@@ -53,4 +53,6 @@ const ProductModel = sequelize.define('Product', {
   timestamps: false,
 });
 
+
+
 export default ProductModel;
