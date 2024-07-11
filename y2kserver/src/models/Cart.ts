@@ -3,7 +3,7 @@ import sequelize from '../config/database';
 import UserModel from './User';
 import ProductModel from './Products';
 
-const CartModel = sequelize.define('Cart', {
+const CartItemModel = sequelize.define('Cart', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -11,18 +11,30 @@ const CartModel = sequelize.define('Cart', {
   },
   userId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
-      model: UserModel,
+      model: 'User',
       key: 'id',
     },
+  },
+  productId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Product',
+      key: 'id',
+    },
+  },
+  quantity: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  products: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER),
-    references: {
-      model: ProductModel,
-      key: 'id',
-    },
+  color: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
+  size: {
+    type: DataTypes.STRING(128),
     allowNull: false,
   },
 }, {
@@ -30,7 +42,9 @@ const CartModel = sequelize.define('Cart', {
   timestamps: false,
 });
 
-UserModel.hasMany(CartModel, { foreignKey: 'userId' });
-CartModel.belongsTo(UserModel, { foreignKey: 'userId' });
+UserModel.hasMany(CartItemModel, { foreignKey: 'userId' });
+CartItemModel.belongsTo(UserModel, { foreignKey: 'userId' });
+ProductModel.hasMany(CartItemModel, { foreignKey: 'productId' });
+CartItemModel.belongsTo(ProductModel, { foreignKey: 'productId' });
 
-export default CartModel;
+export default CartItemModel;
