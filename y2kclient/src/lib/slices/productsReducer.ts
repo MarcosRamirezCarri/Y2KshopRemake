@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  sizes: string[];
-}
+import Product from '@/helpers/Types';
 
 interface ProductState {
   isLoading: boolean;
@@ -44,7 +35,7 @@ export const productsReducer = createSlice({
       if (action.payload === 'all') {
         state.product = copyState;
       } else {
-        state.product = state.sortProducts.filter(item => item.category === action.payload);
+        state.product = state.sortProducts.filter(item => item.clasification === action.payload);
       }
     },
     sortBySize: (state, action: PayloadAction<string>) =>{
@@ -53,7 +44,11 @@ export const productsReducer = createSlice({
       if (action.payload === 'all') {
         state.product = copyState;
       } else {
-        state.product = state.sortProducts.filter(item => item.sizes.includes(action.payload));
+        state.product = state.sortProducts.filter(item =>
+          item.colors.some(color => 
+            color.sizes.some(size => size.size === action.payload)
+          )
+        );
       }
     }
   },

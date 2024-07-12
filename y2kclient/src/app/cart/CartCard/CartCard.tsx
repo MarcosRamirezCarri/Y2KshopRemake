@@ -1,19 +1,14 @@
 import Image from "next/image";
+import Product from "@/helpers/Types";
 
-interface CartProductsProps {
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  image: string;
-}
 
-const CartCard: React.FC<CartProductsProps> = ({
+
+const CartCard: React.FC<Product> = ({
   id,
-  title,
-  category,
+  name,
+  clasification,
   price,
-  image,
+  images,
 }) => {
   return (
     <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
@@ -21,7 +16,7 @@ const CartCard: React.FC<CartProductsProps> = ({
         <Image
           width={680}
           height={680}
-          src={image}
+          src={images[0]}
           className="rounded w-[10.25rem] ring-2 ring-Lightblue-200 h-[10.25rem] bg-transparent"
           alt="no image"
         />
@@ -31,10 +26,10 @@ const CartCard: React.FC<CartProductsProps> = ({
           Product Details:
         </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
-          {title}
+          {name}
         </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
-          {category}
+          {clasification}
         </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           ${price}

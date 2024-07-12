@@ -1,5 +1,1 @@
-interface Server{
-    Server: string;
-}
-
-export const Server = 'https://fakestoreapi.com' 
+export const Server = 'http://localhost:3010/api'

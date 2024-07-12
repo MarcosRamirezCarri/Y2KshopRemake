@@ -2,18 +2,12 @@
 import { useAppSelector, useAppDispatch } from "../../lib/hooks/hooks";
 import CartCard from "./CartCard/CartCard";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
+import Product from "@/helpers/Types";
 
-interface CartProducts {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
+
 
 export default function Cart() {
-  const stateCart: CartProducts[] = useAppSelector(
+  const stateCart: Product[] = useAppSelector(
     (state) => state.cart.products
   );
 
@@ -27,9 +21,10 @@ export default function Cart() {
           stateCart.map((product) => <div>
             <CartCard
             id={product.id}
-            title={product.title}
-            image={product.image}
-            category={product.category}
+            name={product.name}
+            images={product.images}
+            colors={product.colors}
+            clasification={product.clasification}
             price={product.price}
             />
 

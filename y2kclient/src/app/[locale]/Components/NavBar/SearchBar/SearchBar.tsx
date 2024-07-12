@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import setSearchBar from "@/lib/actions/SearchBar/searchFunction";
 
 interface Recomended {
-  title: string;
+  name: string;
 }
 
 export default function SearchBar() {
@@ -22,7 +22,7 @@ export default function SearchBar() {
     setInput(val.toLowerCase());
   };
   const filteredProducts = recomendedSearch.filter((product) =>
-    product.title.toLowerCase().includes(input.toLowerCase())
+    product.name.toLowerCase().includes(input.toLowerCase())
   );
   const onSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ if(path === '/products')
         <div className="bg-pink-50 flex flex-col mt-1 gap-2 p-2 rounded-md">
           {recommend.map((a, index) => (
             <div className="" key={index}>
-              <p className="font-tiltneon text-lg" onClick={() => setInput(a.title)}>{a.title}</p>
+              <p className="font-tiltneon text-lg" onClick={() => setInput(a.name)}>{a.name}</p>
             </div>
           ))}
         </div>

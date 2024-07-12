@@ -33,8 +33,8 @@ export default function ShowCards() {
       {all.map((item, index) => (
         <div data-aos='fade-up' key={index}>
           <CardProduct
-            title={item.title}
-            image={item.image}
+            name={item.name}
+            images={item.images}
             price={item.price}
             id={item.id}
           />
