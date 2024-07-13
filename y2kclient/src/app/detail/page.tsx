@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks/hooks";
-import { getSizesForCategory } from "@/helpers/functions";
+import addDescription  from "@/helpers/functions"
 import { Server } from "@/helpers/server";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const DetailProduct = () => {
     const fetchProduct = async (productId: any) => {
       try {
         const { data } = await axios.get<DetailProductProps[]>(
-          `${Server}/products/${productId}`
+          `${Server}/product/${productId}`
         );
         let arrayData: DetailProductProps[] = [];
         arrayData.push(data);

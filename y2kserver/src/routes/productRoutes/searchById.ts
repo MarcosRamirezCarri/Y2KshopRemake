@@ -15,17 +15,13 @@ const searchById = async (req: Request, res: Response) => {
   }
 
   try {
-    const products: any[] = await ProductModel.findAll();
+    const products = await ProductModel.findByPk(idProduct);
 
-    const filteredProducts = products.filter(
-      (product) => product.id === idProduct
-    );
-
-    if (filteredProducts.length === 0) {
+    if (products === null) {
       return res.status(404).json({ message: "No products found" });
     }
 
-    res.status(200).json(filteredProducts);
+    res.status(200).json(products);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

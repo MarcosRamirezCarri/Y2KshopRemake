@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Product from "@/helpers/Types";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { sortByCategory, sortBySize } from "@/lib/slices/productsReducer";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
@@ -10,21 +11,10 @@ import {
   IoIosArrowDropleftCircle,
 } from "react-icons/io";
 
-interface ProductCategory {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  sizes: string[];
-}
-
 export default function SideBar() {
   const [statusBar, setStatusBar] = useState<boolean>(true);
   const [statusFilter2, setStatusFilter2] = useState<boolean>(false);
   const [statusFilter1, setStatusFilter1] = useState<boolean>(false);
-  const [statusSelectedFilter, setStatusSelectedFilter] = useState<string>("");
   const dispatch = useAppDispatch();
 
   const stateProducts = useAppSelector((state) => state.products.sortProducts);
@@ -43,19 +33,19 @@ export default function SideBar() {
     dispatch(sortBySize(size));
   };
 
-  const getUniqueCategories = (items: ProductCategory[]): string[] => {
+  const getUniqueCategories = (items: Product[]): string[] => {
     const categoriesSet = new Set<string>();
     items.forEach((item) => {
-      categoriesSet.add(item.category);
+      categoriesSet.add(item.clasification);
     });
     return Array.from(categoriesSet);
   };
 
-  const getUniqueSizes = (items: ProductCategory[]) => {
+  const getUniqueSizes = (items: Product[]) => {
     const sizesSet = new Set<string>();
     items.forEach((product) => {
-      product.sizes.forEach((category) => {
-        sizesSet.add(category);
+      product.colors.forEach((category) => {
+        category.sizes.some((size) => sizesSet.add(size.size));
       });
     });
     return Array.from(sizesSet);
@@ -67,18 +57,17 @@ export default function SideBar() {
 
   const handleBar = () => {
     setStatusBar(!statusBar);
-    
   };
   const handleFilter1 = () => {
     setStatusFilter1(!statusFilter1);
-    if(statusFilter2 === true){
-      setStatusFilter2(false)
+    if (statusFilter2 === true) {
+      setStatusFilter2(false);
     }
   };
   const handleFilter2 = () => {
     setStatusFilter2(!statusFilter2);
-    if(statusFilter1 === true){
-      setStatusFilter1(false)
+    if (statusFilter1 === true) {
+      setStatusFilter1(false);
     }
   };
 
