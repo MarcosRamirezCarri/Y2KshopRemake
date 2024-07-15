@@ -1,69 +1,44 @@
 import Image from "next/image";
-import style from './FirstView.module.css'
-import { useState } from "react";
+import SelectButtons from "./Buttons/SelectButton";
 
 interface DetailProducts {
-  title: string;
+  name: string;
   price: number;
-  description: string;
-  category: string;
-  image: string;
-  sizes: string[];
+  description: any;
+  clasification: string;
+  images: string[];
+  colors: any;
   handleAddToCart: any;
   handleChangeSize: any;
-  selectedSize: string;
+  handleChangeColor: any;
+  selectedSize: string | null;
+  selectedColor: string | null;
 }
 
 const FirstView: React.FC<DetailProducts> = ({
-  title,
+  name,
   price,
-  image,
+  images,
   description,
-  category,
-  sizes,
+  clasification,
+  colors,
   handleAddToCart,
   selectedSize,
   handleChangeSize,
+  handleChangeColor,
+  selectedColor,
 }) => {
-const [sizesState, setSizesState] = useState(false)
-
-const handleSizes = () =>{
-  setSizesState(!sizesState)
-}
-
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 w-[100%] gap-3">
-      <div className="col-span-1 flex flex-col relative items-center py-0 top-20 lg:top-0 lg:py-10 gap-5">
-        <Image
-          width={880}
-          height={800}
-          src={image}
-          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
-          alt="no image"
-        />
-        <Image
-          width={880}
-          height={800}
-          src={image}
-          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
-          alt="no image"
-        />
-        <Image
-          width={880}
-          height={800}
-          src={image}
-          className="rounded w-[4.25rem] lg:w-[7.25rem] ring-2 ring-pink-200 h-[4.25rem] lg:h-[7.25rem] bg-transparent"
-          alt="no image"
-        />
-      </div>
+      <div className="col-span-1 flex flex-col relative items-center py-0 top-20 lg:top-0 lg:py-10 gap-5"></div>
       <div className="col-span-2 flex flex-col items-center gap-3 ">
         <p className="font-tiltneon text-2xl lg:text-3xl text-pink-950 font-semibold">
-          {title}
+          {name}
         </p>
         <Image
           width={880}
           height={800}
-          src={image}
+          src={images[0]}
           className="rounded w-[20.25rem] lg:w-[24.25rem] ring-2 ring-pink-300 h-[20.25rem] lg:h-[24.25rem] bg-transparent"
           alt="no image"
         />
@@ -73,7 +48,7 @@ const handleSizes = () =>{
         <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
           Category:{" "}
           <p className="font-tiltneon text-lg text-gray-800 text-justify font-light px-2">
-            - {category}
+            - {clasification}
           </p>
         </p>
 
@@ -89,43 +64,22 @@ const handleSizes = () =>{
             - ${price}
           </p>
         </p>
-        <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">Selected Size:{' '} {selectedSize}</p>
-  
+        <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
+          Selected Size: {selectedSize}
+        </p>
+        <SelectButtons
+          handleChangeColor={handleChangeColor}
+          handleChangeSize={handleChangeSize}
+          selectedSize={selectedSize}
+          selectedColor={selectedColor}
+          colors={colors}
+        />
         <button
           onClick={() => handleAddToCart()}
           className="relative self-end bg-pink-400 px-6 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
         >
           Add to cart
         </button>
-        <div className="relative self-end flex flex-col items-center p-2  font-normal">
-        <button
-          className={`underline  px-3 py-4 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 
-      ${
-        sizesState === true
-          ? "bg-pink-300 decoration-pink-300"
-          : "bg-pink-400 decoration-pink-400 "
-      } hover:decoration-pink-900 transition-colors duration-200`}
-          onClick={handleSizes}
-        >
-          Select Size
-        </button>
-        {sizesState ? (
-          <div className="absolute top-[4.50rem] flex flex-row lg:flex-col gap-2">
-    
-            {sizes.map((size: string, index: any) => (
-              <div className={style.OnlyDropDown}>
-                <div
-                  className={`relative caret-blue-200 px-3 py-1 ${selectedSize === size ? 'bg-pink-400' : 'bg-pink-300' } rounded-[1.25rem] font-tiltneon text-md lg:text-lg text-pink-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-pink-200`}
-                  key={index}
-                  onClick={() => handleChangeSize(size)}
-                >
-                  {size}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
       </div>
     </div>
   );

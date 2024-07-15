@@ -3,7 +3,7 @@ interface Size {
     quantity: number;
   }
   
-  interface Color {
+ export default interface Color {
     color: string;
     sizes: Size[];
   }

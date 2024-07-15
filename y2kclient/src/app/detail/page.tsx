@@ -1,8 +1,9 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks/hooks";
-import addDescription  from "@/helpers/functions"
+import addDescription from "@/helpers/functions";
 import { Server } from "@/helpers/server";
+import Product from "@/helpers/Types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -11,22 +12,12 @@ import SecondView from "./detailComponents/SecondView/SecondView";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
 import addToCart from "@/lib/actions/CartActions/addToCart";
 
-interface DetailProductProps {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  sizes: string[];
-}
-
 const DetailProduct = () => {
-  const [stateDetail, setStateDetail] = useState<DetailProductProps[]>([]);
-  const [selectedSize, setSelectedSize] = useState<string>("");
-  const stateCart: DetailProductProps[] = useAppSelector(
-    (state) => state.cart.products
-  );
+  const [stateDetail, setStateDetail] = useState<Product[]>([]);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>("");
+  const stateCart: Product[] = useAppSelector((state) => state.cart.products);
+  console.log(stateDetail);
   const param = useSearchParams();
   const dispatch = useAppDispatch();
   const searchId = param.get("id");
@@ -34,20 +25,15 @@ const DetailProduct = () => {
   useEffect(() => {
     const fetchProduct = async (productId: any) => {
       try {
-        const { data } = await axios.get<DetailProductProps[]>(
+        const { data } = await axios.get<Product>(
           `${Server}/product/${productId}`
         );
-        let arrayData: DetailProductProps[] = [];
-        arrayData.push(data);
-        const formatedProduct = arrayData.map((shirt) => ({
-          ...shirt,
-          title:
-            shirt.title.length > 20
-              ? `${shirt.title.substring(0, 20)}...`
-              : shirt.title,
-          sizes: getSizesForCategory(shirt.category),
-        }));
-        setStateDetail(formatedProduct);
+
+        const formatedProduct = [];
+        formatedProduct.push(data);
+        const descProduct = addDescription(formatedProduct);
+
+        setStateDetail(descProduct);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -55,34 +41,36 @@ const DetailProduct = () => {
     fetchProduct(searchId);
   }, [searchId]);
 
-  const handleChangeSize = (size: string) => {
-
-    setSelectedSize(size);
-  };
-  console.log(selectedSize);
+const handleChangeColor = (color: string) => {
+  setSelectedColor(color);
+  setSelectedSize(null); 
+};
+const handleChangeSize = (size: string) => {
+  setSelectedSize(size);
+};
 
   const handleAddToCart = () => {
     const productExists = stateCart.some(
       (item) => item.id === stateDetail[0]?.id
     );
-    console.log(productExists)
+    console.log(productExists);
 
     if (productExists === true || selectedSize === "") {
-      if(productExists === true){
+      if (productExists === true) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "This product is already in your cart!",
         });
       }
-      if(selectedSize === ""){
+      if (selectedSize === "") {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Select a Size!",
         });
       }
-      } else {
+    } else {
       Swal.fire({
         title: "Do you want to add this product to your cart?",
         showDenyButton: true,
@@ -113,17 +101,19 @@ const DetailProduct = () => {
           : stateDetail.map((i, index) => (
               <div key={index}>
                 <FirstView
-                  image={i.image}
-                  title={i.title}
+                  images={i.images}
+                  name={i.name}
                   price={i.price}
                   description={i.description}
-                  category={i.category}
+                  clasification={i.clasification}
                   handleAddToCart={handleAddToCart}
-                  sizes={i.sizes}
+                  colors={i.colors}
                   selectedSize={selectedSize}
                   handleChangeSize={handleChangeSize}
+                  handleChangeColor={handleChangeColor}
+                  selectedColor={selectedColor}
                 />
-                <SecondView category={i.category} id={i.id} />
+                {/*<SecondView clasification={i.clasification} id={i.id} />*/}
               </div>
             ))}
       </div>
