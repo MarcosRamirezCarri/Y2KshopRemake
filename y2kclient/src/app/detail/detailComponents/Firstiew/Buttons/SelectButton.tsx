@@ -25,7 +25,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
   return (
     <div className="relative self-end flex flex-col items-center p-2  font-normal">
       <button
-        className={`underline  px-3 py-4 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 
+        className={`underline  px-3 py-4 rounded-xl font-tiltneon text-lg lg:text-xl text-pink-950 
       ${
         sizesState === true
           ? "bg-pink-300 decoration-pink-300"
@@ -40,35 +40,40 @@ const SelectButtons: React.FC<ButtonProps> = ({
         {colors.map((colorObj: Color, colorIndex: number) => (
           <div
             key={colorIndex}
-            className={`relative caret-blue-200 px-3 py-1 rounded-[1.25rem] font-tiltneon text-md lg:text-lg transition-all duration-300 ${
-              sizesState ? "visible bg-pink-200 blur-none" : "invisible blur-lg"
-            } font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-pink-200`}
+            className={`relative caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-md lg:text-lg transition-all duration-300 ${
+              sizesState
+                ? "visible bg-pink-200 translate-y-[0.4rem] blur-none"
+                : "invisible -translate-y-[2rem] blur-lg"
+            } font-normal`}
           >
             <div
               className={`${
-                selectedColor === colorObj.color ? "bg-pink-400" : "bg-pink-300"
-              } text-pink-950`}
+                selectedColor === colorObj.color ? "bg-pink-400" : "bg-pink- 200"
+              } text-pink-950 py-1 px-2 rounded`}
               onClick={() => handleChangeColor(colorObj.color)}
             >
               {colorObj.color}
             </div>
-            {selectedColor === colorObj.color && (
-              <div className="flex flex-col gap-2 mt-2">
+          
                 {colorObj.sizes.map((sizeObj: any, sizeIndex: number) => (
                   <div
                     key={sizeIndex}
                     className={`${
                       selectedSize === sizeObj.size
                         ? "bg-blue-400"
-                        : "bg-blue-300"
-                    } rounded-[1.25rem] transition-all duration-500 ${sizesState ? 'visible translate-y-2 blur-none': 'invisible -translate-y-2 blur-lg'} font-tiltneon text-md lg:text-lg text-blue-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-blue-200`}
+                        : "bg-blue-200"
+                    } rounded-[1.25rem] transition-all delay-150 duration-500 ${
+                      selectedColor === colorObj.color
+                        ? " translate-y-[0rem] visible blur-none"
+                        : " -translate-y-[1rem] hidden invisible blur-lg"
+                    } font-tiltneon text-md self-center lg:text-lg text-gray-950 font-semibold hover:ring-2 hover:ring-pink-400`}
                     onClick={() => handleChangeSize(sizeObj.size)}
                   >
                     {sizeObj.size}
                   </div>
                 ))}
-              </div>
-            )}
+          
+  
           </div>
         ))}
       </div>

@@ -74,12 +74,7 @@ const FirstView: React.FC<DetailProducts> = ({
           selectedColor={selectedColor}
           colors={colors}
         />
-        <button
-          onClick={() => handleAddToCart()}
-          className="relative self-end bg-pink-400 px-6 py-4 rounded-[1.25rem] font-tiltneon text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-        >
-          Add to cart
-        </button>
+      
       </div>
     </div>
   );
