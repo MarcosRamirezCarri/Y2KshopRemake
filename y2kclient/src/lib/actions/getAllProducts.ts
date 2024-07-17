@@ -12,7 +12,6 @@ export const getAllProducts = () => async (Dispatch: Dispatch) => {
     const { data } = await axios.get(`${Server}/product`);
 
     const dataWithDesc = addDescription(data)
-    console.log(dataWithDesc)
 
     Dispatch(setShirts(dataWithDesc))
   } catch (error) {

@@ -1,14 +1,15 @@
 export interface RegisterData {
   name: string ;
   password: string;
-  phoneNumber: string;
+  phone: string;
   email: string;
+  admin: boolean | null;
 }
 
 interface ValidationErrors {
   email: string;
   password: string;
-  phoneNumber: string;
+  phone: string;
   name: string;
 }
 //En un futuro poner aca la peticion para ver si la cuenta ya existe y que lo añada a la base de datos
@@ -17,9 +18,10 @@ export default function ValidateRegister(register: RegisterData): ValidationErro
   let errors: ValidationErrors = {
     email: "",
     password: "",
-    phoneNumber: "",
+    phone: "",
     name: "",
   };
+  console.log(errors.phone)
   let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let regexPassword = /^(?=\w*\d)(?=\w*)(?=\w*[a-z])\S{8,16}$/;
   let regexPhone = /^\d{10}$/;
@@ -31,8 +33,8 @@ export default function ValidateRegister(register: RegisterData): ValidationErro
     errors.password =
       "The password must have at least 8 to 16 characters and contain at least one digit";
   }
-  if (!regexPhone.test(register.phoneNumber)) {
-    errors.phoneNumber = "Invalid phone number (10 digits required)";
+  if (regexPhone.test(register.phone)) {
+    errors.phone = "Invalid phone number (10 digits required)";
   }
 
   return errors;

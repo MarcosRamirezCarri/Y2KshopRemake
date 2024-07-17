@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import AccountType from '../../helpers/Types';
 
 
+ interface AccountType {
+  id: number;
+  password: string;
+  name: string;
+  email: string;  
+  phone: string;
+  admin: boolean | null;
+}
 
 interface ProductState {
   status: string;
@@ -30,9 +37,9 @@ export const accountReducer = createSlice({
       state.token = action.payload.token;
     },
     registerAccount: (state, action: PayloadAction<LoginPayload>) => {
-      state.status = 'Logged';
+      state.status = 'Signed';
       state.account = action.payload.accounts;
-      state.token = action.payload.token;
+      
     },
   }
 });

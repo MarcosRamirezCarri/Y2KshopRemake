@@ -1,13 +1,15 @@
 import { useState } from "react";
 import ValidateRegister from "@/helpers/validatorRegister";
 import { RegisterData } from "@/helpers/validatorRegister";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import registerFunction from "@/lib/actions/AccountActions/registerFunction";
 import Swal from "sweetalert2";
 
 interface Errors {
   email: string;
   password: string;
   name: string;
-  phoneNumber: string;
+  phone: string;
 }
 interface PropModal {
   setModal: (modal: boolean) => void;
@@ -15,22 +17,24 @@ interface PropModal {
 }
 
 const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
+
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<RegisterData>({
     email: "",
     password: "",
-    phoneNumber: "",
+    phone: "",
     name: "",
+    admin: false
   });
   const [error, setError] = useState<Errors>({
     email: "",
     password: "",
-    phoneNumber: "",
+    phone: "",
     name: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -45,16 +49,27 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
     e.preventDefault();
     const errors = ValidateRegister(formData);
     setError(errors);
-    if (!errors.email && !errors.password && !errors.phoneNumber) {
-      Swal.fire({
-        title: "Account Registered!",
-        icon: 'success' ,
-        confirmButtonText: "Ok",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setModal(!modal)
-    }});
-
+    if (!errors.email && !errors.password && !errors.phone) {
+      dispatch(registerFunction(formData))
+        .then(() => {
+          Swal.fire({
+            title: "Account Registered!",
+            icon: 'success',
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setModal(!modal);
+            }
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Registration Failed",
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: "Ok",
+          });
+        });
     }
   };
 
@@ -124,14 +139,14 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
           <li>
             <p>Phone</p>
             <input
-              name="phoneNumber"
+              name="phone"
               type="text"
-              value={formData.phoneNumber}
+              value={formData.phone}
               onChange={handleChange}
               className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
             />
-            {error.phoneNumber && (
-              <span className="text-gray-400">{error.phoneNumber}</span>
+            {error.phone && (
+              <span className="text-gray-400">{error.phone}</span>
             )}
           </li>
           <button className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300" type="submit">Register Now</button>

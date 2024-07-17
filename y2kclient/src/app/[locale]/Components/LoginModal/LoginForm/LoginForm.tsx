@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ValidateLogin from "@/helpers/validatorLogin";
 import { LoginData } from "@/helpers/validatorLogin";
+import loginFunction from "@/lib/actions/AccountActions/loginFunction";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import Swal from "sweetalert2";
 
 interface Errors {
@@ -12,7 +14,8 @@ interface PropModal {
   modal: boolean;
 }
 
-const LoginForm: React.FC<PropModal> = ({ setModal, modal }) => {
+const LoginForm: React.FC<PropModal> = ({ setModal, modal }) => { 
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<LoginData>({
     email: "",
     password: "",
@@ -40,14 +43,26 @@ const LoginForm: React.FC<PropModal> = ({ setModal, modal }) => {
     const errors = ValidateLogin(formData);
     setError(errors);
     if (!errors.email && !errors.password) {
-      Swal.fire({
-        title: "Login Succesfully!",
-        icon: 'success' ,
-        confirmButtonText: "Ok",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setModal(!modal)
-    }});
+      dispatch(loginFunction(formData))
+      .then(() => {
+        Swal.fire({
+          title: "Logged Succesfully!",
+          icon: 'success',
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setModal(!modal);
+          }
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Login Failed",
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: "Ok",
+        });
+      });
 
     }
   };

@@ -18,11 +18,3 @@ interface Size {
     description?: string;
   }
 
- export default interface AccountType {
-    id: number;
-    password: string;
-    name: string;
-    email: string;  
-    phone: string;
-    admin: boolean | null;
-  }
