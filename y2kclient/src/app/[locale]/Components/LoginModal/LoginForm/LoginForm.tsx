@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ValidateLogin from "@/helpers/validatorLogin";
 import { LoginData } from "@/helpers/validatorLogin";
 import loginFunction from "@/lib/actions/AccountActions/loginFunction";
@@ -11,16 +11,32 @@ interface Errors {
 }
 interface PropModal {
   setModalR: (modalR: boolean) => void;
-  modalR: boolean;
   setModalL: (modalL: boolean) => void;
-  modalL: boolean
+  modalL: boolean;
 }
 
-const LoginForm: React.FC<PropModal> = ({  setModalR, modalR, setModalL, modalL }) => { 
+const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
   const dispatch = useAppDispatch();
-  const token = useAppSelector(state => state.account.token)
+  const token: any = useAppSelector((state) => state.account.token);
 
-  console.log(token)
+  useEffect(() => {
+    if (token) {
+      Swal.fire({
+        title: "Already Logged In",
+        text: "You are already logged in.",
+        icon: "info",
+        confirmButtonText: "Ok",
+      }).then(() => {
+        setModalL(false);
+      });
+    }
+  }, [token, setModalL]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("token", token);
+    }
+  }, [token]);
 
   const [formData, setFormData] = useState<LoginData>({
     email: "",
@@ -30,10 +46,10 @@ const LoginForm: React.FC<PropModal> = ({  setModalR, modalR, setModalL, modalL 
     email: "",
     password: "",
   });
-  const handleModals = () =>{
-    setModalL(false)
-    setModalR(true)
-  }
+  const handleModals = () => {
+    setModalL(false);
+    setModalR(true);
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     console.log(value);
@@ -53,26 +69,25 @@ const LoginForm: React.FC<PropModal> = ({  setModalR, modalR, setModalL, modalL 
     setError(errors);
     if (!errors.email && !errors.password) {
       dispatch(loginFunction(formData))
-      .then(() => {
-        Swal.fire({
-          title: "Logged Succesfully!",
-          icon: 'success',
-          confirmButtonText: "Ok",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            setModalL(!modalL);
-          }
+        .then(() => {
+          Swal.fire({
+            title: "Logged Succesfully!",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setModalL(!modalL);
+            }
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Login Failed",
+            text: error.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
         });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Login Failed",
-          text: error.message,
-          icon: 'error',
-          confirmButtonText: "Ok",
-        });
-      });
-
     }
   };
 
@@ -92,12 +107,12 @@ const LoginForm: React.FC<PropModal> = ({  setModalR, modalR, setModalL, modalL 
         `}
       >
         <div className="flex flex-col">
-        <p className="font-titilium text-2xl self-center font-medium">
-         Sign In
-        </p>
-        <p className="font-titilium text-md self-center font-normal text-gray-600">
-          Enter your information to log in
-        </p>
+          <p className="font-titilium text-2xl self-center font-medium">
+            Sign In
+          </p>
+          <p className="font-titilium text-md self-center font-normal text-gray-600">
+            Enter your information to log in
+          </p>
         </div>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <li>
@@ -126,9 +141,19 @@ const LoginForm: React.FC<PropModal> = ({  setModalR, modalR, setModalL, modalL 
               <span className="text-gray-400">{error.password}</span>
             )}
           </li>
-          <button className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300" type="submit">Login Now</button>
+          <button
+            className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300"
+            type="submit"
+          >
+            Login Now
+          </button>
         </form>
-        <button className="font-titilium text-xl self-center font-medium text-Lightblue-800" onClick={handleModals} >Sign up</button>
+        <button
+          className="font-titilium text-xl self-center font-medium text-Lightblue-800"
+          onClick={handleModals}
+        >
+          Sign up
+        </button>
       </ul>
     </div>
   );

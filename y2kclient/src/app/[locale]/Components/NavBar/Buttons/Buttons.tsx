@@ -49,6 +49,7 @@ const ButtonsNavBar = () => {
         <span className={`absolute text-md lg:text-[1.50rem]  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
            ${stateButton === "account" || path === "/account" ? 'visible -translate-y-20 lg:translate-y-2 blur-none ': 'translate-y-20 lg:-translate-y-2 blur-lg invisible' }`}>Account</span>
       </Link>
+
     </div>
   );
 };

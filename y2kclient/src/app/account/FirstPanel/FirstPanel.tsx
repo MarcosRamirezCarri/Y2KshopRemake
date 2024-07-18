@@ -1,4 +1,5 @@
 import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
+import LogOutBtn from "@/app/[locale]/Components/LoginModal/LogOutBtn";
 export default function AccountFirstPanel() {
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[2rem] gap-5 ">
@@ -15,7 +16,9 @@ export default function AccountFirstPanel() {
           Modify
         </button>
         <LoginModal/>
+        
       </div>
+      <LogOutBtn/>
     </div>
   );
 }

@@ -1,10 +1,8 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks/hooks";
-import addDescription from "@/helpers/functions";
-import { Server } from "@/helpers/server";
+import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import Product from "@/helpers/Types";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import FirstView from "./detailComponents/Firstiew/FirstView";
@@ -17,29 +15,19 @@ const DetailProduct = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>("");
   const stateCart: Product[] = useAppSelector((state) => state.cart.products);
-  console.log(stateDetail);
   const param = useSearchParams();
   const dispatch = useAppDispatch();
   const searchId = param.get("id");
 
-  useEffect(() => {
-    const fetchProduct = async (productId: any) => {
-      try {
-        const { data } = await axios.get<Product>(
-          `${Server}/product/${productId}`
-        );
 
-        const formatedProduct = [];
-        formatedProduct.push(data);
-        const descProduct = addDescription(formatedProduct);
-
-        setStateDetail(descProduct);
-      } catch (error) {
-        console.error("Error fetching product data:", error);
+    useEffect(()=>{
+      const fetchDetail = async() =>{
+        const DetailProduct: any = await fetchProduct(searchId);
+        setStateDetail(DetailProduct)
       }
-    };
-    fetchProduct(searchId);
-  }, [searchId]);
+      fetchDetail()
+    },[])
+
 
 const handleChangeColor = (color: string) => {
   setSelectedColor(color);

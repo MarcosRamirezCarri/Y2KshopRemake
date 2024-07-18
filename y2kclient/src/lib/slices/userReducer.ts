@@ -38,12 +38,18 @@ export const accountReducer = createSlice({
   
     },
     registerAccount: (state, action: PayloadAction<LoginPayload>) => {
-      state.status = 'Signed';
-      
+      state.status = 'Signed'; 
     },
+    logOut: (state) =>{
+      state.token = null;
+      state.user = [];
+      state.status = '';
+
+
+    }
   }
 });
 
-export const { registerAccount, setLogin } = accountReducer.actions;
+export const { registerAccount, setLogin, logOut } = accountReducer.actions;
 
 export default accountReducer.reducer;

@@ -22,7 +22,6 @@ const RegisterForm: React.FC<PropModal> = ({
   setModalR,
   modalR,
   setModalL,
-  modalL,
 }) => {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<RegisterData>({

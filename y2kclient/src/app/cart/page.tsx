@@ -1,6 +1,5 @@
 "use client";
 import { useAppSelector } from "../../lib/hooks/hooks";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CartCard from "./CartCard/CartCard";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
@@ -10,11 +9,11 @@ import Product from "@/helpers/Types";
 const Cart = () => {
   const stateCart: Product[] = useAppSelector((state) => state.cart.products);
   const [modal, setModal] = useState<boolean>(false);
-
+  
 useEffect(() =>{
   const token = localStorage.getItem('token');
   console.log(token)
-  if (token === "undefined" || token === null) {
+  if (token === "undefined"|| token === "null" || token === null) {
     setModal(true);
   }
 },[])
