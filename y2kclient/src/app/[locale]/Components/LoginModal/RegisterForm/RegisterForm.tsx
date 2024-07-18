@@ -12,19 +12,25 @@ interface Errors {
   phone: string;
 }
 interface PropModal {
-  setModal: (modal: boolean) => void;
-  modal: boolean;
+  setModalR: (modalR: boolean) => void;
+  modalR: boolean;
+  setModalL: (modalL: boolean) => void;
+  modalL: boolean;
 }
 
-const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
-
+const RegisterForm: React.FC<PropModal> = ({
+  setModalR,
+  modalR,
+  setModalL,
+  modalL,
+}) => {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<RegisterData>({
     email: "",
     password: "",
     phone: "",
     name: "",
-    admin: false
+    admin: false,
   });
   const [error, setError] = useState<Errors>({
     email: "",
@@ -32,6 +38,11 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
     phone: "",
     name: "",
   });
+
+  const handleModals = () => {
+    setModalL(true);
+    setModalR(false);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,11 +65,11 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
         .then(() => {
           Swal.fire({
             title: "Account Registered!",
-            icon: 'success',
+            icon: "success",
             confirmButtonText: "Ok",
           }).then((result) => {
             if (result.isConfirmed) {
-              setModal(!modal);
+              setModalR(!modalR);
             }
           });
         })
@@ -66,7 +77,7 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
           Swal.fire({
             title: "Registration Failed",
             text: error.message,
-            icon: 'error',
+            icon: "error",
             confirmButtonText: "Ok",
           });
         });
@@ -75,29 +86,28 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
 
   return (
     <div
-      onClick={() => setModal(!modal)}
+      onClick={() => setModalR(!modalR)}
       className={`
     fixed inset-0 flex justify-center items-center transition-colors duration-500 z-[101]
-    ${modal ? "visible bg-gray-950/[0.4]" : "invisible"}
+    ${modalR ? "visible bg-gray-950/[0.4]" : "invisible"}
   `}
     >
       <ul
         onClick={(e) => e.stopPropagation()}
         className={`
           bg-Lightblue-100 w-[80%] lg:w-[35%]  gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-500 p-10
-          ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
+          ${modalR ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
       >
         <div className="flex flex-col">
-        <p className="font-titilium text-2xl self-center font-medium">
-          Create a new Account
-        </p>
-        <p className="font-titilium text-md self-center font-normal text-gray-600">
-          Enter your details to register
-        </p>
-
+          <p className="font-titilium text-2xl self-center font-medium">
+            Create a new Account
+          </p>
+          <p className="font-titilium text-md self-center font-normal text-gray-600">
+            Enter your details to register
+          </p>
         </div>
-      
+
         <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <li>
             <p>Full Name</p>
@@ -149,9 +159,19 @@ const RegisterForm: React.FC<PropModal> = ({ setModal, modal }) => {
               <span className="text-gray-400">{error.phone}</span>
             )}
           </li>
-          <button className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300" type="submit">Register Now</button>
+          <button
+            className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300"
+            type="submit"
+          >
+            Register Now
+          </button>
         </form>
-        
+        <button
+          className="font-titilium text-xl self-center font-medium text-Lightblue-800"
+          onClick={handleModals}
+        >
+          Sign In
+        </button>
       </ul>
     </div>
   );

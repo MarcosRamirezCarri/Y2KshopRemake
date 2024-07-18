@@ -5,8 +5,6 @@ import  addDescription from "@/helpers/functions";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
 export const getAllProducts = () => async (Dispatch: Dispatch) => {
   try {
     const { data } = await axios.get(`${Server}/product`);

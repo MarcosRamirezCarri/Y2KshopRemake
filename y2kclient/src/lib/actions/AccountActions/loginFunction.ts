@@ -12,6 +12,8 @@ const loginFunction = ({email, password}: LoginData) => async(dispatch: Dispatch
 try {
     const loginData = await axios.post(`${Server}/login`, {email, password})
     const login = loginData.data
+    const {token} = login.token 
+    localStorage.setItem('token', token )
 
 
     dispatch(setLogin(login))
