@@ -18,8 +18,12 @@ const AddToCart: React.FC<CartProps> = ({
   const param = useSearchParams();
   const searchId = param.get("id");
   const NumberId = Number(searchId);
+
+  const userId = localStorage.getItem("userId")
   const token = localStorage.getItem("token");
+  
   const dispatch = useAppDispatch();
+
   const stateCart: Product[] = useAppSelector((state) => state.cart.products);
   const [modal, setModal] = useState<boolean>(false);
 
@@ -54,6 +58,7 @@ const AddToCart: React.FC<CartProps> = ({
         if (result.isConfirmed) {
           Swal.fire("Saved!", "", "success");
           const cartItem = {
+            userId: userId,
             productId: NumberId,
             quantity: 1,
             color: selectedColor,
@@ -72,6 +77,7 @@ const AddToCart: React.FC<CartProps> = ({
     <div className="flex flex-col itemc-center">
      {modal ? <button
         disabled
+        title="You need login for adding to the cart"
         className="underline  px-3 py-4 rounded-xl font-tiltneon text-lg lg:text-xl text-pink-950/[0.4] bg-pink-400  transition-colors duration-200"
       >
         {" "}

@@ -1,18 +1,21 @@
 'use client'
 import Swal from "sweetalert2";
 import { logOut } from "@/lib/slices/userReducer";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 
 
 const LogOutBtn = () =>{
     const dispatch = useAppDispatch();
     let token: any = ''
+    let id: any = 0
     if (typeof window !== "undefined") {
          token = localStorage.getItem("token");
+         id = localStorage.getItem("userId")
       }
 
     const handleLogout = () => {
         if(token !== "undefined"|| token !== "null" || token !== null){
+          if(id !== "undefined"|| id !== "null" || id !== null){
             dispatch(logOut());
             localStorage.removeItem('token');
             Swal.fire({
@@ -20,6 +23,7 @@ const LogOutBtn = () =>{
               icon: "success",
               confirmButtonText: "Ok",
             });
+          }  
         } else {
             Swal.fire({
                 title: "There is no account",

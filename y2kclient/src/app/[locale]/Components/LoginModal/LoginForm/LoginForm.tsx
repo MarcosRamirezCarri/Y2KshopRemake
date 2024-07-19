@@ -18,6 +18,8 @@ interface PropModal {
 const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
   const dispatch = useAppDispatch();
   const token: any = useAppSelector((state) => state.account.token);
+  const user: any = useAppSelector((state) => state.account.user)
+
 
   useEffect(() => {
     if (token) {
@@ -35,6 +37,7 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("token", token);
+      localStorage.setItem("userId", user.id)
     }
   }, [token]);
 

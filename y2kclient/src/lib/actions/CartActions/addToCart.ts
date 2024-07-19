@@ -1,13 +1,22 @@
 import { saveToCart } from "@/lib/slices/cartReducer";
+import { Server } from "@/helpers/server";
+import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 
 
 const addToCart = (cart: any) => async(dispatch: Dispatch) =>{
-    if (typeof cart === "object" && cart !== null){
-        console.log('Se admitio el objeto', cart)
-        dispatch(saveToCart(cart))
+    const {userId, productId, quantity, color, size } = cart
+    try {
+       const data = await axios.post(`${Server}/cart/${userId}/add`, {productId, quantity, color, size});
+       const savedCart = data.data
+       dispatch(saveToCart(savedCart))
+    } catch (error) {
+           if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("Error desconocido:", error);
+      }
     }
-    console.log('No se admitio o no entro a la funcion')
 }; 
 
 export default addToCart;
