@@ -1,5 +1,4 @@
 import Color from "@/helpers/Types";
-import style from "./SelectButtons.module.css";
 import { useState } from "react";
 
 interface ButtonProps {

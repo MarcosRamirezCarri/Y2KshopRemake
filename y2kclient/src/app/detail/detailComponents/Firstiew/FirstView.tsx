@@ -1,5 +1,6 @@
 import Image from "next/image";
-import SelectButtons from "./Buttons/SelectButton";
+import SelectButtons from "./Buttons/SelectButton/SelectButton";
+import AddToCart from "./Buttons/AddToCart/AddToCartbtn";
 
 interface DetailProducts {
   name: string;
@@ -8,7 +9,6 @@ interface DetailProducts {
   clasification: string;
   images: string[];
   colors: any;
-  handleAddToCart: any;
   handleChangeSize: any;
   handleChangeColor: any;
   selectedSize: string | null;
@@ -22,7 +22,6 @@ const FirstView: React.FC<DetailProducts> = ({
   description,
   clasification,
   colors,
-  handleAddToCart,
   selectedSize,
   handleChangeSize,
   handleChangeColor,
@@ -67,6 +66,8 @@ const FirstView: React.FC<DetailProducts> = ({
         <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
           Selected Size: {selectedSize}
         </p>
+        <div className="flex flex-row gap-2">
+        <AddToCart selectedColor={selectedColor} selectedSize={selectedSize}/>
         <SelectButtons
           handleChangeColor={handleChangeColor}
           handleChangeSize={handleChangeSize}
@@ -74,6 +75,8 @@ const FirstView: React.FC<DetailProducts> = ({
           selectedColor={selectedColor}
           colors={colors}
         />
+        </div>
+      
       
       </div>
     </div>
