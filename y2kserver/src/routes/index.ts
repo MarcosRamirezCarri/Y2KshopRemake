@@ -7,6 +7,7 @@ import getCartItems from './cartRoutes/getCartItems';
 import postUser from './userRoutes/postUser';
 import loginUser from './userRoutes/loginUser';
 import getUsers from './userRoutes/getUsers';
+import getUserFromId from './userRoutes/getUserFromId';
 
 import postProduct from './productRoutes/postProduct';
 import getProducts from './productRoutes/getProducts';
@@ -17,13 +18,15 @@ const router = Router();
 
 router.post('/product', postProduct);
 
-router.post('/login', loginUser)
+router.post('/login', loginUser);
 
 router.post('/register', postUser);
 
-router.post('/cart/:userId/add', postInCart)
+router.post('/cart/:userId/add', postInCart);
 
 router.get('/product', getProducts);
+
+router.get('/user/:userId', getUserFromId);
 
 router.get('/user', getUsers);
 

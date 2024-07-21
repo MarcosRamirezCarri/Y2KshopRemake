@@ -1,11 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
- interface AccountType {
+interface AccountType {
   id: number;
   password: string;
   name: string;
-  email: string;  
+  email: string;
   phone: string;
   admin: boolean | null;
 }
@@ -23,7 +22,7 @@ const initialState: UserState = {
 };
 
 interface LoginPayload {
- user: AccountType[];
+  user: AccountType[];
   token: string;
 }
 
@@ -32,24 +31,28 @@ export const accountReducer = createSlice({
   initialState,
   reducers: {
     setLogin: (state, action: PayloadAction<LoginPayload>) => {
-      state.status = 'Logged';
+      state.status = "Logged";
       state.token = action.payload.token;
       state.user = action.payload.user;
-  
     },
-    registerAccount: (state, action: PayloadAction<LoginPayload>) => {
-      state.status = 'Signed'; 
+    registerAccount: (state) => {
+      state.status = "Signed";
     },
-    logOut: (state) =>{
+    logOut: (state) => {
       state.token = null;
       state.user = [];
-      state.status = '';
+      state.status = "";
+    },
+    setFromId: (state, action: PayloadAction<any>) =>{
+      state.status = "Logged";
+      let helpArray = [];
+      helpArray.push(action.payload);
 
-
+      state.user = helpArray;
     }
-  }
+  },
 });
 
-export const { registerAccount, setLogin, logOut } = accountReducer.actions;
+export const { registerAccount, setLogin, logOut, setFromId } = accountReducer.actions;
 
 export default accountReducer.reducer;

@@ -1,6 +1,23 @@
+'use client'
 import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
 import LogOutBtn from "@/app/[locale]/Components/LoginModal/LogOutBtn";
-export default function AccountFirstPanel() {
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
+
+const AccountFirstPanel = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() =>{
+    const id = localStorage.getItem("userId")
+    if( id !== "undefined"|| id !== null ){
+      const userId = Number(id);
+      dispatch(setUserFromId(userId))
+
+
+    }
+  },[])
+
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[2rem] gap-5 ">
       <p>My account</p>
@@ -22,3 +39,4 @@ export default function AccountFirstPanel() {
     </div>
   );
 }
+export default AccountFirstPanel

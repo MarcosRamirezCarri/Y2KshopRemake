@@ -16,6 +16,7 @@ useEffect(() =>{
   if (token === "undefined"|| token === "null" || token === null) {
     setModal(true);
   }
+  
 },[])
    
 

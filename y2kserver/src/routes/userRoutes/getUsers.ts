@@ -3,8 +3,8 @@ import { Response, Request } from "express";
 
 const getUsers = async (req: Request, res: Response) => {
     try {
-        const products = await UserModel.findAll();
-        res.status(201).json(products);
+        const users = await UserModel.findAll();
+        res.status(201).json(users);
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
