@@ -4,6 +4,8 @@ import { Request, Response } from "express";
 
 const postUser = async (req: Request, res: Response) => {
   const { password, email, phone, name, admin } = req.body;
+
+  console.log(password, email, phone, name, admin)
   try {
     const errors = await Validate(name, email, phone, password);
     if (errors.length > 0) {

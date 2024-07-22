@@ -1,7 +1,9 @@
 'use client'
 import Swal from "sweetalert2";
 import { logOut } from "@/lib/slices/userReducer";
+import { logOutCart } from "@/lib/slices/cartReducer";
 import { useAppDispatch } from "@/lib/hooks/hooks";
+
 
 
 const LogOutBtn = () =>{
@@ -16,6 +18,7 @@ const LogOutBtn = () =>{
     const handleLogout = () => {
         if(token !== "undefined"|| token !== "null" || token !== null){
           if(id !== "undefined"|| id !== "null" || id !== null){
+            dispatch(logOutCart())
             dispatch(logOut());
             localStorage.removeItem('token');
             Swal.fire({

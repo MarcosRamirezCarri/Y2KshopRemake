@@ -6,9 +6,9 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 
 
-const setUserFromId = ({ userId }: any) => async (dispatch: Dispatch) => {
+const setUserFromId = ( userId: number ) => async (dispatch: Dispatch) => {
     try {
-      console.log(userId)
+      
       const user = await axios.get(`${Server}/user/${userId}`)
       const userData = user.data;
 

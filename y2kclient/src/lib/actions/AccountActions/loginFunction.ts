@@ -19,6 +19,7 @@ const loginFunction =
       const login = loginData.data;
 
       dispatch(setLogin(login));
+      window.location.reload()
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
