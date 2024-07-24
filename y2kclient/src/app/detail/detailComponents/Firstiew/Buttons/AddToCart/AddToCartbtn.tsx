@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import addToCart from "@/lib/actions/CartActions/addToCart";
 import Swal from "sweetalert2";
-import Product from "@/helpers/Types";
 import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
 
 interface CartProps {
