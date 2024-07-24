@@ -20,13 +20,15 @@ const ButtonsNavBar = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
-    if (id !== "undefined" || id !== null) {
+    if (id && id !== "undefined" && id !== "null" ) {
       const userId = Number(id);
+      console.log(userId)
       dispatch(setUserFromId(userId));
     }
   }, []);
 
   const user = useAppSelector((state) => state.account.user);
+  
 
   return (
     <div>

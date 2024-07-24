@@ -13,9 +13,10 @@ interface PropModal {
   setModalR: (modalR: boolean) => void;
   setModalL: (modalL: boolean) => void;
   modalL: boolean;
+
 }
 
-const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
+const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
   const dispatch = useAppDispatch();
   const token: any = useAppSelector((state) => state.account.token);
   const user: any = useAppSelector((state) => state.account.user)
