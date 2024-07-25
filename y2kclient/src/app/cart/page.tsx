@@ -14,6 +14,7 @@ const Cart = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
+
     const token = localStorage.getItem("token");
     const userId = Number(id);
     if (token === "undefined" || token === "null" || token === null) {
@@ -57,7 +58,7 @@ const Cart = () => {
         )}
       </div>
 
-      <LoginModal modal={modal} />
+      <LoginModal modal={modal} /> 
     </div>
   );
 };

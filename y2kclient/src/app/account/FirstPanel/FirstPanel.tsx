@@ -1,7 +1,6 @@
 "use client";
-import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
 import LogOutBtn from "@/app/[locale]/Components/LoginModal/LogOutBtn";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 
@@ -10,14 +9,14 @@ const AccountFirstPanel = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
-    if (id !== "undefined" || id !== null) {
+    console.log(id)
+    if (id !== "undefined" && id !== "null") {
       const userId = Number(id);
       dispatch(setUserFromId(userId));
     }
   }, []);
 
   const user = useAppSelector((state) => state.account.user);
-  console.log(user);
 
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[0.75rem] lg:p-[1rem] gap-5 ">
@@ -25,7 +24,7 @@ const AccountFirstPanel = () => {
       <div className="flex flex-col lg:grid lg:grid-cols-4 w-[100%]  gap-5">
         {user.length > 0 ? (
           user.map((data, index) => (
-            <div className="row-span-2 grid col-span-2 w-[100%] gap-10 p-2  font-titilium text-pink-950">
+            <div key={data.id} className="row-span-2 grid col-span-2 w-[100%] gap-10 p-2  font-titilium text-pink-950">
               <div className="gap-1">
               <p className="font-normal lg:font-medium text-sm lg:text-lg">Name: </p>
               <p className="font-medium lg:font-semibold text-base lg:text-xl">{data.name}</p>
@@ -56,7 +55,6 @@ const AccountFirstPanel = () => {
         <LogOutBtn />
         </div>
         
-        <LoginModal />
       </div>
       
     </div>

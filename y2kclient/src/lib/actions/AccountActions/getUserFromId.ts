@@ -13,6 +13,7 @@ const setUserFromId = ( userId: number ) => async (dispatch: Dispatch) => {
       const userData = user.data;
 
       dispatch(setFromId(userData));
+      
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

@@ -20,7 +20,7 @@ const LoginModal: React.FC<PropModal> = ({ modal }) => {
     }
   }, [modal]);
 
-  return (
+ if(modal) return (
     <div>
       <RegisterForm
         modalR={modalR}

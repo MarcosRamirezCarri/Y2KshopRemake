@@ -19,27 +19,14 @@ interface PropModal {
 const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
   const dispatch = useAppDispatch();
   const token: any = useAppSelector((state) => state.account.token);
-  const user: any = useAppSelector((state) => state.account.user)
+  const user: any = useAppSelector((state) => state.account.user);
 
-
-  useEffect(() => {
-    if (token) {
-      Swal.fire({
-        title: "Already Logged In",
-        text: "You are already logged in.",
-        icon: "info",
-        confirmButtonText: "Ok",
-      }).then(() => {
-        setModalL(false);
-      });
-    }
-  }, [token, setModalL]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("token", token);
       localStorage.setItem("userId", user.id)
-    }
+  }
   }, [token]);
 
   const [formData, setFormData] = useState<LoginData>({
@@ -56,7 +43,6 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -73,6 +59,7 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
     setError(errors);
     if (!errors.email && !errors.password) {
       dispatch(loginFunction(formData))
+      
         .then(() => {
           Swal.fire({
             title: "Logged Succesfully!",

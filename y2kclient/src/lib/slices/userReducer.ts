@@ -45,10 +45,7 @@ export const accountReducer = createSlice({
     },
     setFromId: (state, action: PayloadAction<any>) =>{
       state.status = "Logged";
-      let helpArray = [];
-      helpArray.push(action.payload);
-
-      state.user = helpArray;
+      state.user = action.payload;
     }
   },
 });
