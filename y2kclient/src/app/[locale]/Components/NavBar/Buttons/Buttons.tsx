@@ -12,15 +12,16 @@ const ButtonsNavBar = () => {
   const [stateButton, setStateButton] = useState<string>();
   const [modal, setModal] = useState<boolean>(false);
   const [stateUser, setStateUser] = useState<boolean>(false)
+ 
   const path = usePathname();
 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token !== "undefined" && token !== "null") {
-      setStateUser(!stateUser)
+    if (token !== "undefined" && token !== "null" && token !== null) {
+      setStateUser(true)
     }
-  }, []);
+  }, [modal]);
 
   return (
     <div>

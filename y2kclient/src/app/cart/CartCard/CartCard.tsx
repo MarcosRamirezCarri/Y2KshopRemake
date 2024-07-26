@@ -27,14 +27,14 @@ const CartCard: React.FC<CartProduct> = ({
         />
       </div>
       <div className="col-span-4 lg:col-span-2 flex flex-col gap-3">
-        <p className="font-tiltneon text-lg lg:text-2xl text-Lightblue-950 font-bold">
-          Product Details:
-        </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           {Product.name}
         </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           {Product.clasification}
+        </p>
+        <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
+          {color}, {size}
         </p>
         <p className="font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
           ${Product.price}

@@ -11,7 +11,7 @@ interface AccountType {
 
 interface UserState {
   status: string;
-  user: AccountType[];
+  user: AccountType;
   token: string | null;
 }
 
@@ -22,7 +22,7 @@ const initialState: UserState = {
 };
 
 interface LoginPayload {
-  user: AccountType[];
+  user: AccountType;
   token: string;
 }
 

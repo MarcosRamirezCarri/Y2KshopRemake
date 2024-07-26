@@ -29,9 +29,9 @@ const Cart = () => {
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />
-      <div className="relative top-[10rem] w-[90%] flex flex-col gap-[3rem] ">
+      <div className="relative top-[10rem] w-[90%] flex flex-col ">
         {logged ? (
-          <div>
+          <div className=" grid items-center gap-[3rem] ">
             {stateCart.length > 0 ? (
               stateCart.map((product) => (
                 <div key={product.id}>
