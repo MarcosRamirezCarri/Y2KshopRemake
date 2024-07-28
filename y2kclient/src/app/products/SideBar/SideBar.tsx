@@ -74,7 +74,7 @@ export default function SideBar() {
   return (
     <div>
       <div
-        className={`flex flex-col bg-gray-800 gap-2 p-2 top-[8rem] transition-all duration-300 z-[100] left-0 fixed self-start w-[40%] lg:w-[15%] h-[100vh] ${
+        className={`flex flex-col bg-gray-950 gap-2 p-2 top-[8rem] transition-all duration-300 z-[100] left-0 fixed self-start w-[40%] lg:w-[15%] h-[100vh] ${
           statusBar ? "translate-x-0" : "translate-x-[-50vw]"
         } `}
       >
