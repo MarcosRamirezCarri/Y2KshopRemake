@@ -9,17 +9,11 @@ export default function Navbar() {
         className="flex flex-col items-center justify-center"
         href={{ pathname: "/" }}
       >
-        <div className="flex flex-row">
-          <p className="font-titilium text-2xl lg:text-5xl font-bold text-pink-300 [text-shadow:_7px_0px_6px_#80dde0;] ">
-            Y
+        <div className="flex flex-col ">
+          <p className="font-titilium text-2xl lg:text-5xl relative top-2.5 font-bold text-pink-300 [text-shadow:_7px_0px_6px_#80dde0;] ">
+            Zul ' 
           </p>
-          <p className="font-titilium text-2xl lg:text-5xl font-bold text-Lightblue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
-            2
-          </p>
-          <p className="font-titilium text-2xl lg:text-5xl font-bold text-pink-300 [text-shadow:_7px_0px_6px_#80dde0;]">
-            K
-          </p>
-          <p className="font-titilium text-2xl lg:text-5xl font-bold text-Lightblue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
+          <p className="font-titilium text-2xl lg:text-4xl font-bold text-Lightblue-300 [text-shadow:_7px_0px_6px_#ffa1d3;]">
             Fashion
           </p>
         </div>

@@ -29,7 +29,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
         sizesState === true
           ? "bg-pink-300 decoration-pink-300"
           : "bg-pink-400 decoration-pink-400 "
-      } hover:decoration-pink-900 transition-colors duration-200`}
+      } hover:decoration-pink-900 transition-colors duration-200 active:bg-pink-500 `}
         onClick={handleSizes}
       >
         Select Size
@@ -39,7 +39,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
         {colors.map((colorObj: Color, colorIndex: number) => (
           <div
             key={colorIndex}
-            className={`relative caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-md lg:text-lg transition-all duration-300 ${
+            className={`relative flex flex-col items-center caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-md lg:text-lg transition-all duration-300 ${
               sizesState
                 ? "visible bg-pink-200 translate-y-[0.4rem] blur-none"
                 : "invisible -translate-y-[2rem] blur-lg"
@@ -65,7 +65,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
                       selectedColor === colorObj.color
                         ? " translate-y-[0rem] visible blur-none"
                         : " -translate-y-[1rem] hidden invisible blur-lg"
-                    } font-tiltneon text-md self-center lg:text-lg text-gray-950 font-semibold hover:ring-2 hover:ring-pink-400`}
+                    } font-tiltneon flex flex-row text-md justify-center w-[100%] lg:text-lg text-gray-950 font-semibold hover:ring-2 active:bg-pink-400 hover:bg-pink-300 hover:ring-pink-400`}
                     onClick={() => handleChangeSize(sizeObj.size)}
                   >
                     {sizeObj.size}

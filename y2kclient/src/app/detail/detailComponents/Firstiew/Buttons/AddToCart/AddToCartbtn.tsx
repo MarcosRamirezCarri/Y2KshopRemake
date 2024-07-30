@@ -85,7 +85,7 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
           modal
             ? "text-pink-950/[0.4] bg-pink-400"
             : "text-pink-950 bg-pink-400 decoration-pink-400 hover:decoration-pink-900"
-        } transition-colors duration-200`}
+        } transition-colors duration-200 active:bg-pink-500 `}
       >
         Add to cart
       </button>

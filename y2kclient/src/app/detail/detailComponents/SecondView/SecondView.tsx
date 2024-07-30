@@ -1,6 +1,7 @@
 'use client'
 import { getAllProducts } from "@/lib/actions/getAllProducts";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Product from '@/helpers/Types'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
@@ -11,18 +12,10 @@ import { useEffect, useState } from "react";
 
 interface PropOfRecomned {
   id: number;
-  category: string;
+  clasification: string;
 }
 
-interface RecomendArrray {
-  id: number;
-  category: string;
-  price: number;
-  image: string;
-  title: string;
-}
-
-const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
+const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
   const products = useAppSelector((state) => state.products.product);
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useAppDispatch();
@@ -45,10 +38,10 @@ const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
     };
   }, []);
 
-  let AllProducts: RecomendArrray[] = [];
+  let AllProducts: Product[] = [];
   if (Array.isArray(products) && products.length > 0) {
     AllProducts = products.filter(
-      (product) => product.category === category && product.id !== id
+      (product) => product.clasification === clasification && product.id !== id
     );
   }
 
@@ -66,10 +59,10 @@ const SecondView: React.FC<PropOfRecomned> = ({ category, id,  }) => {
         {AllProducts.map((related, index) => (
           <SwiperSlide className=" p-5 "   key={index}>
             <CardProduct
+            
               id={related.id}
-              title={related.title}
-              price={related.price}
-              image={related.image}
+              name={related.name}
+              images={related.images}
             />
           </SwiperSlide>
         ))}

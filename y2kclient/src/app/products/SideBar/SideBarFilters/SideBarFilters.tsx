@@ -49,6 +49,7 @@ const SideBarFilters: React.FC<PropsFilters> = ({
   return (
     <div className="relative flex flex-col items-center gap-5">
       <div className="relative flex flex-col items-center p-2 gap-2 font-normal">
+      <p className="font-tiltneon py-2 text-lg lg:text-2xl text-Lightblue-50 ">Aplly Filters</p>
         <button
           className={`underline bg-Lightblue-200 px-6 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-2xl text-Lightblue-950 ${
             statusFilter1

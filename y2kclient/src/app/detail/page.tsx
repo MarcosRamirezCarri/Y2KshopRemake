@@ -22,7 +22,7 @@ const DetailProduct = () => {
         setStateDetail(DetailProduct)
       }
       fetchDetail()
-    },[])
+    },[searchId])
 
 
 const handleChangeColor = (color: string) => {
@@ -38,7 +38,7 @@ const handleChangeSize = (size: string) => {
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />
-      <div className="grid grid-rows-2 w-[90%] top-[10rem] relative justify-around items-center">
+      <div className="grid grid-rows-2 w-[90%] top-[10rem] relative items-center">
         {stateDetail.length === 0
           ? null
           : stateDetail.map((i, index) => (
@@ -55,7 +55,7 @@ const handleChangeSize = (size: string) => {
                   handleChangeColor={handleChangeColor}
                   selectedColor={selectedColor}
                 />
-                {/*<SecondView clasification={i.clasification} id={i.id} />*/}
+               <SecondView clasification={i.clasification} id={i.id} />
               </div>
             ))}
       </div>

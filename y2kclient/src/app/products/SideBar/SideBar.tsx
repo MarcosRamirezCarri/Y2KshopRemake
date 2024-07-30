@@ -78,7 +78,7 @@ export default function SideBar() {
           statusBar ? "translate-x-0" : "translate-x-[-50vw]"
         } `}
       >
-        <button className="text-3xl text-gray-100 p-5" onClick={handleBar}>
+        <button className="text-3xl h-[1%] relative text-gray-100 p-5" onClick={handleBar}>
           <IoIosArrowDropleftCircle />
         </button>
         <SideBarFilters

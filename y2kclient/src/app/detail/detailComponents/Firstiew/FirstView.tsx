@@ -29,7 +29,20 @@ const FirstView: React.FC<DetailProducts> = ({
 }) => {
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 w-[100%] gap-3">
-      <div className="col-span-1 flex flex-col relative items-center py-0 top-20 lg:top-0 lg:py-10 gap-5"></div>
+      <div className="col-span-1 flex flex-col relative items-center py-0 top-20 lg:top-1 lg:py-10 gap-5">
+        {images.length > 1
+          ? images.map((img, index) => (
+              <Image
+                key={index}
+                src={img}
+                className="rounded w-[8.25rem] lg:w-[10.25rem] ring-2 ring-pink-300 h-[8.25rem] lg:h-[10.25rem] bg-transparent hover:ring-pink-500"
+                alt="no image"
+                width={480}
+                height={400}
+              />
+            ))
+          : null}
+      </div>
       <div className="col-span-2 flex flex-col items-center gap-3 ">
         <p className="font-tiltneon text-2xl lg:text-3xl text-pink-950 font-semibold">
           {name}
@@ -66,18 +79,19 @@ const FirstView: React.FC<DetailProducts> = ({
         <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
           Selected Size: {selectedSize}
         </p>
-        <div className="flex flex-row gap-2">
-        <AddToCart selectedColor={selectedColor} selectedSize={selectedSize}/>
-        <SelectButtons
-          handleChangeColor={handleChangeColor}
-          handleChangeSize={handleChangeSize}
-          selectedSize={selectedSize}
-          selectedColor={selectedColor}
-          colors={colors}
-        />
+        <div className="flex flex-row items-center justify-center gap-2">
+          <AddToCart
+            selectedColor={selectedColor}
+            selectedSize={selectedSize}
+          />
+          <SelectButtons
+            handleChangeColor={handleChangeColor}
+            handleChangeSize={handleChangeSize}
+            selectedSize={selectedSize}
+            selectedColor={selectedColor}
+            colors={colors}
+          />
         </div>
-      
-      
       </div>
     </div>
   );
