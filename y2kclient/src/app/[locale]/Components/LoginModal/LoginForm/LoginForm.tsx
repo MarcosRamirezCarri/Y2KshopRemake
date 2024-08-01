@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import ValidateLogin from "@/helpers/validatorLogin";
-import { LoginData } from "@/helpers/validatorLogin";
+import ValidateLogin from "@/helpers/Validators/validatorLogin";
+import { LoginData } from "@/helpers/Validators/validatorLogin";
 import loginFunction from "@/lib/actions/AccountActions/loginFunction";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import Swal from "sweetalert2";

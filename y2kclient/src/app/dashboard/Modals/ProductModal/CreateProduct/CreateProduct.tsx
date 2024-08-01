@@ -10,7 +10,7 @@ interface ModalProps {
   onSave: (product: Product) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
+const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
   const [product, setProduct] = useState<Product>({
     id: 0,
     name: '',
@@ -92,4 +92,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
   );
 };
 
-export default Modal;
+export default CreateModal;
