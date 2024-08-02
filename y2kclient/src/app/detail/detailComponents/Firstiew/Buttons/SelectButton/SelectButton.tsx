@@ -36,7 +36,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
       </button>
 
       <div className={`absolute top-[4.50rem] flex flex-row lg:flex-col gap-2`}>
-        {colors.map((colorObj: Color, colorIndex: number) => (
+        {colors.map((colorObj: any, colorIndex: number) => (
           <div
             key={colorIndex}
             className={`relative flex flex-col items-center caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-md lg:text-lg transition-all duration-300 ${
