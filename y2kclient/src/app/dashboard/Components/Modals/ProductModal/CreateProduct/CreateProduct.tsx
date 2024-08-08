@@ -10,12 +10,12 @@ interface ModalProps {
   stateAdmin: string;
 }
 
-interface LabelFormProps{
-  name: string,
-  onChange: any,
-  error: string,
-  label: string,
-  value: string
+interface LabelFormProps {
+  name: string;
+  onChange: any;
+  error: string;
+  label: string;
+  value: string;
 }
 
 const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
@@ -45,7 +45,8 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    const newValue = name === "price" ? Number(value) : value;
+    setProduct({ ...product, [name]: newValue });
     setErrors({ ...errors, [name]: "" });
   };
 
@@ -142,15 +143,26 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
       }`}
     >
       <div className="w-[50%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg w-96">
-      <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">Create Product</h2>
+        <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">
+          Create Product
+        </h2>
         <div className="flex flex-col items-center ">
-        <LabelForm name='name' label="Name" onChange={handleChange} value={product.name} error={errors.name}/>
-
-          <input
-            type="file"
-            className="w-full mb-3"
-            onChange={handleFileChange}
+          <LabelForm
+            name="name"
+            label="Name"
+            onChange={handleChange}
+            value={product.name}
+            error={errors.name}
           />
+          <label className="w-[50%] bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500">
+            <p>Upload Image</p>
+            <input
+              type="file"
+              className="w-full hidden"
+              onChange={handleFileChange}
+            />
+          </label>
+
           {uploading && <p>Uploading...</p>}
           {errors.images && (
             <p className="text-pink-950 text-sm">{errors.images}</p>
@@ -172,22 +184,27 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             </div>
           ))}
 
-          <input
-            className={`w-full mb-3 p-2 border ${
-              errors.price ? "text-pink-950" : "border-gray-300"
-            } rounded`}
-            type="number"
+          <LabelForm
             name="price"
-            placeholder="Price"
-            value={product.price}
+            label="Price"
             onChange={handleChange}
+            value={product.price}
+            error={errors.price}
           />
-          {errors.price && (
-            <p className="text-pink-950 text-sm">{errors.price}</p>
-          )}
-          <LabelForm name='clasification' label="Clasification" onChange={handleChange} value={product.clasification} error={errors.clasification}/>
-          <LabelForm name='description' label="Description" onChange={handleChange} value={product.description} error={errors.description}/>
-         
+          <LabelForm
+            name="clasification"
+            label="Clasification"
+            onChange={handleChange}
+            value={product.clasification}
+            error={errors.clasification}
+          />
+          <LabelForm
+            name="description"
+            label="Description"
+            onChange={handleChange}
+            value={product.description}
+            error={errors.description}
+          />
         </div>
         <div className="flex flex-col items-center">
           <h3 className="text-lg font-bold">Colors and Sizes</h3>
@@ -204,6 +221,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                   value={color.color}
                   onChange={(e) => handleColorChange(colorIndex, e)}
                 />
+
                 <button
                   type="button"
                   className="ml-2 bg-red-500 text-white rounded p-2"
@@ -221,9 +239,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                     className="w-1/2 p-2 border border-gray-300 rounded mr-2"
                     name="size"
                     value={size.size}
-                    onChange={(e) =>
-                      handleSizeChange(colorIndex, sizeIndex, e)
-                    }
+                    onChange={(e) => handleSizeChange(colorIndex, sizeIndex, e)}
                   >
                     <option value="">Select Size</option>
                     <option value="XL">XL</option>
@@ -237,9 +253,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                     name="quantity"
                     placeholder="Quantity"
                     value={size.quantity}
-                    onChange={(e) =>
-                      handleSizeChange(colorIndex, sizeIndex, e)
-                    }
+                    onChange={(e) => handleSizeChange(colorIndex, sizeIndex, e)}
                   />
                   <button
                     type="button"
@@ -277,7 +291,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
           </button>
           <button
             className="bg-gray-500 text-white px-4 py-2 rounded"
-            onClick={() => setStateAdmin('')}
+            onClick={() => setStateAdmin("")}
           >
             Cancel
           </button>
@@ -287,28 +301,57 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   );
 };
 
-const LabelForm: React.FC<LabelFormProps> = ({label, name , value, error, onChange}) =>{
+const LabelForm: React.FC<LabelFormProps> = ({
+  label,
+  name,
+  value,
+  error,
+  onChange,
+}) => {
   return (
-    <div className="flex flex-col">
-      <p className="text-Lightblue-950 text-xl">{label}:</p>
-     {name === 'description'?  <textarea
-            className="w-full mb-3 p-2 border border-gray-300 rounded"
-            name="description"
-            placeholder="Description"
-            value={value}
-            onChange={onChange}
-          />  :  <input
-          className={`w-full p-2 border ${error ? "border-pink-950" : "border-gray-300"} rounded`}
+    <div className="flex flex-col w-[100%]">
+      <div className="text-Lightblue-950 flex justify-between flex-row font-titilium text-lg">
+        <p>{label}:</p>
+
+        {error && <p className="text-pink-950 self-end text-sm">{error}</p>}
+      </div>
+      {name === "description" ? (
+        <textarea
+          className="w-full mb-3 p-2 border border-Lightblue-300 rounded focus:outline-Lightblue-400"
+          name="description"
+          placeholder="Description"
+          value={value}
+          onChange={onChange}
+        />
+      ) : name === "price" ? (
+        <input
+          className={`w-full mb-3 p-2 border ${
+            error ? "text-pink-950" : "border-Lightblue-300"
+          } rounded focus:outline-Lightblue-400`}
+          type="text"
+          name="price"
+          placeholder="Price"
+          value={value}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            if (/^\d*$/.test(newValue)) {
+              onChange(e);
+            }
+          }}
+        />
+      ) : (
+        <input
+          className={`w-full p-2 border ${
+            error ? "border-pink-950" : "border-Lightblue-300"
+          } rounded focus:outline-Lightblue-400`}
           type="text"
           name={name}
           value={value}
           onChange={onChange}
-      /> }
-       {error && (
-            <p className="text-pink-950 text-sm">{error}</p>
-          )}    
-        </div>
-  )
-}
+        />
+      )}
+    </div>
+  );
+};
 
 export default CreateModal;
