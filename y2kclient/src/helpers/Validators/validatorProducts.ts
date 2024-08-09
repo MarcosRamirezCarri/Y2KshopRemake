@@ -25,6 +25,10 @@ const validateProduct = (product: Product) => {
       newErrors.images = 'At least one image is required';
       isValid = false;
     }
+    if (product.images.length > 4) {
+      newErrors.images = 'Max of images: 4';
+      isValid = false;
+    }
     if (product.price <= 0 || product.price >= 9999) {
       
       newErrors.price = 'Price must between 0 and 9999';
@@ -32,10 +36,6 @@ const validateProduct = (product: Product) => {
     }
     if (!product.clasification) {
       newErrors.clasification = 'Clasification is required';
-      isValid = false;
-    }
-    if (product.colors.length <= 0) {
-      newErrors.colors = 'Colors are required';
       isValid = false;
     }
     if(!product.description){

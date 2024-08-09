@@ -15,6 +15,6 @@ interface Size {
     price: number;
     colors: Color[];
     clasification: string;
-    description?: string;
+    description: string;
   }
 

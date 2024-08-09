@@ -1,22 +1,18 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import Product from "@/helpers/Types";
 import { uploadImage } from "@/helpers/cloudinarySet";
 import validateProduct from "@/helpers/Validators/validatorProducts";
+import validateColors from "@/helpers/Validators/validateColors";
 import createProduct from "@/lib/actions/ProductActions/createProduct";
+import LabelForm from "./Labels/LabelForm";
 
 interface ModalProps {
   setStateAdmin: (arg: string) => void;
   stateAdmin: string;
 }
 
-interface LabelFormProps {
-  name: string;
-  onChange: any;
-  error: string;
-  label: string;
-  value: string;
-}
 
 const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   const [product, setProduct] = useState<Product>({
@@ -126,8 +122,11 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
 
   const handleSave = () => {
     const errorsBackup: any = validateProduct(product);
+    const errorsColorsBackup = validateColors(product.colors)
 
-    setErrors(errorsBackup);
+    const combinedErrors = { ...errorsBackup, ...errorsColorsBackup };
+    setErrors(combinedErrors);
+
     const hasErrors = Object.values(errors).some((error) => error !== "");
     const hasProduct = Object.values(product).some((prod) => prod === "");
     if (!hasErrors && !hasProduct) {
@@ -142,7 +141,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
         stateAdmin === "CreateProduct" ? "visible" : "invisible"
       }`}
     >
-      <div className="w-[50%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg w-96">
+      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg w-96">
         <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">
           Create Product
         </h2>
@@ -167,22 +166,27 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
           {errors.images && (
             <p className="text-pink-950 text-sm">{errors.images}</p>
           )}
+          <div className="flex flex-row gap-3">
           {product.images.map((image, index) => (
-            <div key={index} className="relative inline-block">
-              <img
+            <div key={index} className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded">
+              <Image
+              width={400}
+              height={400}
                 src={image}
                 alt="Uploaded"
                 className="w-20 h-20 object-cover mb-2"
               />
               <button
                 type="button"
-                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                className="absolute rounded flex bottom-0 text-xl self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950 hover:scale-105 transition-all duration-150"
                 onClick={() => handleRemoveImage(index)}
               >
                 &times;
               </button>
             </div>
           ))}
+          </div>
+          
 
           <LabelForm
             name="price"
@@ -211,11 +215,18 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
           {errors.colors && (
             <p className="text-pink-950 text-sm">{errors.colors}</p>
           )}
+          
           {product.colors.map((color, colorIndex) => (
             <div key={colorIndex}>
+                      {errors.colorName && (
+  <p className="text-pink-950 text-sm">{errors.colorName}</p>
+)}
               <div className="flex items-center mb-1">
+      
                 <input
-                  className="w-full p-2 border border-gray-300 rounded"
+                   className={`w-full p-2 border ${
+                    errors.colorName ? "border-pink-950" : "border-Lightblue-300"
+                  } rounded`}
                   type="text"
                   placeholder="Color"
                   value={color.color}
@@ -297,59 +308,6 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
           </button>
         </div>
       </div>
-    </div>
-  );
-};
-
-const LabelForm: React.FC<LabelFormProps> = ({
-  label,
-  name,
-  value,
-  error,
-  onChange,
-}) => {
-  return (
-    <div className="flex flex-col w-[100%]">
-      <div className="text-Lightblue-950 flex justify-between flex-row font-titilium text-lg">
-        <p>{label}:</p>
-
-        {error && <p className="text-pink-950 self-end text-sm">{error}</p>}
-      </div>
-      {name === "description" ? (
-        <textarea
-          className="w-full mb-3 p-2 border border-Lightblue-300 rounded focus:outline-Lightblue-400"
-          name="description"
-          placeholder="Description"
-          value={value}
-          onChange={onChange}
-        />
-      ) : name === "price" ? (
-        <input
-          className={`w-full mb-3 p-2 border ${
-            error ? "text-pink-950" : "border-Lightblue-300"
-          } rounded focus:outline-Lightblue-400`}
-          type="text"
-          name="price"
-          placeholder="Price"
-          value={value}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            if (/^\d*$/.test(newValue)) {
-              onChange(e);
-            }
-          }}
-        />
-      ) : (
-        <input
-          className={`w-full p-2 border ${
-            error ? "border-pink-950" : "border-Lightblue-300"
-          } rounded focus:outline-Lightblue-400`}
-          type="text"
-          name={name}
-          value={value}
-          onChange={onChange}
-        />
-      )}
     </div>
   );
 };
