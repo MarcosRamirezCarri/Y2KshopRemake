@@ -13,7 +13,6 @@ interface ModalProps {
   stateAdmin: string;
 }
 
-
 const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   const [product, setProduct] = useState<Product>({
     id: 0,
@@ -122,7 +121,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
 
   const handleSave = () => {
     const errorsBackup: any = validateProduct(product);
-    const errorsColorsBackup = validateColors(product.colors)
+    const errorsColorsBackup = validateColors(product.colors);
 
     const combinedErrors = { ...errorsBackup, ...errorsColorsBackup };
     setErrors(combinedErrors);
@@ -141,7 +140,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
         stateAdmin === "CreateProduct" ? "visible" : "invisible"
       }`}
     >
-      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg w-96">
+      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg">
         <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">
           Create Product
         </h2>
@@ -167,26 +166,28 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             <p className="text-pink-950 text-sm">{errors.images}</p>
           )}
           <div className="flex flex-row gap-3">
-          {product.images.map((image, index) => (
-            <div key={index} className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded">
-              <Image
-              width={400}
-              height={400}
-                src={image}
-                alt="Uploaded"
-                className="w-20 h-20 object-cover mb-2"
-              />
-              <button
-                type="button"
-                className="absolute rounded flex bottom-0 text-xl self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950 hover:scale-105 transition-all duration-150"
-                onClick={() => handleRemoveImage(index)}
+            {product.images.map((image, index) => (
+              <div
+                key={index}
+                className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded"
               >
-                &times;
-              </button>
-            </div>
-          ))}
+                <Image
+                  width={400}
+                  height={400}
+                  src={image}
+                  alt="Uploaded"
+                  className="w-20 h-20 object-cover mb-2"
+                />
+                <button
+                  type="button"
+                  className="absolute rounded flex bottom-0 text-xl self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950 hover:scale-105 transition-all duration-150"
+                  onClick={() => handleRemoveImage(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
           </div>
-          
 
           <LabelForm
             name="price"
@@ -210,23 +211,26 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             error={errors.description}
           />
         </div>
-        <div className="flex flex-col items-center">
-          <h3 className="text-lg font-bold">Colors and Sizes</h3>
-          {errors.colors && (
-            <p className="text-pink-950 text-sm">{errors.colors}</p>
-          )}
-          
+        <div className="flex flex-col w-[100%]">
+          <div className="text-Lightblue-950 flex justify-between flex-row font-titilium text-lg">
+            <p>Colors and size:</p>
+            {errors.colors && (
+              <p className="text-pink-950 self-end text-sm">{errors.colors}</p>
+            )}
+             {errors.colorName && (
+                <p className="text-pink-950 self-end text-sm">{errors.colorName}</p>
+              )}
+          </div>
           {product.colors.map((color, colorIndex) => (
             <div key={colorIndex}>
-                      {errors.colorName && (
-  <p className="text-pink-950 text-sm">{errors.colorName}</p>
-)}
+          
               <div className="flex items-center mb-1">
-      
                 <input
-                   className={`w-full p-2 border ${
-                    errors.colorName ? "border-pink-950" : "border-Lightblue-300"
-                  } rounded`}
+                  className={`w-full p-2 border ${
+                    errors.colorName
+                      ? "border-pink-950"
+                      : "border-Lightblue-300"
+                  } rounded focus:outline-Lightblue-400`}
                   type="text"
                   placeholder="Color"
                   value={color.color}
@@ -235,7 +239,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
 
                 <button
                   type="button"
-                  className="ml-2 bg-red-500 text-white rounded p-2"
+                  className="ml-2 bg-Lightblue-400 text-xl rounded  transition-all duration-150 p-1 hover:ring-2 hover:ring-Lightblue-500 active:bg-Lightblue-600"
                   onClick={() => handleRemoveColor(colorIndex)}
                 >
                   &times;
@@ -247,7 +251,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
               {color.sizes.map((size, sizeIndex) => (
                 <div key={sizeIndex} className="flex items-center mb-2">
                   <select
-                    className="w-1/2 p-2 border border-gray-300 rounded mr-2"
+                    className="w-1/2 p-2 border border-Lightblue-300 focus:outline-Lightblue-400 rounded mr-2"
                     name="size"
                     value={size.size}
                     onChange={(e) => handleSizeChange(colorIndex, sizeIndex, e)}
@@ -259,7 +263,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                     <option value="S">S</option>
                   </select>
                   <input
-                    className="w-1/2 p-2 border border-gray-300 rounded"
+                    className="w-1/2 p-2 border rounded border-Lightblue-300 focus:outline-Lightblue-400"
                     type="number"
                     name="quantity"
                     placeholder="Quantity"
@@ -268,7 +272,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                   />
                   <button
                     type="button"
-                    className="ml-2 bg-red-500 text-white rounded p-2"
+                    className="ml-2 bg-Lightblue-300 text-md rounded transition-all duration-150 p-1 hover:ring-2 hover:ring-Lightblue-400 active:bg-Lightblue-400"
                     onClick={() => handleRemoveSize(colorIndex, sizeIndex)}
                   >
                     &times;
@@ -277,7 +281,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
               ))}
               <button
                 type="button"
-                className="bg-blue-500 text-white rounded p-2 mb-2"
+                className=" text-white rounded p-1 bg-Lightblue-300 "
                 onClick={() => handleAddSize(colorIndex)}
               >
                 Add Size
