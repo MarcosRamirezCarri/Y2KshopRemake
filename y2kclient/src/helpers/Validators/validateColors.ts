@@ -13,7 +13,8 @@ interface Size {
       colors: "",
       sizes: "",
       colorName: "",
-      sizesQuantity: ""
+      sizesQuantity: "",
+      duplicateSizes: ""
     };
   
     if (colors.length === 0) {
@@ -30,9 +31,17 @@ interface Size {
         errors.sizes = `You must add at least one size for color ${color.color || colorIndex + 1}`;
       }
   
+      const sizeSet = new Set<string>();
+  
       color.sizes.forEach((size, sizeIndex) => {
         if (size.quantity < 1) {
           errors.sizesQuantity = `Size ${size.size || sizeIndex + 1} for color ${color.color || colorIndex + 1} must have a quantity of at least 1`;
+        }
+  
+        if (sizeSet.has(size.size)) {
+          errors.duplicateSizes = `Duplicate size '${size.size}' found in color ${color.color || colorIndex + 1}`;
+        } else {
+          sizeSet.add(size.size);
         }
       });
     });
@@ -40,4 +49,4 @@ interface Size {
     return errors;
   };
 
-  export default validateColors;
+  export default validateColors

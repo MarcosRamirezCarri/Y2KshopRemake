@@ -7,6 +7,7 @@ import validateProduct from "@/helpers/Validators/validatorProducts";
 import validateColors from "@/helpers/Validators/validateColors";
 import createProduct from "@/lib/actions/ProductActions/createProduct";
 import LabelForm from "./Labels/LabelForm";
+import LabelColors from "./Labels/LabelColors";
 
 interface ModalProps {
   setStateAdmin: (arg: string) => void;
@@ -34,6 +35,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     colorName: "",
     sizesQuantity: "",
     sizes: "",
+    duplicateSizes: "",
   });
 
   const handleChange = (
@@ -83,6 +85,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     const newColors = [...product.colors];
     newColors[index].color = e.target.value;
     setProduct({ ...product, colors: newColors });
+    
   };
 
   const handleAddSize = (colorIndex: number) => {
@@ -140,7 +143,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
         stateAdmin === "CreateProduct" ? "visible" : "invisible"
       }`}
     >
-      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center  grid grid-cols-2 p-6 rounded-lg shadow-lg">
+      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center   grid grid-cols-2 p-6 rounded-lg shadow-lg">
         <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">
           Create Product
         </h2>
@@ -152,7 +155,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             value={product.name}
             error={errors.name}
           />
-          <label className="w-[50%] bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500">
+          <label className="w-[50%] bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500 hover:ring-Lightblue-700 active:bg-Lightblue-500 transition-all delay-50">
             <p>Upload Image</p>
             <input
               type="file"
@@ -163,7 +166,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
 
           {uploading && <p>Uploading...</p>}
           {errors.images && (
-            <p className="text-pink-950 text-sm">{errors.images}</p>
+            <p className="text-pink-950 font-titilium text-sm">{errors.images}</p>
           )}
           <div className="flex flex-row gap-3">
             {product.images.map((image, index) => (
@@ -211,91 +214,16 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             error={errors.description}
           />
         </div>
-        <div className="flex flex-col w-[100%]">
-          <div className="text-Lightblue-950 flex justify-between flex-row font-titilium text-lg">
-            <p>Colors and size:</p>
-            {errors.colors && (
-              <p className="text-pink-950 self-end text-sm">{errors.colors}</p>
-            )}
-             {errors.colorName && (
-                <p className="text-pink-950 self-end text-sm">{errors.colorName}</p>
-              )}
-          </div>
-          {product.colors.map((color, colorIndex) => (
-            <div key={colorIndex}>
-          
-              <div className="flex items-center mb-1">
-                <input
-                  className={`w-full p-2 border ${
-                    errors.colorName
-                      ? "border-pink-950"
-                      : "border-Lightblue-300"
-                  } rounded focus:outline-Lightblue-400`}
-                  type="text"
-                  placeholder="Color"
-                  value={color.color}
-                  onChange={(e) => handleColorChange(colorIndex, e)}
-                />
-
-                <button
-                  type="button"
-                  className="ml-2 bg-Lightblue-400 text-xl rounded  transition-all duration-150 p-1 hover:ring-2 hover:ring-Lightblue-500 active:bg-Lightblue-600"
-                  onClick={() => handleRemoveColor(colorIndex)}
-                >
-                  &times;
-                </button>
-              </div>
-              {errors.sizes && (
-                <p className="text-pink-950 text-sm">{errors.sizes}</p>
-              )}
-              {color.sizes.map((size, sizeIndex) => (
-                <div key={sizeIndex} className="flex items-center mb-2">
-                  <select
-                    className="w-1/2 p-2 border border-Lightblue-300 focus:outline-Lightblue-400 rounded mr-2"
-                    name="size"
-                    value={size.size}
-                    onChange={(e) => handleSizeChange(colorIndex, sizeIndex, e)}
-                  >
-                    <option value="">Select Size</option>
-                    <option value="XL">XL</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="S">S</option>
-                  </select>
-                  <input
-                    className="w-1/2 p-2 border rounded border-Lightblue-300 focus:outline-Lightblue-400"
-                    type="number"
-                    name="quantity"
-                    placeholder="Quantity"
-                    value={size.quantity}
-                    onChange={(e) => handleSizeChange(colorIndex, sizeIndex, e)}
-                  />
-                  <button
-                    type="button"
-                    className="ml-2 bg-Lightblue-300 text-md rounded transition-all duration-150 p-1 hover:ring-2 hover:ring-Lightblue-400 active:bg-Lightblue-400"
-                    onClick={() => handleRemoveSize(colorIndex, sizeIndex)}
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                className=" text-white rounded p-1 bg-Lightblue-300 "
-                onClick={() => handleAddSize(colorIndex)}
-              >
-                Add Size
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="bg-blue-500 text-white rounded p-2"
-            onClick={handleAddColor}
-          >
-            Add Color
-          </button>
-        </div>
+        <LabelColors
+          errors={errors}
+          product={product}
+          handleAddColor={handleAddColor}
+          handleAddSize={handleAddSize}
+          handleRemoveColor={handleRemoveColor}
+          handleRemoveSize={handleRemoveSize}
+          handleColorChange={handleColorChange}
+          handleSizeChange={handleSizeChange}
+        />
         <div className="col-span-2 flex justify-center mt-4">
           <button
             type="button"

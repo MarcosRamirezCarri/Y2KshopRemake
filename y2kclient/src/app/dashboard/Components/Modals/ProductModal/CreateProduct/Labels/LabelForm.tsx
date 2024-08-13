@@ -22,7 +22,9 @@ const LabelForm: React.FC<LabelFormProps> = ({
         </div>
         {name === "description" ? (
           <textarea
-            className="w-full mb-3 p-2 border border-Lightblue-300 rounded focus:outline-Lightblue-400"
+            className={`w-full mb-3 p-2 border ${
+              error ? "text-pink-950 border-pink-950" : "border-Lightblue-300"
+            } rounded focus:outline-Lightblue-400`}
             name="description"
             placeholder="Description"
             value={value}
@@ -31,7 +33,7 @@ const LabelForm: React.FC<LabelFormProps> = ({
         ) : name === "price" ? (
           <input
             className={`w-full mb-3 p-2 border ${
-              error ? "text-pink-950" : "border-Lightblue-300"
+              error ? "text-pink-950 border-pink-950" : "border-Lightblue-300"
             } rounded focus:outline-Lightblue-400`}
             type="text"
             name="price"
