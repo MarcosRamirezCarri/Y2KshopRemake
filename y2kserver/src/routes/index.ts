@@ -4,6 +4,9 @@ import postInCart from './cartRoutes/postCartItem';
 import deleteCartItem from './cartRoutes/deleteCartItem';
 import getCartItems from './cartRoutes/getCartItems';
 
+import PostFlyer from './FlyersRoutes/postFlyer';
+import getFlyers from './FlyersRoutes/getFlyer';
+
 import postUser from './userRoutes/postUser';
 import loginUser from './userRoutes/loginUser';
 import getUsers from './userRoutes/getUsers';
@@ -24,6 +27,8 @@ router.post('/register', postUser);
 
 router.post('/cart/:userId/add', postInCart);
 
+router.post('/flyer', PostFlyer);
+
 router.get('/product', getProducts);
 
 router.get('/user/:userId', getUserFromId);
@@ -35,6 +40,8 @@ router.get('/product/search', searchByName);
 router.get('/product/:idProduct', searchById);
 
 router.get('/cart/:userId', getCartItems);
+
+router.get('/flyer', getFlyers);
 
 router.delete('/cart/:userId/remove/:idProduct', deleteCartItem);
 

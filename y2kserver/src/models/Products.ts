@@ -48,6 +48,10 @@ const ProductModel = sequelize.define('Product', {
     type: DataTypes.STRING(128),
     allowNull: true,
   },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  }
 }, {
   tableName: 'Product',
   timestamps: false,

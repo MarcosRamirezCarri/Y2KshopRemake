@@ -11,42 +11,51 @@ interface Size {
   const validateColors = (colors: Color[]) => {
     let errors = {
       colors: "",
-      sizes: "",
-      colorName: "",
-      sizesQuantity: "",
-      duplicateSizes: ""
+      colorErrors: [] as string[],
+      sizeErrors: [] as string[],
     };
   
     if (colors.length === 0) {
-      errors.colors = "You must add at least one color";
+      errors.colors = "You must add at least one color.";
       return errors;
     }
   
     colors.forEach((color, colorIndex) => {
+      let colorError = `Errors for color ${color.color || `at index ${colorIndex + 1}`}:`;
+      let hasColorError = false;
+  
       if (!color.color) {
-        errors.colorName = `Color name is required at index ${colorIndex + 1}`;
+        colorError += `\n- Color name is required.`;
+        hasColorError = true;
       }
   
       if (color.sizes.length === 0) {
-        errors.sizes = `You must add at least one size for color ${color.color || colorIndex + 1}`;
+        colorError += `\n- At least one size must be added.`;
+        hasColorError = true;
       }
   
       const sizeSet = new Set<string>();
   
       color.sizes.forEach((size, sizeIndex) => {
         if (size.quantity < 1) {
-          errors.sizesQuantity = `Size ${size.size || sizeIndex + 1} for color ${color.color || colorIndex + 1} must have a quantity of at least 1`;
+          colorError += `\n- Size ${size.size || `at index ${sizeIndex + 1}`} must have a quantity of at least 1.`;
+          hasColorError = true;
         }
   
         if (sizeSet.has(size.size)) {
-          errors.duplicateSizes = `Duplicate size '${size.size}' found in color ${color.color || colorIndex + 1}`;
+          colorError += `\n- Duplicate size '${size.size}' found.`;
+          hasColorError = true;
         } else {
           sizeSet.add(size.size);
         }
       });
+  
+      if (hasColorError) {
+        errors.colorErrors.push(colorError);
+      }
     });
   
     return errors;
   };
-
-  export default validateColors
+  
+  export default validateColors;

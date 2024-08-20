@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Product from "@/helpers/Types";
 import { uploadImage } from "@/helpers/cloudinarySet";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/Validators/validatorProducts";
 import validateColors from "@/helpers/Validators/validateColors";
 import createProduct from "@/lib/actions/ProductActions/createProduct";
@@ -24,6 +25,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     clasification: "",
     description: "",
   });
+  const dispatch = useAppDispatch();
   const [uploading, setUploading] = useState<boolean>(false);
   const [errors, setErrors] = useState({
     name: "",
@@ -32,10 +34,8 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     description: "",
     clasification: "",
     colors: "",
-    colorName: "",
-    sizesQuantity: "",
-    sizes: "",
-    duplicateSizes: "",
+    colorErrors: [] as string[],
+    sizeErrors: [] as string[],
   });
 
   const handleChange = (
@@ -85,7 +85,6 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     const newColors = [...product.colors];
     newColors[index].color = e.target.value;
     setProduct({ ...product, colors: newColors });
-    
   };
 
   const handleAddSize = (colorIndex: number) => {
@@ -94,7 +93,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
       newColors[colorIndex].sizes.push({ size: "", quantity: 0 });
       setProduct({ ...product, colors: newColors });
     } else {
-      setErrors({ ...errors, sizes: "You cannot add more than 4 sizes" });
+      setErrors({ ...errors, colors: "You cannot add more than 4 sizes" });
     }
   };
 
@@ -119,31 +118,50 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     const newColors = [...product.colors];
     newColors[colorIndex].sizes.splice(sizeIndex, 1);
     setProduct({ ...product, colors: newColors });
-    setErrors({ ...errors, sizes: "" });
   };
 
   const handleSave = () => {
-    const errorsBackup: any = validateProduct(product);
+    const errorsBackup = validateProduct(product);
     const errorsColorsBackup = validateColors(product.colors);
 
     const combinedErrors = { ...errorsBackup, ...errorsColorsBackup };
     setErrors(combinedErrors);
 
-    const hasErrors = Object.values(errors).some((error) => error !== "");
-    const hasProduct = Object.values(product).some((prod) => prod === "");
+    const hasErrors = Object.values(combinedErrors).some((error) => {
+      if (Array.isArray(error)) {
+        return error.some((subError) => subError !== "");
+      }
+      return error !== "";
+    });
+
+    const hasProduct = Object.values(product).some((prod) => {
+      if (Array.isArray(prod)) {
+        return prod.length === 0;
+      }
+      return prod === "";
+    });
+
     if (!hasErrors && !hasProduct) {
-      alert("se creo");
-      createProduct(product);
+      alert("Product created successfully!");
+      dispatch(createProduct(product));
+    } else {
+      alert("Please fix the errors before saving the product.");
     }
   };
 
   return (
     <div
-      className={`fixed inset-0 flex z-[101] items-center justify-center bg-gray-900/[0.4] ${
+      className={`fixed inset-0 flex z-[101] items-center  justify-center bg-gray-900/[0.4] ${
         stateAdmin === "CreateProduct" ? "visible" : "invisible"
       }`}
     >
-      <div className="w-[60%] bg-Lightblue-200 gap-2 justify-center   grid grid-cols-2 p-6 rounded-lg shadow-lg">
+      <div
+        className={`w-[60%] bg-Lightblue-200 gap-2 justify-center transition-all duration-250   grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-150 ${
+          stateAdmin === "CreateProduct"
+            ? "scale-100 opacity-100"
+            : "scale-125 opacity-0"
+        }`}
+      >
         <h2 className="col-span-2 flex justify-center font-titilium text-2xl font-semibold ">
           Create Product
         </h2>
@@ -166,7 +184,9 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
 
           {uploading && <p>Uploading...</p>}
           {errors.images && (
-            <p className="text-pink-950 font-titilium text-sm">{errors.images}</p>
+            <p className="text-pink-950 font-titilium text-sm">
+              {errors.images}
+            </p>
           )}
           <div className="flex flex-row gap-3">
             {product.images.map((image, index) => (
@@ -227,13 +247,13 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
         <div className="col-span-2 flex justify-center mt-4">
           <button
             type="button"
-            className="bg-green-500 text-white rounded p-2"
+            className="bg-Lightblue-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="bg-gray-500 text-white px-4 py-2 rounded"
+            className="bg-gray-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-gray-600 transition-all duration-150 hover:ring-gray-700 hover:scale-105 active:bg-gray-700"
             onClick={() => setStateAdmin("")}
           >
             Cancel
