@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database';
+import CartItemModel from './Cart';
 
 const UserModel = sequelize.define('User', {
   id: {
@@ -23,13 +24,18 @@ const UserModel = sequelize.define('User', {
     type: new DataTypes.STRING(128),
     allowNull: false,
   },
+  history: {
+    type: DataTypes.ARRAY(DataTypes.JSONB),
+    allowNull: false,
+    defaultValue: [],
+  },
   admin: {
     type: new DataTypes.BOOLEAN,
     allowNull: false,
   }
 }, {
   tableName: 'User',
-  timestamps: false, // Si no quieres que Sequelize agregue automáticamente las columnas createdAt y updatedAt
+  timestamps: false, 
 });
 
 export default UserModel;

@@ -37,6 +37,10 @@ const CartItemModel = sequelize.define('Cart', {
     type: DataTypes.STRING(128),
     allowNull: false,
   },
+  state: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
 }, {
   tableName: 'Cart',
   timestamps: false,

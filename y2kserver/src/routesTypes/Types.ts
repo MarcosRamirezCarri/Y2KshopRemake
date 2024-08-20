@@ -14,5 +14,6 @@ export default interface Product {
     images: string[];
     price: number;
     colors: Color[];
+    description: string
     clasification: string;
 }
