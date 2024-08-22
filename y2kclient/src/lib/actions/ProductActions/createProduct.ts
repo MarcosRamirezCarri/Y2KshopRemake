@@ -3,9 +3,9 @@ import axios from "axios";
 import Product from "@/helpers/Types";
 
 const createProduct = (product: Product) => async() =>{
-    const {name, price, colors, clasification, images } = product
+    const {name, price, colors, clasification, images, description } = product
     try {
-       const data = await axios.post(`${Server}/product`, {name, price, colors, clasification, images});
+       const data = await axios.post(`${Server}/product`, {name, price, colors, clasification, images, description});
        const savedCart = data.data
 
     } catch (error) {

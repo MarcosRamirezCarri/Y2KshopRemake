@@ -5,7 +5,7 @@ import UserModel from "../../models/User";
 
 const postInCart = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const { productId, quantity, color, size } = req.body;
+  const { productId, quantity, color, size, state } = req.body;
 
   if (!userId || !productId) {
     res.status(400).json({ message: "No userId and ProductId" });
@@ -30,6 +30,7 @@ const postInCart = async (req: Request, res: Response) => {
       quantity,
       color,
       size,
+      state,
     });
     res.status(201).json(cartItem)
     console.log('se guardo', cartItem)

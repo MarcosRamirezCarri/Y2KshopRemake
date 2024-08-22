@@ -6,8 +6,9 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 const addToCart = (cart: any) => async(dispatch: Dispatch) =>{
     const {userId, productId, quantity, color, size } = cart
+    const state = 'inCart';
     try {
-       const data = await axios.post(`${Server}/cart/${userId}/add`, {productId, quantity, color, size});
+       const data = await axios.post(`${Server}/cart/${userId}/add`, {productId, quantity, color, size, state});
        const savedCart = data.data
        dispatch(saveToCart(savedCart))
     } catch (error) {

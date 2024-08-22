@@ -1,6 +1,7 @@
 import { setLogin } from "@/lib/slices/userReducer";
 import axios from "axios";
 import { Server } from "@/helpers/server";
+import Swal from "sweetalert2";
 import { Dispatch } from "@reduxjs/toolkit";
 
 interface LoginData {
@@ -17,14 +18,18 @@ const loginFunction =
         password,
       });
       const login = loginData.data;
+  
 
       dispatch(setLogin(login));
-      location.reload();
+      return { success: true, user: login.user };
+      
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
+        return { success: false, message: error.message };
       } else {
         console.log("Error desconocido:", error);
+        return { success: false, message: "Error desconocido" };
       }
     }
   };

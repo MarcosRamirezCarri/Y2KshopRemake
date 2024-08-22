@@ -2,9 +2,11 @@ import ProductModel from "../../models/Products";
 import { Response, Request } from "express";
 
 const postProduct = async (req: Request, res: Response) => {
-  const { name, price, sizes, colors, clasification, images, description } = req.body;
+  const { name, price, colors, clasification, images, description } = req.body;
 
   const errors: string[] = [];
+  console.log(name, price, colors, clasification, images, description)
+
 
   if (typeof name !== "string" || name.trim() === "") {
     errors.push("El nombre es requerido y debe ser una cadena de texto.");
@@ -53,27 +55,18 @@ const postProduct = async (req: Request, res: Response) => {
               } no es válida.`
             );
           }
-
-          if (typeof size.quantity !== "number" || size.quantity <= 0) {
-            errors.push(
-              `La cantidad en la posición ${sizeIndex + 1} del color ${
-                colorIndex + 1
-              } debe ser un número mayor a 0.`
-            );
-          }
         });
       }
     });
 }
   if (errors.length > 0) {
-    return res.status(400).json({ errors });
+    return res.status(400).json( errors );
   }
   
   try {
     const product = ProductModel.create({
       name,
       price,
-      sizes,
       colors,
       clasification,
       images,

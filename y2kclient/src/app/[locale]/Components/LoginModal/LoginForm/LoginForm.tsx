@@ -57,30 +57,34 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
     e.preventDefault();
     const errors = ValidateLogin(formData);
     setError(errors);
+    
     if (!errors.email && !errors.password) {
       dispatch(loginFunction(formData))
-      
-        .then(() => {
-          Swal.fire({
-            title: "Logged Succesfully!",
-            icon: "success",
-            confirmButtonText: "Ok",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              setModalL(!modalL);
-            }
-          });
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: "Login Failed",
-            text: error.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-          });
+        .then((response: any) => {
+          if (response.success) {
+            Swal.fire({
+              title: "Logged Successfully!",
+              text: `Welcome back, ${response.user.name}!`, 
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                setModalL(!modalL);
+                location.reload(); 
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Login Failed",
+              text: response.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
         });
     }
   };
+  
 
   return (
     <div
