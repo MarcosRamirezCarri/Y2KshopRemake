@@ -8,19 +8,20 @@ interface CartItem {
   quantity: number;
   color: string;
   size: string;
+  state: string;
   Product: Product;
 }
 
-interface ProductState {
+interface CartState {
   isLoading: boolean;
   status: string;
-  products: CartItem[];
+  cart: CartItem[];
 }
 
-const initialState: ProductState = {
+const initialState: CartState = {
   isLoading: false,
   status: "",
-  products: [],
+  cart: [],
 };
 
 export const cartReducer = createSlice({
@@ -28,14 +29,17 @@ export const cartReducer = createSlice({
   initialState,
   reducers: {
     saveToCart: (state, action: PayloadAction<CartItem>) => {
-      state.products = action.payload;
+      state.cart = action.payload;
+    },
+    deleteFromCart:(state, action: PayloadAction<number>) =>{
+      state.cart = state.cart.filter(item => item.id !== action.payload);
     },
     logOutCart: (state) => {
-      state.products = [];
+      state.cart = [];
     },
   },
 });
 
-export const { saveToCart, logOutCart } = cartReducer.actions;
+export const { saveToCart, logOutCart, deleteFromCart } = cartReducer.actions;
 
 export default cartReducer.reducer;

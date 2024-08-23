@@ -11,6 +11,7 @@ const Cart = () => {
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
   const [logged, setLogged] = useState<boolean>(false);
+  const [userId, setUserId] = useState(0)
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
@@ -20,11 +21,12 @@ const Cart = () => {
     if (token === "undefined" || token === "null" || token === null) {
       setModal(true);
     } else {
+      setUserId(userId)
       setLogged(!logged);
       dispatch(getCartFromId(userId));
     }
   }, [modal]);
-  const stateCart = useAppSelector((state) => state.cart.products);
+  const stateCart = useAppSelector((state) => state.cart.cart);
 
   return (
     <div className="flex flex-col w-full h-full items-center">
@@ -36,6 +38,8 @@ const Cart = () => {
               stateCart.map((product) => (
                 <div key={product.id}>
                   <CartCard
+                   id={product.id}
+                    userId={userId}
                     productId={product.productId}
                     color={product.color}
                     quantity={product.quantity}

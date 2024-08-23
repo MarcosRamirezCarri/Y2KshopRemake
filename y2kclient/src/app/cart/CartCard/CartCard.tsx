@@ -1,20 +1,47 @@
 import Image from "next/image";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import Swal from 'sweetalert2'
+import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
 import Product from "@/helpers/Types";
 
 interface CartProduct  {
   productId: number;
+  id: number;
   quantity: number;
   color: string;
   size: string;
+  userId: number;
   Product: Product;
 };
 
 const CartCard: React.FC<CartProduct> = ({
   productId,
+  id,
   color,
   size,
-  Product
+  Product,
+  userId
 }) => {
+  const dispatch = useAppDispatch()
+
+  const handleDelete = () =>{
+      Swal.fire({
+        title: "Do you want delete this product from your cart?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: "Don't save",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "", "success");
+          dispatch(deleteCartItem(userId, id))
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+    
+    
+  }
   return (
     <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
       <div className="col-span-2">
@@ -57,7 +84,7 @@ const CartCard: React.FC<CartProduct> = ({
         <button className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Buy
         </button>
-        <button className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+        <button onClick={handleDelete} className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Discard
         </button>
         <button className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
