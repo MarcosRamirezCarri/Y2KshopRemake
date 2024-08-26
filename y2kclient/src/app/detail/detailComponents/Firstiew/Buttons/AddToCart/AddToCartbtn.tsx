@@ -22,7 +22,7 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
   const token = localStorage.getItem("token");
 
   const dispatch = useAppDispatch();
-  const stateCart = useAppSelector((state) => state.cart.products);
+  const stateCart = useAppSelector((state) => state.cart.cart);
 
   useEffect(() => {
     const auxId = Number(userId);

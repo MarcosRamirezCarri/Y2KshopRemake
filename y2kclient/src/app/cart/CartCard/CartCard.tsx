@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useAppDispatch } from "@/lib/hooks/hooks";
+import { useRouter } from "next/navigation";
 import Swal from 'sweetalert2'
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
 import Product from "@/helpers/Types";
@@ -23,7 +24,26 @@ const CartCard: React.FC<CartProduct> = ({
   userId
 }) => {
   const dispatch = useAppDispatch()
+  const route = useRouter();
 
+
+  const handleModify = () =>{
+    Swal.fire({
+      title: "Do you want Modify this product from your cart?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Modify",
+      denyButtonText: "Don't Modify",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      
+        dispatch(deleteCartItem(userId, id))
+        
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  }
   const handleDelete = () =>{
       Swal.fire({
         title: "Do you want delete this product from your cart?",
@@ -70,10 +90,10 @@ const CartCard: React.FC<CartProduct> = ({
         <button className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Buy
         </button>
-        <button className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+        <button onClick={handleDelete} className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
         Discard
         </button>
-        <button className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+        <button onClick={handleModify} className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
          Modify
         </button>
         </div>
@@ -87,7 +107,7 @@ const CartCard: React.FC<CartProduct> = ({
         <button onClick={handleDelete} className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Discard
         </button>
-        <button className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+        <button onClick={handleModify} className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
           Modify
         </button>
       </div>
