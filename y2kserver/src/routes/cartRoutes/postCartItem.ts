@@ -33,7 +33,6 @@ const postInCart = async (req: Request, res: Response) => {
       state,
     });
     res.status(201).json(cartItem)
-    console.log('se guardo', cartItem)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
 }

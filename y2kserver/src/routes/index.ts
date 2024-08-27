@@ -3,6 +3,7 @@ import authenticateToken from './middleware/auth';
 import postInCart from './cartRoutes/postCartItem';
 import deleteCartItem from './cartRoutes/deleteCartItem';
 import getCartItems from './cartRoutes/getCartItems';
+import putCartItem from './cartRoutes/putCartItem';
 
 import PostFlyer from './FlyersRoutes/postFlyer';
 import getFlyers from './FlyersRoutes/getFlyer';
@@ -43,6 +44,8 @@ router.get('/cart/:userId', getCartItems);
 
 router.get('/flyer', getFlyers);
 
-router.delete('/cart/:userId/remove/:idProduct', deleteCartItem);
+router.put('/cart/:userId/modify/:itemId', putCartItem);
+
+router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
 
 export default router

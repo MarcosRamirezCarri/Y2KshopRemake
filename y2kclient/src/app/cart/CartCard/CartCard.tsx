@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { useRouter } from "next/navigation";
 import Swal from 'sweetalert2'
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
 import Product from "@/helpers/Types";
+import ModalModify from "./ModalModify/ModalModify";
 
 interface CartProduct  {
   productId: number;
@@ -23,8 +24,9 @@ const CartCard: React.FC<CartProduct> = ({
   Product,
   userId
 }) => {
-  const dispatch = useAppDispatch()
-  const route = useRouter();
+  const dispatch = useAppDispatch();
+  const [modal, setModal] = useState<boolean>(false);
+  console.log('el id es',id,'y el producto', productId)
 
 
   const handleModify = () =>{
@@ -37,7 +39,7 @@ const CartCard: React.FC<CartProduct> = ({
     }).then((result) => {
       if (result.isConfirmed) {
       
-        dispatch(deleteCartItem(userId, id))
+        setModal(!modal)
         
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
@@ -63,7 +65,8 @@ const CartCard: React.FC<CartProduct> = ({
     
   }
   return (
-    <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
+    <div>
+ <div className="grid grid-cols-6 p-5 w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
       <div className="col-span-2">
         <Image
           width={680}
@@ -112,6 +115,9 @@ const CartCard: React.FC<CartProduct> = ({
         </button>
       </div>
     </div>
+    <ModalModify modal={modal} setModal={setModal} Product={Product} size={size} color={color} />
+    </div>
+   
   );
 };
 
