@@ -3,8 +3,8 @@ import { modifyCartItem } from "@/lib/slices/cartReducer";
 import axios from "axios";
 import { Server } from "@/helpers/server";
 
-const deleteCartItem =
-  (userId: number, itemId: number, size:string, color:string) => async(dispatch: Dispatch) => {
+const modifyCart =
+  (color: string, size: string, itemId:number, userId:number) => async(dispatch: Dispatch) => {
     try {
         const modItem = await axios.put(`${Server}/cart/${userId}/modify/${itemId}`, {size, color})
         
@@ -12,6 +12,7 @@ const deleteCartItem =
         
         if(modifiedItem){
             dispatch(modifyCartItem(modifiedItem))
+           return { success: true };
         }
     } catch (error) {
         if (error instanceof Error) {
@@ -22,4 +23,4 @@ const deleteCartItem =
     }
   };
 
-  export default deleteCartItem;
+  export default modifyCart;
