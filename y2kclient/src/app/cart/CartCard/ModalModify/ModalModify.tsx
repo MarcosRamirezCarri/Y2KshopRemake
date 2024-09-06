@@ -84,7 +84,7 @@ const ModalModify: React.FC<ModalModifyProps> = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`grid grid-cols-2 bg-Lightblue-100 rounded-md ring-2 ring-Lightblue-300 gap-6 transition-all duration-500 p-10 w-[40%] ${
+        className={`grid grid-cols-2 bg-Lightblue-100 rounded-md ring-2 ring-Lightblue-300 gap-6 transition-all duration-500 p-10 w-[80%] lg:w-[40%] ${
           modal ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >

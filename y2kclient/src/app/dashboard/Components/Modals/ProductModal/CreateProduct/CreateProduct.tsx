@@ -118,6 +118,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     const newColors = [...product.colors];
     newColors[colorIndex].sizes.splice(sizeIndex, 1);
     setProduct({ ...product, colors: newColors });
+    setErrors({ ...errors, sizeErrors: [] });
   };
 
   const handleSave = () => {

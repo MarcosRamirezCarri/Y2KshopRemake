@@ -26,7 +26,7 @@ const LabelColors: React.FC<LabelTypes> = ({
   handleSizeChange,
 }) => {
   return (
-    <div className="flex flex-col w-[100%] max-h-[80%]">
+    <div className="flex flex-col w-[100%] max-h-[25rem]">
       <div className="text-Lightblue-950 flex justify-between flex-row font-titilium text-lg">
         <p>Colors and size:</p>
         {errors.colors && (

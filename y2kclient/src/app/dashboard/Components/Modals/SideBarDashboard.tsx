@@ -1,17 +1,62 @@
-'use client'
+"use client";
+import { useState } from "react";
 
 interface SideBarProps {
-    setStateAdmin: (arg: string) => void
+  setStateAdmin: (arg: string) => void;
 }
 
-const SideBarDashboard: React.FC<SideBarProps> = ({setStateAdmin}) =>{
-    return(
-        <div className="w-[20%] h-[100vh] bg-gray-700 items-center flex flex-col gap-5 relative top-[8rem]">
-            <button  >Users</button>
-            <button onClick={() => setStateAdmin('CreateProduct')} className="bg-orange-400/[0.9] px-4 py-2 rounded ">Products</button>
-            <p>Tasks</p>
-            <p>Flyers</p>
-        </div>
-    )
-}
-export default SideBarDashboard
+const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin }) => {
+  const [stateButtons, setStateButtons] = useState<string>("");
+  return (
+    <div className="w-[20%] h-[100vh] bg-gray-950 items-center flex flex-col py-5 gap-5 font-titilium relative top-[8rem]">
+      <p className="text-2xl font-semibold">Dashboard</p>
+      <button onClick={() => setStateButtons("Users")}  className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+            stateButtons === 'Users' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
+        } `} >Users</button>
+      <button
+        onClick={() => setStateButtons("Products")}
+        className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+            stateButtons === 'Products' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
+        } `}
+      >
+        Products
+      </button>
+
+      <div
+        className={`flex flex-col gap-2    ${
+          stateButtons === "Products"
+            ? "visible transition-all relative translate-x-[0vw] duration-500 opacity-100"
+            : "collapse duration-400 transition-all -translate-x-[10vw] opacity-0 top-24 absolute"
+        }`}
+      >
+        <button
+          onClick={() => setStateAdmin("CreateProduct")}
+          className="bg-orange-400/[0.9] px-2 py-1 rounded "
+        >
+          Create Product
+        </button>
+        <button
+          onClick={() => setStateAdmin("ModifyProduct")}
+          className="bg-orange-400/[0.9] px-2 py-1 rounded "
+        >
+          Modify Product
+        </button>
+        <button
+          onClick={() => setStateAdmin("DeleteProduct")}
+          className="bg-orange-400/[0.9] px-2 py-1 rounded "
+        >
+          Delete Product
+        </button>
+      </div>
+
+      <button   onClick={() => setStateButtons("Tasks")}   className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+            stateButtons === 'Tasks' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
+        } `} >Tasks</button>
+    
+    <button   onClick={() => setStateButtons("Flyers")}   className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+            stateButtons === 'Flyers' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
+        } `} >Flyers</button>
+    </div>
+  );
+};
+export default SideBarDashboard;
