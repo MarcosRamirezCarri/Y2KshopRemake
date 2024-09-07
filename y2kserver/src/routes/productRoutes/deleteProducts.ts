@@ -2,7 +2,7 @@ import ProductModel from "../../models/Products";
 import { Request, Response } from "express";
 
 const deleteProduct = async (req: Request, res: Response) => {
-  const { idProduct } = req.params;
+  const { idProduct } = req.body;
   try {
     if (!idProduct) {
       res.status(400).json({ message: "No idProduct" });

@@ -26,7 +26,7 @@ const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin }) => {
         className={`flex flex-col gap-2    ${
           stateButtons === "Products"
             ? "visible transition-all relative translate-x-[0vw] duration-500 opacity-100"
-            : "collapse duration-400 transition-all -translate-x-[10vw] opacity-0 top-24 absolute"
+            : "collapse duration-0 transition-all scale-0 opacity-0 absolute"
         }`}
       >
         <button

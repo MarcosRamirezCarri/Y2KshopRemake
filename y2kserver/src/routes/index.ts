@@ -14,6 +14,7 @@ import getUsers from './userRoutes/getUsers';
 import getUserFromId from './userRoutes/getUserFromId';
 
 import postProduct from './productRoutes/postProduct';
+import deleteProduct from './productRoutes/deleteProducts';
 import getProducts from './productRoutes/getProducts';
 import searchByName from './productRoutes/searchByName';
 import searchById from './productRoutes/searchById';
@@ -47,5 +48,7 @@ router.get('/flyer', getFlyers);
 router.put('/cart/:userId/modify/:itemId', putCartItem);
 
 router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
+
+router.delete('/product/delete', deleteProduct)
 
 export default router
