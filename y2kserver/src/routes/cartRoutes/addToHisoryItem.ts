@@ -4,11 +4,11 @@ import UserModel from "../../models/User";
 
 const addToHistoryItem = async (req: Request, res: Response) => {
   const { userId, productId } = req.params;
-
+  if (!userId || !productId) {
+    res.status(400).json({ message: "No Userid or idProduct" });
+  }
   try {
-    if (!userId || !productId) {
-      res.status(400).json({ message: "No Userid or idProduct" });
-    }
+  
     const cartItem: any = await CartItemModel.findOne({
       where: {
         id: productId,

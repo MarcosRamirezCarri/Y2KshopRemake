@@ -12,19 +12,19 @@ const updateProduct = async (req: Request, res: Response) => {
 
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
+    }else{
+      if (name !== undefined) product.name = name;
+      if (price !== undefined) product.price = price;
+      if (colors !== undefined) product.colors = colors;
+      if (clasification !== undefined) product.clasification = clasification;
+      if (images !== undefined) product.images = images;
+      if (description !== undefined) product.description = description;
+      await product.save();
+  
+      res.status(200).json(product);
     }
 
-    if (name !== undefined) product.name = name;
-    if (price !== undefined) product.price = price;
-    if (colors !== undefined) product.colors = colors;
-    if (clasification !== undefined) product.clasification = clasification;
-    if (images !== undefined) product.images = images;
-    if (description !== undefined) product.description = description;
-
-    // Guarda los cambios en la base de datos
-    await product.save();
-
-    res.status(200).json(product);
+    
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

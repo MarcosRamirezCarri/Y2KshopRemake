@@ -49,6 +49,6 @@ router.put('/cart/:userId/modify/:itemId', putCartItem);
 
 router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
 
-router.delete('/product/delete', deleteProduct)
+router.delete('/product/delete/:idProduct', deleteProduct)
 
 export default router

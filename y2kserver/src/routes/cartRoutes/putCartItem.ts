@@ -4,12 +4,11 @@ import CartItemModel from "../../models/Cart";
 const putCartItem = async (req: Request, res: Response) => {
   const { userId, itemId } = req.params;
   const { color, size } = req.body;
-console.log(userId, itemId)
-  console.log('colores y tamaños',color, size)
+  if (!userId || !itemId) {
+    res.status(400).json({ message: "No Userid or idProduct" });
+  }
   try {
-    if (!userId || !itemId) {
-        res.status(400).json({ message: "No Userid or idProduct" });
-      }
+   
     const cartItem: any = await CartItemModel.findOne({
         where: {
           id: itemId,

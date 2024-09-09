@@ -3,11 +3,11 @@ import { Request, Response } from "express";
 
 const deleteCartItem = async (req: Request, res: Response) => {
   const { userId, itemId } = req.params;
-
+  if (!userId || !itemId) {
+    res.status(400).json({ message: "No Userid or idProduct" });
+  }
   try {
-    if (!userId || !itemId) {
-      res.status(400).json({ message: "No Userid or idProduct" });
-    }
+  
     const cartItem: any = await CartItemModel.findOne({
       where: {
         id: itemId,
