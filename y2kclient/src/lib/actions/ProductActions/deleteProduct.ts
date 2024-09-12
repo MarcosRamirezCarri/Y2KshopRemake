@@ -9,6 +9,7 @@ const deleteProduct = (idProduct: number) => async (dispatch: Dispatch) => {
       `${Server}/product/delete/${idProduct}`
     );
     const deleted = deletedProd.status;
+    console.log(deleted)
 
     if (deleted === 204) {
       dispatch(deleteProd(idProduct));
@@ -22,3 +23,5 @@ const deleteProduct = (idProduct: number) => async (dispatch: Dispatch) => {
     }
   }
 };
+
+export default deleteProduct

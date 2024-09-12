@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import deleteProduct from "@/lib/actions/ProductActions/deleteProduct";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import MiniCard from "./miniCard/MiniCard";
 
 interface DeleteModalProps {
@@ -12,12 +14,34 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
   stateAdmin,
 }) => {
   const [stateProduct, setStateProduct] = useState<number>(0);
+  const dispatch = useAppDispatch();
 
   const products = useAppSelector((state) => state.products.product);
 
-const handleDelete = () =>{
-
-}
+  const handleDelete = () => {
+    if (stateProduct > 0) {
+      Swal.fire({
+        title: `Do you want to delete the product ${stateProduct} ?`,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        denyButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteProduct(stateProduct))
+          .then((response: any) => {
+            if (response.success === true) {
+              Swal.fire("Deleted!", "", "success");
+            } else {
+              Swal.fire("Something went wrong!", "", "error");
+            }
+          });
+        }
+      });
+    } else {
+      Swal.fire("Please First select an product", "", "error");
+    }
+  };
 
   return (
     <div
@@ -33,20 +57,29 @@ const handleDelete = () =>{
         }`}
       >
         <p className="self-center text-2xl font-semibold">Delete any Product</p>
-        <div className="flex flex-row overflow-y-hidden overflow-x-auto">
-          {products.map((prod) => (
-            <MiniCard
-              id={prod.id}
-              name={prod.name}
-              images={prod.images}
-              price={prod.price}
-              setStateProduct={setStateProduct}
-              stateProduct={stateProduct}
-            />
-          ))}
+        <div className="flex items-center justify-center flex-row overflow-y-hidden overflow-x-auto">
+          {products.length > 0 ? (
+            products.map((prod) => (
+              <MiniCard
+                id={prod.id}
+                name={prod.name}
+                images={prod.images}
+                price={prod.price}
+                setStateProduct={setStateProduct}
+                stateProduct={stateProduct}
+              />
+            ))
+          ) : (
+            <h1 className="self-center text-3xl font-titilium font-semibold">
+              We dont have any product!
+            </h1>
+          )}
         </div>
         <div className="flex flex-row gap-2 self-center">
-          <button className="bg-Lightblue-500 rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700">
+          <button
+            onClick={handleDelete}
+            className="bg-Lightblue-500 rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
+          >
             Delete
           </button>
 
