@@ -10,12 +10,12 @@ const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin }) => {
   return (
     <div className="w-[20%] h-[100vh] bg-gray-950 items-center flex flex-col py-5 gap-5 font-titilium relative top-[8rem]">
       <p className="text-2xl font-semibold">Dashboard</p>
-      <button onClick={() => setStateButtons("Users")}  className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+      <button onClick={() => setStateButtons("Users")}  className={`bg-orange-400/[0.9] w-[80%] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
             stateButtons === 'Users' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
         } `} >Users</button>
       <button
         onClick={() => setStateButtons("Products")}
-        className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+        className={`bg-orange-400/[0.9] px-4 py-2  w-[80%] rounded text-xl transition-all duration-200 active:bg-orange-600  ${
             stateButtons === 'Products' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
         } `}
       >
@@ -49,11 +49,11 @@ const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin }) => {
         </button>
       </div>
 
-      <button   onClick={() => setStateButtons("Tasks")}   className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+      <button   onClick={() => setStateButtons("Tasks")}   className={`bg-orange-400/[0.9]  w-[80%] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
             stateButtons === 'Tasks' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
         } `} >Tasks</button>
     
-    <button   onClick={() => setStateButtons("Flyers")}   className={`bg-orange-400/[0.9] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
+    <button   onClick={() => setStateButtons("Flyers")}   className={`bg-orange-400/[0.9]  w-[80%] w-[80%] px-4 py-2 rounded text-xl transition-all duration-200 active:bg-orange-600  ${
             stateButtons === 'Flyers' ? " ring-2 ring-orange-600 bg-orange-500" : " hover:ring-2 ring-orange-500"
         } `} >Flyers</button>
     </div>

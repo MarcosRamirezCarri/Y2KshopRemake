@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/Validators/validatorProducts";
 import validateColors from "@/helpers/Validators/validateColors";
 import createProduct from "@/lib/actions/ProductActions/createProduct";
+import Swal from "sweetalert2";
 import LabelForm from "./Labels/LabelForm";
 import LabelColors from "./Labels/LabelColors";
 
@@ -143,10 +144,22 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     });
 
     if (!hasErrors && !hasProduct) {
-      alert("Product created successfully!");
-      dispatch(createProduct(product));
+      dispatch(createProduct(product)).then((result: any) => {
+        if (result?.success) {
+          Swal.fire("Product Created!", "", "success");
+          setProduct({
+            id: 0,
+            name: "",
+            images: [],
+            price: 0,
+            colors: [],
+            clasification: "",
+            description: "",
+          });
+        }
+      });
     } else {
-      alert("Please fix the errors before saving the product.");
+      Swal.fire("Fix the errors before uploading", "", "error");
     }
   };
 
