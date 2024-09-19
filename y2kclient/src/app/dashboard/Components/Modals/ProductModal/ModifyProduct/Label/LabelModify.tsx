@@ -6,7 +6,7 @@ interface LabelFormProps {
     value: string;
   }
 
-const LabelForm: React.FC<LabelFormProps> = ({
+const LabelFormMod: React.FC<LabelFormProps> = ({
     label,
     name,
     value,
@@ -61,4 +61,4 @@ const LabelForm: React.FC<LabelFormProps> = ({
     );
   };
 
-  export default LabelForm;
+  export default LabelFormMod;
