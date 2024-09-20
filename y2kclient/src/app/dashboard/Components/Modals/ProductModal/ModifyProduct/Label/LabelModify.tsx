@@ -4,6 +4,7 @@ interface LabelFormProps {
     error: string;
     label: string;
     value: string;
+    id: number
   }
 
 const LabelFormMod: React.FC<LabelFormProps> = ({
@@ -12,6 +13,7 @@ const LabelFormMod: React.FC<LabelFormProps> = ({
     value,
     error,
     onChange,
+    id
   }) => {
     return (
       <div className="flex flex-col w-[100%]">
@@ -28,6 +30,7 @@ const LabelFormMod: React.FC<LabelFormProps> = ({
             name="description"
             placeholder="Description"
             value={value}
+            disabled={id === 0}
             onChange={onChange}
           />
         ) : name === "price" ? (
@@ -39,6 +42,7 @@ const LabelFormMod: React.FC<LabelFormProps> = ({
             name="price"
             placeholder="Price"
             value={value}
+            disabled={id === 0}
             onChange={(e) => {
               const newValue = e.target.value;
               if (/^\d*$/.test(newValue)) {

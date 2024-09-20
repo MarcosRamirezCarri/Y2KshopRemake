@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { useState } from "react";
 import Image from "next/image";
 import { uploadImage } from "@/helpers/cloudinarySet";
-import validateColors from "@/helpers/Validators/validateColors";
 import validateProduct from "@/helpers/Validators/validatorProducts";
+import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
 import Product from "@/helpers/Types";
 import MiniCard from "./MiniCard/Minicard";
@@ -42,7 +42,10 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
       const imageUrl = await uploadImage(e.target.files[0]);
 
       if (imageUrl) {
-        setStateProduct({ ...stateProduct, images: [...stateProduct.images, imageUrl] });
+        setStateProduct({
+          ...stateProduct,
+          images: [...stateProduct.images, imageUrl],
+        });
       } else {
         setErrors({ ...errors, images: "Failed to upload image" });
       }
@@ -79,73 +82,107 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
             : "scale-125 opacity-0"
         }`}
       >
-        <div className="flex items-center justify-center flex-row overflow-y-hidden overflow-x-auto">
-          {products.length > 0 ? (
-            products.map((prod) => (
-              <MiniCard
-                product={prod}
-                setStateProduct={setStateProduct}
-                stateProduct={stateProduct}
-              />
-            ))
-          ) : (
-            <p>There are no products</p>
-          )}
+        <p className="text-2xl flex justify-center font-semibold col-span-2">
+          Modify any Product
+        </p>
+        <div className=" flex flex-col gap-2">
+          <p className="text-xl flex justify-center font-medium">
+            Select the product{" "}
+          </p>
+          <div className="flex items-center justify-center flex-row overflow-y-hidden overflow-x-auto">
+            {products.length > 0 ? (
+              products.map((prod) => (
+                <MiniCard
+                  product={prod}
+                  setStateProduct={setStateProduct}
+                  stateProduct={stateProduct}
+                />
+              ))
+            ) : (
+              <p>There are no products</p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col items-center">
+        <div
+          className={`flex flex-col items-center ${
+            stateProduct.id === 0 ? "blur-sm " : ""
+          }`}
+        >
           {errors.images && (
             <p className="text-pink-950 font-titilium text-sm">
               {errors.images}
             </p>
           )}
-          <div className="flex flex-row gap-3">
-            {stateProduct.images.map((image, index) => (
-              <div
-                key={index}
-                className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded"
-              >
-                <Image
-                  width={400}
-                  height={400}
-                  src={image}
-                  alt="Uploaded"
-                  className="w-20 h-20 object-cover mb-2"
-                />
-                <button
-                  type="button"
-                  className="absolute rounded flex bottom-0 text-xl self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950 hover:scale-105 transition-all duration-150"
-                  onClick={() => handleRemoveImage(index)}
+          <div className={`flex w-[100%] flex-col`}>
+            <p className="text-Lightblue-950 relative justify-start text-lg">
+              Images:
+            </p>
+            <div className="flex justify-center  flex-row gap-3">
+              {stateProduct.images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded"
                 >
-                  &times;
-                </button>
-              </div>
-            ))}
-            
+                  <Image
+                    width={400}
+                    height={400}
+                    src={image}
+                    alt="Uploaded"
+                    className="w-20 h-20 mb-2"
+                  />
+                  <button
+                    type="button"
+                    className="absolute rounded flex bottom-0 text-xl self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950 hover:scale-105 transition-all duration-150"
+                    onClick={() => handleRemoveImage(index)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
+            <label className=" justify-center bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500 hover:ring-Lightblue-700 active:bg-Lightblue-500 transition-all delay-50">
+              <p>Upload Image</p>
+              <input
+                type="file"
+                className="w-full hidden"
+                disabled={stateProduct.id === 0}
+                onChange={handleFileChange}
+              />
+            </label>
           </div>
-          <label className="w-[50%] bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500 hover:ring-Lightblue-700 active:bg-Lightblue-500 transition-all delay-50">
-            <p>Upload Image</p>
-            <input
-              type="file"
-              className="w-full hidden"
-              onChange={handleFileChange}
-            />
-          </label>
+
           <LabelFormMod
             name="price"
             label="Price"
             onChange={handleChange}
+            id={stateProduct.id}
             value={stateProduct.price}
             error={errors.price}
           />
           <LabelFormMod
+            id={stateProduct.id}
             name="description"
             label="Description"
             onChange={handleChange}
             value={stateProduct.description}
             error={errors.price}
           />
+          <button
+            disabled={stateProduct.id === 0}
+            onClick={() => setStateModal(!stateModal)}
+          >
+            Change Colors
+          </button>
         </div>
       </div>
+      <ModalColors
+        stateModal={stateModal}
+        stateProduct={stateProduct}
+        setStateModal={setStateModal}
+        setErrors={setErrors}
+        errors={errors}
+        setStateProduct={setStateProduct}
+      />
     </div>
   );
 };
