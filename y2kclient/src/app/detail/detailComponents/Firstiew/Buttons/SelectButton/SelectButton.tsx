@@ -2,8 +2,8 @@ import Color from "@/helpers/Types";
 import { useState } from "react";
 
 interface ButtonProps {
-  handleChangeSize: any;
-  handleChangeColor: any;
+  handleChangeSize: (arg: string)=>void;
+  handleChangeColor: (arg: string)=>void;
   selectedSize: string | null;
   selectedColor: string | null;
   colors: any;

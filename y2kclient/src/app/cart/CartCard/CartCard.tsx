@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import Swal from "sweetalert2";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
 import Product from "@/helpers/Types";
 import ModalModify from "./ModalModify/ModalModify";
@@ -17,7 +17,6 @@ interface CartProduct {
 }
 
 const CartCard: React.FC<CartProduct> = ({
-  productId,
   id,
   color,
   size,

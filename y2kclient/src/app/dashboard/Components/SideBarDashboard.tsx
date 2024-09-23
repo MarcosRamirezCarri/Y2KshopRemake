@@ -3,10 +3,11 @@ import { useState } from "react";
 
 interface SideBarProps {
   setStateAdmin: (arg: string) => void;
+  setStateButtons: (arg: string) => void;
+  stateButtons: string;
 }
 
-const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin }) => {
-  const [stateButtons, setStateButtons] = useState<string>("");
+const SideBarDashboard: React.FC<SideBarProps> = ({ setStateAdmin, setStateButtons, stateButtons }) => {
   return (
     <div className="w-[20%] h-[100vh] bg-gray-950 items-center flex flex-col py-5 gap-5 font-titilium relative top-[8rem]">
       <p className="text-2xl font-semibold">Dashboard</p>

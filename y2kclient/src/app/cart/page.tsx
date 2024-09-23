@@ -1,10 +1,10 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "../../lib/hooks/hooks";
-import getCartFromId from "@/lib/actions/CartActions/getCart";
 import { useEffect, useState } from "react";
-import CartCard from "./CartCard/CartCard";
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+import getCartFromId from "@/lib/actions/CartActions/getCart";
 import { BsFillCartXFill } from "react-icons/bs";
+import Navbar from "../[locale]/Components/NavBar/NavBar";
+import CartCard from "./CartCard/CartCard"
 import LoginModal from "../[locale]/Components/LoginModal/LoginModal";
 
 const Cart = () => {

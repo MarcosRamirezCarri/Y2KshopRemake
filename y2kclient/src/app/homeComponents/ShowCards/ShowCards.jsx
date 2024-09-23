@@ -4,7 +4,7 @@ import AOS from "aos";
 import '../../../../node_modules/aos/dist/aos.css'
 import CardProduct from "./Card/Card";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ShowCards() {
   const products = useAppSelector((state) => state.products.product);

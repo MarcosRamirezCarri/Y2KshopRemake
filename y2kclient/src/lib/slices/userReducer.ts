@@ -1,13 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface AccountType {
-  id: number;
-  password: string;
-  name: string;
-  email: string;
-  phone: string;
-  admin: boolean | null;
-}
+import { AccountType } from "@/helpers/Types";
 
 interface UserState {
   status: string;

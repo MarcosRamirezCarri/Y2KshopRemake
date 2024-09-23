@@ -1,11 +1,13 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { useState } from "react";
 import Image from "next/image";
+import Swal from 'sweetalert2';
 import { uploadImage } from "@/helpers/cloudinarySet";
 import validateProduct from "@/helpers/Validators/validatorProducts";
+import Product from "@/helpers/Types";
+import modProduct from "@/lib/actions/ProductActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
-import Product from "@/helpers/Types";
 import MiniCard from "./MiniCard/Minicard";
 
 interface ModifyProductModalProps {
@@ -29,9 +31,11 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
   });
 
   const [errors, setErrors] = useState({
+    name: "",
     images: "",
     price: "",
     description: "",
+    clasification: "",
     colors: "",
     colorErrors: [] as string[],
     sizeErrors: [] as string[],
@@ -66,6 +70,51 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
     setStateProduct({ ...stateProduct, [name]: newValue });
     setErrors({ ...errors, [name]: "" });
   };
+
+  const handleSave = () =>{
+   
+    if(stateProduct.id > 0){
+      const errorsBackup = validateProduct(stateProduct);
+  
+      setErrors(errorsBackup);
+  
+      const hasErrors = Object.values(errorsBackup).some((error) => {
+        if (Array.isArray(error)) {
+          return error.some((subError) => subError !== "");
+        }
+        return error !== "";
+      });
+  
+      const hasProduct = Object.values(stateProduct).some((prod) => {
+        if (Array.isArray(prod)) {
+          return prod.length === 0;
+        }
+        return prod === "";
+      });
+      if (!hasErrors && !hasProduct) {
+        dispatch(modProduct(stateProduct)).then((result: any) => {
+          if (result?.success) {
+            Swal.fire("Product Modifyed!", "", "success");
+            setStateProduct({
+              id: 0,
+              name: "",
+              images: [],
+              price: 0,
+              colors: [],
+              clasification: "",
+              description: "",
+            });
+          }
+        });
+      }else {
+        Swal.fire("Fix the errors before uploading", "", "error");
+      }
+    }else{
+      Swal.fire("FIrst Select an Product", "", "error");
+    }
+
+    
+  }
 
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.product);
@@ -170,9 +219,26 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
           <button
             disabled={stateProduct.id === 0}
             onClick={() => setStateModal(!stateModal)}
+            className="bg-Lightblue-500 rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
           >
             Change Colors
           </button>
+        </div>
+        <div className="col-span-2 justify-center flex flex-row">
+        <button
+            onClick={handleSave}
+            className="bg-Lightblue-500 rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
+          >
+            Modify
+          </button>
+
+          <button
+            className="bg-gray-500 self-center font-semibold w-fit rounded px-4 py-2 m-1 font-titilium ring-2 ring-gray-600 transition-all duration-150 hover:ring-gray-700 hover:scale-105 active:bg-gray-700"
+            onClick={() => setStateAdmin("")}
+          >
+            Cancel
+          </button>
+
         </div>
       </div>
       <ModalColors

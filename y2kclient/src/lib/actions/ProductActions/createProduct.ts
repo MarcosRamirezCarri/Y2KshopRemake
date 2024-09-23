@@ -13,8 +13,8 @@ const createProduct = (product: Product) => async () => {
       images,
       description,
     });
-    const savedCart = data.status;
-    if (savedCart == 201) {
+    const posted = data.status;
+    if (posted == 201) {
       return { success: true };
     }
   } catch (error) {

@@ -1,11 +1,12 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import Product from "@/helpers/Types";
-import { useEffect, useState } from "react";
+import Navbar from "../[locale]/Components/NavBar/NavBar";
 import FirstView from "./detailComponents/Firstiew/FirstView";
 import SecondView from "./detailComponents/SecondView/SecondView";
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+
 
 
 const DetailProduct = () => {
@@ -32,9 +33,6 @@ const handleChangeColor = (color: string) => {
 const handleChangeSize = (size: string) => {
   setSelectedSize(size);
 };
-
- 
-
   return (
     <div className="flex flex-col w-full h-full items-center">
       <Navbar />

@@ -4,15 +4,14 @@ import Product from "../../routesTypes/Types";
 
 
 const updateProduct = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, price, colors, clasification, images, description }: Partial<Product> = req.body;
+  const { id, name, price, colors, clasification, images, description }: Partial<Product> = req.body;
 
   try {
     const product: any = await ProductModel.findByPk(id);
 
-    if (!product) {
+    if (product === null) {
       return res.status(404).json({ error: "Product not found" });
-    }else{
+    }
       if (name !== undefined) product.name = name;
       if (price !== undefined) product.price = price;
       if (colors !== undefined) product.colors = colors;
@@ -22,7 +21,7 @@ const updateProduct = async (req: Request, res: Response) => {
       await product.save();
   
       res.status(200).json(product);
-    }
+    
 
     
   } catch (error: any) {

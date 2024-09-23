@@ -5,12 +5,12 @@ import AddToCart from "./Buttons/AddToCart/AddToCartbtn";
 interface DetailProducts {
   name: string;
   price: number;
-  description: any;
+  description: string;
   clasification: string;
   images: string[];
   colors: any;
-  handleChangeSize: any;
-  handleChangeColor: any;
+  handleChangeSize: (arg: string)=>void;
+  handleChangeColor: (arg: string)=>void;
   selectedSize: string | null;
   selectedColor: string | null;
 }

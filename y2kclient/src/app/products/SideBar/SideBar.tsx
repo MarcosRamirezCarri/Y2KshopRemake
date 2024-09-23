@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import Product from "@/helpers/Types";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { sortByCategory, sortBySize } from "@/lib/slices/productsReducer";
 import { getAllProducts } from "@/lib/actions/getAllProducts";
+import Product from "@/helpers/Types";
 import SideBarFilters from "./SideBarFilters/SideBarFilters";
 import style from "./SideBar.module.css";
 import {

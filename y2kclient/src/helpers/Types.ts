@@ -18,3 +18,12 @@ interface Size {
     description: string;
   }
 
+  export interface AccountType{
+    id: number;
+    password: string;
+    name: string;
+    email: string;
+    phone: string;
+    admin: boolean | null;
+  }
+

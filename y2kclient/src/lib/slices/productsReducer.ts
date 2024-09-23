@@ -30,6 +30,12 @@ export const productsReducer = createSlice({
         (prod) => prod.id !== action.payload
       );
     },
+    modifyProduct:(state, action:PayloadAction<Product>)=>{
+      const index = state.product.findIndex(item => item.id === action.payload.id);
+      if (index !== -1) {
+        state.product[index] = action.payload;
+      }
+    },
     setSearch: (state, action: PayloadAction<Product[]>) => {
       state.product = action.payload;
     },
@@ -59,7 +65,7 @@ export const productsReducer = createSlice({
     },
   },
 });
-export const { setShirts, sortByCategory, sortBySize, setSearch, deleteProd } =
+export const { setShirts, sortByCategory, modifyProduct ,sortBySize, setSearch, deleteProd } =
   productsReducer.actions;
 
 export default productsReducer.reducer;

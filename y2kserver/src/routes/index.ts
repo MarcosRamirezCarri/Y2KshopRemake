@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authenticateToken from './middleware/auth';
+
 import postInCart from './cartRoutes/postCartItem';
 import deleteCartItem from './cartRoutes/deleteCartItem';
 import getCartItems from './cartRoutes/getCartItems';
@@ -16,6 +17,7 @@ import getUserFromId from './userRoutes/getUserFromId';
 import postProduct from './productRoutes/postProduct';
 import deleteProduct from './productRoutes/deleteProducts';
 import getProducts from './productRoutes/getProducts';
+import updateProduct from './productRoutes/putProduct';
 import searchByName from './productRoutes/searchByName';
 import searchById from './productRoutes/searchById';
 
@@ -46,6 +48,8 @@ router.get('/cart/:userId', getCartItems);
 router.get('/flyer', getFlyers);
 
 router.put('/cart/:userId/modify/:itemId', putCartItem);
+
+router.put('/product/modify', updateProduct)
 
 router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
 

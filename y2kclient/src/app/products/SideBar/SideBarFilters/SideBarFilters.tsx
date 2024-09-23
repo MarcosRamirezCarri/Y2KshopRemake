@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from "react";
 import style from "../SideBar.module.css";
 
 interface PropsFilters {
-  handleFilterCategory: any;
-  handleSizeCategory: any;
-  allSizes: any;
-  allCategories: any;
-  handleFilter1: any;
-  handleFilter2: any;
+  handleFilterCategory: (arg: string)=>void;
+  handleSizeCategory: (arg: string)=>void;
+  allSizes: string[];
+  allCategories: string[];
+  handleFilter1: () =>void;
+  handleFilter2: () =>void;
   statusFilter1: boolean;
   statusFilter2: boolean;
 }
