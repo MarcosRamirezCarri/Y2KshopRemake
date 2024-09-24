@@ -28,5 +28,15 @@ export const adminReducer = createSlice({
     saveUsers: (state, action: PayloadAction<AccountType[]>) => {
       state.allUsers = action.payload;
     },
+    setAdminUser: (state, action: PayloadAction<AccountType>) =>{
+      const index = state.allUsers.findIndex(user => user.id === action.payload.id);
+      if (index !== -1) {
+        state.allUsers[index] = action.payload;
+      }
+    }
   },
 });
+
+export const {saveUsers, setAdminUser} = adminReducer.actions
+
+export default adminReducer.reducer

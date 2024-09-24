@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 
 
 
-const updateProduct = async (req: Request, res: Response) => {
+const putUser = async (req: Request, res: Response) => {
   const { idUser } = req.params;
   const { name, password, email, phone, admin } = req.body;
 
@@ -11,7 +11,7 @@ const updateProduct = async (req: Request, res: Response) => {
     const user: any = await UserModel.findByPk(idUser);
 
     if (user === null) {
-      return res.status(404).json({ error: "Product not found" });
+      return res.status(404).json({ error: "User not found" });
     } else{
       if (name !== undefined) user.name = name;
       if (password !== undefined) user.price = password;
@@ -30,4 +30,4 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export default updateProduct;
+export default putUser;

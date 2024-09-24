@@ -1,7 +1,7 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useEffect } from "react";
-import { getAllProducts } from "@/lib/actions/getAllProducts";
+import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import CardProductComplete from "./Cards/CardProduct";
 
 export default function CardsContainer() {

@@ -3,7 +3,7 @@ import { AccountType } from "@/helpers/Types";
 
 interface UserState {
   status: string;
-  user: AccountType;
+  user: AccountType[];
   token: string | null;
 }
 

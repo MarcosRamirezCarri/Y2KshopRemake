@@ -12,6 +12,7 @@ import getFlyers from './FlyersRoutes/getFlyer';
 import postUser from './userRoutes/postUser';
 import loginUser from './userRoutes/loginUser';
 import getUsers from './userRoutes/getUsers';
+import putUser from './userRoutes/putUser';
 import getUserFromId from './userRoutes/getUserFromId';
 
 import postProduct from './productRoutes/postProduct';
@@ -49,7 +50,9 @@ router.get('/flyer', getFlyers);
 
 router.put('/cart/:userId/modify/:itemId', putCartItem);
 
-router.put('/product/modify', updateProduct)
+router.put('/product/modify', updateProduct);
+
+router.put('/user/:userId', putUser);
 
 router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
 

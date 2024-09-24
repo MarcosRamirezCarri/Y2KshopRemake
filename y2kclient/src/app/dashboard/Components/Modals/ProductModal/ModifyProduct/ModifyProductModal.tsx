@@ -142,6 +142,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
             {products.length > 0 ? (
               products.map((prod) => (
                 <MiniCard
+                key={prod.id}
                   product={prod}
                   setStateProduct={setStateProduct}
                   stateProduct={stateProduct}

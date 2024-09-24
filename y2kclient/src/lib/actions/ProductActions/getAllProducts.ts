@@ -1,4 +1,4 @@
-import { setShirts } from "../slices/productsReducer";
+import { setShirts } from "../../slices/productsReducer";
 import Product from "@/helpers/Types";
 import { Server } from "@/helpers/server";
 import  addDescription from "@/helpers/functions";
