@@ -13,8 +13,24 @@ const UsersTable = () =>{
         dispatch(getAllUsers())
     },[]);
 
-    const handleAdminChange = (userId: string, isAdmin: boolean) => {
-        
+    const handleAdminChange = (userId: number,name: string ,isAdmin: boolean ) => {
+        Swal.fire({
+            title: `You want ${name} be an admin?`,
+            icon: 'question',
+            showDenyButton: true,
+            showConfirmButton: true,
+        }).then((result: any) =>{
+            if(result.isConfirmed){
+                dispatch(changeToAdmin(userId,isAdmin)).then((response: any) =>{
+                    if(response?.success){
+                        Swal.fire('Saved!', '', 'success')
+                    } else{
+                        Swal.fire('Somethings wrong!', '', 'error')
+                    }
+                })
+            }
+
+        })
     };
 
     const users = useAppSelector((state) => state.admin.allUsers);
@@ -55,7 +71,7 @@ const UsersTable = () =>{
                 <td className="border-l-2 border-b-2 border-r-2 p-1 text-md font-medium">
                 <select
                                     value={user.admin ? "true" : "false"}
-                                    onChange={(e) => handleAdminChange(user.id, e.target.value === "true")}
+                                    onChange={(e) => handleAdminChange(user.id, user.name, e.target.value === "true")}
                                     className="border bg-orange-200 rounded px-2 py-1 focus:outline-orange-400"
                                 >
                                     <option value="true">Admin</option>

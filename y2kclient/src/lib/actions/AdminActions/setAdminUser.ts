@@ -5,12 +5,13 @@ import { setAdminUser } from "@/lib/slices/adminReducer";
 
 const changeToAdmin = (userId:number, admin:boolean) => async(dispatch: Dispatch) =>{
     try {
-        const data = await axios.put(`${Server}/user/${userId}`, {admin})
+        const data = await axios.put(`${Server}/user`, {userId ,admin})
         const changed =  data.data
         const statChanged = data.status
 
         if(statChanged=== 200){
             dispatch(setAdminUser(changed))
+            return {success: true}
         }
         
     } catch (error) {

@@ -52,7 +52,7 @@ router.put('/cart/:userId/modify/:itemId', putCartItem);
 
 router.put('/product/modify', updateProduct);
 
-router.put('/user/:userId', putUser);
+router.put('/user', putUser);
 
 router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
 

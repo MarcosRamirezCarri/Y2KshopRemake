@@ -4,11 +4,13 @@ import { Response, Request } from "express";
 
 
 const putUser = async (req: Request, res: Response) => {
-  const { idUser } = req.params;
-  const { name, password, email, phone, admin } = req.body;
+
+  const { name, password, email, phone, admin, userId } = req.body;
+  console.log(userId)
 
   try {
-    const user: any = await UserModel.findByPk(idUser);
+    
+    const user: any = await UserModel.findByPk(userId);
 
     if (user === null) {
       return res.status(404).json({ error: "User not found" });
