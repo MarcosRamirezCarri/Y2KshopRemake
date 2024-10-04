@@ -2,30 +2,59 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
+import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import LoginModal from "../../LoginModal/LoginModal";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
+import { BsArchiveFill } from "react-icons/bs";
 import { FaUserXmark } from "react-icons/fa6";
 import { FaIdBadge } from "react-icons/fa";
 
 const ButtonsNavBar = () => {
   const [stateButton, setStateButton] = useState<string>();
   const [modal, setModal] = useState<boolean>(false);
-  const [stateUser, setStateUser] = useState<boolean>(false)
- 
+  const [stateUser, setStateUser] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.account.user);
   const path = usePathname();
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const id = localStorage.getItem("userId");
+    const userId = Number(id);
     if (token !== "undefined" && token !== "null" && token !== null) {
-      setStateUser(true)
+      setStateUser(true);
+      dispatch(setUserFromId(userId));
     }
   }, [modal]);
 
   return (
     <div>
       <div className="gap-6 lg:gap-[5rem] flex flex-row">
+        {user.admin === true ? (
+          <Link
+          className="flex flex-col items-center justify-center"
+            onMouseLeave={() => setStateButton("none dash")}
+            onMouseEnter={() => setStateButton("dash")}
+            href={{ pathname: "/dashboard" }}
+          >
+            <button className=" flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+              <BsArchiveFill />
+            </button>
+            <span
+              className={`absolute text-lg lg:text-[1.40rem]  justify-self-center bottom-1  p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
+           ${
+             stateButton === "dash" || path === "/dashboard"
+               ? "visible -translate-y-20 lg:translate-y-2 blur-none "
+               : "translate-y-20 lg:-translate-y-2 blur-lg invisible"
+           }`}
+            >
+              Dashboard
+            </span>
+          </Link>
+        ) : null}
+
         <Link
           className="flex flex-col items-center justify-center"
           onMouseLeave={() => setStateButton("none cart")}
@@ -108,7 +137,7 @@ const ButtonsNavBar = () => {
           </div>
         )}
       </div>
-       <LoginModal modal={modal} /> 
+      <LoginModal modal={modal} />
     </div>
   );
 };

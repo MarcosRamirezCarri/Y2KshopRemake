@@ -24,6 +24,6 @@ interface Size {
     name: string;
     email: string;
     phone: string;
-    admin: boolean | null;
+    admin: boolean;
   }
 

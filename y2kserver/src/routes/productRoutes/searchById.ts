@@ -19,9 +19,11 @@ const searchById = async (req: Request, res: Response) => {
 
     if (products === null) {
       return res.status(404).json({ message: "No products found" });
+    } else {
+      res.status(200).json(products);
     }
 
-    res.status(200).json(products);
+ 
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

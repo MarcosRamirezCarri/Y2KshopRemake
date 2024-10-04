@@ -11,7 +11,7 @@ const updateProduct = async (req: Request, res: Response) => {
 
     if (product === null) {
       return res.status(404).json({ error: "Product not found" });
-    }
+    } else {
       if (name !== undefined) product.name = name;
       if (price !== undefined) product.price = price;
       if (colors !== undefined) product.colors = colors;
@@ -21,6 +21,8 @@ const updateProduct = async (req: Request, res: Response) => {
       await product.save();
   
       res.status(200).json(product);
+    }
+      
     
 
     

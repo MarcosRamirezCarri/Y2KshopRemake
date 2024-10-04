@@ -15,9 +15,11 @@ const deleteUser  = async (req: Request, res: Response) => {
     });
     if (!user) {
       res.status(400).json({ message: "the user doesnt exists" });
+    } else{
+      await user.destroy();
+      res.status(204).send();
     }
-    await user.destroy();
-    res.status(204).send();
+   
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

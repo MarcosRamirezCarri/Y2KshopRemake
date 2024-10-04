@@ -20,11 +20,7 @@ export default function Navbar() {
           </p>
         </div>
       </Link>
-      <Link href={{pathname: '/dashboard'}}>
-     <button className=" flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
-      <BsArchiveFill/>
-     </button>
-      </Link>
+     
       </div>
     
       <SearchBar />

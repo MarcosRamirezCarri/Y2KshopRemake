@@ -16,12 +16,15 @@ if (!userId) {
   }
     try {
         const user = await UserModel.findByPk(userId);
+     
 
         if(user === null){
             res.status(400).json({message: 'User not found'})
+        } else {
+            res.status(201).json(user);
         }
 
-        res.status(201).json(user);
+       
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }

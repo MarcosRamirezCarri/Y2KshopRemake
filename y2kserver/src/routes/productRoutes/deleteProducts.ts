@@ -7,7 +7,6 @@ const deleteProduct = async (req: Request, res: Response) => {
     res.status(400).json({ message: "No idProduct" });
   }
   try {
-   
     const product: any = await ProductModel.findOne({
       where: {
         id: idProduct,
@@ -15,14 +14,15 @@ const deleteProduct = async (req: Request, res: Response) => {
     });
     if (product === null) {
       return res.status(400).json({ message: "the item doesnt exists" });
-    } 
+    } else {
       await product.destroy();
-      return res.status(204).json({message: `The item ${idProduct} was deleted`});
-    
- 
+      return res
+        .status(204)
+        .json({ message: `The item ${idProduct} was deleted` });
+    }
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 export default deleteProduct;

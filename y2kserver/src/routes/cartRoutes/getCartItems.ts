@@ -17,8 +17,10 @@ const getCartItems = async (req: Request, res: Response) => {
 
     if (!cartItems) {
       res.status(400).json({ message: "No items in this cart" });
+    } else {
+      res.status(201).json( cartItems );
     }
-    res.status(201).json( cartItems );
+  
   } catch (error) {
     res.status(500).json({ error });
   }

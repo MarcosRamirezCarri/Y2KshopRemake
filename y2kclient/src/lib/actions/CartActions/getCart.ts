@@ -5,10 +5,16 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
   try {
-    const cart = await axios.get(`${Server}/cart/${userId}`);
-    const cartData = cart.data;
+    const data = await axios.get(`${Server}/cart/${userId}`);
+    const cartData = data.data;
+    const status = data.status;
 
-    dispatch(saveToCart(cartData));
+    if(status === 201){
+      dispatch(saveToCart(cartData));
+      return { success: true }
+    }
+
+    
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

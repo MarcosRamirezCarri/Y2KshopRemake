@@ -18,11 +18,12 @@ const loginFunction =
         password,
       });
       const login = loginData.data;
-  
+      const status = loginData.status;
 
-      dispatch(setLogin(login));
-      return { success: true, user: login.user };
-      
+      if (status === 200) {
+        dispatch(setLogin(login));
+        return { success: true, user: login.user };
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

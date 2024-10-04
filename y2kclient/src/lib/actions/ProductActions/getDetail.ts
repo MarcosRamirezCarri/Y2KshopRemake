@@ -5,16 +5,15 @@ import addDescription from "@/helpers/functions";
 
 const fetchProduct = async (productId: any) => {
     try {
-      const { data } = await axios.get<Product>(
+      const  data  = await axios.get<Product>(
         `${Server}/product/${productId}`
       );
+      const detail = data.data
 
       const formatedProduct = [];
       formatedProduct.push(data);
-      const descProduct = addDescription(formatedProduct);
-      console.log(descProduct)
 
-     return descProduct;
+     return detail;
     } catch (error) {
       console.error("Error fetching product data:", error);
     }

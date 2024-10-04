@@ -16,9 +16,11 @@ const deleteCartItem = async (req: Request, res: Response) => {
     });
     if (!cartItem) {
       res.status(400).json({ message: "the item doesnt exists" });
+    } else {
+      await cartItem.destroy();
+      res.status(204).send(`deleted item from ${userId} with the id ${itemId}`);
     }
-    await cartItem.destroy();
-    res.status(204).send(`deleted item from ${userId} with the id ${itemId}`);
+ 
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

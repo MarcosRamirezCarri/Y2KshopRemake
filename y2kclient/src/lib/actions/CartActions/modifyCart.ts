@@ -6,11 +6,12 @@ import { Server } from "@/helpers/server";
 const modifyCart =
   (color: string, size: string, itemId:number, userId:number) => async(dispatch: Dispatch) => {
     try {
-        const modItem = await axios.put(`${Server}/cart/${userId}/modify/${itemId}`, {size, color})
+        const data = await axios.put(`${Server}/cart/${userId}/modify/${itemId}`, {size, color})
         
-        const modifiedItem = modItem.data;
+        const modifiedItem = data.data;
+        const status = data.status
         
-        if(modifiedItem){
+        if(status === 201){
             dispatch(modifyCartItem(modifiedItem))
            return { success: true };
         }
