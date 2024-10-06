@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ValidateRegister from "@/helpers/Validators/validatorRegister";
+import { ValidateRegister } from "@/helpers/Validators/validatorRegister";
 import { RegisterData } from "@/helpers/Validators/validatorRegister";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import registerFunction from "@/lib/actions/AccountActions/registerFunction";
@@ -55,9 +55,9 @@ const RegisterForm: React.FC<PropModal> = ({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = ValidateRegister(formData);
+    const errors = await ValidateRegister(formData);
     setError(errors);
     if (!errors.email && !errors.password && !errors.phone) {
       dispatch(registerFunction(formData))

@@ -14,6 +14,7 @@ import loginUser from './userRoutes/loginUser';
 import getUsers from './userRoutes/getUsers';
 import putUser from './userRoutes/putUser';
 import getUserFromId from './userRoutes/getUserFromId';
+import { checkEmail } from './userRoutes/checkEmail';
 
 import postProduct from './productRoutes/postProduct';
 import deleteProduct from './productRoutes/deleteProducts';
@@ -39,6 +40,8 @@ router.get('/product', getProducts);
 router.get('/user/:userId', getUserFromId);
 
 router.get('/user', getUsers);
+
+router.get('/user/checkemail/:emailuser', checkEmail)
 
 router.get('/product/search', searchByName);
 
