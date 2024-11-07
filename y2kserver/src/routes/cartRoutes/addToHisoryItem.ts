@@ -2,15 +2,15 @@ import { Response, Request } from "express";
 import CartItemModel from "../../models/Cart";
 import UserModel from "../../models/User";
 
-const addToHistoryItem = async (req: Request, res: Response) => {
-  const { userId, productId } = req.params;
-  if (!userId || !productId) {
+export const addToHistoryItem = async (req: Request, res: Response) => {
+  const { userId, itemId } = req.params;
+  if (!userId || !itemId) {
     res.status(400).json({ message: "No Userid or idProduct" });
   }
   try {
     const cartItem: any = await CartItemModel.findOne({
       where: {
-        id: productId,
+        id: itemId,
         userId,
       },
     });
@@ -25,16 +25,20 @@ const addToHistoryItem = async (req: Request, res: Response) => {
           quantity: item.quantity,
           color: item.color,
           size: item.size,
+          state: item.state
         }));
 
+
         user.history = [...user.history, ...itemsToSave];
+        cartItem.status = 'InDispatch';
 
         await user.save();
-
-        await CartItemModel.destroy({ where: { userId } });
+        await cartItem.save();
       }
     }
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
+
+

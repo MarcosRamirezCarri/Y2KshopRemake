@@ -6,6 +6,7 @@ import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
 import { redirect } from "next/navigation";
 import SideBarDashboard from "./SideBarDashboard";
+import ProductsMetrics from "./Views/ProductsView/ProductsMetrics";
 import CreateModal from "./Modals/ProductModal/CreateProduct/CreateProduct";
 import DeleteModal from "./Modals/ProductModal/DeleteProduct/DeleteModal";
 import ModifyProductModal from "./Modals/ProductModal/ModifyProduct/ModifyProductModal";
@@ -47,7 +48,7 @@ useEffect(() =>{
       
 
   return (
-    <div className="w-[100%] h-[100vh] bg-gray-100 flex flex-col gap-5 ">
+    <div className="w-[100%] bg-gray-100 flex flex-col  gap-5 ">
       <SideBarDashboard
         setStateAdmin={setStateAdmin}
         setStateButtons={setStateButtons}
@@ -55,6 +56,7 @@ useEffect(() =>{
       />
       {stateButtons === "Products" ? (
         <div>
+          <ProductsMetrics/>
           <CreateModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <DeleteModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <ModifyProductModal
