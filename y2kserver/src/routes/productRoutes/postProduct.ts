@@ -1,7 +1,7 @@
 import ProductModel from "../../models/Products";
 import { Response, Request } from "express";
 
-const postProduct = async (req: Request, res: Response) => {
+export const postProduct = async (req: Request, res: Response) => {
   const { name, price, colors, clasification, images, description } = req.body;
 
   const errors: string[] = [];
@@ -77,4 +77,4 @@ const postProduct = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
-export default postProduct;
+

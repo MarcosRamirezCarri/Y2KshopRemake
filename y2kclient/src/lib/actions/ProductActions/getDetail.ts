@@ -11,9 +11,11 @@ const fetchProduct = async (productId: any) => {
       const detail = data.data
 
       const formatedProduct = [];
-      formatedProduct.push(data);
+      formatedProduct.push(detail);
 
-     return detail;
+
+
+     return formatedProduct;
     } catch (error) {
       console.error("Error fetching product data:", error);
     }

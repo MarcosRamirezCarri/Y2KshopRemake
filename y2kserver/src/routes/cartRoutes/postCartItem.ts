@@ -3,7 +3,7 @@ import CartItemModel from "../../models/Cart";
 import ProductModel from "../../models/Products";
 import UserModel from "../../models/User";
 
-const postInCart = async (req: Request, res: Response) => {
+export const postInCart = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const { productId, quantity, color, size, state } = req.body;
 
@@ -16,11 +16,11 @@ const postInCart = async (req: Request, res: Response) => {
     if (!user || !product) {
       return res.status(404).json({ error: "User or Product not found" });
     }
-    const selectedColor = product.colors.find((c:any) => c.color === color);
+    const selectedColor = product.colors.find((c: any) => c.color === color);
     if (!selectedColor) {
       return res.status(400).json({ error: "Color not found in product" });
     }
-    const selectedSize = selectedColor.sizes.find((s:any) => s.size === size);
+    const selectedSize = selectedColor.sizes.find((s: any) => s.size === size);
     if (!selectedSize) {
       return res.status(400).json({ error: "Size not found in color" });
     }
@@ -32,10 +32,10 @@ const postInCart = async (req: Request, res: Response) => {
       size,
       state,
     });
-    res.status(201).json(cartItem)
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-}
+    res.status(201).json(cartItem);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-export default postInCart;
+

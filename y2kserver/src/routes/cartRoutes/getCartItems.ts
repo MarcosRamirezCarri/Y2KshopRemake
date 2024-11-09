@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import CartItemModel from "../../models/Cart";
 import ProductModel from "../../models/Products";
 
-const getCartItems = async (req: Request, res: Response) => {
+export const getCartItems = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
   if (!userId) {
@@ -11,7 +11,7 @@ const getCartItems = async (req: Request, res: Response) => {
 
   try {
     const cartItems = await CartItemModel.findAll({
-      where: { userId },
+      where: { userId,  state: "inCart" },
       include: [ProductModel],
     });
 
@@ -21,9 +21,9 @@ const getCartItems = async (req: Request, res: Response) => {
       res.status(201).json( cartItems );
     }
   
-  } catch (error) {
-    res.status(500).json({ error });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 };
 
-export default getCartItems;
+

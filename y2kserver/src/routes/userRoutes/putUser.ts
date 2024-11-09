@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 
 
 
-const putUser = async (req: Request, res: Response) => {
+export const putUser = async (req: Request, res: Response) => {
 
   const { name, password, email, phone, admin, userId } = req.body;
   console.log(userId)
@@ -32,4 +32,3 @@ const putUser = async (req: Request, res: Response) => {
   }
 };
 
-export default putUser;

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "JWT_secret";
 
-const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -29,4 +29,4 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-export default loginUser;
+

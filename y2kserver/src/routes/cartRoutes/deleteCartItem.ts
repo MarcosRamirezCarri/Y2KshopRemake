@@ -1,7 +1,7 @@
 import CartItemModel from "../../models/Cart";
 import { Request, Response } from "express";
 
-const deleteCartItem = async (req: Request, res: Response) => {
+export const deleteCartItem = async (req: Request, res: Response) => {
   const { userId, itemId } = req.params;
   if (!userId || !itemId) {
     res.status(400).json({ message: "No Userid or idProduct" });
@@ -26,4 +26,4 @@ const deleteCartItem = async (req: Request, res: Response) => {
   }
 };
 
-export default deleteCartItem;
+

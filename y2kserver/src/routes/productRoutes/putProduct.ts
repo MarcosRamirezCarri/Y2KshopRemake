@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 import Product from "../../routesTypes/Types";
 
 
-const updateProduct = async (req: Request, res: Response) => {
+export const updateProduct = async (req: Request, res: Response) => {
   const { id, name, price, colors, clasification, images, description }: Partial<Product> = req.body;
 
   try {
@@ -31,4 +31,3 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export default updateProduct;

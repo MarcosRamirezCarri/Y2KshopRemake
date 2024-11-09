@@ -16,10 +16,13 @@ const DetailProduct = () => {
   const param = useSearchParams();
   const searchId = param.get("id");
 
+ 
+
 
     useEffect(()=>{
       const fetchDetail = async() =>{
         const DetailProduct: any = await fetchProduct(searchId);
+        console.log(DetailProduct)
         setStateDetail(DetailProduct)
       }
       fetchDetail()

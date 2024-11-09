@@ -1,67 +1,49 @@
-import { Router } from 'express';
-import authenticateToken from './middleware/auth';
+import { Router } from "express";
+import authenticateToken from "./middleware/auth";
 
-import postInCart from './cartRoutes/postCartItem';
-import deleteCartItem from './cartRoutes/deleteCartItem';
-import getCartItems from './cartRoutes/getCartItems';
-import putCartItem from './cartRoutes/putCartItem';
-import { addToHistoryItem } from './cartRoutes/addToHisoryItem';
-
-import PostFlyer from './FlyersRoutes/postFlyer';
-import getFlyers from './FlyersRoutes/getFlyer';
-
-import postUser from './userRoutes/postUser';
-import loginUser from './userRoutes/loginUser';
-import getUsers from './userRoutes/getUsers';
-import putUser from './userRoutes/putUser';
-import getUserFromId from './userRoutes/getUserFromId';
-import { checkEmail } from './userRoutes/checkEmail';
-
-import postProduct from './productRoutes/postProduct';
-import deleteProduct from './productRoutes/deleteProducts';
-import getProducts from './productRoutes/getProducts';
-import updateProduct from './productRoutes/putProduct';
-import searchByName from './productRoutes/searchByName';
-import searchById from './productRoutes/searchById';
+import * as cartRoutes from "../routes/cartRoutes/zndexCart";
+import * as flyerRoutes from "../routes/FlyersRoutes/zndexFlyer";
+import * as productRoutes from "../routes/productRoutes/zndexProducts";
+import * as userRoutes from "../routes/userRoutes/zndexUser";
 
 const router = Router();
 
-router.post('/product', postProduct);
+router.post("/product", productRoutes.postProduct);
 
-router.post('/login', loginUser);
+router.post("/login", userRoutes.loginUser);
 
-router.post('/register', postUser);
+router.post("/register", userRoutes.postUser);
 
-router.post('/cart/:userId/add', postInCart);
+router.post("/cart/:userId/add", cartRoutes.postInCart);
 
-router.post('/flyer', PostFlyer);
+router.post("/flyer", flyerRoutes.PostFlyer);
 
-router.get('/product', getProducts);
+router.get("/product", productRoutes.getProducts);
 
-router.get('/user/:userId', getUserFromId);
+router.get("/user/:userId", userRoutes.getUserFromId);
 
-router.get('/user', getUsers);
+router.get("/user", userRoutes.getUsers);
 
-router.get('/user/checkemail/:emailuser', checkEmail)
+router.get("/user/checkemail/:emailuser", userRoutes.checkEmail);
 
-router.get('/product/search', searchByName);
+router.get("/product/search", productRoutes.searchByName);
 
-router.get('/product/:idProduct', searchById);
+router.get("/product/:idProduct", productRoutes.searchById);
 
-router.get('/cart/:userId', getCartItems);
+router.get("/cart/:userId", cartRoutes.getCartItems);
 
-router.get('/flyer', getFlyers);
+router.get("/flyer", flyerRoutes.getFlyers);
 
-router.put('/cart/:userId/modify/:itemId', putCartItem);
+router.put("/cart/:userId/modify/:itemId", cartRoutes.putCartItem);
 
-router.put('/product/modify', updateProduct);
+router.put("/product/modify", productRoutes.updateProduct);
 
-router.put('/cart/:userId/:itemId', addToHistoryItem);
+router.put("/cart/:userId/:itemId", cartRoutes.addToHistoryItem);
 
-router.put('/user', putUser);
+router.put("/user", userRoutes.putUser);
 
-router.delete('/cart/:userId/remove/:itemId', deleteCartItem);
+router.delete("/cart/:userId/remove/:itemId", cartRoutes.deleteCartItem);
 
-router.delete('/product/delete/:idProduct', deleteProduct)
+router.delete("/product/delete/:idProduct", productRoutes.deleteProduct);
 
-export default router
+export default router;

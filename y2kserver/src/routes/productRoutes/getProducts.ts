@@ -1,7 +1,7 @@
 import ProductModel from "../../models/Products";
 import { Response, Request } from "express";
 
-const getProducts = async (req: Request, res: Response) => {
+export const getProducts = async (req: Request, res: Response) => {
     try {
         const products = await ProductModel.findAll();
         res.status(201).json(products);
@@ -10,4 +10,3 @@ const getProducts = async (req: Request, res: Response) => {
     }
 };
 
-export default getProducts;

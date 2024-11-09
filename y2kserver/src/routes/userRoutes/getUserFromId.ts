@@ -6,7 +6,7 @@ interface TypeUserId {
     userId?: number
 }
 
-const getUserFromId = async (req: Request, res: Response) => {
+export const getUserFromId = async (req: Request, res: Response) => {
 const { userId } = req.params as TypeUserId
 
 if (!userId) {
@@ -30,4 +30,3 @@ if (!userId) {
     }
 };
 
-export default getUserFromId;

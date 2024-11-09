@@ -4,8 +4,9 @@ import UserModel from "../../models/User";
 
 export const addToHistoryItem = async (req: Request, res: Response) => {
   const { userId, itemId } = req.params;
+  const { newState } = req.body;
   if (!userId || !itemId) {
-    res.status(400).json({ message: "No Userid or idProduct" });
+    return res.status(400).json({ message: "No Userid or idProduct" });
   }
   try {
     const cartItem: any = await CartItemModel.findOne({
@@ -15,7 +16,7 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       },
     });
     if (!cartItem) {
-      res.status(400).json({ message: "the item doesnt exists" });
+      return res.status(400).json({ message: "the item doesnt exists" });
     } else {
       const user: any = await UserModel.findByPk(userId);
 
@@ -25,12 +26,12 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
           quantity: item.quantity,
           color: item.color,
           size: item.size,
-          state: item.state
+          state: item.state,
         }));
-
+        console.log(cartItem,  user)
 
         user.history = [...user.history, ...itemsToSave];
-        cartItem.status = 'InDispatch';
+        cartItem.state = newState;
 
         await user.save();
         await cartItem.save();
@@ -40,5 +41,3 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-

@@ -2,7 +2,7 @@ import UserModel from "../../models/User";
 import Validate from "./Validator/ValidatorUser";
 import { Request, Response } from "express";
 
-const postUser = async (req: Request, res: Response) => {
+export const postUser = async (req: Request, res: Response) => {
   const { password, email, phone, name, admin } = req.body;
 
   console.log(password, email, phone, name, admin)
@@ -19,5 +19,5 @@ const postUser = async (req: Request, res: Response) => {
 };
 
 
-export default postUser;
+
 

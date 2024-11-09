@@ -4,8 +4,7 @@ import ProductModel from "../../models/Products";
 interface ProductFilterType {
     name?: string;
 }
-
-const searchByName = async (req: Request, res: Response) => {
+export const searchByName = async (req: Request, res: Response) => {
     const { name } = req.query as ProductFilterType;
 
     if (!name || typeof name !== 'string') {
@@ -29,4 +28,3 @@ const searchByName = async (req: Request, res: Response) => {
     }
 };
 
-export default searchByName;

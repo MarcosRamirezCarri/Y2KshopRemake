@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import FlyerModel from "../../models/Flyers";
 
-const PostFlyer = (req: Request, res: Response) => {
+export const PostFlyer = (req: Request, res: Response) => {
   const { name, image } = req.body;
 
   if (typeof name !== "string" || name.trim() === "") {

@@ -31,7 +31,6 @@ const ModalModify: React.FC<ModalModifyProps> = ({
     idItem: id,
     userId: userId,
   });
-  console.log(formModify);
   const handleSave = () => {
     dispatch(
       modifyCart(

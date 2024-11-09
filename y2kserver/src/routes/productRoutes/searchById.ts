@@ -5,7 +5,7 @@ interface ProductFilterType {
     idProduct?: number;
 }
 
-const searchById = async (req: Request, res: Response) => {
+export const searchById = async (req: Request, res: Response) => {
   const { idProduct } = req.params as ProductFilterType;
 
   if (!idProduct) {
@@ -29,4 +29,4 @@ const searchById = async (req: Request, res: Response) => {
   }
 };
 
-export default searchById;
+

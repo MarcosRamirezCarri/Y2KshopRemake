@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import CartItemModel from "../../models/Cart";
 
-const putCartItem = async (req: Request, res: Response) => {
+export const putCartItem = async (req: Request, res: Response) => {
   const { userId, itemId } = req.params;
   const { color, size } = req.body;
   if (!userId || !itemId) {
@@ -32,9 +32,8 @@ const putCartItem = async (req: Request, res: Response) => {
     }
     
   } catch (error: any) {
-    console.log(error.message)
     res.status(500).json({ error: error.message });
   }
 };
 
-export default putCartItem;
+
