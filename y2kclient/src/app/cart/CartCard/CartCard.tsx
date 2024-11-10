@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
-import { buyAndAddToHistory } from "@/lib/actions/CartActions/buyAndAddToH";
+import  buyAndAddToHistory  from "@/lib/actions/CartActions/buyAndAddToH";
 import Product from "@/helpers/Types";
 import ModalModify from "./ModalModify/ModalModify";
 
@@ -27,6 +27,8 @@ const CartCard: React.FC<CartProduct> = ({
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
 
+  const state = "inDispatch"
+
   const handleBuy = () => {
     Swal.fire({
       title: `Confirm your purchase of ${Product.name}`,
@@ -36,7 +38,7 @@ const CartCard: React.FC<CartProduct> = ({
       denyButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(buyAndAddToHistory(userId, id, "inDispatch")).then((response: any) =>{
+        dispatch(buyAndAddToHistory(userId, id, state)).then((response: any) =>{
           if(response.success){
             Swal.fire(
               `Buyed for ${Product.price}`,

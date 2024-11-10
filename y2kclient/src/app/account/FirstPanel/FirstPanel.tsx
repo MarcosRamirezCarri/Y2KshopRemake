@@ -17,6 +17,7 @@ const AccountFirstPanel = () => {
 
   const user = useAppSelector((state) => state.account.user);
 
+
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[0.75rem] lg:p-[1rem] gap-5">
       <p className="font-titilium text-2xl self-center font-medium text-pink-950">My account</p>

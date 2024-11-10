@@ -28,6 +28,8 @@ const Cart = () => {
   }, [modal]);
   const stateCart = useAppSelector((state) => state.cart.cart);
 
+
+
   
 
   return (

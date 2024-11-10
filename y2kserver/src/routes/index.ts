@@ -38,7 +38,7 @@ router.put("/cart/:userId/modify/:itemId", cartRoutes.putCartItem);
 
 router.put("/product/modify", productRoutes.updateProduct);
 
-router.put("/cart/:userId/:itemId", cartRoutes.addToHistoryItem);
+router.put("/cart/update", cartRoutes.addToHistoryItem);
 
 router.put("/user", userRoutes.putUser);
 

@@ -15,7 +15,7 @@ export const putCartItem = async (req: Request, res: Response) => {
           userId: userId,
         },
       });
-    console.log('item carrito',cartItem)
+  
     if (cartItem === null) {
       res.status(400).json({ message: "the item doesnt exists" });
     }else{
