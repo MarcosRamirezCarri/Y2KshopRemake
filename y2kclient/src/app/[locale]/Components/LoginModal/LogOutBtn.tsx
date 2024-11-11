@@ -22,7 +22,7 @@ useEffect(() =>{
    
  }
 },[])
-console.log(id)
+
 
     const handleLogout = () => {
         if(token !== "undefined" && token !== "null"){

@@ -3,43 +3,48 @@ import CartItemModel from "../../models/Cart";
 import UserModel from "../../models/User";
 
 export const addToHistoryItem = async (req: Request, res: Response) => {
-  const {userId , itemId, newState } = req.body;
-  console.log(userId, itemId, newState)
-  if (!userId || !itemId || !newState) {
-   res.status(400).json({ message: "No Userid or idProduct or State" });
-  }
-  try {
+  const { userId, itemId, newState } = req.body;
 
+
+  if (!userId || !itemId || !newState) {
+    return res.status(400).json({ message: "No Userid, idProduct, or State" });
+  }
+
+  try {
     const cartItem: any = await CartItemModel.findOne({
       where: {
         id: itemId,
-        userId,
+        userId: userId,
       },
     });
 
     if (cartItem === null) {
-      return res.status(400).json({ message: "the item doesnt exists" });
-    } else {
-      const user: any = await UserModel.findByPk(userId);
+      return res.status(400).json({ message: "The item doesn't exist" });
+    }
 
-      if (user && cartItem.length > 0) {
-        const itemsToSave = cartItem.map((item: any) => ({
-          productId: item.productId,
-          quantity: item.quantity,
-          color: item.color,
-          size: item.size,
-          state: item.state,
-        }));
+    const user: any = await UserModel.findByPk(userId);
+
+    if (user !== null) {
   
+      const itemToSave = {
+        productId: cartItem.productId,
+        quantity: cartItem.quantity,
+        color: cartItem.color,
+        size: cartItem.size,
+        state: newState,
+      };
 
-        user.history = [...user.history, ...itemsToSave];
-        cartItem.state = newState;
+      user.history = [...user.history, itemToSave];
 
-        await user.save();
-        await cartItem.save();
+ 
+      cartItem.state = newState;
 
-        res.status(200).json({cartItem});
-      }
+      await user.save();
+      await cartItem.save();
+
+      res.status(200).json(cartItem);
+    } else {
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error: any) {
     res.status(500).json({ message: error.message });

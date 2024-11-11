@@ -11,7 +11,7 @@ export const getCartItems = async (req: Request, res: Response) => {
 
   try {
     const cartItems = await CartItemModel.findAll({
-      where: { userId,  state: "inCart" },
+      where: { userId: userId},
       include: [ProductModel],
     });
 

@@ -4,16 +4,18 @@ import { Server } from "@/helpers/server";
 import { modifyCartItem } from "@/lib/slices/cartReducer";
 
  const buyAndAddToHistory =
-  (userId: number, itemId: number, state: string) =>
+  (userId: number, itemId: number, newState: string) =>
   async (dispatch: Dispatch) => {
     try {
 
       const  data  = await axios.put(
         `${Server}/cart/update`,
-        {userId, itemId, state }
+        { userId, itemId, newState  }
       );
       const status = data.status;
       const dataCart = data.data;
+
+      console.log(dataCart)
 
       dispatch(modifyCartItem(dataCart));
       return { success: true };

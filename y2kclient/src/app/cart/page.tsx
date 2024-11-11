@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from "../../lib/hooks/hooks";
 import { useEffect, useState } from "react";
 import getCartFromId from "@/lib/actions/CartActions/getCart";
 import { BsFillCartXFill } from "react-icons/bs";
+import { BsCartPlusFill } from "react-icons/bs";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
 import CartCard from "./CartCard/CartCard"
 import LoginModal from "../[locale]/Components/LoginModal/LoginModal";
@@ -27,10 +28,7 @@ const Cart = () => {
     }
   }, [modal]);
   const stateCart = useAppSelector((state) => state.cart.cart);
-
-
-
-  
+  const showCart = stateCart.filter((item) => item.state === 'inCart');
 
   return (
     <div className="flex flex-col w-full h-full items-center">
@@ -38,8 +36,8 @@ const Cart = () => {
       <div className="relative top-[10rem] w-[90%] flex flex-col ">
         {logged ? (
           <div className=" grid items-center gap-[3rem] ">
-            {stateCart.length > 0 ? (
-              stateCart.map((product) => (
+            {showCart.length > 0 ? (
+              showCart.map((product) => (
                 <div key={product.id}>
                   <CartCard
                    id={product.id}
@@ -53,9 +51,11 @@ const Cart = () => {
                 </div>
               ))
             ) : (
-              <div>
-                <p>Its empty!!</p>
-              </div>
+             <div className="w-[100%] justify-center items-center flex flex-col">
+            <p className="relative top-[10rem] text-2xl lg:text-3xl text-Lightblue-950 font-titilium font-semibold">It seems your Cart its Empty!</p>
+            <p className="relative top-[10.5rem] text-lg lg:text-xl text-Lightblue-950 font-titilium font-normal">Check your history or save something you want to buy!</p>
+            <BsCartPlusFill className="relative top-[11.5rem] text-3xl lg:text-5xl text-Lightblue-950 font-titilium font-semibold"/>
+          </div>
             )}
           </div>
         ) : (

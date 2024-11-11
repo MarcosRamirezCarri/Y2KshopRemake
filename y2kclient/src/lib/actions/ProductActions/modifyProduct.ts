@@ -15,8 +15,8 @@ const modProduct = (product: Product) => async (dispatch: Dispatch) => {
       description,
     });
     const modProd = data.data;
-    const puted = data.status;
-    if (puted == 200) {
+    const status = data.status;
+    if (status == 200) {
       dispatch(modifyProduct(modProd));
       return { success: true };
     }
