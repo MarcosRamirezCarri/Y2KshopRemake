@@ -16,18 +16,19 @@ interface ValidationErrors {
   name: string;
 }
 
-const checkEmailExists = async (email: string) => {
+const checkEmailExists = async (emailuser: string) => {
   
+  console.log(emailuser)
   try {
-    const response = await axios.get(`${Server}/user/checkemail/${email}`);
+    const response = await axios.get(`${Server}/user/checkemail`, { emailuser });
 
     if (response.data.exists) {
       return response.data.exists;
     } else {
       return false;
     }
-  } catch (error) {
-    console.error("Error checking email:", error);
+  } catch (error: any) {
+    console.log("Error checking email:", error.message);
     return false;
   }
 };

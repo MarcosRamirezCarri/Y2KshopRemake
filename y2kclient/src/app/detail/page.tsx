@@ -22,7 +22,6 @@ const DetailProduct = () => {
     useEffect(()=>{
       const fetchDetail = async() =>{
         const DetailProduct: any = await fetchProduct(searchId);
-        console.log(DetailProduct)
         setStateDetail(DetailProduct)
       }
       fetchDetail()

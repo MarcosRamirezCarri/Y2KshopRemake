@@ -27,6 +27,8 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     if (user !== null) {
   
       const itemToSave = {
+        name: cartItem.name,
+        images: cartItem.images,
         productId: cartItem.productId,
         quantity: cartItem.quantity,
         color: cartItem.color,

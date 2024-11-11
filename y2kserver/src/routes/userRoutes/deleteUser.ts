@@ -2,15 +2,15 @@ import UserModel from "../../models/User";
 import { Request, Response } from "express";
 
 export const deleteUser  = async (req: Request, res: Response) => {
-  const { idUser } = req.params;
-  if (!idUser) {
+  const { userId } = req.params;
+  if (!userId) {
     res.status(400).json({ message: "No Userid" });
   }
   try {
   
     const user: any = await UserModel.findOne({
       where: {
-        id: idUser,
+        id: userId,
       },
     });
     if (!user) {

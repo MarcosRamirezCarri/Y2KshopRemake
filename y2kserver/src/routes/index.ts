@@ -24,7 +24,7 @@ router.get("/user/:userId", userRoutes.getUserFromId);
 
 router.get("/user", userRoutes.getUsers);
 
-router.get("/user/checkemail/:emailuser", userRoutes.checkEmail);
+router.get("/user/checkemail", userRoutes.checkEmail);
 
 router.get("/product/search", productRoutes.searchByName);
 
@@ -45,5 +45,7 @@ router.put("/user", userRoutes.putUser);
 router.delete("/cart/:userId/remove/:itemId", cartRoutes.deleteCartItem);
 
 router.delete("/product/delete/:idProduct", productRoutes.deleteProduct);
+
+router.delete("/user/delete/:userId", userRoutes.deleteUser);
 
 export default router;

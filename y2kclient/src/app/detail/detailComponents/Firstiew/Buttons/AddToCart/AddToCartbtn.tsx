@@ -34,13 +34,17 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
   }, [modal]);
 
   const handleAddToCart = () => {
-    const productExists = stateCart.some((item) => item.productId === NumberId);
+    const productExists = stateCart.find((item) => item.productId === NumberId);
+    console.log(productExists)
     if (!token || token === "undefined" || token === "null") {
       setModal(true);
     } else if (productExists || !selectedSize) {
       let errorMessage = "";
-      if (productExists) {
+      if (productExists?.state === 'inCart') {
         errorMessage = "This product is already in your cart!";
+      }
+      if (productExists?.state === 'inDispatch') {
+        errorMessage = "You already bought this product, check your history to follow his state!";
       }
       if (!selectedSize) {
         errorMessage = "Select a Size!";
