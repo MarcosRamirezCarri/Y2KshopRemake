@@ -17,6 +17,8 @@ const AccountFirstPanel = () => {
 
   const user = useAppSelector((state) => state.account.user);
 
+  console.log(user);
+
 
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[0.75rem] lg:p-[1rem] gap-5">

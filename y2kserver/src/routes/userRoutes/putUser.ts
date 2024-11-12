@@ -6,7 +6,7 @@ import { Response, Request } from "express";
 export const putUser = async (req: Request, res: Response) => {
 
   const { name, password, email, phone, admin, userId } = req.body;
-  console.log(userId)
+
 
   try {
     

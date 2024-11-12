@@ -1,6 +1,4 @@
-import { Server } from "../server";
-import axios from "axios";
-
+import { checkEmailExists } from "@/lib/actions/AccountActions/checkEmail";
 export interface RegisterData {
   name: string;
   password: string;
@@ -16,22 +14,6 @@ interface ValidationErrors {
   name: string;
 }
 
-const checkEmailExists = async (emailuser: string) => {
-  
-  console.log(emailuser)
-  try {
-    const response = await axios.get(`${Server}/user/checkemail`, { emailuser });
-
-    if (response.data.exists) {
-      return response.data.exists;
-    } else {
-      return false;
-    }
-  } catch (error: any) {
-    console.log("Error checking email:", error.message);
-    return false;
-  }
-};
 
 export async function ValidateRegister(
   register: RegisterData
@@ -45,7 +27,8 @@ export async function ValidateRegister(
 
   let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let regexPassword = /^(?=\w*\d)(?=\w*)(?=\w*[a-z])\S{8,16}$/;
-  let regexPhone = /^\d{10}$/;
+  let regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+
 
   if (!regexEmail.test(register.email)) {
     errors.email = "Invalid Email";

@@ -24,7 +24,7 @@ router.get("/user/:userId", userRoutes.getUserFromId);
 
 router.get("/user", userRoutes.getUsers);
 
-router.get("/user/checkemail", userRoutes.checkEmail);
+router.get("/user/checkemail/:emailuser", userRoutes.checkEmail);
 
 router.get("/product/search", productRoutes.searchByName);
 

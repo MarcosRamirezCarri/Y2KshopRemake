@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import CartItemModel from "../../models/Cart";
 import UserModel from "../../models/User";
+import ProductModel from "../../models/Products";
 
 export const addToHistoryItem = async (req: Request, res: Response) => {
   const { userId, itemId, newState } = req.body;
@@ -24,17 +25,22 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
 
     const user: any = await UserModel.findByPk(userId);
 
-    if (user !== null) {
+    const product: any = await ProductModel.findByPk(cartItem.productId)
+
+   
+
+    if (user !== null && product !== null) {
   
       const itemToSave = {
-        name: cartItem.name,
-        images: cartItem.images,
+        name: product.name,
+        images: product.images,
         productId: cartItem.productId,
         quantity: cartItem.quantity,
         color: cartItem.color,
         size: cartItem.size,
         state: newState,
       };
+      
 
       user.history = [...user.history, itemToSave];
 
@@ -42,6 +48,7 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       cartItem.state = newState;
 
       await user.save();
+
       await cartItem.save();
 
       res.status(200).json(cartItem);

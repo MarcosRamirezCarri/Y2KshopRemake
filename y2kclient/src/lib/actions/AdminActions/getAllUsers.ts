@@ -8,7 +8,7 @@ const getAllUsers = () => async (dispatch: Dispatch) => {
     const data = await axios.get(`${Server}/user`);
     const users = data.data;
     const statusUser = data.status;
-
+console.log(users)
     if (statusUser === 201) {
       dispatch(saveUsers(users));
       return { success: true };
