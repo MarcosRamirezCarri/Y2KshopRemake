@@ -10,7 +10,7 @@ export default function AccountSecondPanel() {
       <p className="font-titilium text-2xl self-center font-medium text-Lightblue-950">
         My History
       </p>
-      {user?.history.map((his: any) => (
+      {user.history?.map((his: any) => (
         <div>
           <CardHistory
             name={his.name}

@@ -7,7 +7,7 @@ export default function AccountPanel() {
       <div className="flex flex-col w-full h-full items-center ">
         <Navbar/>
 
-  <div className="relative top-[10rem] grid grid-cols-2 gap-5 p-5">
+  <div className="relative top-[10rem] flex flex-col lg:grid lg:grid-cols-2 gap-5 p-5">
   
   <AccountFirstPanel/>
   <AccountSecondPanel/>
