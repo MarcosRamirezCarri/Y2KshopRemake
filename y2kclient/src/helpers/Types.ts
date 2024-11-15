@@ -8,6 +8,8 @@ interface Size {
     sizes: Size[];
   }
 
+  
+
  export interface History{
     name: string;
     color: string;
@@ -37,4 +39,13 @@ interface Size {
     phone: string;
     admin: boolean;
   }
-
+  export interface CartItem{
+    id: number;
+    userId: number;
+    productId: number;
+    quantity: number;
+    color: string;
+    size: string;
+    state: string;
+    Product: Product;
+  }

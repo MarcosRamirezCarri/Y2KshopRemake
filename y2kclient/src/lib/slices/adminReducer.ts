@@ -1,24 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AccountType } from "@/helpers/Types";
+import { CartItem } from "@/helpers/Types";
 
-interface Taskes {
-  id: number;
-  userId: number;
-  productId: number;
-  quantity: number;
-  color: string;
-  size: string;
-  state: string;
-}
+
 
 interface AdminInterface {
   allUsers: AccountType[];
-  allTasks: Taskes[];
+  allCarts: CartItem[];
 }
 
 const initialState: AdminInterface = {
   allUsers: [],
-  allTasks: [],
+  allCarts: [],
 };
 
 export const adminReducer = createSlice({
@@ -27,6 +20,9 @@ export const adminReducer = createSlice({
   reducers: {
     saveUsers: (state, action: PayloadAction<AccountType[]>) => {
       state.allUsers = action.payload;
+    },
+    saveCarts:(state, action: PayloadAction<CartItem[]>) => {
+      state.allCarts = action.payload;
     },
     setAdminUser: (state, action: PayloadAction<AccountType>) =>{
       const index = state.allUsers.findIndex(user => user.id === action.payload.id);
@@ -37,6 +33,6 @@ export const adminReducer = createSlice({
   },
 });
 
-export const {saveUsers, setAdminUser} = adminReducer.actions
+export const {saveUsers, setAdminUser, saveCarts} = adminReducer.actions
 
 export default adminReducer.reducer

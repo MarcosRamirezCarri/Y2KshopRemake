@@ -1,16 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Product from "@/helpers/Types";
+import { CartItem } from "@/helpers/Types";
 
-export interface CartItem {
-  id: number;
-  userId: number;
-  productId: number;
-  quantity: number;
-  color: string;
-  size: string;
-  state: string;
-  Product: Product;
-}
+
 
 interface CartState {
   isLoading: boolean;
