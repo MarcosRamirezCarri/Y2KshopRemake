@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
+import TaskList from "./Views/TasksViews/TaskList";
 import { redirect } from "next/navigation";
 import SideBarDashboard from "./SideBarDashboard";
 import ProductsMetrics from "./Views/ProductsView/ProductsMetrics";
@@ -15,7 +16,7 @@ const ViewOfAll = () => {
   const dispatch = useAppDispatch();
   const [stateAdmin, setStateAdmin] = useState<string>("");
   const [stateButtons, setStateButtons] = useState<string>("");
-  const user = useAppSelector((state) => state.account.user);
+  const user: any = useAppSelector((state) => state.account.user);
 
 
   useEffect(() => {
@@ -70,6 +71,11 @@ useEffect(() =>{
           <UsersTable />
     
       ) : null}
+        {stateButtons === "Tasks" ? (
+       
+       <TaskList />
+ 
+   ) : null}
     </div>
   );
 };
