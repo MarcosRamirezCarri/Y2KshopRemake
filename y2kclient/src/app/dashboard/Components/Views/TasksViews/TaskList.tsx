@@ -9,14 +9,11 @@ const TaskList = () => {
     dispatch(getAllCarts());
   }, []);
   const tasks = useAppSelector((state) => state.admin.allCarts);
- const showTask = tasks.filter((item) => item.state === 'inCart');
-
-
-  console.log(tasks);
+ const showTask = tasks.filter((item) => item.state !== 'inCart');
 
   return (
-    <div className="relative font-titilium left-[23%] flex flex-col top-[10rem] w-[75%]">
-      {tasks.length > 0
+    <div className="relative font-titilium left-[23%] flex flex-col gap-10 top-[10rem] w-[75%]">
+      {showTask.length > 0
         ? showTask.map((task) => (
             <TaskCard
               Product={task.Product}

@@ -36,7 +36,7 @@ const UsersTable = () =>{
     const users = useAppSelector((state) => state.admin.allUsers);
 
     return (
-        <div className="relative font-titilium left-[23%] flex flex-col top-[10rem]  w-[75%]">
+        <div className="relative font-titilium left-[23%] flex flex-col top-[10rem] w-[75%]">
             <table  className="border-spacing-2 w-[100%] table-auto border-collapse top-2">
             <thead>
           <tr className="bg-orange-200 select-none shadow-inner">

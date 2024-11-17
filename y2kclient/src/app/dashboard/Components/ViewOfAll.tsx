@@ -18,7 +18,6 @@ const ViewOfAll = () => {
   const [stateButtons, setStateButtons] = useState<string>("");
   const user: any = useAppSelector((state) => state.account.user);
 
-
   useEffect(() => {
     const id = localStorage.getItem("userId");
 
@@ -33,20 +32,14 @@ const ViewOfAll = () => {
     fetchData();
   }, [dispatch]);
 
-
-useEffect(() =>{
-  if (user.admin === true) {
-    console.log("El usuario es administrador");
-
-  } else {
-    console.log("El usuario no es administrador");
-    redirect('/')
-
-  } 
-},[user])
-      
-
-      
+  useEffect(() => {
+    if (user.admin === true) {
+      console.log("El usuario es administrador");
+    } else {
+      console.log("El usuario no es administrador");
+      redirect("/");
+    }
+  }, [user]);
 
   return (
     <div className="w-[100%] bg-gray-100 flex flex-col  gap-5 ">
@@ -57,7 +50,7 @@ useEffect(() =>{
       />
       {stateButtons === "Products" ? (
         <div>
-          <ProductsMetrics/>
+          <ProductsMetrics />
           <CreateModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <DeleteModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <ModifyProductModal
@@ -66,16 +59,8 @@ useEffect(() =>{
           />
         </div>
       ) : null}
-      {stateButtons === "Users" ? (
-       
-          <UsersTable />
-    
-      ) : null}
-        {stateButtons === "Tasks" ? (
-       
-       <TaskList />
- 
-   ) : null}
+      {stateButtons === "Users" ? <UsersTable /> : null}
+      {stateButtons === "Tasks" ? <TaskList /> : null}
     </div>
   );
 };

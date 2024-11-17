@@ -138,7 +138,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
           <p className="text-xl flex justify-center font-medium">
             Select the product{" "}
           </p>
-          <div className="flex items-center justify-center flex-row overflow-y-hidden overflow-x-auto">
+          <div className="flex items-center justify-center flex-row overflow-y-hidden  ">
             {products.length > 0 ? (
               products.map((prod) => (
                 <MiniCard
