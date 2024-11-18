@@ -3,22 +3,21 @@ import axios from "axios";
 import { Server } from "@/helpers/server";
 import { modifyCartItem } from "@/lib/slices/cartReducer";
 
- const buyAndAddToHistory =
+const changeCartState =
   (userId: number, itemId: number, newState: string) =>
   async (dispatch: Dispatch) => {
     try {
-
-      const  data  = await axios.put(
-        `${Server}/cart/update`,
-        { userId, itemId, newState  }
-      );
+      const data = await axios.put(`${Server}/cart/update`, {
+        userId,
+        itemId,
+        newState,
+      });
       const status = data.status;
-      const dataCart = data.data;
 
-      console.log(dataCart)
-
-      dispatch(modifyCartItem(dataCart));
-      return { success: true };
+      if (status) {
+      
+        return { success: true };
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -28,4 +27,4 @@ import { modifyCartItem } from "@/lib/slices/cartReducer";
     }
   };
 
-  export default buyAndAddToHistory
+export default changeCartState;

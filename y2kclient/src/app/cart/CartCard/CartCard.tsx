@@ -3,7 +3,8 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
-import  buyAndAddToHistory  from "@/lib/actions/CartActions/buyAndAddToH";
+import changeCartState  from "@/lib/actions/CartActions/buyAndAddToH";
+import getCartFromId from "@/lib/actions/CartActions/getCart";
 import Product from "@/helpers/Types";
 import ModalModify from "./ModalModify/ModalModify";
 
@@ -27,7 +28,7 @@ const CartCard: React.FC<CartProduct> = ({
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
 
-  const state = "inDispatch"
+  const state = "pending"
 
   const handleBuy = () => {
     Swal.fire({
@@ -38,8 +39,9 @@ const CartCard: React.FC<CartProduct> = ({
       denyButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(buyAndAddToHistory(userId, id, state)).then((response: any) =>{
+        dispatch(changeCartState(userId, id, state)).then((response: any) =>{
           if(response.success){
+            dispatch(getCartFromId(userId));
             Swal.fire(
               `Buyed for ${Product.price}`,
               "Redirects to Pay Method",

@@ -18,6 +18,7 @@ interface Size {
     productId: number;
     quantity: number;
     state: string
+    itemId: number
   }
   
  export default interface Product  {

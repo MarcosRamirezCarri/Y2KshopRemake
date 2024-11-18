@@ -72,6 +72,7 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
             size: selectedSize,
           };
           dispatch(addToCart(cartItem));
+          location.reload()
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
         }

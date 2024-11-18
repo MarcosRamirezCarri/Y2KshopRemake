@@ -6,7 +6,6 @@ import ProductModel from "../../models/Products";
 export const addToHistoryItem = async (req: Request, res: Response) => {
   const { userId, itemId, newState } = req.body;
 
-
   if (!userId || !itemId || !newState) {
     return res.status(400).json({ message: "No Userid, idProduct, or State" });
   }
@@ -25,36 +24,53 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
 
     const user: any = await UserModel.findByPk(userId);
 
-    const product: any = await ProductModel.findByPk(cartItem.productId)
-
-   
-
-    if (user !== null && product !== null) {
-  
-      const itemToSave = {
-        name: product.name,
-        images: product.images,
-        productId: cartItem.productId,
-        quantity: cartItem.quantity,
-        color: cartItem.color,
-        size: cartItem.size,
-        state: newState,
-      };
-      
-
-      user.history = [...user.history, itemToSave];
-
- 
-      cartItem.state = newState;
-
-      await user.save();
-
-      await cartItem.save();
-
-      res.status(200).json(cartItem);
-    } else {
-      res.status(404).json({ message: "User not found" });
+    if (user === null) {
+      return res.status(404).json({ message: "User not found" });
     }
+
+    if (newState === "cancel") {
+      const itemIndex = user.history.findIndex(
+        (item: any) => item.itemId === itemId
+      );
+    
+      if (itemIndex !== -1) {
+        user.history = user.history.filter((item: any) => item.itemId !== itemId);
+    
+        await user.save();
+      }
+      await cartItem.destroy();
+    
+      return res.status(204).send();
+    }
+
+    const product: any = await ProductModel.findByPk(cartItem.productId);
+
+    if (product === null) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const itemToSave = {
+      itemId: itemId,
+      name: product.name,
+      images: product.images,
+      productId: cartItem.productId,
+      quantity: cartItem.quantity,
+      color: cartItem.color,
+      size: cartItem.size,
+      state: newState,
+    };
+
+    // Agregar el nuevo ítem al historial
+    user.history = [...user.history, itemToSave];
+
+    // Actualizar el estado del cartItem
+    cartItem.state = newState;
+
+    // Guardar cambios
+    await user.save();
+    await cartItem.save();
+
+    res.status(200).json(cartItem);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

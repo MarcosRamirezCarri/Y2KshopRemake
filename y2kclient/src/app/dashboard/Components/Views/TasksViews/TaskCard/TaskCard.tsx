@@ -7,6 +7,7 @@ const TaskCard: React.FC<CartItem> = ({
   color,
   size,
   state,
+  userId
 }) => {
   return (
     <div className="bg-Lightblue-200 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
@@ -23,10 +24,11 @@ const TaskCard: React.FC<CartItem> = ({
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-4 text-Lightblue-950">
         <p>Color: {color}</p>
         <p>Size: {size}</p>
+        <p>User Id: {userId}</p>
       </div>
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-2 text-orange-950 ">
         <div className="flex flex-row gap-2">
-          State: {state === "inDispatch" ? <p>In Dispatch</p> : <p>error</p>}
+          State: {state === "inDispatch" ? <p>Pending Approval</p> : <p>error</p>}
         </div>
         <div className="flex flex-row gap-2">
           <button disabled={state === "approved"}
