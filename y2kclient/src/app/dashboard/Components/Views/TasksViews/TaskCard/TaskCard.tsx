@@ -1,5 +1,8 @@
 import { CartItem } from "@/helpers/Types";
 import Image from "next/image";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import changeCartState from "@/lib/actions/CartActions/changeCartState";
+import { getAllCarts } from "@/lib/actions/AdminActions/getAllCarts";
 
 const TaskCard: React.FC<CartItem> = ({
   Product,
@@ -7,8 +10,19 @@ const TaskCard: React.FC<CartItem> = ({
   color,
   size,
   state,
-  userId
+  userId,
+  id,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const handleState = (state: string) => {
+    dispatch(changeCartState(userId, id, state)).then((response: any) => {
+      if (response.success) {
+        dispatch(getAllCarts());
+      }
+    });
+  };
+
   return (
     <div className="bg-Lightblue-200 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
       <div className="flex flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
@@ -28,21 +42,43 @@ const TaskCard: React.FC<CartItem> = ({
       </div>
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-2 text-orange-950 ">
         <div className="flex flex-row gap-2">
-          State: {state === "inDispatch" ? <p>Pending Approval</p> : <p>error</p>}
+          State:{" "}
+          {state === "pending" ? (
+            <p>Pending Approval</p>
+          ) : state === "approved" ? (
+            <p>Approved</p>
+          ) : state === "sended" ? (
+            <p>Sended to destiny</p>
+          ) : (
+            <p>error</p>
+          )}
         </div>
+        {state === "approved" ? <p> Pending sending </p> : null}
         <div className="flex flex-row gap-2">
-          <button disabled={state === "approved"}
+          <button
+             onClick={() => handleState("adminCancel")}
+            disabled={state === "approved"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
               state === "approved"
                 ? "bg-orange-400/[0.4] text-orange-950/[0.8]"
                 : " bg-orange-400/[0.8]  hover:scale-105 hover:ring-2 hover:ring-orange-500"
-            } `}>
-            Cancel
+            } `}
+          >
+            Deny
           </button>
-          <button className="relative self-center bg-orange-400/[0.8] px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-500">
+          <button
+            onClick={() => handleState("approved")}
+            disabled={state === "approved"}
+            className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
+              state === "approved"
+                ? "bg-orange-400/[0.4] text-orange-950/[0.8]"
+                : " bg-orange-400/[0.8]  hover:scale-105 hover:ring-2 hover:ring-orange-500"
+            } `}
+          >
             Approve
           </button>
           <button
+          onClick={() => handleState("sended")}
             disabled={state !== "approved"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
               state !== "approved"

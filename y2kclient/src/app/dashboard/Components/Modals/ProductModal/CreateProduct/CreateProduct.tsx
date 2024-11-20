@@ -170,7 +170,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
       }`}
     >
       <div
-        className={`w-[60%] bg-Lightblue-200 gap-2 justify-center transition-all duration-250   grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-150 ${
+        className={`w-[60%] bg-Lightblue-200 gap-2 justify-center transition-all duration-250   grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
           stateAdmin === "CreateProduct"
             ? "scale-100 opacity-100"
             : "scale-125 opacity-0"

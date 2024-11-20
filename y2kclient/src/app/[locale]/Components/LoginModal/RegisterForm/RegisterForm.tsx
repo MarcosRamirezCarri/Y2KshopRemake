@@ -87,14 +87,14 @@ const RegisterForm: React.FC<PropModal> = ({
     <div
       onClick={() => setModalR(!modalR)}
       className={`
-    fixed inset-0 flex justify-center items-center transition-colors duration-500 z-[101]
+    fixed inset-0 flex justify-center items-center transition-colors duration-300 z-[101]
     ${modalR ? "visible bg-gray-950/[0.4]" : "invisible"}
   `}
     >
       <ul
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-Lightblue-100 w-[80%] lg:w-[35%]  gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-500 p-10
+          bg-Lightblue-100 w-[80%] lg:w-[35%]  gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-300 p-10
           ${modalR ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
       >

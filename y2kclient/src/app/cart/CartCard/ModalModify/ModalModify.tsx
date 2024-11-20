@@ -77,13 +77,13 @@ const ModalModify: React.FC<ModalModifyProps> = ({
     <div
       onClick={() => setModal(!modal)}
       className={`
-        fixed inset-0 w-[100%] flex justify-center items-center transition-colors duration-500 z-[101]
+        fixed inset-0 w-[100%] flex justify-center items-center transition-colors duration-300 z-[101]
         ${modal ? "visible bg-gray-950/[0.4]" : "invisible"}
       `}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`grid grid-cols-2 bg-Lightblue-100 rounded-md ring-2 ring-Lightblue-300 gap-6 transition-all duration-500 p-10 w-[80%] lg:w-[40%] ${
+        className={`grid grid-cols-2 bg-Lightblue-100 rounded-md ring-2 ring-Lightblue-300 gap-6 transition-all duration-300 p-10 w-[80%] lg:w-[40%] ${
           modal ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >

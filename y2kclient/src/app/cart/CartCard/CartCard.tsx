@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
-import changeCartState  from "@/lib/actions/CartActions/buyAndAddToH";
+import changeCartState  from "@/lib/actions/CartActions/changeCartState";
 import getCartFromId from "@/lib/actions/CartActions/getCart";
 import Product from "@/helpers/Types";
 import ModalModify from "./ModalModify/ModalModify";
@@ -32,6 +32,7 @@ const CartCard: React.FC<CartProduct> = ({
 
   const handleBuy = () => {
     Swal.fire({
+      background: "#d3f5f5",
       title: `Confirm your purchase of ${Product.name}`,
       text: `Size: ${size}, Color: ${color}`,
       showDenyButton: true,

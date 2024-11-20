@@ -50,7 +50,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
       }`}
     >
       <div
-        className={`w-[60%] font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg transition-all duration-150 ${
+        className={`w-[60%] font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg transition-all duration-300 ${
           stateAdmin === "DeleteProduct"
             ? "scale-100 opacity-100"
             : "scale-125 opacity-0"
