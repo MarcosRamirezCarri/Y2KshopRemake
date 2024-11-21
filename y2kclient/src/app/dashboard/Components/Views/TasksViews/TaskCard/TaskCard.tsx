@@ -56,7 +56,7 @@ const TaskCard: React.FC<CartItem> = ({
         {state === "approved" ? <p> Pending sending </p> : null}
         <div className="flex flex-row gap-2">
           <button
-             onClick={() => handleState("adminCancel")}
+            onClick={() => handleState("adminCancel")}
             disabled={state === "approved"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
               state === "approved"
@@ -78,7 +78,7 @@ const TaskCard: React.FC<CartItem> = ({
             Approve
           </button>
           <button
-          onClick={() => handleState("sended")}
+            onClick={() => handleState("sended")}
             disabled={state !== "approved"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
               state !== "approved"
