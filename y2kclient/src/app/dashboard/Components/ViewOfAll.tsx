@@ -15,7 +15,7 @@ import ModifyProductModal from "./Modals/ProductModal/ModifyProduct/ModifyProduc
 const ViewOfAll = () => {
   const dispatch = useAppDispatch();
   const [stateAdmin, setStateAdmin] = useState<string>("");
-  const [stateButtons, setStateButtons] = useState<string>("");
+  const [stateButtons, setStateButtons] = useState<string>("Tasks");
   const user: any = useAppSelector((state) => state.account.user);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const ViewOfAll = () => {
       console.log("El usuario es administrador");
     } else {
       console.log("El usuario no es administrador");
-      redirect("/");
+ 
     }
   }, [user]);
 

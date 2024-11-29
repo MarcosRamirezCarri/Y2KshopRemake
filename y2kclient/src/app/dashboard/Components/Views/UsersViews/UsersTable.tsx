@@ -1,5 +1,7 @@
 'use client'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import UserHistoryModal from "../../Modals/UserModal/UserModalHistory";
+import { AccountType } from "@/helpers/Types";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import Swal from 'sweetalert2'
 import changeToAdmin from "@/lib/actions/AdminActions/setAdminUser";
@@ -8,6 +10,10 @@ import getAllUsers from "@/lib/actions/AdminActions/getAllUsers";
 const UsersTable = () =>{
 
     const dispatch = useAppDispatch();
+
+    const [stateModal, setStateModal] = useState<boolean>(false);
+
+   
 
     useEffect(()=>{
         dispatch(getAllUsers())
@@ -34,6 +40,12 @@ const UsersTable = () =>{
     };
 
     const users = useAppSelector((state) => state.admin.allUsers);
+    const [userId, setUserId] = useState<number>(-1);
+
+    const handleClick = (id: number) =>{
+        setUserId(id);
+        setStateModal(!stateModal)
+    }
 
     return (
         <div className="relative font-titilium left-[23%] flex flex-col top-[10rem] w-[75%]">
@@ -79,7 +91,7 @@ const UsersTable = () =>{
                                 </select>
                 </td>
                 <td className="border-l-2 border-b-2 border-r-2 p-1 text-md font-medium">
-                    see History
+                    <button onClick={() => handleClick(user.id)}> see history </button>
                 </td>
             </tr>)
 
@@ -88,6 +100,7 @@ const UsersTable = () =>{
                 </div>}
         </tbody>
             </table>
+            <UserHistoryModal state={stateModal} userId={userId} setState={setStateModal} />
             
         </div>
     )
