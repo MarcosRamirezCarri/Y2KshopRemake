@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/lib/hooks/hooks";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
 import changeCartState  from "@/lib/actions/CartActions/changeCartState";
 import getCartFromId from "@/lib/actions/CartActions/getCart";
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 import ModalModify from "./ModalModify/ModalModify";
 
 interface CartProduct {

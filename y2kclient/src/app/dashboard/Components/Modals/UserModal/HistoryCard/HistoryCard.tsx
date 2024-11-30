@@ -10,6 +10,7 @@ const HistoryCard: React.FC<History> = ({
   productId,
   quantity,
   state,
+  lastUpdate
 }) =>{
     return (
         <div className="bg-Lightblue-300 p-2 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-2">

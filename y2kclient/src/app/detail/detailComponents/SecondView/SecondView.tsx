@@ -1,7 +1,7 @@
 'use client'
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Product from '@/helpers/Types'
+import {Product} from '@/helpers/Types'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
@@ -44,7 +44,7 @@ const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
       (product) => product.clasification === clasification && product.id !== id
     );
   }
-
+if (AllProducts.length > 0){
   return (
     <div className="flex flex-col items-left gap-5 m-5 w-[100%]">
       <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">Related Products</p>
@@ -71,6 +71,8 @@ const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
       </div>
     </div>
   );
+}
+ 
 };
 
 export default SecondView;

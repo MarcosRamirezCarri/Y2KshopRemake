@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 
 const CardProductComplete: React.FC<Product> = ({
   id,

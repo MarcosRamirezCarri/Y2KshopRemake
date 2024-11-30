@@ -41,6 +41,10 @@ const CartItemModel = sequelize.define('Cart', {
     type: DataTypes.STRING(128),
     allowNull: false,
   },
+  lastUpdate:{
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
 }, {
   tableName: 'Cart',
   timestamps: false,

@@ -69,6 +69,7 @@ const taskCount = countTasks(showTask, selectedState);
               userId={task.userId}
               productId={task.productId}
               quantity={task.quantity}
+              lastUpdate={task.lastUpdate}
             />
           ))
         : <div className="w-[100%] justify-center items-center flex flex-col">

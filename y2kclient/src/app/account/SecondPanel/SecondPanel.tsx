@@ -13,6 +13,7 @@ export default function AccountSecondPanel() {
       <div className="flex flex-col p-5 overflow-auto gap-5 max-h-[22rem]">
         {user.history?.map((his: any) => (
           <CardHistory
+          lastUpdate={his.lastUpdate}
           itemId={his.itemId}
             name={his.name}
             color={his.color}

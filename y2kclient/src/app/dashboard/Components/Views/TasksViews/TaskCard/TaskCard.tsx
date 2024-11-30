@@ -12,6 +12,7 @@ const TaskCard: React.FC<CartItem> = ({
   state,
   userId,
   id,
+  lastUpdate,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -23,9 +24,13 @@ const TaskCard: React.FC<CartItem> = ({
     });
   };
 
+
+ 
+
   return (
     <div className="bg-Lightblue-200 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
       <div className="flex flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
+       
         <Image
           alt="history"
           width={200}
@@ -41,6 +46,7 @@ const TaskCard: React.FC<CartItem> = ({
         <p>User Id: {userId}</p>
       </div>
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-2 text-orange-950 ">
+      <p className="text-base self-end font-medium p-2">Last Update: {lastUpdate}</p>
         <div className="flex flex-row gap-2">
           State:{" "}
           {state === "pending" ? (
@@ -55,6 +61,7 @@ const TaskCard: React.FC<CartItem> = ({
         </div>
         {state === "approved" ? <p> Pending sending </p> : null}
         <div className="flex flex-row gap-2">
+        
           <button
             onClick={() => handleState("adminCancel")}
             disabled={state === "approved" || state === "sended"}

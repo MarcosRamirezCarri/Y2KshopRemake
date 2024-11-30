@@ -4,7 +4,7 @@ import UserModel from "../../models/User";
 import ProductModel from "../../models/Products";
 
 export const addToHistoryItem = async (req: Request, res: Response) => {
-  const { userId, itemId, newState } = req.body;
+  const { userId, itemId, newState, lastUpdate } = req.body;
 
   if (!userId || !itemId || !newState) {
     return res.status(400).json({ message: "No Userid, idProduct, or State" });
@@ -68,6 +68,7 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
         color: cartItem.color,
         size: cartItem.size,
         state: newState,
+        lastUpdate: lastUpdate,
       };
 
       updatedHistory = [...user.history, itemToSave];
@@ -77,6 +78,7 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     user.history = updatedHistory;
 
     // Actualizar el estado del carrito
+    cartItem.lastUpdate = lastUpdate;
     cartItem.state = newState;
 
     await user.save();

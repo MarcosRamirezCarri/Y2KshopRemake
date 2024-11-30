@@ -1,16 +1,23 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
+import { formatDate } from "@/helpers/formatDate";
 import { Server } from "@/helpers/server";
 
 
 const changeCartState =
   (userId: number, itemId: number, newState: string) =>
   async (dispatch: Dispatch) => {
+   
+    const date = new Date().toISOString();
+
+    const lastUpdate = formatDate(date);
+    
     try {
       const data = await axios.put(`${Server}/cart/update`, {
         userId,
         itemId,
         newState,
+        lastUpdate
       });
       const status = data.status;
 

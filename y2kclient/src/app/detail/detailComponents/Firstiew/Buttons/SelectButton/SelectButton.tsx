@@ -1,4 +1,3 @@
-import Color from "@/helpers/Types";
 import { useState } from "react";
 
 interface ButtonProps {

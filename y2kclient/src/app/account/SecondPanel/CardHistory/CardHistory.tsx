@@ -14,6 +14,7 @@ const CardHistory: React.FC<History> = ({
   productId,
   quantity,
   state,
+  lastUpdate,
 }) => {
   const dispatch = useAppDispatch();
 

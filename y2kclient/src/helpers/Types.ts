@@ -17,11 +17,12 @@ interface Size {
     images: string[];
     productId: number;
     quantity: number;
-    state: string
-    itemId: number
+    state: string;
+    itemId: number;
+    lastUpdate: string;
   }
   
- export default interface Product  {
+ export interface Product  {
     id: number;
     name: string;
     images: string[];
@@ -49,4 +50,5 @@ interface Size {
     size: string;
     state: string;
     Product: Product;
+    lastUpdate: string;
   }

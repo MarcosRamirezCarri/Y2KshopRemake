@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 import { uploadImage } from "@/helpers/cloudinarySet";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/Validators/validatorProducts";

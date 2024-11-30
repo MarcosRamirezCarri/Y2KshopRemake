@@ -51,6 +51,7 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
           stateUser.history.length > 0 ? (
             stateUser?.history.map((his: any) => (
               <HistoryCard
+              lastUpdate={his.lastUpdate}
                 itemId={his.itemId}
                 name={his.name}
                 color={his.color}
