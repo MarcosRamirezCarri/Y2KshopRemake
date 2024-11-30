@@ -57,9 +57,9 @@ const TaskCard: React.FC<CartItem> = ({
         <div className="flex flex-row gap-2">
           <button
             onClick={() => handleState("adminCancel")}
-            disabled={state === "approved"}
+            disabled={state === "approved" || state === "sended"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
-              state === "approved"
+              state === "approved" || state === "sended"
                 ? "bg-orange-400/[0.4] text-orange-950/[0.8]"
                 : " bg-orange-400/[0.8]  hover:scale-105 hover:ring-2 hover:ring-orange-500"
             } `}
@@ -68,9 +68,9 @@ const TaskCard: React.FC<CartItem> = ({
           </button>
           <button
             onClick={() => handleState("approved")}
-            disabled={state === "approved"}
+            disabled={state === "approved" || state === "sended"}
             className={`relative self-center  px-4 py-2 rounded-[1rem]  font-normal transition-all duration-300 ${
-              state === "approved"
+              state === "approved" || state === "sended"
                 ? "bg-orange-400/[0.4] text-orange-950/[0.8]"
                 : " bg-orange-400/[0.8]  hover:scale-105 hover:ring-2 hover:ring-orange-500"
             } `}

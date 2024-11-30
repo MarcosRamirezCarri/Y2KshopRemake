@@ -29,17 +29,14 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     }
 
     if (newState === "cancel") {
-      const itemIndex = user.history.findIndex(
-        (item: any) => item.itemId === itemId
+      const updatedHistory = user.history.filter(
+        (item: any) => item.itemId !== itemId
       );
-    
-      if (itemIndex !== -1) {
-        user.history = user.history.filter((item: any) => item.itemId !== itemId);
-    
-        await user.save();
-      }
+
+      user.history = updatedHistory;
+      await user.save();
       await cartItem.destroy();
-    
+
       return res.status(204).send();
     }
 
@@ -49,24 +46,39 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const itemToSave = {
-      itemId: itemId,
-      name: product.name,
-      images: product.images,
-      productId: cartItem.productId,
-      quantity: cartItem.quantity,
-      color: cartItem.color,
-      size: cartItem.size,
-      state: newState,
-    };
+    // Crear una copia del historial
+    const existingItemIndex = user.history.findIndex(
+      (item: any) => item.itemId === itemId
+    );
 
-    // Agregar el nuevo ítem al historial
-    user.history = [...user.history, itemToSave];
+    let updatedHistory;
+    if (existingItemIndex !== -1) {
+      // Actualizar el estado si el elemento ya existe
+      updatedHistory = user.history.map((item: any) =>
+        item.itemId === itemId ? { ...item, state: newState } : item
+      );
+    } else {
+      // Agregar un nuevo elemento al historial
+      const itemToSave = {
+        itemId: itemId,
+        name: product.name,
+        images: product.images,
+        productId: cartItem.productId,
+        quantity: cartItem.quantity,
+        color: cartItem.color,
+        size: cartItem.size,
+        state: newState,
+      };
 
-    // Actualizar el estado del cartItem
+      updatedHistory = [...user.history, itemToSave];
+    }
+
+    // Actualizar el historial del usuario
+    user.history = updatedHistory;
+
+    // Actualizar el estado del carrito
     cartItem.state = newState;
 
-    // Guardar cambios
     await user.save();
     await cartItem.save();
 

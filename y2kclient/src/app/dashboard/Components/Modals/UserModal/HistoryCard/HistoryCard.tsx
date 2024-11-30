@@ -12,7 +12,7 @@ const HistoryCard: React.FC<History> = ({
   state,
 }) =>{
     return (
-        <div className="bg-Lightblue-200 p-2 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
+        <div className="bg-Lightblue-300 p-2 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-2">
       <div className="flex flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
         <Image
           alt="history"
@@ -23,11 +23,9 @@ const HistoryCard: React.FC<History> = ({
         />
         <p>{name}</p>
       </div>
-      <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-4 text-Lightblue-950">
+      <div className="flex flex-col justify-center font-tiltneon text-md lg:text-xl gap-2 text-Lightblue-950">
         <p>Color: {color}</p>
         <p>Size: {size}</p>
-      </div>
-      <div className="flex flex-col justify-center font-tiltneon text-md lg:text-xl gap-2 text-Lightblue-950 ">
         <div className="flex flex-row gap-2">
           State:{" "}
           {state === "pending" ? (
