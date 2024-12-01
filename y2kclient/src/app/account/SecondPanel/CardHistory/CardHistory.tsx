@@ -64,6 +64,7 @@ const CardHistory: React.FC<History> = ({
         <p>Size: {size}</p>
       </div>
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-xl gap-2 text-Lightblue-950 ">
+      <p className="text-base self-end font-medium p-2">Last Update: {lastUpdate}</p>
         <div className="flex flex-row gap-2">
           State:{" "}
           {state === "pending" ? (
