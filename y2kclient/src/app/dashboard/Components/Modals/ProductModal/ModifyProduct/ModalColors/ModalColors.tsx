@@ -1,4 +1,4 @@
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 import validateColors from "@/helpers/Validators/validateColors";
 import Swal from "sweetalert2";
 

@@ -1,4 +1,4 @@
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 
 interface LabelTypes {
   errors: any;

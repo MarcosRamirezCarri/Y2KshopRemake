@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { useState } from "react";
 import Image from "next/image";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/cloudinarySet";
 import validateProduct from "@/helpers/Validators/validatorProducts";
-import {Product} from "@/helpers/Types";
+import { Product } from "@/helpers/Types";
 import modProduct from "@/lib/actions/ProductActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
@@ -71,20 +71,19 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
     setErrors({ ...errors, [name]: "" });
   };
 
-  const handleSave = () =>{
-   
-    if(stateProduct.id > 0){
-      const errorsBackup = validateProduct(stateProduct);
-  
+  const handleSave = () => {
+    if (stateProduct.id > 0) {
+      const errorsBackup: any = validateProduct(stateProduct);
+
       setErrors(errorsBackup);
-  
+
       const hasErrors = Object.values(errorsBackup).some((error) => {
         if (Array.isArray(error)) {
           return error.some((subError) => subError !== "");
         }
         return error !== "";
       });
-  
+
       const hasProduct = Object.values(stateProduct).some((prod) => {
         if (Array.isArray(prod)) {
           return prod.length === 0;
@@ -106,15 +105,13 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
             });
           }
         });
-      }else {
+      } else {
         Swal.fire("Fix the errors before uploading", "", "error");
       }
-    }else{
+    } else {
       Swal.fire("FIrst Select an Product", "", "error");
     }
-
-    
-  }
+  };
 
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.product);
@@ -142,7 +139,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
             {products.length > 0 ? (
               products.map((prod) => (
                 <MiniCard
-                key={prod.id}
+                  key={prod.id}
                   product={prod}
                   setStateProduct={setStateProduct}
                   stateProduct={stateProduct}
@@ -226,7 +223,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
           </button>
         </div>
         <div className="col-span-2 justify-center flex flex-row">
-        <button
+          <button
             onClick={handleSave}
             className="bg-Lightblue-500 rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
           >
@@ -239,7 +236,6 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
           >
             Cancel
           </button>
-
         </div>
       </div>
       <ModalColors
