@@ -8,8 +8,6 @@ interface Size {
     sizes: Size[];
   }
 
-  
-
  export interface History{
     name: string;
     color: string;
@@ -51,4 +49,11 @@ interface Size {
     state: string;
     Product: Product;
     lastUpdate: string;
+  }
+
+  export interface FlyerType{
+    id: number;
+    type: string;
+    name: string;
+    image: string;
   }

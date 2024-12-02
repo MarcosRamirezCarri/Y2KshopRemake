@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Product from "@/helpers/Types";
+import {Product} from "@/helpers/Types";
 
 interface ProductState {
   isLoading: boolean;
@@ -21,7 +21,7 @@ export const productsReducer = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setShirts: (state, action: PayloadAction<Product[]>) => {
+    setProducts: (state, action: PayloadAction<Product[]>) => {
       state.product = action.payload;
       state.sortProducts = action.payload;
     },
@@ -65,7 +65,7 @@ export const productsReducer = createSlice({
     },
   },
 });
-export const { setShirts, sortByCategory, modifyProduct ,sortBySize, setSearch, deleteProd } =
+export const { setProducts, sortByCategory, modifyProduct ,sortBySize, setSearch, deleteProd } =
   productsReducer.actions;
 
 export default productsReducer.reducer;

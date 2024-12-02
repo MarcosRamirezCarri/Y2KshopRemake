@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import deleteProduct from "@/lib/actions/ProductActions/deleteProduct";
+import deleteProduct from "@/lib/actions/AdminActions/deleteProduct";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import MiniCard from "./miniCard/MiniCard";

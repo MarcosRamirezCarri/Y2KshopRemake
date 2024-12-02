@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/cloudinarySet";
 import validateProduct from "@/helpers/Validators/validatorProducts";
 import { Product } from "@/helpers/Types";
-import modProduct from "@/lib/actions/ProductActions/modifyProduct";
+import modProduct from "@/lib/actions/AdminActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
 import MiniCard from "./MiniCard/Minicard";

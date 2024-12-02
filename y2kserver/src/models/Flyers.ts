@@ -14,6 +14,10 @@ const FlyerModel = sequelize.define(
       type: DataTypes.STRING(128),
       allowNull: false,
     },
+    type: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,

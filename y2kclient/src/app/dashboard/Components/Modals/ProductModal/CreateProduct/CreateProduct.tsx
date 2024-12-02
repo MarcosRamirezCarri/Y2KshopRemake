@@ -6,7 +6,7 @@ import { uploadImage } from "@/helpers/cloudinarySet";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/Validators/validatorProducts";
 import validateColors from "@/helpers/Validators/validateColors";
-import createProduct from "@/lib/actions/ProductActions/createProduct";
+import createProduct from "@/lib/actions/AdminActions/createProduct";
 import Swal from "sweetalert2";
 import LabelForm from "./Labels/LabelForm";
 import LabelColors from "./Labels/LabelColors";

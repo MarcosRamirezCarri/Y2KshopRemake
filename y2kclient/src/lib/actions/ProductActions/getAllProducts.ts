@@ -1,4 +1,4 @@
-import { setShirts } from "../../slices/productsReducer";
+import { setProducts } from "../../slices/productsReducer";
 import { Server } from "@/helpers/server";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -9,7 +9,7 @@ export const getAllProducts = () => async (Dispatch: Dispatch) => {
     const products = data.data;
     const status = data.status;
     if (status === 201) {
-      Dispatch(setShirts(products));
+      Dispatch(setProducts(products));
       return { success: true };
     }
   } catch (error) {
