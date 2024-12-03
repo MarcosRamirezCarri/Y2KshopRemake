@@ -28,6 +28,50 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    const product: any = await ProductModel.findByPk(cartItem.productId);
+
+    if (product === null) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (newState === "pending") {
+      const colorToUpdate = product.colors.find(
+        (color: any) => color.color === cartItem.color
+      );
+      const indexColor = product.colors.findIndex(
+        (color: any) => color.color === cartItem.color
+      );
+
+      if (!colorToUpdate) {
+        return res.status(404).json({ message: "Color not found in product" });
+      }
+
+      const sizeToUpdate = colorToUpdate.sizes.findIndex(
+        (size: any) => size.size === cartItem.size
+      );
+
+      if (sizeToUpdate === -1) {
+        return res.status(404).json({ message: "Size not found in product" });
+      }
+
+      const sizeObjToUpdate = colorToUpdate.sizes[sizeToUpdate];
+
+      if (sizeObjToUpdate.quantity <= 0) {
+        return res.status(400).json({ message: "Insufficient stock" });
+      }
+
+      const updatedColors = [...product.colors];
+      updatedColors[indexColor].sizes[sizeToUpdate] = {
+        ...updatedColors[indexColor].sizes[sizeToUpdate],
+        quantity: updatedColors[indexColor].sizes[sizeToUpdate].quantity - 1,
+      };
+
+      product.colors = updatedColors;
+
+
+      await product.save();
+    }
+
     if (newState === "cancel") {
       const updatedHistory = user.history.filter(
         (item: any) => item.itemId !== itemId
@@ -40,25 +84,16 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       return res.status(204).send();
     }
 
-    const product: any = await ProductModel.findByPk(cartItem.productId);
-
-    if (product === null) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    // Crear una copia del historial
     const existingItemIndex = user.history.findIndex(
       (item: any) => item.itemId === itemId
     );
 
     let updatedHistory;
     if (existingItemIndex !== -1) {
-      // Actualizar el estado si el elemento ya existe
       updatedHistory = user.history.map((item: any) =>
         item.itemId === itemId ? { ...item, state: newState } : item
       );
     } else {
-      // Agregar un nuevo elemento al historial
       const itemToSave = {
         itemId: itemId,
         name: product.name,
@@ -74,10 +109,8 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       updatedHistory = [...user.history, itemToSave];
     }
 
-    // Actualizar el historial del usuario
     user.history = updatedHistory;
 
-    // Actualizar el estado del carrito
     cartItem.lastUpdate = lastUpdate;
     cartItem.state = newState;
 

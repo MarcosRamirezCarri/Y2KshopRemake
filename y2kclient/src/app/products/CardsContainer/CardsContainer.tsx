@@ -15,6 +15,7 @@ export default function CardsContainer() {
     fetchData();
   }, []);
 
+  console.log(stateProducts)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 relative gap-[2rem] top-[10rem] w-[90%] justify-items-center">
       {stateProducts.map((a, index) => (

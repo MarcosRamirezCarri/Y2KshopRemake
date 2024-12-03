@@ -89,6 +89,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   };
 
   const handleAddSize = (colorIndex: number) => {
+
     const newColors = [...product.colors];
     if (newColors[colorIndex].sizes.length < 4) {
       newColors[colorIndex].sizes.push({ size: "", quantity: 0 });
@@ -104,7 +105,14 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const newColors = [...product.colors];
-    newColors[colorIndex].sizes[sizeIndex][e.target.name] = e.target.value;
+  
+    if (e.target.name === "quantity") {
+      const quantity = parseInt(e.target.value, 10); 
+      newColors[colorIndex].sizes[sizeIndex][e.target.name] = isNaN(quantity) ? 0 : quantity; // Asignamos 0 si no es un número válido
+    } else {
+      newColors[colorIndex].sizes[sizeIndex][e.target.name] = e.target.value;
+    }
+  
     setProduct({ ...product, colors: newColors });
   };
 

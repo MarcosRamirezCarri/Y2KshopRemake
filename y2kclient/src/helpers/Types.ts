@@ -8,6 +8,15 @@ interface Size {
     sizes: Size[];
   }
 
+  export interface Product  {
+    id: number;
+    name: string;
+    images: string[];
+    price: number;
+    colors: Color[];
+    clasification: string;
+    description: string;
+  }
  export interface History{
     name: string;
     color: string;
@@ -20,15 +29,7 @@ interface Size {
     lastUpdate: string;
   }
   
- export interface Product  {
-    id: number;
-    name: string;
-    images: string[];
-    price: number;
-    colors: Color[];
-    clasification: string;
-    description: string;
-  }
+
 
   export interface AccountType{
     id: number;
