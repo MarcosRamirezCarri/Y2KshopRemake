@@ -8,6 +8,12 @@ interface Size {
     sizes: Size[];
   }
 
+  interface Location{
+    city: string;
+    province: string;
+    country: string;
+  }
+
   export interface Product  {
     id: number;
     name: string;
@@ -36,6 +42,7 @@ interface Size {
     password: string;
     name: string;
     history: History[];
+    location: Location;
     email: string;
     phone: string;
     admin: boolean;

@@ -1,4 +1,4 @@
-const Validate = async(name: string, email: string, phone: string, password: string) => {
+const Validate = async(name: string, email: string, phone: string, password: string, location: any) => {
     const errors = [];
 
     if (!name || typeof name !== 'string' || name.length > 128) {
@@ -17,7 +17,10 @@ const Validate = async(name: string, email: string, phone: string, password: str
     if (!password || typeof password !== 'string' || password.length < 6) {
       errors.push('La contraseña es obligatoria y debe tener al menos 6 caracteres.');
     }
-  
+    if (!location.city || !location.province || !location.country) {
+      errors.push('Debe haber ciudad, provincia y pais');
+    }
+
     return errors;
   };
 

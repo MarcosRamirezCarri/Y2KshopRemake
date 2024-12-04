@@ -1,9 +1,18 @@
 import { checkEmailExists } from "@/lib/actions/AccountActions/checkEmail";
+import { validateLocationGeoNames } from "./validateLocation";
+
+interface Location {
+  city: string;
+  province: string;
+  country: string;
+}
+
 export interface RegisterData {
   name: string;
   password: string;
   phone: string;
   email: string;
+  location: Location;
   admin: boolean | null;
 }
 
@@ -12,8 +21,10 @@ interface ValidationErrors {
   password: string;
   phone: string;
   name: string;
+  city: string;
+  province: string;
+  country: string;
 }
-
 
 export async function ValidateRegister(
   register: RegisterData
@@ -23,13 +34,16 @@ export async function ValidateRegister(
     password: "",
     phone: "",
     name: "",
+    city: "",
+    province: "",
+    country: "",
   };
 
   let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let regexPassword = /^(?=\w*\d)(?=\w*)(?=\w*[a-z])\S{8,16}$/;
   let regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
-
+  // Validate email
   if (!regexEmail.test(register.email)) {
     errors.email = "Invalid Email";
   } else {
@@ -39,13 +53,40 @@ export async function ValidateRegister(
     }
   }
 
+  // Validate password
   if (!regexPassword.test(register.password)) {
     errors.password =
       "The password must have at least 8 to 16 characters and contain at least one digit";
   }
 
+  // Validate phone
   if (!regexPhone.test(register.phone)) {
     errors.phone = "Invalid phone number (10 digits required)";
+  }
+
+  // Validate name
+  if (!register.name.trim()) {
+    errors.name = "Name is required";
+  }
+  if (!register.location.city) {
+    errors.city = "City is required";
+  }
+  if (!register.location.province) {
+    errors.province = "Province is required";
+  }
+  if (!register.location.country) {
+    errors.country = "Country is required";
+  }
+  const isValidLocation = await validateLocationGeoNames(
+    register.location.city,
+    register.location.province,
+    register.location.country,
+  );
+
+  if (!isValidLocation) {
+    errors.city = "Ciudad, provincia o país inválidos";
+    errors.province = "Ciudad, provincia o país inválidos";
+    errors.country = "Ciudad, provincia o país inválidos";
   }
 
   return errors;

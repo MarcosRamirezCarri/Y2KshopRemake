@@ -1,18 +1,12 @@
 import { registerAccount } from "@/lib/slices/userReducer";
 import axios from "axios";
 import { Server } from "@/helpers/server";
+import { AccountType } from "@/helpers/Types";
 import { Dispatch } from "@reduxjs/toolkit";
 
-interface AccountType {
-  password: string;
-  name: string;
-  email: string;
-  phone: string;
-  admin: boolean | null;
-}
 
 const registerFunction =
-  ({ name, password, email, phone, admin }: AccountType) =>
+  ({ name, password, email, phone, location, admin }: AccountType) =>
   async (dispatch: Dispatch) => {
     try {
       const register = await axios.post(`${Server}/register`, {
@@ -21,6 +15,7 @@ const registerFunction =
         email,
         phone,
         admin,
+        location
       });
       const data = register.data;
       const status = data.status;

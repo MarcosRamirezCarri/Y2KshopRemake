@@ -24,6 +24,10 @@ const UserModel = sequelize.define('User', {
     type: new DataTypes.STRING(128),
     allowNull: false,
   },
+  location:{
+    type: new DataTypes.JSONB,
+    allowNull: false,
+  },
   history: {
     type: DataTypes.ARRAY(DataTypes.JSONB),
     allowNull: false,

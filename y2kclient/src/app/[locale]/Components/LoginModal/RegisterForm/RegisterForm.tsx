@@ -29,6 +29,11 @@ const RegisterForm: React.FC<PropModal> = ({
     password: "",
     phone: "",
     name: "",
+    location: {
+      city: "",
+      province: "",
+      country: "",
+    },
     admin: false,
   });
   const [error, setError] = useState<Errors>({
@@ -45,14 +50,25 @@ const RegisterForm: React.FC<PropModal> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setError((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
+
+    if (["city", "province", "country"].includes(name)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        location: {
+          ...prevData.location,
+          [name]: value,
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+      setError((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,17 +102,15 @@ const RegisterForm: React.FC<PropModal> = ({
   return (
     <div
       onClick={() => setModalR(!modalR)}
-      className={`
-    fixed inset-0 flex justify-center items-center transition-colors duration-300 z-[101]
-    ${modalR ? "visible bg-gray-950/[0.4]" : "invisible"}
-  `}
+      className={`fixed inset-0 flex justify-center items-center transition-colors duration-300 z-[101] ${
+        modalR ? "visible bg-gray-950/[0.4]" : "invisible"
+      }`}
     >
       <ul
         onClick={(e) => e.stopPropagation()}
-        className={`
-          bg-Lightblue-100 w-[80%] lg:w-[35%]  gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-300 p-10
-          ${modalR ? "scale-100 opacity-100" : "scale-125 opacity-0"}
-        `}
+        className={`bg-Lightblue-100 w-[80%] font-titilium lg:w-[50%] gap-6 rounded-lg flex flex-col shadow p-6 transition-all duration-300 p-10 ${
+          modalR ? "scale-100 opacity-100" : "scale-125 opacity-0"
+        }`}
       >
         <div className="flex flex-col">
           <p className="font-titilium text-2xl self-center font-medium">
@@ -107,7 +121,8 @@ const RegisterForm: React.FC<PropModal> = ({
           </p>
         </div>
 
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-2">
           <li>
             <p>Full Name</p>
             <input
@@ -158,8 +173,42 @@ const RegisterForm: React.FC<PropModal> = ({
               <span className="text-gray-400">{error.phone}</span>
             )}
           </li>
+          </div>
+          <div  className="flex flex-col gap-2 ">
+          <li>
+            <p>City</p>
+            <input
+              name="city"
+              type="text"
+              value={formData.location.city}
+              onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
+            />
+          </li>
+          <li>
+            <p>Province</p>
+            <input
+              name="province"
+              type="text"
+              value={formData.location.province}
+              onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
+            />
+          </li>
+          <li>
+            <p>Country</p>
+            <input
+              name="country"
+              type="text"
+              value={formData.location.country}
+              onChange={handleChange}
+              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
+            />
+          </li>
+          </div>
+         
           <button
-            className="bg-Lightblue-200 self-center py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300"
+            className="bg-Lightblue-200 w-[50%] justify-self-center col-span-2 py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300"
             type="submit"
           >
             Register Now
@@ -175,5 +224,7 @@ const RegisterForm: React.FC<PropModal> = ({
     </div>
   );
 };
+
+
 
 export default RegisterForm;

@@ -34,6 +34,20 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
+
+    if (newState === "cancel") {
+      const updatedHistory = user.history.filter(
+        (item: any) => item.itemId !== itemId
+      );
+
+      user.history = updatedHistory;
+      await user.save();
+      await cartItem.destroy();
+
+      return res.status(204).send();
+    }
+
+    let updatedColors = [...product.colors];
     if (newState === "pending") {
       const colorToUpdate = product.colors.find(
         (color: any) => color.color === cartItem.color
@@ -60,7 +74,6 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
         return res.status(400).json({ message: "Insufficient stock" });
       }
 
-      const updatedColors = [...product.colors];
       updatedColors[indexColor].sizes[sizeToUpdate] = {
         ...updatedColors[indexColor].sizes[sizeToUpdate],
         quantity: updatedColors[indexColor].sizes[sizeToUpdate].quantity - 1,
@@ -68,20 +81,10 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
 
       product.colors = updatedColors;
 
-
-      await product.save();
-    }
-
-    if (newState === "cancel") {
-      const updatedHistory = user.history.filter(
-        (item: any) => item.itemId !== itemId
+      await ProductModel.update(
+        { colors: updatedColors }, 
+        { where: { id: cartItem.productId } }
       );
-
-      user.history = updatedHistory;
-      await user.save();
-      await cartItem.destroy();
-
-      return res.status(204).send();
     }
 
     const existingItemIndex = user.history.findIndex(
@@ -114,8 +117,12 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     cartItem.lastUpdate = lastUpdate;
     cartItem.state = newState;
 
+   
+   
+
     await user.save();
     await cartItem.save();
+   
 
     res.status(200).json(cartItem);
   } catch (error: any) {
