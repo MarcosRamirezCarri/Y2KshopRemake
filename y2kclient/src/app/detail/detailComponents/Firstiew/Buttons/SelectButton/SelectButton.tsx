@@ -21,7 +21,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
     setSizesState(!sizesState);
   };
   return (
-    <div className="relative self-end flex flex-col items-center p-2  font-normal">
+    <div className="relative flex flex-col items-center select-none font-normal">
       <button
         className={`underline  px-3 py-4 rounded-xl font-tiltneon text-lg lg:text-xl text-pink-950 
       ${
@@ -34,11 +34,11 @@ const SelectButtons: React.FC<ButtonProps> = ({
         Select Size
       </button>
 
-      <div className={`absolute top-[4.50rem] flex flex-row lg:flex-col gap-2`}>
+      <div className={`absolute left-[6.5rem] flex flex-row gap-2`}>
         {colors.map((colorObj: any, colorIndex: number) => (
           <div
             key={colorIndex}
-            className={`relative flex flex-col items-center caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-md lg:text-lg transition-all duration-300 ${
+            className={`relative flex flex-row items-center gap-1 caret-blue-200 px-3 py-1 rounded-lg font-tiltneon text-lg lg:text-xl transition-all duration-300 ${
               sizesState
                 ? "visible bg-pink-200 translate-y-[0.4rem] blur-none"
                 : "invisible -translate-y-[2rem] blur-lg"
@@ -47,24 +47,25 @@ const SelectButtons: React.FC<ButtonProps> = ({
             <div
               className={`${
                 selectedColor === colorObj.color ? "bg-pink-400" : "bg-pink- 200"
-              } text-pink-950 py-1 px-2 rounded`}
+              } text-pink-950 py-1 px-2 rounded cursor-pointer`}
               onClick={() => handleChangeColor(colorObj.color)}
             >
               {colorObj.color}
             </div>
           
-                {colorObj.sizes.map((sizeObj: any, sizeIndex: number) => (
+                { colorObj.sizes.map((sizeObj: any, sizeIndex: number) => (
                   <div
                     key={sizeIndex}
+                  
                     className={`${
                       selectedSize === sizeObj.size
                         ? "bg-blue-400"
                         : "bg-blue-200"
-                    } rounded-[1.25rem] transition-all delay-150 duration-500 ${
+                    } rounded-md transition-all duration-500 ${
                       selectedColor === colorObj.color
-                        ? " translate-y-[0rem] visible blur-none"
+                        ? " translate-y-[0rem] visible blur-none "
                         : " -translate-y-[1rem] hidden invisible blur-lg"
-                    } font-tiltneon flex flex-row text-md justify-center w-[100%] lg:text-lg text-gray-950 font-semibold hover:ring-2 active:bg-pink-400 hover:bg-pink-300 hover:ring-pink-400`}
+                    } font-tiltneon cursor-pointer px-3 flex flex-row text-md justify-center w-[100%] lg:text-lg text-gray-950 font-semibold hover:ring-2 active:bg-pink-400 hover:bg-pink-300 hover:ring-pink-400`}
                     onClick={() => handleChangeSize(sizeObj.size)}
                   >
                     {sizeObj.size}

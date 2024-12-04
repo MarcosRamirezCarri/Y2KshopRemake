@@ -9,8 +9,8 @@ interface DetailProducts {
   clasification: string;
   images: string[];
   colors: any;
-  handleChangeSize: (arg: string)=>void;
-  handleChangeColor: (arg: string)=>void;
+  handleChangeSize: (arg: string) => void;
+  handleChangeColor: (arg: string) => void;
   selectedSize: string | null;
   selectedColor: string | null;
 }
@@ -54,6 +54,20 @@ const FirstView: React.FC<DetailProducts> = ({
           className="rounded w-[20.25rem] lg:w-[24.25rem] ring-2 ring-pink-300 h-[20.25rem] lg:h-[24.25rem] bg-transparent"
           alt="no image"
         />
+        <div
+          className={`flex flex-row gap-2 ${
+            !selectedColor || !selectedSize
+              ? " -translate-y-[1rem] invisible blur-lg" 
+              : " translate-y-[0rem] visible blur-none"
+          } transition-all bg-pink-400  p-5 rounded duration-500 `}
+        >
+          <p className="font-tiltneon text-sm lg:text-xl text-pink-50 font-normal flex flex-row">
+            Selected Color: {selectedColor}
+          </p>
+          <p className="font-tiltneon text-sm lg:text-xl text-pink-50 font-normal flex flex-row">
+            Selected Size: {selectedSize}
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-col p-6 justify-center items-left col-span-3 lg:col-span-2 gap-3">
@@ -76,20 +90,18 @@ const FirstView: React.FC<DetailProducts> = ({
             - ${price}
           </p>
         </p>
-        <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
-          Selected Size: {selectedSize}
-        </p>
-        <div className="flex flex-row items-center justify-center gap-2">
-          <AddToCart
-            selectedColor={selectedColor}
-            selectedSize={selectedSize}
-          />
+
+        <div className="flex flex-col justify-start gap-3 items-start">
           <SelectButtons
             handleChangeColor={handleChangeColor}
             handleChangeSize={handleChangeSize}
             selectedSize={selectedSize}
             selectedColor={selectedColor}
             colors={colors}
+          />
+          <AddToCart
+            selectedColor={selectedColor}
+            selectedSize={selectedSize}
           />
         </div>
       </div>

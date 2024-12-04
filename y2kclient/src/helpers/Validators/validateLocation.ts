@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 // Función para validar la ciudad, provincia y país con GeoNames
 export const validateLocationGeoNames = async(
     city: string,
