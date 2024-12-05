@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 interface ButtonProps {
-  handleChangeSize: (arg: string)=>void;
-  handleChangeColor: (arg: string)=>void;
+  handleChangeSize: (arg: string) => void;
+  handleChangeColor: (arg: string) => void;
   selectedSize: string | null;
   selectedColor: string | null;
   colors: any;
@@ -46,33 +46,34 @@ const SelectButtons: React.FC<ButtonProps> = ({
           >
             <div
               className={`${
-                selectedColor === colorObj.color ? "bg-pink-400" : "bg-pink- 200"
+                selectedColor === colorObj.color
+                  ? "bg-pink-400"
+                  : "bg-pink- 200"
               } text-pink-950 py-1 px-2 rounded cursor-pointer`}
               onClick={() => handleChangeColor(colorObj.color)}
             >
               {colorObj.color}
             </div>
-          
-                { colorObj.sizes.map((sizeObj: any, sizeIndex: number) => (
-                  <div
-                    key={sizeIndex}
-                  
-                    className={`${
-                      selectedSize === sizeObj.size
-                        ? "bg-blue-400"
-                        : "bg-blue-200"
-                    } rounded-md transition-all duration-500 ${
-                      selectedColor === colorObj.color
-                        ? " translate-y-[0rem] visible blur-none "
-                        : " -translate-y-[1rem] hidden invisible blur-lg"
-                    } font-tiltneon cursor-pointer px-3 flex flex-row text-md justify-center w-[100%] lg:text-lg text-gray-950 font-semibold hover:ring-2 active:bg-pink-400 hover:bg-pink-300 hover:ring-pink-400`}
-                    onClick={() => handleChangeSize(sizeObj.size)}
-                  >
-                    {sizeObj.size}
-                  </div>
-                ))}
-          
-  
+
+            {colorObj.sizes.map((sizeObj: any, sizeIndex: number) =>
+              sizeObj.quantity > 0 ? (
+                <div
+                  key={sizeIndex}
+                  className={`${
+                    selectedSize === sizeObj.size
+                      ? "bg-blue-400"
+                      : "bg-blue-200"
+                  } rounded-md transition-all duration-500 ${
+                    selectedColor === colorObj.color
+                      ? " translate-y-[0rem] visible blur-none "
+                      : " -translate-y-[1rem] hidden invisible blur-lg"
+                  } font-tiltneon cursor-pointer px-3 flex flex-row text-md justify-center w-[100%] lg:text-lg text-gray-950 font-semibold hover:ring-2 active:bg-pink-400 hover:bg-pink-300 hover:ring-pink-400`}
+                  onClick={() => handleChangeSize(sizeObj.size)}
+                >
+                  {sizeObj.size}
+                </div>
+              ) : null
+            )}
           </div>
         ))}
       </div>

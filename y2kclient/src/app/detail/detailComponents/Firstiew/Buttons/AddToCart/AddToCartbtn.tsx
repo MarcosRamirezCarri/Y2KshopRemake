@@ -35,7 +35,6 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
 
   const handleAddToCart = () => {
     const productExists = stateCart.find((item) => item.productId === NumberId);
-    console.log(productExists)
     if (!token || token === "undefined" || token === "null") {
       setModal(true);
     } else if (productExists || !selectedSize) {

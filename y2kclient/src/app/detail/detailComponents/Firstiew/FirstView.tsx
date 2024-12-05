@@ -71,12 +71,12 @@ const FirstView: React.FC<DetailProducts> = ({
       </div>
 
       <div className="flex flex-col p-6 justify-center items-left col-span-3 lg:col-span-2 gap-3">
-        <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
+        <div className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
           Category:{" "}
           <p className="font-tiltneon text-lg text-gray-800 text-justify font-light px-2">
             - {clasification}
           </p>
-        </p>
+        </div>
 
         <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row ">
           Description:
@@ -84,12 +84,12 @@ const FirstView: React.FC<DetailProducts> = ({
         <p className="font-tiltneon text-lg text-gray-800 text-justify font-light">
           - {description}
         </p>
-        <p className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
+        <div className="font-tiltneon text-xl text-pink-950 font-normal flex flex-row">
           Price:{" "}
           <p className="font-tiltneon text-lg text-gray-800 text-justify font-light px-2">
             - ${price}
           </p>
-        </p>
+        </div>
 
         <div className="flex flex-col justify-start gap-3 items-start">
           <SelectButtons

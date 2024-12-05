@@ -1,6 +1,3 @@
-"use client";
-import { useState } from "react";
-
 interface SideBarProps {
   setStateAdmin: (arg: string) => void;
   setStateButtons: (arg: string) => void;

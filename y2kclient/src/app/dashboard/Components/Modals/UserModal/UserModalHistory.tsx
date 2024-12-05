@@ -18,11 +18,14 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
   setState,
 }) => {
   const [stateUser, setStateUser] = useState<any>("No hay user");
-  console.log(stateUser);
+  
 
 
   useEffect(() => {
     const getUser = async (userId: number) => {
+      if(userId === -1){
+        return;
+       }
       try {
         const user = await axios.get(`${Server}/user/${userId}`);
         const userData = user.data;

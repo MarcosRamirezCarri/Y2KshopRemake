@@ -5,8 +5,13 @@ import { BiTaskX } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { CartItem } from "@/helpers/Types";
 import TaskCard from "./TaskCard/TaskCard";
+import DestinyTaksModal from "../../Modals/TasksModal/DestinyTaskModal";
 
 const TaskList = () => {
+const [stateModal, setStateModal] = useState<boolean>(false);
+const [userIdModal, setUserIdModal] = useState<number>(-1);
+
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllCarts());
@@ -39,6 +44,13 @@ const countTasks = (tasks: CartItem[], state: string) => {
 
 const taskCount = countTasks(showTask, selectedState);
 
+const handleClick = (userId: number) =>{
+  setStateModal(!stateModal);
+  setUserIdModal(userId);
+}
+
+
+
 
   return (
     <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[9.5rem] w-[75%]">
@@ -70,12 +82,14 @@ const taskCount = countTasks(showTask, selectedState);
               productId={task.productId}
               quantity={task.quantity}
               lastUpdate={task.lastUpdate}
+              handleClick={handleClick}
             />
           ))
         : <div className="w-[100%] justify-center items-center flex flex-col">
         <p className="relative top-[10rem] text-2xl lg:text-3xl text-Lightblue-950 font-titilium font-semibold">It seems there are no pending tasks!</p>
         <BiTaskX className="relative top-[11rem] text-3xl lg:text-5xl text-Lightblue-950 font-titilium font-semibold"/>
       </div>}
+      <DestinyTaksModal state={stateModal} setState={setStateModal} userId={userIdModal} />
     </div>
   );
 };

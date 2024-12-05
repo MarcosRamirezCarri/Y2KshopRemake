@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/lib/hooks/hooks";
 import changeCartState from "@/lib/actions/CartActions/changeCartState";
 import { getAllCarts } from "@/lib/actions/AdminActions/getAllCarts";
 
-const TaskCard: React.FC<CartItem> = ({
+const TaskCard: React.FC<CartItem | any> = ({
   Product,
   productId,
   color,
@@ -13,6 +13,7 @@ const TaskCard: React.FC<CartItem> = ({
   userId,
   id,
   lastUpdate,
+  handleClick
 }) => {
   const dispatch = useAppDispatch();
 
@@ -43,7 +44,7 @@ const TaskCard: React.FC<CartItem> = ({
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-4 text-Lightblue-950">
         <p>Color: {color}</p>
         <p>Size: {size}</p>
-        <p>User Id: {userId}</p>
+        <button className="self-start decoration-Lightblue-200 transtition-all duration-150 underline hover:decoration-Lightblue-900" onClick={() =>handleClick(userId)}>Destiny</button>
       </div>
       <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-2 text-orange-950 ">
       <p className="text-base self-end font-medium p-2">Last Update: {lastUpdate}</p>
