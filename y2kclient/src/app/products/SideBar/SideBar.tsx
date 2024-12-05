@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { sortByCategory, sortBySize } from "@/lib/slices/productsReducer";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
-import {Product} from "@/helpers/Types";
+import { Product } from "@/helpers/Types";
 import SideBarFilters from "./SideBarFilters/SideBarFilters";
 import style from "./SideBar.module.css";
 import {
-  IoIosArrowDroprightCircle,
-  IoIosArrowDropleftCircle,
+  IoIosArrowDropdownCircle,
+  IoIosArrowDropupCircle,
 } from "react-icons/io";
 
 export default function SideBar() {
@@ -74,12 +74,17 @@ export default function SideBar() {
   return (
     <div>
       <div
-        className={`flex flex-col bg-gray-950 gap-2 p-2 top-[8rem] transition-all duration-300 z-[100] left-0 fixed self-start w-[40%] lg:w-[15%] h-[100vh] ${
-          statusBar ? "translate-x-0" : "translate-x-[-50vw]"
+        className={`flex flex-row bg-[#190a0a] gap-2 p-2 rounded-b-2xl top-[6rem] transition-all duration-300 z-[90] right-0 fixed self-start w-[40%]  ${
+          statusBar
+            ? "translate-y-0 visible blur-none"
+            : "translate-y-[-50vh] invisible blur-lg"
         } `}
       >
-        <button className="text-3xl h-[1%] relative text-gray-100 p-5" onClick={handleBar}>
-          <IoIosArrowDropleftCircle />
+        <button
+          className="text-3xl h-[1%] relative text-Lightblue-100 p-5"
+          onClick={handleBar}
+        >
+          <IoIosArrowDropupCircle />
         </button>
         <SideBarFilters
           handleFilter1={handleFilter1}
@@ -95,10 +100,10 @@ export default function SideBar() {
       {!statusBar ? (
         <div className={style.animate}>
           <button
-            className="text-5xl transition-all duration-100 text-gray-800 p-5"
+            className="text-5xl transition-all duration-100 text-Lightblue-800 p-5"
             onClick={handleBar}
           >
-            <IoIosArrowDroprightCircle />
+            <IoIosArrowDropdownCircle />
           </button>
         </div>
       ) : null}

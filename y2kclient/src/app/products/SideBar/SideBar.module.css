@@ -1,6 +1,7 @@
 .animate{
     padding: 1rem;
     position: fixed;
+    right: 5rem;
     top: 6rem;
     z-index: 999;
     animation: l9 1s infinite linear alternate;
@@ -24,13 +25,13 @@
 
 @keyframes l9 {
     0% {
-      transform: translateX(-10px);
+      transform: translateY(-10px);
     }
     50% {
-      transform: translateX(11px);
+      transform: translateY(11px);
     }
     100%{
-        transform: translateX(12px);
+        transform: translateY(12px);
     }
   }
   

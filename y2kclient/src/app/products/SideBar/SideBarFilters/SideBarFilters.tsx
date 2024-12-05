@@ -28,7 +28,7 @@ const SideBarFilters: React.FC<PropsFilters> = ({
   useEffect(() => {
     const applyAnimationDelay = (elements: NodeListOf<Element>) => {
       elements.forEach((element, index) => {
-        (element as HTMLElement).style.animationDelay = `${index * 0.1}s`;
+        (element as HTMLElement).style.animationDelay = `${index * 0.2}s`;
       });
     };
 
@@ -47,9 +47,9 @@ const SideBarFilters: React.FC<PropsFilters> = ({
     }
   }, [statusFilter1, statusFilter2]);
   return (
-    <div className="relative flex flex-col items-center gap-5">
+    <div className="relative flex flex-row items-center ">
       <div className="relative flex flex-col items-center p-2 gap-2 font-normal">
-      <p className="font-tiltneon py-2 text-lg lg:text-2xl text-Lightblue-50 ">Aplly Filters</p>
+     
         <button
           className={`underline bg-Lightblue-200 px-6 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-2xl text-Lightblue-950 ${
             statusFilter1
@@ -61,7 +61,7 @@ const SideBarFilters: React.FC<PropsFilters> = ({
           Categories
         </button>
         {statusFilter1 && (
-          <div className="relative flex flex-col gap-2" ref={categoryContainerRef}>
+          <div className="absolute top-[4rem] flex flex-col gap-2" ref={categoryContainerRef}>
             <div
               className="relative caret-Lightblue-200 p-2 bg-Lightblue-300 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-Lightblue-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-Lightblue-200"
               onClick={() => handleFilterCategory("all")}
@@ -91,10 +91,10 @@ const SideBarFilters: React.FC<PropsFilters> = ({
           } hover:decoration-Lightblue-900 transition-colors duration-200`}
           onClick={handleFilter2}
         >
-          Select Size
+          Sizes
         </button>
         {statusFilter2 && (
-          <div className="relative flex flex-col gap-2" ref={sizeContainerRef} >
+          <div className="absolute top-[4rem] flex flex-col gap-2" ref={sizeContainerRef} >
             <div
               className="relative caret-Lightblue-200 p-2 bg-Lightblue-300 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-Lightblue-950 font-normal transition-all duration-300 after:rounded hover:scale-105 hover:ring-2 hover:ring-Lightblue-200"
               onClick={() => handleSizeCategory("all")}

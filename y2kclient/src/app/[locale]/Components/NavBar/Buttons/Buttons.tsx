@@ -31,15 +31,15 @@ const ButtonsNavBar = () => {
 
   return (
     <div>
-      <div className="gap-6 lg:gap-[5rem] flex flex-row">
-        {user.admin === true ? (
+      <div className="gap-6    lg:gap-[5rem] flex flex-row">
+        {user?.admin === true ? (
           <Link
           className="flex flex-col items-center justify-center"
             onMouseLeave={() => setStateButton("none dash")}
             onMouseEnter={() => setStateButton("dash")}
             href={{ pathname: "/dashboard" }}
           >
-            <button className=" flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
               <BsArchiveFill />
             </button>
             <span
@@ -61,7 +61,7 @@ const ButtonsNavBar = () => {
           onMouseEnter={() => setStateButton("cart")}
           href={{ pathname: "/cart" }}
         >
-          <button className="flex flex-col items-center justify-center font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+          <button className="flex flex-col items-center justify-center font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
             <FaCartShopping />
           </button>
 
@@ -82,7 +82,7 @@ const ButtonsNavBar = () => {
           onMouseLeave={() => setStateButton("none prod")}
           href={{ pathname: "/products" }}
         >
-          <button className="flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+          <button className="flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
             <FaBagShopping />
           </button>
           <span
@@ -103,7 +103,7 @@ const ButtonsNavBar = () => {
             onMouseLeave={() => setStateButton("none acc")}
             href={{ pathname: "/account" }}
           >
-            <button className=" flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
               <FaIdBadge />
             </button>
             <span
@@ -125,7 +125,7 @@ const ButtonsNavBar = () => {
             onClick={() => setModal(!modal)}
           >
             {" "}
-            <button className=" flex flex-col font-titilium text-3xl lg:text-5xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
               <FaUserXmark />
             </button>{" "}
             <span className="absolute text-md lg:text-[1rem] visible  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300  translate-y-20 lg:-translate-y-1 -translate-x-2">

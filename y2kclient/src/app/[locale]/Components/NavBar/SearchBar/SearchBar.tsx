@@ -39,7 +39,7 @@ export default function SearchBar() {
   }, [input]);
 if(path === '/products')
   return (
-    <div className="flex flex-col absolute top-[90%] left-[50%] lg:left-0 lg:top-3 lg:translate-x-0 lg:translate-y-0 translate-x-[-50%] translate-y-[-30%] self-center lg:relative w-[70%] lg:w-[40%] h-[80%] ">
+    <div className="flex flex-col bg-[#190a0a]  px-4 py-2 rounded-br-2xl rounded-bl-2xl absolute left-[50%] lg:left-0 lg:top-3 lg:translate-x-0 lg:translate-y-0 translate-x-[-50%] translate-y-[-30%] self-center lg:relative lg:w-[40%] ">
       <form className="grid p-2 rounded-xl grid-cols-3 bg-pink-100 gap-2" onSubmit={onSubmitSearch}>
         <input
           className="bg-pink-50 w-full font-tiltneon text-lg col-span-2 rounded-xl ring-2 ring-pink-200 focus:outline-pink-300"

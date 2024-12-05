@@ -4,8 +4,10 @@ import SearchBar from "./SearchBar/SearchBar";
 import { BsArchiveFill } from "react-icons/bs";
 
 export default function Navbar() {
+
   return (
-    <div className="flex flex-row w-full px-4 lg:px-8 py-10 lg:py-8 h-32 bg-gray-950 fixed items-center justify-between z-[100]">
+    <div className="flex flex-row w-full p-8 bg-[#190a0a] h-24 fixed items-center justify-between z-[100]">
+     
       <div className="flex flex-row items-centes justify-center gap-3">
       <Link
         className="flex flex-col items-center justify-center"
