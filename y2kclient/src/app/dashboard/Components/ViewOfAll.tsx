@@ -7,7 +7,7 @@ import UsersTable from "./Views/UsersViews/UsersTable";
 import TaskList from "./Views/TasksViews/TaskList";
 import { redirect } from "next/navigation";
 import SideBarDashboard from "./SideBarDashboard";
-import ProductsMetrics from "./Views/ProductsView/ProductsMetrics";
+import ProductsControl from "./Views/ProductsView/ProductsMetrics";
 import CreateModal from "./Modals/ProductModal/CreateProduct/CreateProduct";
 import DeleteModal from "./Modals/ProductModal/DeleteProduct/DeleteModal";
 import ModifyProductModal from "./Modals/ProductModal/ModifyProduct/ModifyProductModal";
@@ -50,7 +50,7 @@ const ViewOfAll = () => {
       />
       {stateButtons === "Products" ? (
         <div>
-          <ProductsMetrics />
+          <ProductsControl />
           <CreateModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <DeleteModal setStateAdmin={setStateAdmin} stateAdmin={stateAdmin} />
           <ModifyProductModal
