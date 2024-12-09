@@ -26,10 +26,6 @@ const ViewOfAll = () => {
     if (token !== "undefined" || token !== null) {
       dispatch(setUserFromId(userId));
     }
-    const fetchData = async () => {
-      await dispatch(getAllProducts());
-    };
-    fetchData();
   }, [dispatch]);
 
   useEffect(() => {
