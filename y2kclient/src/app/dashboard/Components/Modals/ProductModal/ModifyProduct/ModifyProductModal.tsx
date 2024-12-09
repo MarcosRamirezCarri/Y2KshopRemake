@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/cloudinarySet";
@@ -8,27 +8,22 @@ import { Product } from "@/helpers/Types";
 import modProduct from "@/lib/actions/AdminActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
-import MiniCard from "./MiniCard/Minicard";
 
 interface ModifyProductModalProps {
   setStateAdmin: (arg: string) => void;
   stateAdmin: string;
+  setStateProduct: (arg: Product) => void;
+  stateProduct: Product;
 }
 
 const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
   setStateAdmin,
   stateAdmin,
+  stateProduct,
+  setStateProduct,
 }) => {
+  const dispatch = useAppDispatch();
   const [stateModal, setStateModal] = useState<boolean>(false);
-  const [stateProduct, setStateProduct] = useState<Product>({
-    id: 0,
-    name: "",
-    images: [],
-    price: 0,
-    colors: [],
-    clasification: "",
-    description: "",
-  });
 
   const [errors, setErrors] = useState({
     name: "",
@@ -113,8 +108,8 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
     }
   };
 
-  const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.products.product);
+  
+  if(stateProduct)
   return (
     <div
       className={`fixed inset-0 flex z-[101] items-center  justify-center bg-gray-900/[0.4] ${
@@ -122,7 +117,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
       }`}
     >
       <div
-        className={`w-[60%] font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
+        className={`w-[60%] font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg transition-all duration-300 ${
           stateAdmin === "ModifyProduct"
             ? "scale-100 opacity-100"
             : "scale-125 opacity-0"
@@ -131,25 +126,6 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
         <p className="text-2xl flex justify-center font-semibold col-span-2">
           Modify any Product
         </p>
-        <div className=" flex flex-col gap-2">
-          <p className="text-xl flex justify-center font-medium">
-            Select the product{" "}
-          </p>
-          <div className="flex items-center justify-center flex-row overflow-y-hidden  ">
-            {products.length > 0 ? (
-              products.map((prod) => (
-                <MiniCard
-                  key={prod.id}
-                  product={prod}
-                  setStateProduct={setStateProduct}
-                  stateProduct={stateProduct}
-                />
-              ))
-            ) : (
-              <p>There are no products</p>
-            )}
-          </div>
-        </div>
         <div
           className={`flex flex-col items-center ${
             stateProduct.id === 0 ? "blur-sm " : ""
@@ -165,7 +141,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
               Images:
             </p>
             <div className="flex justify-center  flex-row gap-3">
-              {stateProduct.images.map((image, index) => (
+              {stateProduct?.images.map((image, index) => (
                 <div
                   key={index}
                   className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 flex flex-col hover:scale-105 transition-all duration-200 hover:ring-pink-950 rounded"

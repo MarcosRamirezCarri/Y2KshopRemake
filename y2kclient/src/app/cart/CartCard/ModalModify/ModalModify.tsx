@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import modifyCart from "@/lib/actions/CartActions/modifyCart";
 import Swal from "sweetalert2";
-import Product from "@/helpers/Types";
+import { Product } from "@/helpers/Types";
 
 interface ModalModifyProps {
   modal: boolean;

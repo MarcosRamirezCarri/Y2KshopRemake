@@ -1,6 +1,7 @@
 import { Product } from "@/helpers/Types";
 import Image from "next/image";
 
+
 const CardProductControl: React.FC<Product> = ({
   name,
   id,
@@ -10,7 +11,7 @@ const CardProductControl: React.FC<Product> = ({
   clasification,
 }) => {
   return (
-    <div className="p-5 rounded-md bg-Lightblue-200 z-5 select-none grid grid-cols-3 transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-Lightblue-300">
+    <div className="p-4 col-span-1 rounded-md bg-Lightblue-200 select-none grid grid-cols-3 transition-all duration-300 hover:ring-2 hover:ring-Lightblue-300">
       <div className="flex flex-col gap-1">
         <p className="font-tiltneon text-xl text-Lightblue-900 font-semibold">
           {name}
@@ -29,7 +30,9 @@ const CardProductControl: React.FC<Product> = ({
         </p>
       </div>
       <div className={`grid grid-cols-[${colors.length}] gap-1`}>
-        <p className={`font-tiltneon col-span-2 text-lg text-Lightblue-900 font-semibold`}>
+        <p
+          className={`font-tiltneon col-span-2 text-lg text-Lightblue-900 font-semibold`}
+        >
           Colors and Sizes:
         </p>
         {colors.map((color, index) => (
@@ -43,17 +46,20 @@ const CardProductControl: React.FC<Product> = ({
                   key={idx}
                   className="font-tiltneon text-sm text-Lightblue-700"
                 >
-                  Size: {size.size}, Quantity: {size.quantity}
+                  {size.size}: {size.quantity}
                 </li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-      <div>
-        <p className="font-tiltneon text-xl text-Lightblue-900 font-semibold">
-          ${price}
-        </p>
+      <div className="flex flex-col gap-2 items-center justify-center">
+        <button className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">
+          Modify
+        </button>
+        <button className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">
+          Delete
+        </button>
       </div>
     </div>
   );
