@@ -1,5 +1,5 @@
-import { AccountType } from "@/helpers/Types";
-import { Server } from "@/helpers/server";
+import { AccountType } from "@/helpers/types/Types";
+import { Server } from "@/helpers/services/server";
 import { BsFillCartXFill } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";

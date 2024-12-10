@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AccountType } from "@/helpers/Types";
-import { CartItem } from "@/helpers/Types";
+import { AccountType } from "@/helpers/types/Types";
+import { CartItem } from "@/helpers/types/Types";
 
 
 

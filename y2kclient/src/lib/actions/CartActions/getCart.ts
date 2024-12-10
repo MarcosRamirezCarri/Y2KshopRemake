@@ -1,6 +1,6 @@
 import { saveToCart } from "@/lib/slices/cartReducer";
 import axios from "axios";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import { Dispatch } from "@reduxjs/toolkit";
 
 const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {

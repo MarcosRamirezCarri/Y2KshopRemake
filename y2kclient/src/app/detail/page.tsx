@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import fetchProduct from "@/lib/actions/ProductActions/getDetail";
-import { Product } from "@/helpers/Types";
+import { Product } from "@/helpers/types/Types";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
 import FirstView from "./detailComponents/Firstiew/FirstView";
 import SecondView from "./detailComponents/SecondView/SecondView";

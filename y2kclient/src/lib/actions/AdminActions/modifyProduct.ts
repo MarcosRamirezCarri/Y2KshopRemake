@@ -1,6 +1,6 @@
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import axios from "axios";
-import {Product} from "@/helpers/Types";
+import {Product} from "@/helpers/types/Types";
 import { modifyProduct } from "@/lib/slices/productsReducer";
 import { Dispatch } from "@reduxjs/toolkit";
 

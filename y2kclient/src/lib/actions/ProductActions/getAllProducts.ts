@@ -1,5 +1,5 @@
 import { setProducts } from "../../slices/productsReducer";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 

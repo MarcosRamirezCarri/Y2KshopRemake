@@ -1,4 +1,4 @@
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setAdminUser } from "@/lib/slices/adminReducer";

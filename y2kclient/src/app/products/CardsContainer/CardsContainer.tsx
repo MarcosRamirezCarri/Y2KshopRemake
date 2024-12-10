@@ -2,7 +2,7 @@
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useEffect } from "react";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
-import CardProductComplete from "./Cards/CardProduct";
+import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
 
 export default function CardsContainer() {
   const dispatch = useAppDispatch();
@@ -15,19 +15,14 @@ export default function CardsContainer() {
     fetchData();
   }, []);
 
-  console.log(stateProducts)
+const place = "products"
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 relative gap-[2rem] top-[10rem] w-[90%] justify-items-center">
       {stateProducts.map((a, index) => (
         <div key={index}>
           <CardProductComplete
-            id={a.id}
-            name={a.name}
-            description={a.description}
-            images={a.images}
-            clasification={a.clasification}
-            price={a.price}
-            colors={a.colors}
+           product={a}
+           place={place}
           />
         </div>
       ))}

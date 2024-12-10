@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem } from "@/helpers/Types";
+import { CartItem } from "@/helpers/types/Types";
 
 
 

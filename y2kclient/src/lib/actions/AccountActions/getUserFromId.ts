@@ -1,6 +1,6 @@
 import { setFromId } from "@/lib/slices/userReducer";
 import axios from "axios";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import { Dispatch } from "@reduxjs/toolkit";
 
 

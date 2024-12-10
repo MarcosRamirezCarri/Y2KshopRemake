@@ -1,4 +1,4 @@
-import { History } from "@/helpers/Types";
+import { History } from "@/helpers/types/Types";
 import Image from "next/image";
 
 const HistoryCard: React.FC<History> = ({

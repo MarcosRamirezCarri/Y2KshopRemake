@@ -1,5 +1,5 @@
-import {Product} from "@/helpers/Types";
-import validateColors from "@/helpers/Validators/validateColors";
+import {Product} from "@/helpers/types/Types";
+import validateColors from "@/helpers/validators/validateColors";
 import Swal from "sweetalert2";
 
 interface ModalColorsProps {
@@ -111,7 +111,7 @@ const ModalColors: React.FC<ModalColorsProps> = ({
       } justify-center bg-gray-900/[0.4] z-[105] fixed inset-0 flex `}
     >
       <div
-        className={`w-[70%] relative place-self-center font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg transition-all duration-150 ${
+        className={`w-[60%] relative place-self-center font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg transition-all duration-150 ${
           stateModal ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >

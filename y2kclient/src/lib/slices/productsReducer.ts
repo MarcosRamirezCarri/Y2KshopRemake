@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {Product} from "@/helpers/Types";
+import {Product} from "@/helpers/types/Types";
 
 interface ProductState {
   isLoading: boolean;

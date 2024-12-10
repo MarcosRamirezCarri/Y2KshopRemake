@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FlyerType } from "@/helpers/Types";
+import { FlyerType } from "@/helpers/types/Types";
 
 interface FlyerState{
     allFlyers: FlyerType[];

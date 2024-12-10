@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/lib/hooks/hooks";
 import changeCartState from "@/lib/actions/CartActions/changeCartState";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import Swal from "sweetalert2";
-import { History } from "@/helpers/Types";
+import { History } from "@/helpers/types/Types";
 
 const CardHistory: React.FC<History> = ({
   name,

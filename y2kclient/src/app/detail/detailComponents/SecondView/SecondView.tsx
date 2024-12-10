@@ -1,7 +1,7 @@
 'use client'
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Product} from '@/helpers/Types'
+import {Product} from '@/helpers/types/Types'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'

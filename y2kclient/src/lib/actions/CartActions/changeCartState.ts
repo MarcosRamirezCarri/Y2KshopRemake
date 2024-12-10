@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
-import { formatDate } from "@/helpers/formatDate";
-import { Server } from "@/helpers/server";
+import { formatDate } from "@/helpers/functions/formatDate";
+import { Server } from "@/helpers/services/server";
 
 
 const changeCartState =

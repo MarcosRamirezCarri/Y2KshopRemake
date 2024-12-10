@@ -1,11 +1,9 @@
 interface SideBarProps {
-  setStateAdmin: (arg: string) => void;
   setStateButtons: (arg: string) => void;
   stateButtons: string;
 }
 
 const SideBarDashboard: React.FC<SideBarProps> = ({
-  setStateAdmin,
   setStateButtons,
   stateButtons,
 }) => {
@@ -32,33 +30,6 @@ const SideBarDashboard: React.FC<SideBarProps> = ({
       >
         Products
       </button>
-
-      <div
-        className={`flex flex-col gap-2    ${
-          stateButtons === "Products"
-            ? "visible transition-all relative translate-x-[0vw] duration-500 opacity-100"
-            : "collapse duration-0 transition-all scale-0 opacity-0 absolute"
-        }`}
-      >
-        <button
-          onClick={() => setStateAdmin("CreateProduct")}
-          className="bg-orange-400/[0.9] px-2 py-1 rounded "
-        >
-          Create Product
-        </button>
-        <button
-          onClick={() => setStateAdmin("ModifyProduct")}
-          className="bg-orange-400/[0.9] px-2 py-1 rounded "
-        >
-          Modify Product
-        </button>
-        <button
-          onClick={() => setStateAdmin("DeleteProduct")}
-          className="bg-orange-400/[0.9] px-2 py-1 rounded "
-        >
-          Delete Product
-        </button>
-      </div>
 
       <button
         onClick={() => setStateButtons("Tasks")}

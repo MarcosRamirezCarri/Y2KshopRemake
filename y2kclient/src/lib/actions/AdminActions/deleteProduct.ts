@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 import { deleteProd } from "@/lib/slices/productsReducer";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ const deleteProduct = (idProduct: number) => async (dispatch: Dispatch) => {
 
     if (deleted == 204) {
       dispatch(deleteProd(idProduct));
-      return { succes: true };
+      return { success: true };
     }
   } catch (error) {
     if (error instanceof Error) {

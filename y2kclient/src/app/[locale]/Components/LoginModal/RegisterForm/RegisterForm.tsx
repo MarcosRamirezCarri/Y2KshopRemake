@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ValidateRegister } from "@/helpers/Validators/validatorRegister";
-import { RegisterData } from "@/helpers/Validators/validatorRegister";
+import { ValidateRegister } from "@/helpers/validators/validatorRegister";
+import { RegisterData } from "@/helpers/validators/validatorRegister";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import registerFunction from "@/lib/actions/AccountActions/registerFunction";
 import Swal from "sweetalert2";

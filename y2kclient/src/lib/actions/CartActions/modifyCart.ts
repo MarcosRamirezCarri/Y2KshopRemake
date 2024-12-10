@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { modifyCartItem } from "@/lib/slices/cartReducer";
 import axios from "axios";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 
 const modifyCart =
   (color: string, size: string, itemId: number, userId: number) =>

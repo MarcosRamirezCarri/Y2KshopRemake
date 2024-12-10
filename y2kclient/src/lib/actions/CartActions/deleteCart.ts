@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { deleteFromCart } from "@/lib/slices/cartReducer";
 import axios from "axios";
-import { Server } from "@/helpers/server";
+import { Server } from "@/helpers/services/server";
 
 const deleteCartItem =
   (userId: number, id: number) => async(dispatch: Dispatch) => {

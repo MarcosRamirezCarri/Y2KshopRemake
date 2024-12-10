@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { uploadImage } from "@/helpers/cloudinarySet";
+import { uploadImage } from "@/helpers/services/cloudinarySet";
 
 const AddFlyerButton = () => {
   const [flyers, setFlyers] = useState<string[]>([]);

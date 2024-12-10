@@ -1,6 +1,6 @@
 import { saveToCart } from "@/lib/slices/cartReducer";
-import { Server } from "@/helpers/server";
-import { formatDate } from "@/helpers/formatDate";
+import { Server } from "@/helpers/services/server";
+import { formatDate } from "@/helpers/functions/formatDate";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 

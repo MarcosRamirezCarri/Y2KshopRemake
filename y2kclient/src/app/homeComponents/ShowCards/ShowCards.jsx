@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import AOS from "aos";
 import '../../../../node_modules/aos/dist/aos.css'
-import CardProduct from "./Card/Card";
+import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { useEffect } from "react";
 
@@ -19,6 +19,7 @@ export default function ShowCards() {
     AOS.init({duration: 1000})
   }, [dispatch]);
 
+  const place = "home"
   const all = [];
   if (Array.isArray(products) && products.length > 0) all.push(...products);
 
@@ -32,11 +33,9 @@ export default function ShowCards() {
       ) : null}
       {all.map((item, index) => (
         <div data-aos='fade-up' key={index}>
-          <CardProduct
-            name={item.name}
-            images={item.images}
-            price={item.price}
-            id={item.id}
+          <CardProductComplete
+            product={item}
+            place={place}
           />
         </div>
       ))}
