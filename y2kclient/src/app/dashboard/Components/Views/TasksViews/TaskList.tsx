@@ -3,7 +3,7 @@ import { setSelectedState } from "@/lib/slices/adminReducer";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { BiTaskX } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import { CartItem } from "@/helpers/types/Types";
+import { CartItem } from "@/helpers/types/CartItem";
 import TaskCard from "./TaskCard/TaskCard";
 import DestinyTaksModal from "../../Modals/TasksModal/DestinyTaskModal";
 

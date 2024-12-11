@@ -1,10 +1,9 @@
-import { AccountType } from "@/helpers/types/Types";
+import { AccountType } from "@/helpers/types/Account";
 import { Server } from "@/helpers/services/server";
 import { BsFillCartXFill } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-import HistoryCard from "./HistoryCard/HistoryCard";
+import CardHistory from "@/app/[locale]/Components/CardHistory/CardHistory";
 
 interface HistoryModalProps {
   state: boolean;
@@ -18,14 +17,12 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
   setState,
 }) => {
   const [stateUser, setStateUser] = useState<any>("No hay user");
-  
-
 
   useEffect(() => {
     const getUser = async (userId: number) => {
-      if(userId === -1){
+      if (userId === -1) {
         return;
-       }
+      }
       try {
         const user = await axios.get(`${Server}/user/${userId}`);
         const userData = user.data;
@@ -36,6 +33,8 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
     };
     getUser(userId);
   }, [userId]);
+
+  const place = "AdminHistory";
 
   return (
     <div
@@ -52,29 +51,23 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
       >
         {stateUser !== "No hay user" ? (
           stateUser.history.length > 0 ? (
-            stateUser?.history.map((his: any) => (
-              <HistoryCard
-              lastUpdate={his.lastUpdate}
-                itemId={his.itemId}
-                name={his.name}
-                color={his.color}
-                size={his.size}
-                images={his.images}
-                productId={his.productId}
-                quantity={his.quantity}
-                state={his.state}
-              />
+            stateUser?.history.map((his: any, index: any) => (
+              <CardHistory key={index} history={his} place={place} />
             ))
           ) : (
             <div className="flex flex-col p-5 col-span-2 justify-center items-center">
-              <p className="relative text-2xl text-Lightblue-950 font-titilium font-semibold">This User doesnt have any purchases!</p>
-              <BsFillCartXFill className="relative text-5xl  text-Lightblue-950 font-titilium font-semibold"/>
+              <p className="relative text-2xl text-Lightblue-950 font-titilium font-semibold">
+                This User doesnt have any purchases!
+              </p>
+              <BsFillCartXFill className="relative text-5xl  text-Lightblue-950 font-titilium font-semibold" />
             </div>
           )
         ) : (
           <div className="flex flex-col p-5 col-span-2 justify-center items-center">
-          <p className="relative text-2xl text-Lightblue-950 font-titilium font-semibold">An error occurred!</p>
-        </div>
+            <p className="relative text-2xl text-Lightblue-950 font-titilium font-semibold">
+              An error occurred!
+            </p>
+          </div>
         )}
       </div>
     </div>

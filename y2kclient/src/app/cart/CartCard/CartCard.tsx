@@ -3,9 +3,9 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
-import changeCartState  from "@/lib/actions/CartActions/changeCartState";
+import changeCartState from "@/lib/actions/CartActions/changeCartState";
 import getCartFromId from "@/lib/actions/CartActions/getCart";
-import {Product} from "@/helpers/types/Types";
+import { Product } from "@/helpers/types/Types";
 import ModalModify from "./ModalModify/ModalModify";
 
 interface CartProduct {
@@ -28,7 +28,7 @@ const CartCard: React.FC<CartProduct> = ({
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
 
-  const state = "pending"
+  const state = "pending";
 
   const handleBuy = () => {
     Swal.fire({
@@ -40,15 +40,15 @@ const CartCard: React.FC<CartProduct> = ({
       denyButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(changeCartState(userId, id, state)).then((response: any) =>{
-          if(response.success){
+        dispatch(changeCartState(userId, id, state)).then((response: any) => {
+          if (response.success) {
             dispatch(getCartFromId(userId));
             Swal.fire(
               `Buyed for ${Product.price}`,
               "Redirects to Pay Method",
               "success"
             );
-          }else{
+          } else {
             Swal.fire("An error Occurried in the purchase", "", "info");
           }
         });
@@ -115,7 +115,10 @@ const CartCard: React.FC<CartProduct> = ({
             ${Product.price}
           </p>
           <div className="flex flex-row gap-2 lg:hidden">
-            <button onClick={handleBuy} className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+            <button
+              onClick={handleBuy}
+              className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem] font-tiltneon text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
+            >
               Buy
             </button>
             <button
@@ -134,7 +137,10 @@ const CartCard: React.FC<CartProduct> = ({
         </div>
 
         <div className="lg:col-span-2  gap-3 hidden lg:flex lg:flex-col">
-          <button onClick={handleBuy} className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200">
+          <button
+            onClick={handleBuy}
+            className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] font-tiltneon text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
+          >
             Buy
           </button>
           <button

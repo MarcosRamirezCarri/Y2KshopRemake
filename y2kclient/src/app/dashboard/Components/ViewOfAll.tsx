@@ -6,6 +6,7 @@ import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
 import TaskList from "./Views/TasksViews/TaskList";
 import SideBarDashboard from "./SideBarDashboard";
+import FlyersConfig from "./Views/FlyersView/FlyersConfig";
 import ProductsControl from "./Views/ProductsView/ProductsMetrics";
 
 const ViewOfAll = () => {
@@ -40,6 +41,7 @@ const ViewOfAll = () => {
       {stateButtons === "Products" ? <ProductsControl /> : null}
       {stateButtons === "Users" ? <UsersTable /> : null}
       {stateButtons === "Tasks" ? <TaskList /> : null}
+      {stateButtons === "Flyers" ? <FlyersConfig /> : null}
     </div>
   );
 };

@@ -56,10 +56,10 @@ const CardProductControl: React.FC<ControlProps> = ({
         ))}
       </div>
       <div className="flex flex-col gap-2 items-center justify-center">
-        <button onClick={() => handleModify(product)} className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">
+        <button onClick={() => handleModify(product)} className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-500">
           Modify
         </button>
-        <button onClick={() => handleDelete(product.id, product.name)} className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">
+        <button onClick={() => handleDelete(product.id, product.name)} className="relative bg-orange-300 px-4 py-2 w-[90%] rounded-xl font-tiltneon text-lg lg:text-xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-500">
           Delete
         </button>
       </div>

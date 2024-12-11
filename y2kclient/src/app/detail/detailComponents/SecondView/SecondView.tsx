@@ -1,13 +1,13 @@
-'use client'
+"use client";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {Product} from '@/helpers/types/Types'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation'
-import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Product } from "@/helpers/types/Types";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import CardProduct from '../../../homeComponents/ShowCards/Card/Card'
+import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
 import { useEffect, useState } from "react";
 
 interface PropOfRecomned {
@@ -15,7 +15,7 @@ interface PropOfRecomned {
   clasification: string;
 }
 
-const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
+const SecondView: React.FC<PropOfRecomned> = ({ clasification, id }) => {
   const products = useAppSelector((state) => state.products.product);
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useAppDispatch();
@@ -29,14 +29,16 @@ const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768 ? true : false); 
+      setIsMobile(window.innerWidth <= 768 ? true : false);
     };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
+
+  const place = "Related";
 
   let AllProducts: Product[] = [];
   if (Array.isArray(products) && products.length > 0) {
@@ -44,35 +46,32 @@ const SecondView: React.FC<PropOfRecomned> = ({ clasification, id,  }) => {
       (product) => product.clasification === clasification && product.id !== id
     );
   }
-if (AllProducts.length > 0){
-  return (
-    <div className="flex flex-col items-left gap-5 m-5 w-[100%]">
-      <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">Related Products</p>
-      <div className="grid grid-cols-3 w-[90%] lg:w-[80%] gap-3 ">
-        <Swiper   slidesPerView={isMobile ? 1 : 3}
-        navigation={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination, Navigation]}
-        className="col-span-3 w-[95%] border-2  rounded-md border-Lightblue-800">
-        {AllProducts.map((related, index) => (
-          <SwiperSlide className=" p-5 "   key={index}>
-            <CardProduct
-            
-              id={related.id}
-              name={related.name}
-              images={related.images}
-            />
-          </SwiperSlide>
-        ))}
-        </Swiper>
-      
+  if (AllProducts.length > 0) {
+    return (
+      <div className="flex flex-col items-left gap-5 m-5 w-[100%]">
+        <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">
+          Related Products
+        </p>
+        <div className="grid grid-cols-3 w-[90%] lg:w-[80%] gap-3 ">
+          <Swiper
+            slidesPerView={isMobile ? 1 : 3}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination, Navigation]}
+            className="col-span-3 w-[95%] border-2  rounded-md border-Lightblue-800"
+          >
+            {AllProducts.map((related, index) => (
+              <SwiperSlide className=" p-5 " key={index}>
+                <CardProductComplete product={related} place={place} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-    </div>
-  );
-}
- 
+    );
+  }
 };
 
 export default SecondView;

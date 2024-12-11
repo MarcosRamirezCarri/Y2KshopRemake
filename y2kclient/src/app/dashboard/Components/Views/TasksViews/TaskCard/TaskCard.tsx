@@ -1,4 +1,4 @@
-import { CartItem } from "@/helpers/types/Types";
+import { CartItem } from "@/helpers/types/CartItem";
 import Image from "next/image";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import changeCartState from "@/lib/actions/CartActions/changeCartState";
@@ -27,7 +27,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
  
 
   return (
-    <div className="bg-Lightblue-200 ring-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
+    <div className="bg-Lightblue-200 ring-2 ring-Lightblue-300 rounded-md grid grid-cols-3">
       <div className="flex flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
        
         <Image

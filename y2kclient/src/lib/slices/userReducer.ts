@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AccountType } from "@/helpers/types/Types";
+import { AccountType } from "@/helpers/types/Account";
 
 interface UserState {
   status: string;
