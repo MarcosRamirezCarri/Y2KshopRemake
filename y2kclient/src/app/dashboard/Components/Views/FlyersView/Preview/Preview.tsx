@@ -24,12 +24,12 @@ const PreviewFlyers = () => {
           <SwiperSlide  key={index}>
             <Image
               src={mock.img}
-              className="h-[100%] z-[1] w-[100%]"
+              className="h-[100%] w-[100%]"
               width={1980}
               height={1800}
               alt="PhCarousel"
             />
-            <p className="text-orange-500 z-[99] font-medium text-5xl">{mock.name}</p>
+            <p className="text-orange-500  font-medium text-5xl">{mock.name}</p>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -3,4 +3,5 @@ export interface FlyerType{
     type: string;
     name: string;
     image: string;
+    status: boolean
   }
