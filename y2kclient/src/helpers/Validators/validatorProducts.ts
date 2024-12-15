@@ -1,4 +1,4 @@
-import Product from "../types/Types";
+import {Product} from "../types/Types";
 
 const validateProduct = (product: Product) => {
     const newErrors = {
