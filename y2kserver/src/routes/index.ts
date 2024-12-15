@@ -44,6 +44,8 @@ router.put("/cart/update", cartRoutes.addToHistoryItem);
 
 router.put("/user", userRoutes.putUser);
 
+router.put("/flyer/:id", flyerRoutes.putFlyer)
+
 router.delete("/cart/:userId/remove/:itemId", cartRoutes.deleteCartItem);
 
 router.delete("/product/delete/:idProduct", productRoutes.deleteProduct);

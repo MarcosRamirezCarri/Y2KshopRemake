@@ -2,7 +2,7 @@ import { Response, Request } from "express";
 import FlyerModel from "../../models/Flyers";
 
 export const PostFlyer = (req: Request, res: Response) => {
-  const { name, image } = req.body;
+  const {  name, image, type, status } = req.body;
 
   if (typeof name !== "string" || name.trim() === "") {
     return res
@@ -18,6 +18,8 @@ export const PostFlyer = (req: Request, res: Response) => {
     const Flyer = FlyerModel.create({
       name,
       image,
+      type,
+      status
     });
     res.status(201).json({ Flyer });
   } catch (error: any) {

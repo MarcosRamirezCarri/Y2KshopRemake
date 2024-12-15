@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { usePathname } from "next/navigation";
-import setSearchBar from "@/lib/actions/SearchBar/searchFunction";
+import setSearchBar from "@/lib/actions/ProductActions/searchFunction";
 
 interface Recomended {
   name: string;

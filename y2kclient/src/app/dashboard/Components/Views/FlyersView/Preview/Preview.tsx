@@ -1,13 +1,15 @@
 import { useAppSelector } from "@/lib/hooks/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import mockCarousel from "@/app/[locale]/Mocks/mock";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 
 const PreviewFlyers = () => {
+
+
   const flyers = useAppSelector((state) => state.flyers.allFlyers);
+
   return (
     <div>
       <Swiper
@@ -18,18 +20,17 @@ const PreviewFlyers = () => {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Navigation]}
-        className="h-80 w-[100%]"
+        className="h-80 "
       >
-        {mockCarousel.map((mock, index) => (
+        {flyers.map((fly, index) => (
           <SwiperSlide  key={index}>
             <Image
-              src={mock.img}
+              src={fly.image}
               className="h-[100%] w-[100%]"
-              width={1980}
-              height={1800}
+              width={980}
+              height={800}
               alt="PhCarousel"
             />
-            <p className="text-orange-500  font-medium text-5xl">{mock.name}</p>
           </SwiperSlide>
         ))}
       </Swiper>

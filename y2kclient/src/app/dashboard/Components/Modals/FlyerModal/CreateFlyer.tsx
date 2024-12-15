@@ -16,9 +16,9 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
   const [flyers, setFlyers] = useState<FlyerType>({
     image: "",
     name: "",
-    id: 0,
     type: "",
     status: true,
+    id: 0,
   });
   const [error, setError] = useState({
     name: "",
@@ -26,7 +26,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
     image: "",
   });
 
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [uploading, setUploading] = useState<boolean>(false);
 
@@ -54,10 +54,7 @@ const dispatch = useAppDispatch();
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    console.log(name, value);
     if (value === "text") {
-      console.log("s eingresa");
-
       const newImages = { ...flyers };
       newImages.image = "";
       setFlyers(newImages);
@@ -67,32 +64,42 @@ const dispatch = useAppDispatch();
   };
 
   const handleCreate = () => {
-    const validationErrors = validateFlyer(flyers);
-    if (Object.keys(validationErrors).length > 0) {
+    const validationErrors: any = validateFlyer(flyers);
+
+    const hasErrors: boolean = Object.values(validationErrors).some((error) => {
+      if (Array.isArray(error)) {
+        return error.some((subError) => subError !== "");
+      }
+      return error !== "";
+    });
+    if (hasErrors) {
       setError(validationErrors);
       return;
-    }else{
-      dispatch(createFlyer(flyers)).then((response: any) =>{
-        if (response.success){
-          Swal.fire("Flyer Created!", "Enable him in the flyers section!", "success");
+    } else {
+      dispatch(createFlyer(flyers)).then((response: any) => {
+        if (response.success) {
+          console.log("se crea");
+          Swal.fire(
+            "Flyer Created!",
+            "Enable him in the flyers section!",
+            "success"
+          );
           setFlyers({
             image: "",
             name: "",
             id: 0,
             type: "",
             status: true,
-          })
+          });
           setError({
             name: "",
             type: "",
             image: "",
           });
-          setState(!state)
+          setState(!state);
         }
-      })
+      });
     }
-
-    
   };
   return (
     <div
@@ -161,7 +168,7 @@ const dispatch = useAppDispatch();
             height={400}
             src={flyers.image}
             alt="Uploaded"
-            className="w-20 h-20 object-cover mb-2"
+            className=" h-20 object-cover mb-2"
           />
           <button
             type="button"
@@ -194,7 +201,7 @@ const dispatch = useAppDispatch();
           <button
             type="button"
             className="bg-Lightblue-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all duration-150 hover:ring-Lightblue-700 hover:scale-105 active:bg-Lightblue-700"
-          onClick={handleCreate}
+            onClick={() => handleCreate()}
           >
             Save
           </button>
@@ -206,7 +213,6 @@ const dispatch = useAppDispatch();
           </button>
         </div>
       </div>
-      ;
     </div>
   );
 };
