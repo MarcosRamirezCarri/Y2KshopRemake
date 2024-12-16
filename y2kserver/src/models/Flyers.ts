@@ -25,6 +25,10 @@ const FlyerModel = sequelize.define(
     status:{
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    text:{
+      type: DataTypes.STRING(128),
+      allowNull: true
     }
   },
   {

@@ -3,7 +3,7 @@ import { FlyerType } from "@/helpers/types/FlyerType";
 import axios from "axios";
 
 export const createFlyer = (flyer: FlyerType) => async() => {
-  const { name, image, type, status } = flyer;
+  const { name, image, type, status, text } = flyer;
 
   try {
     const data = await axios.post(`${Server}/flyer`, {
@@ -11,6 +11,7 @@ export const createFlyer = (flyer: FlyerType) => async() => {
       image,
       type,
       status,
+      text
     });
     const posted = data.status;
     if (posted === 201) {

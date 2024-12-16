@@ -1,8 +1,9 @@
 import { useAppSelector } from "@/lib/hooks/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import 'swiper/css/pagination';
 import Image from "next/image";
 
 const PreviewFlyers = () => {
@@ -10,19 +11,25 @@ const PreviewFlyers = () => {
 
   const flyers = useAppSelector((state) => state.flyers.allFlyers);
 
+  const showFlyers = flyers.filter((fly) => fly.type === "bigFlyer");
+  const finalFlyers = showFlyers.filter((fly) => fly.status === true);
+
   return (
     <div>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
+        pagination={{
+          dynamicBullets: true,
+        }}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay, Navigation]}
-        className="h-80 "
+        modules={[Autoplay, Navigation, Pagination]}
+        className="h-80 rounded "
       >
-        {flyers.map((fly, index) => (
+        {finalFlyers.map((fly, index) => (
           <SwiperSlide  key={index}>
             <Image
               src={fly.image}

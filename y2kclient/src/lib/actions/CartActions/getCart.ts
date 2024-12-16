@@ -9,7 +9,7 @@ const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
     const cartData = data.data;
     const status = data.status;
 
-    if(status === 201){
+    if(cartData){
       dispatch(saveToCart(cartData));
       return { success: true }
     }

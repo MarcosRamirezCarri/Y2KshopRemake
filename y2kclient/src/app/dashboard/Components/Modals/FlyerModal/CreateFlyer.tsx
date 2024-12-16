@@ -17,6 +17,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
     image: "",
     name: "",
     type: "",
+    text: "",
     status: true,
     id: 0,
   });
@@ -24,6 +25,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
     name: "",
     type: "",
     image: "",
+    text: "",
   });
 
   const dispatch = useAppDispatch();
@@ -51,7 +53,9 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     if (value === "text") {
@@ -90,11 +94,13 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             id: 0,
             type: "",
             status: true,
+            text: "",
           });
           setError({
             name: "",
             type: "",
             image: "",
+            text: "",
           });
           setState(!state);
         }
@@ -127,7 +133,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             value={flyers.type}
             onChange={(e) => handleChange(e)}
           >
-            <option value="">Select Type</option>
+            <option disabled value="">Select Type</option>
             <option value="text">Text</option>
             <option value="bigFlyer">Big Flyer</option>
             <option value="smallFlyer">Small Flyer</option>
@@ -194,6 +200,27 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             type="text"
             name="name"
             value={flyers.name}
+            onChange={handleChange}
+          />
+          <div className="flex justify-between flex-row ">
+            <p>Text:</p>
+
+            {error.text && (
+              <p className="text-pink-950 self-end text-sm">{error.text}</p>
+            )}
+          </div>
+          <textarea
+            disabled={flyers.type !== "text"}
+            className={`w-full mb-3 p-2 border ${
+              error ? "text-pink-950 border-pink-950" : "border-Lightblue-300"
+            } ${
+              flyers.type !== "text"
+                ? "blur-sm cursor-not-allowed"
+                : "blur-none"
+            } rounded focus:outline-Lightblue-400`}
+            name="text"
+            placeholder="Enter your text"
+            value={flyers.text}
             onChange={handleChange}
           />
         </div>

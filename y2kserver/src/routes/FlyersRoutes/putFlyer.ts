@@ -3,7 +3,7 @@ import FlyerModel from "../../models/Flyers";
 
 export const putFlyer = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, type, status } = req.body;
+  const { name, type, status, text } = req.body;
   try {
     const flyer: any = await FlyerModel.findByPk(id);
     if (flyer === null) {
@@ -12,6 +12,7 @@ export const putFlyer = async (req: Request, res: Response) => {
       if (name !== undefined) flyer.name = name;
       if (type !== undefined) flyer.type = type;
       if (status !== undefined) flyer.status = status;
+      if (text !== undefined) flyer.text = text;
 
       await flyer.save();
 

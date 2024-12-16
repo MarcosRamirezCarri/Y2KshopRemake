@@ -5,6 +5,7 @@ const validateFlyer = (flyer: FlyerType) => {
     name: "",
     image: "",
     type: "",
+    text: "",
   };
   let isValid = true;
 
@@ -25,15 +26,23 @@ const validateFlyer = (flyer: FlyerType) => {
       newErrors.image = "The Image is required!";
       isValid = false;
     }
+    if (flyer.text) {
+      newErrors.text =
+        "The text on the flyer of type 'bigFlyer/smallFlyer' is not allowed";
+      isValid = false;
+    }
   } else {
-    if(flyer.image.length > 3){
-        newErrors.image = "The image on the flyer of type 'Text' is not allowed";
-        isValid = false
+    if (flyer.image.length > 3) {
+      newErrors.image = "The image on the flyer of type 'Text' is not allowed";
+      isValid = false;
+    }
+    if (flyer.text.length < 6) {
+      newErrors.text = "The text is required!";
+      isValid = false;
     }
   }
 
-  return newErrors
-
+  return newErrors;
 };
 
 export default validateFlyer;

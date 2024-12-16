@@ -44,7 +44,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         <p>Size: {cartItem.size}</p>
         <button className="self-start decoration-Lightblue-200 transtition-all duration-150 underline hover:decoration-Lightblue-900" onClick={() =>handleClick(cartItem.userId)}>Destiny</button>
       </div>
-      <div className="flex flex-col justify-center font-tiltneon text-md lg:text-2xl gap-2 text-orange-950 ">
+      <div className="flex flex-col justify-center font-tiltneon p-1 text-md lg:text-2xl gap-2 text-orange-950 ">
       <p className="text-base self-end font-medium p-2">Last Update: {cartItem.lastUpdate}</p>
         <div className="flex flex-row gap-2">
           State:{" "}

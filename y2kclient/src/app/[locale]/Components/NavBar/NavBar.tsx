@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ButtonsNavBar from "./Buttons/Buttons";
 import SearchBar from "./SearchBar/SearchBar";
+import TextFlyer from "./TextFlyer/TextFlyer";
 
 
 export default function Navbar() {
@@ -24,6 +25,7 @@ export default function Navbar() {
 
       <SearchBar />
       <ButtonsNavBar />
+      <TextFlyer/>
     </div>
   );
 }

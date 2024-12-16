@@ -5,6 +5,7 @@ import ProductModel from "../../models/Products";
 export const getCartItems = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
+
   if (!userId) {
     res.status(400).json({ message: "No user id" });
   }
@@ -15,6 +16,7 @@ export const getCartItems = async (req: Request, res: Response) => {
       include: [ProductModel],
     });
 
+    console.log(cartItems)
     if (!cartItems) {
       res.status(400).json({ message: "No items in this cart" });
     } else {
