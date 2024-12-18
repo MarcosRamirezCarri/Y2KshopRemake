@@ -69,6 +69,7 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
               confirmButtonText: "Ok",
             }).then((result) => {
               if (result.isConfirmed) {
+                
                 setModalL(!modalL);
                 location.reload(); 
               }

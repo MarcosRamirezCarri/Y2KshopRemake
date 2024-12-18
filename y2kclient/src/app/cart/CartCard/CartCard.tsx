@@ -91,7 +91,7 @@ const CartCard: React.FC<CartProduct> = ({
   };
   return (
     <div>
-      <div className="grid grid-cols-6 p-5 font-tiltneon w-[100%] rounded-md gap-[1rem] bg-Lightblue-100 border-2 border-Lightblue-800">
+      <div className="grid grid-cols-6 p-5 font-tiltneon w-[100%] rounded-md gap-[0.5rem] bg-Lightblue-100 border-2 border-Lightblue-800">
         <div className="col-span-2">
           <Image
             width={680}

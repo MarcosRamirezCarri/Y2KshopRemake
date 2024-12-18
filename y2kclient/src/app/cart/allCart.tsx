@@ -34,7 +34,7 @@ const AllCart = () => {
   return (
       <div className="relative top-[10rem] w-[90%] flex flex-col ">
         {logged ? (
-          <div className=" grid items-center gap-[3rem] ">
+          <div className=" grid items-center gap-[1rem] ">
             {showCart.length > 0 ? (
               showCart.map((product) => (
                 <div key={product.id}>

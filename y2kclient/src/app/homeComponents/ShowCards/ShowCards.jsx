@@ -25,7 +25,7 @@ export default function ShowCards() {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 h-[60vh] w-[85%] items-center relative content-around">
-      <p className="col-span-2 lg:col-span-4 text-center font-tiltneon text-lg lg:text-2xl text-blue-950 font-bold">You can see our products</p>
+      <p className="col-span-2 lg:col-span-4 text-center font-tiltneon text-lg lg:text-2xl text-Lightblue-950 font-bold">You can see our products</p>
       {all.length === 0 ? (
         <div>
           <p>loading</p>

@@ -8,15 +8,15 @@ import * as userRoutes from "../routes/userRoutes/zndexUser";
 
 const router = Router();
 
-router.post("/product", productRoutes.postProduct);
+router.post("/product", authenticateToken , productRoutes.postProduct);
 
 router.post("/login", userRoutes.loginUser);
 
 router.post("/register", userRoutes.postUser);
 
-router.post("/cart/:userId/add", cartRoutes.postInCart);
+router.post("/cart/:userId/add", authenticateToken , cartRoutes.postInCart);
 
-router.post("/flyer", flyerRoutes.PostFlyer);
+router.post("/flyer", authenticateToken, flyerRoutes.PostFlyer);
 
 router.get("/product", productRoutes.getProducts);
 

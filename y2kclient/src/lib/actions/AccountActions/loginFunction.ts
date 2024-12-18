@@ -18,9 +18,14 @@ const loginFunction =
       });
       const login = loginData.data;
       const status = loginData.status;
+      const token = login.token
+
 
       if (status === 200) {
         dispatch(setLogin(login));
+        document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24}; Secure; SameSite=Strict`;
+
+        console.log(document.cookie)
         return { success: true, user: login.user };
       }
     } catch (error) {

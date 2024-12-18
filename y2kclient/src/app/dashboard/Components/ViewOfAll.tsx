@@ -33,7 +33,7 @@ const ViewOfAll = () => {
   }, [user]);
 
   return (
-    <div className="w-[100%] bg-gray-100 flex flex-col  gap-5 ">
+    <div className="w-[100%] flex flex-col  gap-5 ">
       <SideBarDashboard
         setStateButtons={setStateButtons}
         stateButtons={stateButtons}
