@@ -1,8 +1,13 @@
 import { Request, Response } from "express";
 import UserModel from "../../models/User";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-const JWT_SECRET = "JWT_secret";
+dotenv.config()
+
+const SECRET: any = process.env.SECRET_JWT;
+
+
 
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -19,12 +24,15 @@ export const loginUser = async (req: Request, res: Response) => {
     } else {
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        JWT_SECRET,
+        SECRET,
         { expiresIn: "3h" }
       );
+      const decoded = jwt.decode(token);
+console.log("Decoded Token:", decoded);
       return res.status(200).json({ token, user });
     }
   } catch (error: any) {
+    console.log(error.message)
     return res.status(500).json({ error: error.message });
   }
 };

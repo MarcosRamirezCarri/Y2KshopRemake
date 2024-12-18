@@ -33,6 +33,7 @@ const LogOutBtn = () => {
             dispatch(logOutCart());
             dispatch(logOut());
             localStorage.removeItem("token");
+            document.cookie ="token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict;";
             localStorage.removeItem("userId");
             router.push("/");
           }
