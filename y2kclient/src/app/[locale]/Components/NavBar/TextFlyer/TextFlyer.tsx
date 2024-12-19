@@ -21,7 +21,7 @@ const TextFlyer = () => {
     <div
       className={` ${
         path !== "/" && path !== "/cart" ? "hidden" : "visible"
-      } font-tiltneon flex left-[35%] flex-row self-center top-24 absolute`}
+      } font-tiltneon text-Lightblue-950 flex left-[35%] flex-row self-center top-24 absolute`}
     >
       {finalFlyers
         ? finalFlyers.map((fly, index) => (

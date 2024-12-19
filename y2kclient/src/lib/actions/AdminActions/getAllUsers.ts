@@ -3,12 +3,17 @@ import { Server } from "@/helpers/services/server";
 import { saveUsers } from "@/lib/slices/adminReducer";
 import { Dispatch } from "@reduxjs/toolkit";
 
-const getAllUsers = () => async (dispatch: Dispatch) => {
+export const getAllUsers = () => async (dispatch: Dispatch) => {
   try {
-    const data = await axios.get(`${Server}/user`);
+    const token = localStorage.getItem("token");
+    const data = await axios.get(`${Server}/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const users = data.data;
     const statusUser = data.status;
-console.log(users)
+    console.log(users);
     if (statusUser === 201) {
       dispatch(saveUsers(users));
       return { success: true };
@@ -21,5 +26,3 @@ console.log(users)
     }
   }
 };
-
-export default getAllUsers;

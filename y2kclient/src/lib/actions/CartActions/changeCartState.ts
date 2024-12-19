@@ -4,7 +4,7 @@ import { formatDate } from "@/helpers/functions/formatDate";
 import { Server } from "@/helpers/services/server";
 
 
-const changeCartState =
+export const changeCartState =
   (userId: number, itemId: number, newState: string) =>
   async (dispatch: Dispatch) => {
    
@@ -13,11 +13,16 @@ const changeCartState =
     const lastUpdate = formatDate(date);
     
     try {
+      const token = localStorage.getItem("token")
       const data = await axios.put(`${Server}/cart/update`, {
         userId,
         itemId,
         newState,
         lastUpdate
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const status = data.status;
 
@@ -34,4 +39,4 @@ const changeCartState =
     }
   };
 
-export default changeCartState;
+

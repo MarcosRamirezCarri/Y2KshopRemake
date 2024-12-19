@@ -20,11 +20,11 @@ router.post("/flyer", authenticateToken, flyerRoutes.PostFlyer);
 
 router.get("/product", productRoutes.getProducts);
 
-router.get("/user/:userId", userRoutes.getUserFromId);
+router.get("/user/:userId" , userRoutes.getUserFromId);
 
-router.get("/user", userRoutes.getUsers);
+router.get("/user", authenticateToken , userRoutes.getUsers);
 
-router.get("/cart", cartRoutes.getAllCarts)
+router.get("/cart", authenticateToken ,  cartRoutes.getAllCarts)
 
 router.get("/user/checkemail/:emailuser", userRoutes.checkEmail);
 
@@ -32,24 +32,24 @@ router.get("/product/search", productRoutes.searchByName);
 
 router.get("/product/:idProduct", productRoutes.searchById);
 
-router.get("/cart/:userId", cartRoutes.getCartItems);
+router.get("/cart/:userId", authenticateToken , cartRoutes.getCartItems);
 
 router.get("/flyer", flyerRoutes.getFlyers);
 
-router.put("/cart/:userId/modify/:itemId", cartRoutes.putCartItem);
+router.put("/cart/:userId/modify/:itemId", authenticateToken,  cartRoutes.putCartItem);
 
-router.put("/product/modify", productRoutes.updateProduct);
+router.put("/product/modify", authenticateToken, productRoutes.updateProduct);
 
-router.put("/cart/update", cartRoutes.addToHistoryItem);
+router.put("/cart/update", authenticateToken, cartRoutes.addToHistoryItem);
 
-router.put("/user", userRoutes.putUser);
+router.put("/user", authenticateToken, userRoutes.putUser);
 
-router.put("/flyer/:id", flyerRoutes.putFlyer)
+router.put("/flyer/:id", authenticateToken, flyerRoutes.putFlyer)
 
-router.delete("/cart/:userId/remove/:itemId", cartRoutes.deleteCartItem);
+router.delete("/cart/:userId/remove/:itemId",authenticateToken ,cartRoutes.deleteCartItem);
 
-router.delete("/product/delete/:idProduct", productRoutes.deleteProduct);
+router.delete("/product/delete/:idProduct",authenticateToken ,productRoutes.deleteProduct);
 
-router.delete("/user/delete/:userId", userRoutes.deleteUser);
+router.delete("/user/delete/:userId", authenticateToken,userRoutes.deleteUser);
 
 export default router;

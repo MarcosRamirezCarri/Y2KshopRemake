@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import changeCartState from "@/lib/actions/CartActions/changeCartState";
+import {changeCartState} from "@/lib/actions/CartActions/changeCartState";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import Swal from "sweetalert2";
 import { History } from "@/helpers/types/Account";

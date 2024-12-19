@@ -4,15 +4,20 @@ import {Product} from "@/helpers/types/Types";
 import { modifyProduct } from "@/lib/slices/productsReducer";
 import { Dispatch } from "@reduxjs/toolkit";
 
-const modProduct = (product: Product) => async (dispatch: Dispatch) => {
+export const modProduct = (product: Product) => async (dispatch: Dispatch) => {
   const { price, colors, images, description, id } = product;
   try {
+    const token = localStorage.getItem("token")
     const data = await axios.put(`${Server}/product/modify`, {
       id,
       price,
       colors,
       images,
       description,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const modProd = data.data;
     const status = data.status;
@@ -29,4 +34,5 @@ const modProduct = (product: Product) => async (dispatch: Dispatch) => {
   }
 };
 
-export default modProduct;
+
+

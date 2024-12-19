@@ -5,7 +5,7 @@ import CreateModal from "../../Modals/ProductModal/CreateProduct/CreateProduct";
 import CardProductControl from "./CardProduct/CardProductControl";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { Product } from "@/helpers/types/Types";
-import deleteProduct from "@/lib/actions/AdminActions/deleteProduct";
+import {deleteProduct} from "@/lib/actions/AdminActions/deleteProduct";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 
 const ProductsControl = () => {

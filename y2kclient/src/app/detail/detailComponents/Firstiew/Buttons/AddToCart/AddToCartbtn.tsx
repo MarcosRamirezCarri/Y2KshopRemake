@@ -1,8 +1,8 @@
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useState, useEffect } from "react";
-import getCartFromId from "@/lib/actions/CartActions/getCart";
+import {getCartFromId} from "@/lib/actions/CartActions/getCart";
 import { useSearchParams } from "next/navigation";
-import addToCart from "@/lib/actions/CartActions/addToCart";
+import {addToCart} from "@/lib/actions/CartActions/addToCart";
 import Swal from "sweetalert2";
 import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
 

@@ -3,10 +3,19 @@ import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setAdminUser } from "@/lib/slices/adminReducer";
 
-const changeToAdmin =
+export const changeToAdmin =
   (userId: number, admin: boolean) => async (dispatch: Dispatch) => {
     try {
-      const data = await axios.put(`${Server}/user`, { userId, admin });
+      const token = localStorage.getItem("token");
+      const data = await axios.put(
+        `${Server}/user`,
+        { userId, admin },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const changed = data.data;
       const statChanged = data.status;
 
@@ -23,4 +32,3 @@ const changeToAdmin =
     }
   };
 
-export default changeToAdmin;

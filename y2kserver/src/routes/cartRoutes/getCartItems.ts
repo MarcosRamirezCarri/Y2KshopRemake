@@ -6,6 +6,7 @@ export const getCartItems = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
 
+
   if (!userId) {
     res.status(400).json({ message: "No user id" });
   }

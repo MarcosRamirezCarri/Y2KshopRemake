@@ -1,7 +1,7 @@
 import { CartItem } from "@/helpers/types/CartItem";
 import Image from "next/image";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import changeCartState from "@/lib/actions/CartActions/changeCartState";
+import {changeCartState} from "@/lib/actions/CartActions/changeCartState";
 import { getAllCarts } from "@/lib/actions/AdminActions/getAllCarts";
 
 interface TaskCardProps{

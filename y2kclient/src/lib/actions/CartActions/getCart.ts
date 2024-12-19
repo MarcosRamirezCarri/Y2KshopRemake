@@ -3,9 +3,14 @@ import axios from "axios";
 import { Server } from "@/helpers/services/server";
 import { Dispatch } from "@reduxjs/toolkit";
 
-const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
+export const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
   try {
-    const data = await axios.get(`${Server}/cart/${userId}`);
+    const token = localStorage.getItem("token")
+    const data = await axios.get(`${Server}/cart/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const cartData = data.data;
     const status = data.status;
 
@@ -24,4 +29,3 @@ const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
   }
 };
 
-export default getCartFromId;

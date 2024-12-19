@@ -9,10 +9,8 @@ const AccountFirstPanel = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
-    if (id && id !== "undefined" && id !== "null") {
       const userId = Number(id);
       dispatch(setUserFromId(userId));
-    }
   }, [dispatch]);
 
   const user: any = useAppSelector((state) => state.account.user);

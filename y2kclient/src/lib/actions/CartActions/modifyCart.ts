@@ -3,13 +3,18 @@ import { modifyCartItem } from "@/lib/slices/cartReducer";
 import axios from "axios";
 import { Server } from "@/helpers/services/server";
 
-const modifyCart =
+export const modifyCart =
   (color: string, size: string, itemId: number, userId: number) =>
   async (dispatch: Dispatch) => {
     try {
+      const token = localStorage.getItem("token");
       const data = await axios.put(
         `${Server}/cart/${userId}/modify/${itemId}`,
-        { size, color }
+        { size, color }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       const modifiedItem = data.data;
@@ -28,4 +33,4 @@ const modifyCart =
     }
   };
 
-export default modifyCart;
+

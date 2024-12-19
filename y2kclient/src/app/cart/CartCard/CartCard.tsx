@@ -2,9 +2,9 @@ import Image from "next/image";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import deleteCartItem from "@/lib/actions/CartActions/deleteCart";
-import changeCartState from "@/lib/actions/CartActions/changeCartState";
-import getCartFromId from "@/lib/actions/CartActions/getCart";
+import {deleteCartItem} from "@/lib/actions/CartActions/deleteCart";
+import {changeCartState} from "@/lib/actions/CartActions/changeCartState";
+import {getCartFromId} from "@/lib/actions/CartActions/getCart";
 import { Product } from "@/helpers/types/Types";
 import ModalModify from "./ModalModify/ModalModify";
 

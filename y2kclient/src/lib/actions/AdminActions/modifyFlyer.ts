@@ -6,7 +6,12 @@ import { modifyFlyers } from "@/lib/slices/flyersReducer";
 export const modifyFlyer =
   (id: number, status: boolean) => async (dispatch: Dispatch) => {
     try {
-      const data = await axios.put(`${Server}/flyer/${id}`, { status });
+      const token = localStorage.getItem("token")
+      const data = await axios.put(`${Server}/flyer/${id}`, { status }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const dataFlyer = data.data;
       const statusFlyer = data.status;
 

@@ -5,7 +5,12 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 export const getAllCarts = () => async (dispatch: Dispatch) => {
   try {
-    const data = await axios.get(`${Server}/cart`);
+    const token = localStorage.getItem("token")
+    const data = await axios.get(`${Server}/cart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const carts = data.data;
     const statusCarts = data.status;
 

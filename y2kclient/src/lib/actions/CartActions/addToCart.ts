@@ -4,14 +4,13 @@ import { formatDate } from "@/helpers/functions/formatDate";
 import axios from "axios";
 import { Dispatch } from "@reduxjs/toolkit";
 
-const addToCart = (cart: any) => async (dispatch: Dispatch) => {
+export const addToCart = (cart: any) => async (dispatch: Dispatch) => {
   const { userId, productId, quantity, color, size } = cart;
   const state = "inCart";
   try {
     const date = new Date().toISOString();
-
     const lastUpdate = formatDate(date);
-    console.log(lastUpdate)
+const token = localStorage.getItem("token");
     const data = await axios.post(`${Server}/cart/${userId}/add`, {
       productId,
       quantity,
@@ -19,6 +18,10 @@ const addToCart = (cart: any) => async (dispatch: Dispatch) => {
       size,
       state,
       lastUpdate
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const savedCart = data.data;
     const status = data.status;
@@ -34,5 +37,3 @@ const addToCart = (cart: any) => async (dispatch: Dispatch) => {
     }
   }
 };
-
-export default addToCart;

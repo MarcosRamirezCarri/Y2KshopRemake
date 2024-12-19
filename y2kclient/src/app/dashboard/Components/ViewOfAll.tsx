@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { redirect } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
@@ -16,12 +15,9 @@ const ViewOfAll = () => {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
-
-    const token = localStorage.getItem("token");
     const userId = Number(id);
-    if (token !== "undefined" || token !== null) {
       dispatch(setUserFromId(userId));
-    }
+    
   }, [dispatch]);
 
   useEffect(() => {
