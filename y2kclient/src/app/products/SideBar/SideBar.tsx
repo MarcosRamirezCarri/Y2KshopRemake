@@ -74,7 +74,7 @@ export default function SideBar() {
   return (
     <div>
       <div
-        className={`flex flex-row bg-[#190a0a] gap-2 p-2 rounded-b-2xl top-[6rem] transition-all duration-300 z-[90] right-0 fixed self-start w-[40%]  ${
+        className={`flex flex-row bg-[#00080a] gap-2 p-2 rounded-b-2xl top-[6rem] transition-all duration-300 z-[90] right-0 fixed self-start w-[40%]  ${
           statusBar
             ? "translate-y-0 visible blur-none"
             : "translate-y-[-50vh] invisible blur-lg"

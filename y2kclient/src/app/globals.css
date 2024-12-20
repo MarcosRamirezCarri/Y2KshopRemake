@@ -5,7 +5,7 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: #fee5f2;
-  --background-end-rgb: #d3f5f5;
+  --background-end-rgb: #258995;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,7 +37,7 @@ body {
 }
 @font-face {
   font-family: "Tiltneon";
-  src: url('../../public/fonts/Oswald-Light.ttf');
+  src: url('../../public/fonts/Lato-Regular.ttf');
 }
 .swal2-popup {
   font-size: 1.3rem !important;

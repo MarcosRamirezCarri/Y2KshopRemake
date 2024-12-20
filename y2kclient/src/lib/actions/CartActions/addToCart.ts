@@ -32,8 +32,10 @@ const token = localStorage.getItem("token");
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
+      return { success: false, message: error.message };
     } else {
       console.log("Error desconocido:", error);
+      return { success: false, message: "Error desconocido" };
     }
   }
 };

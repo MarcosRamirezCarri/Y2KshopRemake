@@ -31,19 +31,19 @@ const ButtonsNavBar = () => {
 
   return (
     <div>
-      <div className="gap-6    lg:gap-[5rem] flex flex-row">
+      <div className="gap-6 font-tiltneon text-gray-50   lg:gap-[5rem] flex flex-row">
         {user?.admin === true ? (
           <Link
-          className="flex flex-col items-center justify-center"
+            className="flex flex-col items-center justify-center active:text-Lightblue-300"
             onMouseLeave={() => setStateButton("none dash")}
             onMouseEnter={() => setStateButton("dash")}
             href={{ pathname: "/dashboard" }}
           >
-            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col text-2xl lg:text-3xl font-normal transition-all duration-300 hover:scale-105">
               <BsArchiveFill />
             </button>
             <span
-              className={`absolute text-lg lg:text-[1.40rem]  justify-self-center bottom-1  p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
+              className={`absolute text-lg lg:text-[1.30rem]  justify-self-center bottom-1  p-2 font-bold justify-self-center transition-all duration-300 
            ${
              stateButton === "dash" || path === "/dashboard"
                ? "visible -translate-y-20 lg:translate-y-2 blur-none "
@@ -56,17 +56,17 @@ const ButtonsNavBar = () => {
         ) : null}
 
         <Link
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center active:text-Lightblue-300"
           onMouseLeave={() => setStateButton("none cart")}
           onMouseEnter={() => setStateButton("cart")}
           href={{ pathname: "/cart" }}
         >
-          <button className="flex flex-col items-center justify-center font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+          <button className="flex flex-col items-center justify-center text-2xl lg:text-3xl font-normal transition-all duration-300 hover:scale-105 ">
             <FaCartShopping />
           </button>
 
           <span
-            className={`absolute text-lg lg:text-[1.50rem]  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
+            className={`absolute text-lg lg:text-[1.40rem]  justify-self-center bottom-1 p-2 font-bold  justify-self-center transition-all duration-50 
            ${
              stateButton === "cart" || path === "/cart"
                ? "visible -translate-y-20 lg:translate-y-2 blur-none "
@@ -77,16 +77,16 @@ const ButtonsNavBar = () => {
           </span>
         </Link>
         <Link
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center active:text-Lightblue-300"
           onMouseEnter={() => setStateButton("product")}
           onMouseLeave={() => setStateButton("none prod")}
           href={{ pathname: "/products" }}
         >
-          <button className="flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+          <button className="flex flex-col  text-2xl lg:text-3xl  font-normal transition-all duration-300 hover:scale-105">
             <FaBagShopping />
           </button>
           <span
-            className={`absolute text-lg lg:text-[1.50rem]  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
+            className={`absolute text-lg lg:text-[1.40rem]  justify-self-center bottom-1 p-2 font-bold justify-self-center transition-all duration-300 
            ${
              stateButton === "product" || path === "/products"
                ? "visible -translate-y-20 lg:translate-y-2 blur-none "
@@ -98,16 +98,16 @@ const ButtonsNavBar = () => {
         </Link>
         {stateUser ? (
           <Link
-            className="flex flex-col items-center justify-center"
+            className="flex flex-col items-center justify-center active:text-Lightblue-300"
             onMouseEnter={() => setStateButton("account")}
             onMouseLeave={() => setStateButton("none acc")}
             href={{ pathname: "/account" }}
           >
-            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col text-2xl lg:text-3xl  font-normal transition-all duration-300 hover:scale-105">
               <FaIdBadge />
             </button>
             <span
-              className={`absolute text-md lg:text-[1.50rem]  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300 
+              className={`absolute text-md lg:text-[1.40rem]  justify-self-center bottom-1 p-2 font-bold justify-self-center transition-all duration-300 
            ${
              stateButton === "account" || path === "/account"
                ? "visible -translate-y-20 lg:translate-y-2 blur-none "
@@ -119,19 +119,19 @@ const ButtonsNavBar = () => {
           </Link>
         ) : (
           <div
-            className="flex flex-col items-center justify-center"
+            className="flex flex-col items-center justify-center active:text-Lightblue-300"
             onMouseEnter={() => setStateButton("account")}
             onMouseLeave={() => setStateButton("none acc")}
             onClick={() => setModal(!modal)}
           >
             {" "}
-            <button className=" flex flex-col font-titilium text-3xl lg:text-4xl text-pink-50 font-normal transition-all duration-300 hover:scale-105">
+            <button className=" flex flex-col pb-1  text-2xl lg:text-3xl font-normal transition-all duration-300 hover:scale-105">
               <FaUserXmark />
             </button>{" "}
-            <span className="absolute text-md lg:text-[1rem] visible  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300  translate-y-20 lg:-translate-y-1 -translate-x-2">
+            <span className="absolute text-md lg:text-[0.75rem] visible  justify-self-center bottom-1  font-bold  justify-self-center transition-all duration-300  translate-y-20 lg:-translate-y-1 -translate-x-2">
               No Account
             </span>
-            <span className="absolute text-md lg:text-[0.75rem] visible  justify-self-center bottom-1 p-2 font-bold text-[#fef1f8] font-tiltneon [text-shadow:4px_2px_15px_#ffcbe8] justify-self-center transition-all duration-300  translate-y-20 lg:translate-y-2.5 -translate-x-2">
+            <span className="absolute text-md lg:text-[0.55rem] visible  justify-self-center bottom-1 p-2 font-bold   justify-self-center transition-all duration-300  translate-y-20 lg:translate-y-2.5 -translate-x-2">
               Sig In?
             </span>
           </div>
