@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
+import * as jose from "jose";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import LoginModal from "../../LoginModal/LoginModal";
 import { FaCartShopping } from "react-icons/fa6";
@@ -19,19 +20,42 @@ const ButtonsNavBar = () => {
   const user = useAppSelector((state) => state.account.user);
   const path = usePathname();
 
+  const secret = "y2k_project";
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const id = localStorage.getItem("userId");
-    const userId = Number(id);
-    if (token !== "undefined" && token !== "null" && token !== null) {
-      setStateUser(true);
-      dispatch(setUserFromId(userId));
-    }
-  }, [modal]);
+    const verifyToken = async () => {
+      const token: any = localStorage.getItem("token");
+      const id = localStorage.getItem("userId");
+      const userId = Number(id);
+
+      if (token) {
+        try {
+          const tokenFormated = String(token);
+          const decoded = await jose.jwtVerify(
+            tokenFormated,
+            new TextEncoder().encode(secret)
+          );
+          if (decoded.payload?.userId) {
+            setStateUser(true);
+            dispatch(setUserFromId(userId));
+            return true;
+          } else {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            return false;
+          }
+        } catch (error: any) {
+          console.log(error.message);
+        }
+      }
+    };
+
+    verifyToken();
+  }, []);
 
   return (
     <div>
-      <div className="gap-6 font-tiltneon text-gray-50   lg:gap-[5rem] flex flex-row">
+      <div className="gap-6 font-tiltneon text-gray-50   lg:gap-[5.8rem] flex flex-row">
         {user?.admin === true ? (
           <Link
             className="flex flex-col items-center justify-center active:text-Lightblue-300"

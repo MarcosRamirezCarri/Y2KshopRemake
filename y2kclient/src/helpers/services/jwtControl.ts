@@ -6,7 +6,7 @@ const jwtConfig = {
 };
 
 export const isAuthenticated = async (req: NextRequest) => {
-  let token = req.cookies.get("token")?.value.trim();
+  let token: any = req.cookies.get("token")?.value.trim();
 
   if (token) {
     try {
@@ -15,13 +15,9 @@ export const isAuthenticated = async (req: NextRequest) => {
       if (decoded.payload?.userId) {
         return true;
       } else {
-        location.reload();
-        localStorage.clear();
         return false;
       }
     } catch (err) {
-      console.error("isAuthenticated error: ", err);
-
       return false;
     }
   } else {

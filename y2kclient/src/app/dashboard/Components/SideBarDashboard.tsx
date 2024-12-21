@@ -8,7 +8,7 @@ const SideBarDashboard: React.FC<SideBarProps> = ({
   stateButtons,
 }) => {
   return (
-    <div className="w-[20%] h-[100vh] bg-[#190a0a] items-center flex flex-col py-5 gap-5 font-titilium fixed top-[6rem]">
+    <div className="w-[20%] h-[100vh] bg-[#00080a] items-center flex flex-col py-5 gap-5 font-titilium fixed top-[4.5rem]">
       <p className="text-2xl text-orange-300 font-semibold">Dashboard</p>
       <button
         onClick={() => setStateButtons("Users")}

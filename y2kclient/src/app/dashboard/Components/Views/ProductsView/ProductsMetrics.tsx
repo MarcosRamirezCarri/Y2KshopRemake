@@ -60,7 +60,7 @@ const ProductsControl = () => {
 
   return (
     <div
-      className={`relative font-titilium left-[23%] grid grid-cols-2 gap-5 top-[9.5rem] w-[75%]`}
+      className={`relative font-titilium left-[23%] grid grid-cols-2 gap-5 top-[7.5rem]  w-[75%]`}
     >
       <div className="flex flex-row justify-center  col-span-2">
         <button onClick={() => setStateAdmin("CreateProduct")} className="relative bg-orange-300 px-4 py-2 w-[40%] rounded-xl text-2xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">

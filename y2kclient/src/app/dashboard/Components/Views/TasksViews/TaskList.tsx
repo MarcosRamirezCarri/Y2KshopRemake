@@ -49,7 +49,7 @@ const TaskList = () => {
   };
 
   return (
-    <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[9.5rem] w-[75%]">
+    <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[7.5rem] w-[75%]">
       <div className="flex flex-row self-center gap-5 ">
         <select
           value={selectedState}

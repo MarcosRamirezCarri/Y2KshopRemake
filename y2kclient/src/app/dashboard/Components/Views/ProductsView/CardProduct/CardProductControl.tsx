@@ -31,14 +31,14 @@ const CardProductControl: React.FC<ControlProps> = ({
           {product.clasification}
         </p>
       </div>
-      <div className={`grid grid-cols-[${product.colors.length}] gap-1`}>
-        <p className={` col-span-2 text-lg text-Lightblue-900 font-semibold`}>
-          Colors and Sizes:
+      <div className={`grid grid-cols-${product.colors.length} gap-1`}>
+        <p className={` col-span-${product.colors.length} text-lg text-Lightblue-900 font-semibold`}>
+          Colors, Sizes and Quantity:
         </p>
         {product.colors.map((color, index) => (
           <div key={index} className="mt-2">
             <p className=" text-md text-Lightblue-800 font-semibold">
-              Color: {color.color}
+           {color.color}
             </p>
             <ul className="ml-4 list-disc">
               {color.sizes.map((size, idx) => (

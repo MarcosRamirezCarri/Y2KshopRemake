@@ -14,7 +14,7 @@ const FlyersConfig = () => {
     dispatch(getAllFlyers());
   }, [dispatch]);
   return (
-    <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[9.5rem] w-[75%]">
+    <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[7.5rem]  w-[75%]">
       <button
         className="relative self-center bg-orange-300 px-4 py-2 w-[40%] rounded-xl text-2xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200"
         onClick={() => setState(!state)}

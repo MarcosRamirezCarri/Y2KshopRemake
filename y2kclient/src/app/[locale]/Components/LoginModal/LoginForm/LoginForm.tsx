@@ -13,20 +13,20 @@ interface PropModal {
   setModalR: (modalR: boolean) => void;
   setModalL: (modalL: boolean) => void;
   modalL: boolean;
-
 }
 
-const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
+const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
   const dispatch = useAppDispatch();
   const token: any = useAppSelector((state) => state.account.token);
   const user: any = useAppSelector((state) => state.account.user);
 
+  console.log("se renderiza");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("token", token);
-      localStorage.setItem("userId", user.id)
-  }
+      localStorage.setItem("userId", user.id);
+    }
   }, [token]);
 
   const [formData, setFormData] = useState<LoginData>({
@@ -57,35 +57,32 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL,  }) => {
     e.preventDefault();
     const errors = ValidateLogin(formData);
     setError(errors);
-    
+
     if (!errors.email && !errors.password) {
-      dispatch(loginFunction(formData))
-        .then((response: any) => {
-          if (response.success) {
-            Swal.fire({
-              title: "Logged Successfully!",
-              text: `Welcome back, ${response.user.name}!`, 
-              icon: "success",
-              confirmButtonText: "Ok",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                
-                setModalL(!modalL);
-                location.reload(); 
-              }
-            });
-          } else {
-            Swal.fire({
-              title: "Login Failed",
-              text: response.message,
-              icon: "error",
-              confirmButtonText: "Ok",
-            });
-          }
-        });
+      dispatch(loginFunction(formData)).then((response: any) => {
+        if (response.success) {
+          Swal.fire({
+            title: "Logged Successfully!",
+            text: `Welcome back, ${response.user.name}!`,
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setModalL(!modalL);
+              location.reload();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Login Failed",
+            text: response.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        }
+      });
     }
   };
-  
 
   return (
     <div
