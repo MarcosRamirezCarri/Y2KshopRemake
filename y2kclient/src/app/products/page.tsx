@@ -1,6 +1,6 @@
 import CardsContainer from "./CardsContainer/CardsContainer";
 import Navbar from "../[locale]/Components/NavBar/NavBar";
-import SideBar from "./SideBar/SideBar";
+import SideBar from "../[locale]/Components/FiltersProduct/SideBar";
 
 export default function ShowProducts() {
   return (

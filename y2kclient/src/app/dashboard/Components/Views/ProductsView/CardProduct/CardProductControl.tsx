@@ -32,7 +32,7 @@ const CardProductControl: React.FC<ControlProps> = ({
         </p>
       </div>
       <div className={`grid grid-cols-${product.colors.length} gap-1`}>
-        <p className={` col-span-${product.colors.length} text-lg text-Lightblue-900 font-semibold`}>
+        <p className={` col-span-${product.colors.length} text-md text-Lightblue-900 font-semibold`}>
           Colors, Sizes and Quantity:
         </p>
         {product.colors.map((color, index) => (

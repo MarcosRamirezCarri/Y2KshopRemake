@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import Swal from "sweetalert2";
-import ModifyProductModal from "../../Modals/ProductModal/ModifyProduct/ModifyProductModal";
-import CreateModal from "../../Modals/ProductModal/CreateProduct/CreateProduct";
-import CardProductControl from "./CardProduct/CardProductControl";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { Product } from "@/helpers/types/Types";
 import {deleteProduct} from "@/lib/actions/AdminActions/deleteProduct";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
+import Swal from "sweetalert2";
+import ModifyProductModal from "../../Modals/ProductModal/ModifyProduct/ModifyProductModal";
+import CreateModal from "../../Modals/ProductModal/CreateProduct/CreateProduct";
+import CardProductControl from "./CardProduct/CardProductControl";
+import SideBar from "@/app/[locale]/Components/FiltersProduct/SideBar";
+
 
 const ProductsControl = () => {
   const [stateAdmin, setStateAdmin] = useState<string>("");
@@ -62,6 +64,7 @@ const ProductsControl = () => {
     <div
       className={`relative font-titilium left-[23%] grid grid-cols-2 gap-5 top-[7.5rem]  w-[75%]`}
     >
+      <SideBar/>
       <div className="flex flex-row justify-center  col-span-2">
         <button onClick={() => setStateAdmin("CreateProduct")} className="relative bg-orange-300 px-4 py-2 w-[40%] rounded-xl text-2xl text-orange-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200">
           Create New Product

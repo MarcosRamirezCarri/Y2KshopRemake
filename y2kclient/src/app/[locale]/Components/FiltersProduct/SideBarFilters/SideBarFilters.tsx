@@ -28,7 +28,7 @@ const SideBarFilters: React.FC<PropsFilters> = ({
   useEffect(() => {
     const applyAnimationDelay = (elements: NodeListOf<Element>) => {
       elements.forEach((element, index) => {
-        (element as HTMLElement).style.animationDelay = `${index * 0.2}s`;
+        (element as HTMLElement).style.animationDelay = `${index * 0.1}s`;
       });
     };
 

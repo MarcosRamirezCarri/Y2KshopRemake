@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {Product} from "@/helpers/types/Types";
+import { Product } from "@/helpers/types/Types";
 
 interface ProductState {
   isLoading: boolean;
@@ -7,6 +7,7 @@ interface ProductState {
   product: Product[];
   sortProducts: Product[];
   selectedCategory: string;
+  selectedSize: string;
 }
 
 const initialState: ProductState = {
@@ -15,6 +16,7 @@ const initialState: ProductState = {
   product: [],
   sortProducts: [],
   selectedCategory: "all",
+  selectedSize: "all",
 };
 
 export const productsReducer = createSlice({
@@ -30,8 +32,10 @@ export const productsReducer = createSlice({
         (prod) => prod.id !== action.payload
       );
     },
-    modifyProduct:(state, action:PayloadAction<Product>)=>{
-      const index = state.product.findIndex(item => item.id === action.payload.id);
+    modifyProduct: (state, action: PayloadAction<Product>) => {
+      const index = state.product.findIndex(
+        (item) => item.id === action.payload.id
+      );
       if (index !== -1) {
         state.product[index] = action.payload;
       }
@@ -40,32 +44,44 @@ export const productsReducer = createSlice({
       state.product = action.payload;
     },
     sortByCategory: (state, action: PayloadAction<string>) => {
-      let copyState = [...state.sortProducts];
       state.selectedCategory = action.payload;
-      if (action.payload === "all") {
-        state.product = copyState;
-      } else {
-        state.product = state.sortProducts.filter(
-          (item) => item.clasification === action.payload
-        );
-      }
+      // Aplica los filtros combinados
+      state.product = state.sortProducts.filter((item) => {
+        const matchesCategory =
+          action.payload === "all" || item.clasification === action.payload;
+        const matchesSize =
+          state.selectedSize === "all" ||
+          item.colors.some((color) =>
+            color.sizes.some((size) => size.size === state.selectedSize)
+          );
+        return matchesCategory && matchesSize;
+      });
     },
     sortBySize: (state, action: PayloadAction<string>) => {
-      let copyState = [...state.sortProducts];
-      state.selectedCategory = action.payload;
-      if (action.payload === "all") {
-        state.product = copyState;
-      } else {
-        state.product = state.sortProducts.filter((item) =>
+      state.selectedSize = action.payload;
+      // Aplica los filtros combinados
+      state.product = state.sortProducts.filter((item) => {
+        const matchesCategory =
+          state.selectedCategory === "all" ||
+          item.clasification === state.selectedCategory;
+        const matchesSize =
+          action.payload === "all" ||
           item.colors.some((color) =>
             color.sizes.some((size) => size.size === action.payload)
-          )
-        );
-      }
+          );
+        return matchesCategory && matchesSize;
+      });
     },
   },
 });
-export const { setProducts, sortByCategory, modifyProduct ,sortBySize, setSearch, deleteProd } =
-  productsReducer.actions;
+
+export const {
+  setProducts,
+  sortByCategory,
+  modifyProduct,
+  sortBySize,
+  setSearch,
+  deleteProd,
+} = productsReducer.actions;
 
 export default productsReducer.reducer;

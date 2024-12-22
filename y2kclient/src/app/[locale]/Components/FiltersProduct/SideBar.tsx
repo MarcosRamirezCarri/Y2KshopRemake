@@ -11,7 +11,7 @@ import {
   IoIosArrowDropupCircle,
 } from "react-icons/io";
 
-export default function SideBar() {
+ const SideBar = () => {
   const [statusBar, setStatusBar] = useState<boolean>(true);
   const [statusFilter2, setStatusFilter2] = useState<boolean>(false);
   const [statusFilter1, setStatusFilter1] = useState<boolean>(false);
@@ -44,8 +44,12 @@ export default function SideBar() {
   const getUniqueSizes = (items: Product[]) => {
     const sizesSet = new Set<string>();
     items.forEach((product) => {
-      product.colors.forEach((category) => {
-        category.sizes.some((size) => sizesSet.add(size.size));
+      product.colors.forEach((color) => {
+        color.sizes.forEach((size) => {
+          if (size.quantity > 0) {
+            sizesSet.add(size.size);
+          }
+        });
       });
     });
     return Array.from(sizesSet);
@@ -110,3 +114,5 @@ export default function SideBar() {
     </div>
   );
 }
+
+export default SideBar
