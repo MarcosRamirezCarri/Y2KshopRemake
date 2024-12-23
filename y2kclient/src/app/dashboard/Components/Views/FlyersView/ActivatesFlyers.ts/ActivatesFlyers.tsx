@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import Image from "next/image";
 import { modifyFlyer } from "@/lib/actions/AdminActions/modifyFlyer";
+import { deleteFlyer } from "@/lib/actions/AdminActions/deleteFlyer";
 import Swal from "sweetalert2";
 import { FlyerType } from "@/helpers/types/FlyerType";
 
@@ -9,6 +10,32 @@ const ActivateFlyers: React.FC = () => {
   const dispatch = useAppDispatch();
   const flyers = useAppSelector((state) => state.flyers.allFlyers); // Suponiendo que el estado de los flyers está en Redux
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({}); // Para manejar el estado de carga por flyer
+
+  const handleDelete = (id: number, name: string) => {
+    if (id > 0) {
+      Swal.fire({
+        title: `Do you want to delete the flyer ${name} ?`,
+        showDenyButton: true,
+        confirmButtonText: "Delete",
+        denyButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(deleteFlyer(id)).then((response: any) => {
+            if (response.success) {
+              Swal.fire("Deleted!", "", "success");
+            } else {
+              Swal.fire({
+                title: "Somtehing Failed!",
+                text: response.message,
+                icon: "error",
+                confirmButtonText: "Ok",
+              });
+            }
+          });
+        }
+      });
+    } 
+  };
 
   const handleToggleStatus = async (
     id: number,
@@ -21,19 +48,17 @@ const ActivateFlyers: React.FC = () => {
       );
 
       if (activeTextFlyer) {
-       Swal.fire("Error!", "Only one flyer of type 'Text' can be active", "error");
+        Swal.fire(
+          "Error!",
+          "Only one flyer of type 'Text' can be active",
+          "error"
+        );
         return;
       }
     }
     setLoading((prev) => ({ ...prev, [id]: true }));
 
     const response = await dispatch(modifyFlyer(id, !currentStatus));
-
-    if (response && response.success) {
-      console.log(`Flyer ${id} actualizado correctamente.`);
-    } else {
-      console.log(`Error al actualizar el flyer ${id}.`);
-    }
 
     setLoading((prev) => ({ ...prev, [id]: false }));
   };
@@ -80,7 +105,7 @@ const ActivateFlyers: React.FC = () => {
                     ? "Deactivate"
                     : "Activate"}
                 </button>
-                <button className="bg-gray-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-gray-600 transition-all duration-150 hover:ring-gray-700 hover:scale-105 active:bg-gray-700">
+                <button onClick={() => handleDelete(flyer.id, flyer.name)} className="bg-gray-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-gray-600 transition-all duration-150 hover:ring-gray-700 hover:scale-105 active:bg-gray-700">
                   Delete
                 </button>
               </div>

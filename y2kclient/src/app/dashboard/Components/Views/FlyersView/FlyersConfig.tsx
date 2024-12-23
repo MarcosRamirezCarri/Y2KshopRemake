@@ -2,7 +2,7 @@ import CreateFlyer from "../../Modals/FlyerModal/CreateFlyer";
 import { useState, useEffect } from "react";
 import { getAllFlyers } from "@/lib/actions/FlyerActions/getAllFlyers";
 import ActivateFlyers from "./ActivatesFlyers.ts/ActivatesFlyers";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import PreviewFlyers from "./Preview/Preview";
 
 const FlyersConfig = () => {
@@ -21,9 +21,8 @@ const FlyersConfig = () => {
       >
         Create flyer
       </button>
-      <p className="text-xl text-Lightblue-950  font-bold ">Preview big flyers</p>
+      <p className="text-xl text-Lightblue-950 font-bold ">Preview big flyers</p>
       <PreviewFlyers />
-      
       <ActivateFlyers />
       <CreateFlyer state={state} setState={setState} />
     </div>

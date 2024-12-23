@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import UserHistoryModal from "../../Modals/UserModal/UserModalHistory";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import Swal from "sweetalert2";
-import {changeToAdmin} from "@/lib/actions/AdminActions/setAdminUser";
-import {getAllUsers} from "@/lib/actions/AdminActions/getAllUsers";
+import { changeToAdmin } from "@/lib/actions/AdminActions/setAdminUser";
+import { getAllUsers } from "@/lib/actions/AdminActions/getAllUsers";
 
 const UsersTable = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,12 @@ const UsersTable = () => {
           if (response?.success) {
             Swal.fire("Saved!", "", "success");
           } else {
-            Swal.fire("Somethings wrong!", "", "error");
+            Swal.fire({
+              title: "Somtehing Failed!",
+              text: response.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
           }
         });
       }

@@ -46,6 +46,8 @@ router.put("/user", authenticateToken, userRoutes.putUser);
 
 router.put("/flyer/:id", authenticateToken, flyerRoutes.putFlyer)
 
+router.delete("/flyer/delete/:idFlyer", authenticateToken, flyerRoutes.deleteFlyer)
+
 router.delete("/cart/:userId/remove/:itemId",authenticateToken ,cartRoutes.deleteCartItem);
 
 router.delete("/product/delete/:idProduct",authenticateToken ,productRoutes.deleteProduct);
