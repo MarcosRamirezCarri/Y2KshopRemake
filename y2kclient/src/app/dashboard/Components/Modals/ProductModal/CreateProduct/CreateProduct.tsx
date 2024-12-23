@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import {Product} from "@/helpers/types/Types";
+import { Product } from "@/helpers/types/Types";
 import { uploadImage } from "@/helpers/services/cloudinarySet";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/validators/validatorProducts";
 import validateColors from "@/helpers/validators/validateColors";
-import {createProduct} from "@/lib/actions/AdminActions/createProduct";
+import { createProduct } from "@/lib/actions/AdminActions/createProduct";
 import Swal from "sweetalert2";
 import LabelForm from "./Labels/LabelForm";
 import LabelColors from "./Labels/LabelColors";
@@ -89,7 +89,6 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   };
 
   const handleAddSize = (colorIndex: number) => {
-
     const newColors = [...product.colors];
     if (newColors[colorIndex].sizes.length < 4) {
       newColors[colorIndex].sizes.push({ size: "", quantity: 0 });
@@ -105,14 +104,16 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const newColors = [...product.colors];
-  
+
     if (e.target.name === "quantity") {
-      const quantity = parseInt(e.target.value, 10); 
-      newColors[colorIndex].sizes[sizeIndex][e.target.name] = isNaN(quantity) ? 0 : quantity; // Asignamos 0 si no es un número válido
+      const quantity = parseInt(e.target.value, 10);
+      newColors[colorIndex].sizes[sizeIndex][e.target.name] = isNaN(quantity)
+        ? 0
+        : quantity; // Asignamos 0 si no es un número válido
     } else {
       newColors[colorIndex].sizes[sizeIndex][e.target.name] = e.target.value;
     }
-  
+
     setProduct({ ...product, colors: newColors });
   };
 
@@ -163,6 +164,13 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             colors: [],
             clasification: "",
             description: "",
+          });
+        } else {
+          Swal.fire({
+            title: "Somtehing Failed!",
+            text: result.message,
+            icon: "error",
+            confirmButtonText: "Ok",
           });
         }
       });

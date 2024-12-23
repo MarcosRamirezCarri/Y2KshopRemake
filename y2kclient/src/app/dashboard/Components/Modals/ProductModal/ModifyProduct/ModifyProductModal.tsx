@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/services/cloudinarySet";
 import validateProduct from "@/helpers/validators/validatorProducts";
 import { Product } from "@/helpers/types/Types";
-import {modProduct} from "@/lib/actions/AdminActions/modifyProduct";
+import { modProduct } from "@/lib/actions/AdminActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";
 import LabelFormMod from "./Label/LabelModify";
 
@@ -99,13 +99,18 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
               description: "",
             });
             setStateAdmin("");
+          } else {
+            Swal.fire({
+              title: "Somtehing Failed!",
+              text: result.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
           }
         });
       } else {
         Swal.fire("Fix the errors before uploading", "", "error");
       }
-    } else {
-      Swal.fire("FIrst Select an Product", "", "error");
     }
   };
 

@@ -18,7 +18,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
     name: "",
     type: "",
     text: "",
-    status: true,
+    status: false,
     id: 0,
   });
   const [error, setError] = useState({
@@ -93,7 +93,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             name: "",
             id: 0,
             type: "",
-            status: true,
+            status: false,
             text: "",
           });
           setError({
@@ -103,6 +103,13 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             text: "",
           });
           setState(!state);
+        } else {
+          Swal.fire({
+            title: "Somtehing Failed!",
+            text: response.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
         }
       });
     }
@@ -133,7 +140,9 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             value={flyers.type}
             onChange={(e) => handleChange(e)}
           >
-            <option disabled value="">Select Type</option>
+            <option disabled value="">
+              Select Type
+            </option>
             <option value="text">Text</option>
             <option value="bigFlyer">Big Flyer</option>
             <option value="smallFlyer">Small Flyer</option>

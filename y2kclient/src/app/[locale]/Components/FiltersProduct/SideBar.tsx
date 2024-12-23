@@ -17,6 +17,9 @@ import {
   const [statusFilter1, setStatusFilter1] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
+  const selectedCat = useAppSelector((state) => state.products.selectedCategory)
+  const selectedSize = useAppSelector((state) => state.products.selectedSize)
+
   const stateProducts = useAppSelector((state) => state.products.sortProducts);
 
   useEffect(() => {
@@ -78,7 +81,7 @@ import {
   return (
     <div>
       <div
-        className={`flex flex-row bg-[#00080a] gap-2 p-2 rounded-b-2xl top-[4.5rem] transition-all duration-300 z-[90] right-0 fixed self-start w-[40%]  ${
+        className={`flex flex-row bg-[#00080a] gap-2 p-2 pt-8 lg:pt-0 rounded-b-2xl top-[4.5rem] transition-all duration-300 z-[90] right-0 fixed self-start lg:w-[40%]  ${
           statusBar
             ? "translate-y-0 visible blur-none"
             : "translate-y-[-50vh] invisible blur-lg"
@@ -99,6 +102,9 @@ import {
           allSizes={allSizes}
           statusFilter1={statusFilter1}
           statusFilter2={statusFilter2}
+          selectedCat={selectedCat}
+          selectedSize={selectedSize}
+          
         />
       </div>
       {!statusBar ? (

@@ -57,7 +57,6 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
       Swal.fire({
         title: "Do you want to add this product to your cart?",
         showDenyButton: true,
-        showCancelButton: true,
         confirmButtonText: "Save",
         denyButtonText: "Don't save",
       }).then((result) => {

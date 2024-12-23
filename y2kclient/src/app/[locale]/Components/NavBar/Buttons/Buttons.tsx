@@ -152,10 +152,10 @@ const ButtonsNavBar = () => {
             <button className=" flex flex-col pb-1  text-2xl lg:text-3xl font-normal transition-all duration-300 hover:scale-105">
               <FaUserXmark />
             </button>{" "}
-            <span className="absolute text-md lg:text-[0.75rem] visible  justify-self-center bottom-1  font-bold  justify-self-center transition-all duration-300  translate-y-20 lg:-translate-y-1 -translate-x-2">
+            <span className="absolute invisible lg:visible lg:text-md   justify-self-center bottom-1  font-bold  justify-self-center transition-all duration-300   lg:-translate-y-2 lg:-translate-x-2  ">
               No Account
             </span>
-            <span className="absolute text-md lg:text-[0.55rem] visible  justify-self-center bottom-1 p-2 font-bold   justify-self-center transition-all duration-300  translate-y-20 lg:translate-y-2.5 -translate-x-2">
+            <span className="absolute text-md lg:text-[0.75rem]   justify-self-center bottom-1 p-2 font-bold   justify-self-center transition-all duration-300  lg:translate-y-2.5  lg:-translate-x-1">
               Sig In?
             </span>
           </div>
