@@ -1,24 +1,33 @@
 "use client";
-import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Product } from "@/helpers/types/Types";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import fetchProduct from "@/lib/actions/ProductActions/getDetail";
+import { useSearchParams } from "next/navigation";
+import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
+import { Product } from "@/helpers/types/Types";
 import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
-import { useEffect, useState } from "react";
 
-interface PropOfRecomned {
-  id: number;
-  clasification: string;
-}
-
-const SecondView: React.FC<PropOfRecomned> = ({ clasification, id }) => {
+const SecondView: React.FC = () => {
   const products = useAppSelector((state) => state.products.product);
   const [isMobile, setIsMobile] = useState(false);
+  const [classif, setClassif] = useState<string>("none");
   const dispatch = useAppDispatch();
+  const param = useSearchParams();
+  const searchId = param.get("id");
+  const numberId = Number(searchId);
+
+  useEffect(() => {
+    const fetchDetail = async () => {
+      const DetailProduct: any = await fetchProduct(numberId);
+      setClassif(DetailProduct[0].clasification);
+    };
+    fetchDetail();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +52,7 @@ const SecondView: React.FC<PropOfRecomned> = ({ clasification, id }) => {
   let AllProducts: Product[] = [];
   if (Array.isArray(products) && products.length > 0) {
     AllProducts = products.filter(
-      (product) => product.clasification === clasification && product.id !== id
+      (product) => product.clasification === classif && product.id !== numberId
     );
   }
   if (AllProducts.length > 0) {

@@ -2,11 +2,12 @@ import Image from "next/image";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import {deleteCartItem} from "@/lib/actions/CartActions/deleteCart";
-import {changeCartState} from "@/lib/actions/CartActions/changeCartState";
-import {getCartFromId} from "@/lib/actions/CartActions/getCart";
+import { deleteCartItem } from "@/lib/actions/CartActions/deleteCart";
+import { changeCartState } from "@/lib/actions/CartActions/changeCartState";
+import { getCartFromId } from "@/lib/actions/CartActions/getCart";
 import { Product } from "@/helpers/types/Types";
 import ModalModify from "./ModalModify/ModalModify";
+import { error } from "console";
 
 interface CartProduct {
   productId: number;
@@ -41,7 +42,7 @@ const CartCard: React.FC<CartProduct> = ({
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(changeCartState(userId, id, state)).then((response: any) => {
-          if (response.success) {
+          if (response?.success) {
             dispatch(getCartFromId(userId));
             Swal.fire(
               `Buyed for ${Product.price}`,
@@ -89,6 +90,11 @@ const CartCard: React.FC<CartProduct> = ({
       }
     });
   };
+  const buttonStyles =
+    "relative bg-pink-300 px-4 py-2 rounded-[1.25rem] text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200";
+  const buttonStylesPhone =
+    "relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem]  text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200";
+
   return (
     <div>
       <div className="grid grid-cols-6 p-5 font-tiltneon w-[100%] rounded-md gap-[0.5rem] bg-Lightblue-100 border-2 border-Lightblue-800">
@@ -115,44 +121,26 @@ const CartCard: React.FC<CartProduct> = ({
             ${Product.price}
           </p>
           <div className="flex flex-row gap-2 lg:hidden">
-            <button
-              onClick={handleBuy}
-              className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem]  text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-            >
+            <button onClick={handleBuy} className={buttonStylesPhone}>
               Buy
             </button>
-            <button
-              onClick={handleDelete}
-              className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem]  text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-            >
+            <button onClick={handleDelete} className={buttonStylesPhone}>
               Discard
             </button>
-            <button
-              onClick={handleModify}
-              className="relative self-end bg-pink-300 px-2  py-1 rounded-[1.25rem]  text-md text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-            >
+            <button onClick={handleModify} className={buttonStylesPhone}>
               Modify
             </button>
           </div>
         </div>
 
         <div className="lg:col-span-2  gap-3 hidden lg:flex lg:flex-col">
-          <button
-            onClick={handleBuy}
-            className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem]  text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-          >
+          <button onClick={handleBuy} className={buttonStyles}>
             Buy
           </button>
-          <button
-            onClick={handleDelete}
-            className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem] text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-          >
+          <button onClick={handleDelete} className={buttonStyles}>
             Discard
           </button>
-          <button
-            onClick={handleModify}
-            className="relative bg-pink-300 px-4 py-2 rounded-[1.25rem]  text-lg lg:text-xl text-pink-950 font-normal transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-pink-200"
-          >
+          <button onClick={handleModify} className={buttonStyles}>
             Modify
           </button>
         </div>

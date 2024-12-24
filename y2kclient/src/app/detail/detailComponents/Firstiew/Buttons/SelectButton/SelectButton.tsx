@@ -34,7 +34,7 @@ const SelectButtons: React.FC<ButtonProps> = ({
         Select Size
       </button>
 
-      <div className={`absolute left-[6.5rem] flex flex-row gap-2`}>
+      <div className={`absolute left-[6.8rem] flex flex-row gap-2`}>
         {colors.map((colorObj: any, colorIndex: number) => (
           <div
             key={colorIndex}

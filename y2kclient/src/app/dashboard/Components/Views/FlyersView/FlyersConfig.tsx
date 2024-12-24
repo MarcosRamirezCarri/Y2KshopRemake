@@ -7,7 +7,6 @@ import PreviewFlyers from "./Preview/Preview";
 
 const FlyersConfig = () => {
   const [state, setState] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {

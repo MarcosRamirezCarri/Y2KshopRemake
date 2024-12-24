@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import Image from "next/image";
 import { modifyFlyer } from "@/lib/actions/AdminActions/modifyFlyer";
+import { getAllFlyers } from "@/lib/actions/FlyerActions/getAllFlyers";
 import { deleteFlyer } from "@/lib/actions/AdminActions/deleteFlyer";
 import Swal from "sweetalert2";
 import { FlyerType } from "@/helpers/types/FlyerType";
 
 const ActivateFlyers: React.FC = () => {
   const dispatch = useAppDispatch();
-  const flyers = useAppSelector((state) => state.flyers.allFlyers); // Suponiendo que el estado de los flyers está en Redux
+  const flyers = useAppSelector((state) => state.flyers.allFlyers);
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({}); // Para manejar el estado de carga por flyer
+
+
+
 
   const handleDelete = (id: number, name: string) => {
     if (id > 0) {
@@ -23,6 +27,7 @@ const ActivateFlyers: React.FC = () => {
           dispatch(deleteFlyer(id)).then((response: any) => {
             if (response.success) {
               Swal.fire("Deleted!", "", "success");
+              dispatch(getAllFlyers());
             } else {
               Swal.fire({
                 title: "Somtehing Failed!",

@@ -126,6 +126,7 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
 
     res.status(200).json(cartItem);
   } catch (error: any) {
+   
     res.status(500).json({ message: error.message });
   }
 };

@@ -10,16 +10,17 @@ const AllCart = () => {
   const dispatch = useAppDispatch();
   const [logged, setLogged] = useState<boolean>(false);
   const [userId, setUserId] = useState(0);
+  const id = localStorage.getItem("userId");
+
+    const idUser = Number(id);
 
   useEffect(() => {
-    const id = localStorage.getItem("userId");
-
-    const userId = Number(id);
+    
 
     setUserId(userId);
     setLogged(!logged);
-    dispatch(getCartFromId(userId));
-  }, [dispatch]);
+    dispatch(getCartFromId(idUser));
+  }, [idUser]);
 
   const stateCart = useAppSelector((state) => state.cart.cart);
   const showCart = stateCart.filter((item) => item.state === "inCart");

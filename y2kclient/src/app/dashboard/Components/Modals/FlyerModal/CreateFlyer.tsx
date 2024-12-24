@@ -1,11 +1,12 @@
-import { useState } from "react";
 import Image from "next/image";
+import Swal from "sweetalert2";
+import { useState } from "react";
 import { uploadImage } from "@/helpers/services/cloudinarySet";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import Swal from "sweetalert2";
 import { createFlyer } from "@/lib/actions/AdminActions/createFlyer";
-import validateFlyer from "@/helpers/validators/validateFlyers";
+import { getAllFlyers } from "@/lib/actions/FlyerActions/getAllFlyers";
 import { FlyerType } from "@/helpers/types/FlyerType";
+import validateFlyer from "@/helpers/validators/validateFlyers";
 
 interface CreateFlyerProps {
   state: boolean;
@@ -88,6 +89,7 @@ const CreateFlyer: React.FC<CreateFlyerProps> = ({ state, setState }) => {
             "Enable him in the flyers section!",
             "success"
           );
+          dispatch(getAllFlyers())
           setFlyers({
             image: "",
             name: "",
