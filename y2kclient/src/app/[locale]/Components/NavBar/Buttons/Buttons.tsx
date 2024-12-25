@@ -6,12 +6,15 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import * as jose from "jose";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import LoginModal from "../../LoginModal/LoginModal";
-import { FaCartShopping, FaBagShopping, FaUserXmark, FaIdBadge } from "react-icons/fa6";
+import {
+  FaCartShopping,
+  FaBagShopping,
+  FaUserXmark,
+  FaIdBadge,
+} from "react-icons/fa6";
 import { BsArchiveFill } from "react-icons/bs";
 
 const secret = "y2k_project";
-
-
 
 const ButtonsNavBar = () => {
   const [stateButton, setStateButton] = useState<string>("");
@@ -24,14 +27,23 @@ const ButtonsNavBar = () => {
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("token");
-      const userId = Number(localStorage.getItem("userId"));
+      const userId = localStorage.getItem("userId");
+      const numberUserId =
+        userId && !isNaN(Number(userId)) ? Number(userId) : null;
+
+      if (!numberUserId) {
+        return;
+      }
 
       if (token) {
         try {
-          const decoded = await jose.jwtVerify(token, new TextEncoder().encode(secret));
+          const decoded = await jose.jwtVerify(
+            token,
+            new TextEncoder().encode(secret)
+          );
           if (decoded.payload?.userId) {
             setStateUser(true);
-            dispatch(setUserFromId(userId));
+            dispatch(setUserFromId(numberUserId));
           } else {
             localStorage.clear();
           }

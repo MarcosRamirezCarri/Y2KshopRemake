@@ -14,9 +14,14 @@ const ViewOfAll = () => {
   const user: any = useAppSelector((state) => state.account.user);
 
   useEffect(() => {
-    const id = localStorage.getItem("userId");
-    const userId = Number(id);
-      dispatch(setUserFromId(userId));
+   
+  const userId = localStorage.getItem("userId");
+  const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+
+  if (!numberUserId) {
+    return;
+  }
+      dispatch(setUserFromId(numberUserId));
     
   }, [dispatch]);
 

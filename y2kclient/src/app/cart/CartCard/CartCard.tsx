@@ -63,9 +63,8 @@ const CartCard: React.FC<CartProduct> = ({
     Swal.fire({
       title: "Do you want Modify this product from your cart?",
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: "Modify",
-      denyButtonText: "Don't Modify",
+      denyButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         setModal(!modal);
@@ -78,9 +77,8 @@ const CartCard: React.FC<CartProduct> = ({
     Swal.fire({
       title: "Do you want delete this product from your cart?",
       showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: "Don't save",
+      confirmButtonText: "Delete",
+      denyButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "", "success");

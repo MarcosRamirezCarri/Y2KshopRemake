@@ -13,8 +13,14 @@ interface CardHistoryProps {
 const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
   const dispatch = useAppDispatch();
 
+
   const userId = localStorage.getItem("userId");
-  const numberUserId = Number(userId);
+const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+
+if (!numberUserId) {
+  Swal.fire("Invalid User ID", "Please login again.", "error");
+  return;
+}
 
   const handleCancel = () => {
     const state = "cancel";

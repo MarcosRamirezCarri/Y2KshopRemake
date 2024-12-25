@@ -1,7 +1,7 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "../../lib/hooks/hooks";
 import { useEffect, useState } from "react";
-import {getCartFromId} from "@/lib/actions/CartActions/getCart";
+import { getCartFromId } from "@/lib/actions/CartActions/getCart";
 import { BsFillCartXFill } from "react-icons/bs";
 import { BsCartPlusFill } from "react-icons/bs";
 import CartCard from "./CartCard/CartCard";
@@ -9,24 +9,25 @@ import CartCard from "./CartCard/CartCard";
 const AllCart = () => {
   const dispatch = useAppDispatch();
   const [logged, setLogged] = useState<boolean>(false);
-  const [userId, setUserId] = useState(0);
-  const id = localStorage.getItem("userId");
 
-    const idUser = Number(id);
+  const userId = localStorage.getItem("userId");
+  const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+
+  if (!numberUserId) {
+    return;
+  }
 
   useEffect(() => {
-    
-
-    setUserId(userId);
     setLogged(!logged);
-    dispatch(getCartFromId(idUser));
-  }, [idUser]);
+    dispatch(getCartFromId(numberUserId));
+  }, [numberUserId]);
 
-  const stateCart = useAppSelector((state) => state.cart.cart);
-  const showCart = stateCart.filter((item) => item.state === "inCart");
+  const stateCart= useAppSelector((state) => state.cart.cart);
+  const showCart = stateCart?.filter((item) => item.state === "inCart");
+  
 
   return (
-    <div className="relative top-[10rem] w-[90%] flex flex-col ">
+    <div className="relative top-[7.5rem] w-[90%] flex flex-col ">
       {logged ? (
         <div className=" grid items-center gap-[1rem] ">
           {showCart.length > 0 ? (
@@ -34,7 +35,7 @@ const AllCart = () => {
               <div key={product.id}>
                 <CartCard
                   id={product.id}
-                  userId={userId}
+                  userId={numberUserId}
                   productId={product.productId}
                   color={product.color}
                   quantity={product.quantity}

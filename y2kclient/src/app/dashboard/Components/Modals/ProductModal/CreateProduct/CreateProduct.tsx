@@ -203,11 +203,18 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             value={product.name}
             error={errors.name}
           />
-          <label className="w-[50%] bg-Lightblue-400 flex flex-col items-center py-2 cursor-pointer m-2 font-titilium text-lg rounded ring-2 ring-Lightblue-500 hover:ring-Lightblue-700 active:bg-Lightblue-500 transition-all delay-50">
+          <label
+            className={`w-[50%] ${
+              product.images.length >= 4
+                ? "bg-Lightblue-300 ring-Lightblue-400 cursor-not-allowed"
+                : "hover:ring-Lightblue-700 active:bg-Lightblue-500 bg-Lightblue-400 ring-Lightblue-500 cursor-pointer"
+            } flex flex-col items-center py-2 m-2 font-titilium text-lg rounded ring-2  transition-all delay-50`}
+          >
             <p>Upload Image</p>
             <input
               type="file"
               className="w-full hidden"
+              disabled={product.images.length >= 4}
               onChange={handleFileChange}
             />
           </label>

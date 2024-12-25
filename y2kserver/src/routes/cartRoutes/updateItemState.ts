@@ -6,6 +6,8 @@ import ProductModel from "../../models/Products";
 export const addToHistoryItem = async (req: Request, res: Response) => {
   const { userId, itemId, newState, lastUpdate } = req.body;
 
+  console.log(userId, itemId, newState, lastUpdate)
+
   if (!userId || !itemId || !newState) {
     return res.status(400).json({ message: "No Userid, idProduct, or State" });
   }
@@ -87,6 +89,11 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
       );
     }
 
+    if (newState === "deleteItem") {
+      await cartItem.destroy();
+      return res.status(204).send();
+    }
+
     const existingItemIndex = user.history.findIndex(
       (item: any) => item.itemId === itemId
     );
@@ -113,7 +120,6 @@ export const addToHistoryItem = async (req: Request, res: Response) => {
     }
 
     user.history = updatedHistory;
-
     cartItem.lastUpdate = lastUpdate;
     cartItem.state = newState;
 

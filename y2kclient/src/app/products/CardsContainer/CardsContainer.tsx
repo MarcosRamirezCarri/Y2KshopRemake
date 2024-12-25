@@ -18,7 +18,7 @@ export default function CardsContainer() {
 
   const place = "products";
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 relative gap-[2rem] top-[10rem] w-[90%] justify-items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-4 relative gap-[2rem] top-[7.5rem] w-[90%] justify-items-center">
       {stateProducts.length > 0 ? (
         stateProducts.map((a, index) => (
           <div key={index}>

@@ -45,7 +45,7 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`w-[60%] font-titilium bg-Lightblue-200 gap-2 justify-center transition-all duration-250 grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
+        className={`w-[80%] font-titilium bg-Lightblue-300 gap-2 justify-center transition-all duration-250 grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
           state ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >

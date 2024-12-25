@@ -7,11 +7,7 @@ import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import SelectButtons from "./Buttons/SelectButton/SelectButton";
 import AddToCart from "./Buttons/AddToCart/AddToCartbtn";
 
-
-
-const FirstView = ({
-
-}) => {
+const FirstView = ({}) => {
   const [stateDetail, setStateDetail] = useState<Product>({
     id: 0,
     name: "",
@@ -25,7 +21,7 @@ const FirstView = ({
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const param = useSearchParams();
   const searchId = param.get("id");
-  const numberId = Number(searchId)
+  const numberId = Number(searchId);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -43,16 +39,18 @@ const FirstView = ({
     setSelectedSize(size);
   };
   const renderImages = () =>
-    stateDetail.images?.map((img, index) => (
-      <Image
-        key={index}
-        src={img}
-        alt="Product image"
-        className="rounded w-[8.25rem] lg:w-[10.25rem] h-[8.25rem] lg:h-[10.25rem] ring-2 ring-pink-300 bg-transparent hover:ring-pink-500"
-        width={480}
-        height={400}
-      />
-    ));
+    stateDetail.images
+      ?.filter((_, index) => index !== 0) // Excluye la imagen en la posición 0
+      .map((img, index) => (
+        <Image
+          key={index}
+          src={img}
+          alt="Product image"
+          className="rounded w-[7.25rem] lg:w-[9.25rem] h-[7.25rem] lg:h-[9.25rem] ring-2 ring-pink-300 bg-transparent hover:ring-pink-500"
+          width={480}
+          height={400}
+        />
+      ));
 
   const renderSelectedInfo = () => (
     <div
@@ -72,9 +70,11 @@ const FirstView = ({
   );
 
   return (
-    <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 w-full gap-3">
+    <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 gap-3">
       {/* Left: Image Thumbnails */}
-      <div className="col-span-1 flex flex-col items-center gap-5 py-10 relative top-20 lg:top-1">
+      <div
+        className={`col-span-1 flex flex-col items-center gap-5 relative top-5 `}
+      >
         {renderImages()}
       </div>
 
@@ -86,7 +86,7 @@ const FirstView = ({
         <Image
           src={stateDetail.images[0]}
           alt="Main product image"
-          className="rounded w-[20.25rem] lg:w-[24.25rem] h-[20.25rem] lg:h-[24.25rem] ring-2 ring-pink-300 bg-transparent"
+          className="rounded w-[18.25rem] lg:w-[24.25rem] h-[18.25rem] lg:h-[24.25rem] ring-2 ring-pink-300 bg-transparent"
           width={880}
           height={800}
         />
@@ -94,18 +94,24 @@ const FirstView = ({
       </div>
 
       {/* Right: Product Details and Actions */}
-      <div className="col-span-3 lg:col-span-2 flex flex-col p-6 gap-3">
+      <div className="col-span-3 relative lg:col-span-2 flex flex-col p-6 gap-3 top-5">
         <div className="font-tiltneon text-xl text-pink-950">
           Category:
-          <span className="font-light text-gray-800 px-2">- {stateDetail.clasification}</span>
+          <span className="font-light text-gray-800 px-2">
+            - {stateDetail.clasification}
+          </span>
         </div>
         <div className="font-tiltneon text-xl text-pink-950">
           Description:
-          <p className="font-light text-gray-800">- {stateDetail.description}</p>
+          <p className="font-light text-gray-800">
+            - {stateDetail.description}
+          </p>
         </div>
         <div className="font-tiltneon text-xl text-pink-950">
           Price:
-          <span className="font-light text-gray-800 px-2">- ${stateDetail.price}</span>
+          <span className="font-light text-gray-800 px-2">
+            - ${stateDetail.price}
+          </span>
         </div>
 
         <div className="flex flex-col justify-start gap-3 items-start">
@@ -116,7 +122,10 @@ const FirstView = ({
             selectedColor={selectedColor}
             colors={stateDetail.colors}
           />
-          <AddToCart selectedColor={selectedColor} selectedSize={selectedSize} />
+          <AddToCart
+            selectedColor={selectedColor}
+            selectedSize={selectedSize}
+          />
         </div>
       </div>
     </div>

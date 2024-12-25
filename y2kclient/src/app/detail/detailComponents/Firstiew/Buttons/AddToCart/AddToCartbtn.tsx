@@ -1,3 +1,4 @@
+"use client"
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useState, useEffect } from "react";
 import {getCartFromId} from "@/lib/actions/CartActions/getCart";
@@ -18,24 +19,27 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
   const searchId = param.get("id");
   const NumberId = Number(searchId);
 
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
 
+  const userId = localStorage.getItem("userId");
+  const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+
+  if (!numberUserId) {
+    return;
+  }
   const dispatch = useAppDispatch();
   const stateCart = useAppSelector((state) => state.cart.cart);
 
   useEffect(() => {
-    const auxId = Number(userId);
-    if (token === "undefined" || token === "null" || token === null) {
+    if (!numberUserId) {
       setModal(true);
     } else {
-      dispatch(getCartFromId(auxId));
+      dispatch(getCartFromId(numberUserId));
     }
   }, [modal]);
 
   const handleAddToCart = () => {
     const productExists = stateCart.find((item) => item.productId === NumberId);
-    if (!token || token === "undefined" || token === "null") {
+    if (!numberUserId) {
       setModal(true);
     } else if (productExists || !selectedSize) {
       let errorMessage = "";
@@ -63,7 +67,7 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
         if (result.isConfirmed) {
           Swal.fire("Saved!", "", "success");
           const cartItem = {
-            userId: Number(userId),
+            userId: numberUserId,
             productId: NumberId,
             quantity: 1,
             color: selectedColor,
