@@ -57,7 +57,7 @@ const SecondView: React.FC = () => {
   }
   if (AllProducts.length > 0) {
     return (
-      <div className="flex flex-col items-left gap-5 m-5 w-[100%]">
+      <div className="flex flex-col items-left gap-5 m-10 w-[100%]">
         <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">
           Related Products
         </p>

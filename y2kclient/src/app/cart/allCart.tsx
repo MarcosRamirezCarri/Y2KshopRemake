@@ -23,7 +23,7 @@ const AllCart = () => {
   }, [numberUserId]);
 
   const stateCart= useAppSelector((state) => state.cart.cart);
-  const showCart = stateCart?.filter((item) => item.state === "inCart");
+  const showCart = stateCart.length > 0 ? stateCart?.filter((item) => item.state === "inCart") : []
   
 
   return (

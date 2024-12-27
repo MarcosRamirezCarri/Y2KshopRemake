@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import SelectButtons from "./Buttons/SelectButton/SelectButton";
+import ImagesDetail from "./Images/imagesDetail";
 import AddToCart from "./Buttons/AddToCart/AddToCartbtn";
 
-const FirstView = ({}) => {
+const FirstView = () => {
   const [stateDetail, setStateDetail] = useState<Product>({
     id: 0,
     name: "",
@@ -35,22 +36,10 @@ const FirstView = ({}) => {
     setSelectedColor(color);
     setSelectedSize(null);
   };
+
   const handleChangeSize = (size: string) => {
     setSelectedSize(size);
   };
-  const renderImages = () =>
-    stateDetail.images
-      ?.filter((_, index) => index !== 0) // Excluye la imagen en la posición 0
-      .map((img, index) => (
-        <Image
-          key={index}
-          src={img}
-          alt="Product image"
-          className="rounded w-[7.25rem] lg:w-[9.25rem] h-[7.25rem] lg:h-[9.25rem] ring-2 ring-pink-300 bg-transparent hover:ring-pink-500"
-          width={480}
-          height={400}
-        />
-      ));
 
   const renderSelectedInfo = () => (
     <div
@@ -72,11 +61,7 @@ const FirstView = ({}) => {
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 gap-3">
       {/* Left: Image Thumbnails */}
-      <div
-        className={`col-span-1 flex flex-col items-center gap-5 relative top-5 `}
-      >
-        {renderImages()}
-      </div>
+      <ImagesDetail stateDetail={stateDetail} setStateDetail={setStateDetail}/>
 
       {/* Center: Main Product Information */}
       <div className="col-span-2 flex flex-col items-center gap-3">
@@ -84,7 +69,7 @@ const FirstView = ({}) => {
           {stateDetail.name}
         </p>
         <Image
-          src={stateDetail.images[0]}
+          src={stateDetail.images[0]} // Imagen principal
           alt="Main product image"
           className="rounded w-[18.25rem] lg:w-[24.25rem] h-[18.25rem] lg:h-[24.25rem] ring-2 ring-pink-300 bg-transparent"
           width={880}
@@ -94,22 +79,22 @@ const FirstView = ({}) => {
       </div>
 
       {/* Right: Product Details and Actions */}
-      <div className="col-span-3 relative lg:col-span-2 flex flex-col p-6 gap-3 top-5">
+      <div className="col-span-3 relative lg:col-span-2 flex flex-col gap-3 top-10">
         <div className="font-tiltneon text-xl text-pink-950">
           Category:
-          <span className="font-light text-gray-800 px-2">
+          <span className="font-light text-gray-950 px-2">
             - {stateDetail.clasification}
           </span>
         </div>
-        <div className="font-tiltneon text-xl text-pink-950">
+        <div className="font-tiltneon w-[90%] text-xl text-pink-950">
           Description:
-          <p className="font-light text-gray-800">
+          <p className="font-light text-gray-950">
             - {stateDetail.description}
           </p>
         </div>
         <div className="font-tiltneon text-xl text-pink-950">
           Price:
-          <span className="font-light text-gray-800 px-2">
+          <span className="font-light text-gray-950 px-2">
             - ${stateDetail.price}
           </span>
         </div>

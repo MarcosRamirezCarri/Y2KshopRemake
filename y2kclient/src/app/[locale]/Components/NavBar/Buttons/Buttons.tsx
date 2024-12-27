@@ -100,10 +100,10 @@ const ButtonsNavBar = () => {
             <button className="text-2xl lg:text-3xl font-normal transition-all duration-300 hover:scale-105">
               <FaUserXmark />
             </button>
-            <span className="absolute invisible lg:visible lg:text-md bottom-1 font-bold transition-all duration-300 lg:-translate-y-2">
+            <span className="absolute invisible lg:visible lg:text-md bottom-1 font-bold transition-all duration-300 lg:-translate-y-2 lg:-translate-x-1">
               No Account
             </span>
-            <span className="absolute text-md lg:text-[0.75rem] bottom-1 p-2 font-bold transition-all duration-300 lg:translate-y-2.5">
+            <span className="absolute text-md lg:text-[0.75rem] bottom-1 p-2 font-bold transition-all duration-300 lg:translate-y-2.5 lg:-translate-x-1">
               Sign In?
             </span>
           </div>

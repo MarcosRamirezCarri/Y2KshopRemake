@@ -43,6 +43,10 @@ const validateProduct = (product: Product) => {
       isValid = false;
 
     }
+    if (product.description.length > 100) {
+      newErrors.description = 'Description need to be less than 100 characters'
+      isValid = false;
+    }
 
     return newErrors;
     
