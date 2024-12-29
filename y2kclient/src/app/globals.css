@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: #fee5f2;
-  --background-end-rgb: #258995;
+  --background-start-rgb: 254, 229, 242; /* #fee5f2 */
+  --background-end-rgb: 211, 245, 245;    /* #258995 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,14 +16,25 @@
   }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
-      transparent,
+      rgb(var(--background-start-rgb)),
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 @layer utilities {

@@ -1,10 +1,8 @@
 "use client";
 import NavLink from "./NavLink/NavLinks";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState,  } from "react";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
-import * as jose from "jose";
-import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
 import LoginModal from "../../LoginModal/LoginModal";
 import {
   FaCartShopping,
@@ -14,47 +12,13 @@ import {
 } from "react-icons/fa6";
 import { BsArchiveFill } from "react-icons/bs";
 
-const secret = "y2k_project";
 
 const ButtonsNavBar = () => {
   const [stateButton, setStateButton] = useState<string>("");
   const [modal, setModal] = useState<boolean>(false);
-  const [stateUser, setStateUser] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.account.user);
+  const user: any = useAppSelector((state) => state.account.user);
   const path = usePathname();
 
-  useEffect(() => {
-    const verifyToken = async () => {
-      const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId");
-      const numberUserId =
-        userId && !isNaN(Number(userId)) ? Number(userId) : null;
-
-      if (!numberUserId) {
-        return;
-      }
-
-      if (token) {
-        try {
-          const decoded = await jose.jwtVerify(
-            token,
-            new TextEncoder().encode(secret)
-          );
-          if (decoded.payload?.userId) {
-            setStateUser(true);
-            dispatch(setUserFromId(numberUserId));
-          } else {
-            localStorage.clear();
-          }
-        } catch {
-          localStorage.clear();
-        }
-      }
-    };
-
-    verifyToken();
-  }, [dispatch]);
 
   return (
     <div>
@@ -82,7 +46,7 @@ const ButtonsNavBar = () => {
           isActive={stateButton === "product" || path === "/products"}
           onHover={() => setStateButton("product")}
         />
-        {stateUser ? (
+        {user.id ? (
           <NavLink
             href="/account"
             icon={FaIdBadge}

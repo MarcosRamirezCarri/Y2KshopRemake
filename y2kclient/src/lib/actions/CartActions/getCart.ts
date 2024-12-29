@@ -12,7 +12,6 @@ export const getCartFromId = (userId: number) => async (dispatch: Dispatch) => {
       },
     });
     const cartData = data.data;
-    const status = data.status;
 
     if(cartData){
       dispatch(saveToCart(cartData));

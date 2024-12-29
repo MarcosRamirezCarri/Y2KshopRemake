@@ -21,6 +21,10 @@ server.use(cors({
 
 server.use('/api', router);
 
+server.use((err: Error, req: Request, res: Response, next: Function) => {
+  console.error("Unhandled error:", err.stack || err.message);
+  res.status(500).json({ error: "Internal server error" });
+});
 
 server.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;

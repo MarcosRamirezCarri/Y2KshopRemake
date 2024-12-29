@@ -7,7 +7,6 @@ import { changeCartState } from "@/lib/actions/CartActions/changeCartState";
 import { getCartFromId } from "@/lib/actions/CartActions/getCart";
 import { Product } from "@/helpers/types/Types";
 import ModalModify from "./ModalModify/ModalModify";
-import { error } from "console";
 
 interface CartProduct {
   productId: number;
@@ -15,7 +14,7 @@ interface CartProduct {
   quantity: number;
   color: string;
   size: string;
-  userId: number;
+  userId: any;
   Product: Product;
 }
 

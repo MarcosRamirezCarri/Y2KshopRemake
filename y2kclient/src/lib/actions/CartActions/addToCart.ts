@@ -10,19 +10,23 @@ export const addToCart = (cart: any) => async (dispatch: Dispatch) => {
   try {
     const date = new Date().toISOString();
     const lastUpdate = formatDate(date);
-const token = localStorage.getItem("token");
-    const data = await axios.post(`${Server}/cart/${userId}/add`, {
-      productId,
-      quantity,
-      color,
-      size,
-      state,
-      lastUpdate
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const token = localStorage.getItem("token");
+    const data = await axios.post(
+      `${Server}/cart/${userId}/add`,
+      {
+        productId,
+        quantity,
+        color,
+        size,
+        state,
+        lastUpdate,
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const savedCart = data.data;
     const status = data.status;
     if (status === 201) {

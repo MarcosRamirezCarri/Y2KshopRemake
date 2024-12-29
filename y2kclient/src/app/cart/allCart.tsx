@@ -9,22 +9,24 @@ import CartCard from "./CartCard/CartCard";
 const AllCart = () => {
   const dispatch = useAppDispatch();
   const [logged, setLogged] = useState<boolean>(false);
-
-  const userId = localStorage.getItem("userId");
-  const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
-
-  if (!numberUserId) {
-    return;
-  }
+  const [user, setUser] = useState<number | null>(null);
 
   useEffect(() => {
-    setLogged(!logged);
-    dispatch(getCartFromId(numberUserId));
-  }, [numberUserId]);
+    const userId = localStorage.getItem("userId");
+    const numberUserId =
+      userId && !isNaN(Number(userId)) ? Number(userId) : null;
+    if (numberUserId) {
+      setLogged(!logged);
+      setUser(numberUserId)
+      dispatch(getCartFromId(numberUserId));
+    }
+  }, []);
 
-  const stateCart= useAppSelector((state) => state.cart.cart);
-  const showCart = stateCart.length > 0 ? stateCart?.filter((item) => item.state === "inCart") : []
-  
+  const stateCart = useAppSelector((state) => state.cart.cart);
+  const showCart =
+    stateCart.length > 0
+      ? stateCart?.filter((item) => item.state === "inCart")
+      : [];
 
   return (
     <div className="relative top-[7.5rem] w-[90%] flex flex-col ">
@@ -35,7 +37,7 @@ const AllCart = () => {
               <div key={product.id}>
                 <CartCard
                   id={product.id}
-                  userId={numberUserId}
+                  userId={user}
                   productId={product.productId}
                   color={product.color}
                   quantity={product.quantity}
