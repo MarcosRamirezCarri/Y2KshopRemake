@@ -20,7 +20,6 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
   const token: any = useAppSelector((state) => state.account.token);
   const user: any = useAppSelector((state) => state.account.user);
 
-  console.log("se renderiza");
 
   useEffect(() => {
     if (typeof window !== "undefined") {

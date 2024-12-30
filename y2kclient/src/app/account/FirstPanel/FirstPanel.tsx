@@ -2,7 +2,7 @@
 import LogOutBtn from "@/app/[locale]/Components/LoginModal/LogOutBtn";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
+import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
 
 const AccountFirstPanel = () => {
   const dispatch = useAppDispatch();

@@ -1,12 +1,10 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import LoginModal from "../../LoginModal/LoginModal";
-import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
+import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
 import { verifySession } from "@/lib/actions/AccountActions/verifyUser";
 
 const SessionVerify = () => {
-const [modal, setModal] = useState<boolean>(false)
   const dispatch = useAppDispatch();
 
   
@@ -30,17 +28,14 @@ const [modal, setModal] = useState<boolean>(false)
             console.warn("Invalid token, clearing localStorage");
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
-            setModal(true)
-
+           
           }
         } catch (error) {
           console.error("Error verifying token:", error);
           localStorage.clear();
-          setModal(true)
+ 
         }
-      } else{
-        setModal(true)
-      }
+      } 
     };
 
     verifyToken();

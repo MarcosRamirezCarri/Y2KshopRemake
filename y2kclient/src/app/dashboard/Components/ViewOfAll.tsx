@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
+import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
 import TaskList from "./Views/TasksViews/TaskList";
 import SideBarDashboard from "./SideBarDashboard";

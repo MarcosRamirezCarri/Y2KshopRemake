@@ -1,7 +1,7 @@
 interface LabelFormProps {
-    name: string;
+    name: any ;
     onChange: any;
-    error: string;
+    error: any;
     label: string;
     value: string;
   }
