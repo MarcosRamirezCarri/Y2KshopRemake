@@ -8,6 +8,7 @@ const jwtConfig = {
 export const isAuthenticated = async (req: NextRequest) => {
   let token: any = req.cookies.get("token")?.value.trim();
 
+
   if (token) {
     try {
       const decoded = await jose.jwtVerify(token, jwtConfig.secret);

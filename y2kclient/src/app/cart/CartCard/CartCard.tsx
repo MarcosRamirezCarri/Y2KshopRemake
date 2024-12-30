@@ -99,23 +99,23 @@ const CartCard: React.FC<CartProduct> = ({
           <Image
             width={680}
             height={680}
-            src={Product.images[0]}
+            src={Product?.images[0]}
             className="rounded w-[10.25rem] ring-2 ring-Lightblue-200 h-[10.25rem] bg-transparent"
             alt="no image"
           />
         </div>
         <div className="col-span-4 lg:col-span-2 flex flex-col gap-3">
           <p className=" text-md lg:text-xl text-Lightblue-950 font-semibold">
-            {Product.name}
+            {Product?.name}
           </p>
           <p className=" text-md lg:text-xl text-Lightblue-950 font-semibold">
-            {Product.clasification}
+            {Product?.clasification}
           </p>
           <p className=" text-md lg:text-xl text-Lightblue-950 font-semibold">
             {color}, {size}
           </p>
           <p className=" text-md lg:text-xl text-Lightblue-950 font-semibold">
-            ${Product.price}
+            ${Product?.price}
           </p>
           <div className="flex flex-row gap-2 lg:hidden">
             <button onClick={handleBuy} className={buttonStylesPhone}>

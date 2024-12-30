@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ButtonsNavBar from "./Buttons/Buttons";
-import SessionVerify from "./SessionVerify/SessionVerify";
 import SearchBar from "./SearchBar/SearchBar";
+import SessionVerify from "./SessionVerify/SessionVerify";
 import TextFlyer from "./TextFlyer/TextFlyer";
 
 export default function Navbar() {
@@ -20,8 +20,8 @@ export default function Navbar() {
 
       <SearchBar />
       <ButtonsNavBar />
-      <TextFlyer />
       <SessionVerify/>
+      <TextFlyer />
     </div>
   );
 }

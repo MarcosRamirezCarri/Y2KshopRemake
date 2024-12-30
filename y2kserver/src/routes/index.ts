@@ -35,6 +35,8 @@ router.get("/product/:idProduct", productRoutes.searchById);
 
 router.get("/cart/:userId", authenticateToken , cartRoutes.getCartItems);
 
+router.get("/session", userRoutes.verifySession);
+
 router.get("/flyer", flyerRoutes.getFlyers);
 
 router.put("/cart/:userId/modify/:itemId", authenticateToken,  cartRoutes.putCartItem);

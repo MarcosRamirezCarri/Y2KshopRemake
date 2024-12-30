@@ -49,17 +49,22 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
       return;
     }
 
-    const existingItem = cartItems.find((item) => item.productId === productId);
-
+    const existingItem: any = cartItems.find(
+      (item) => item.productId === productId
+    );
     if (existingItem) {
-      const messages: Record<string, string> = {
-        inCart: "This product is already in your cart!",
-        inDispatch:
-          "You already bought this product, check your history to follow its state!",
-      };
+      if (existingItem.state !== "sended") {
+        const messages: Record<string, string> = {
+          inCart: "This product is already in your cart!",
+          pending:
+            "You already bought this product, check your history to follow its state!",
+          approved:
+            "You already bought this product, check your history to follow its state!",
+        };
 
-      showAlert("error", "Oops...", messages[existingItem.state] || "");
-      return;
+        showAlert("error", "Oops...", messages[existingItem.state]);
+        return;
+      }
     }
 
     if (!selectedSize) {

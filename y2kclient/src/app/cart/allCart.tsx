@@ -20,7 +20,7 @@ const AllCart = () => {
       setUser(numberUserId)
       dispatch(getCartFromId(numberUserId));
     }
-  }, []);
+  }, [dispatch]);
 
   const stateCart = useAppSelector((state) => state.cart.cart);
   const showCart =

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import {modifyCart} from "@/lib/actions/CartActions/modifyCart";
+import { getCartFromId } from "@/lib/actions/CartActions/getCart";
+import { modifyCart } from "@/lib/actions/CartActions/modifyCart";
 import Swal from "sweetalert2";
 import { Product } from "@/helpers/types/Types";
 
@@ -48,7 +49,7 @@ const ModalModify: React.FC<ModalModifyProps> = ({
         }).then((result) => {
           if (result.isConfirmed) {
             setModal(!modal);
-            location.reload();
+            dispatch(getCartFromId(userId));
           }
         });
       } else {
@@ -66,12 +67,11 @@ const ModalModify: React.FC<ModalModifyProps> = ({
   };
 
   const handleSizeChange = (newSize: string) => {
-    console.log(newSize);
     setFormModify((prev) => ({ ...prev, size: newSize }));
   };
 
   const availableSizes =
-    Product.colors.find((c) => c.color === formModify.color)?.sizes || [];
+    Product?.colors.find((c) => c.color === formModify.color)?.sizes || [];
 
   return (
     <div
@@ -96,7 +96,7 @@ const ModalModify: React.FC<ModalModifyProps> = ({
             <button className="bg-pink-300  text-xl rounded-md cursor-default ring-2 ring-pink-400">
               Select Color
             </button>
-            {Product.colors.map((c) => (
+            {Product?.colors.map((c) => (
               <button
                 key={c.color}
                 className={`px-3 py-2 rounded-md ring-2 ring-pink-400 hover:scale-105 active:bg-pink-400 text-lg ring-2 transition-all delay-800 duration-200 ${
@@ -127,14 +127,18 @@ const ModalModify: React.FC<ModalModifyProps> = ({
             {availableSizes.map((s) => (
               <button
                 key={s.size}
-                className={`px-3 py-2 rounded-md ring-2 ring-pink-400 hover:scale-105 active:bg-pink-400 text-lg ring-2 transition-all duration-200 ${
-                  formModify.size === s.size
+                disabled={s.quantity === 0} // Deshabilitar si la cantidad es 0
+                className={`px-3 py-2 rounded-md ring-2 ring-pink-400 hover:scale-105 active:bg-pink-400 text-lg transition-all duration-200 ${
+                  s.quantity === 0
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed ring-gray-400" // Estilo para deshabilitado
+                    : formModify.size === s.size
                     ? "bg-pink-300 ring-pink-500"
                     : "bg-pink-200 ring-pink-300"
                 }`}
                 onClick={() => handleSizeChange(s.size)}
               >
-                {s.size}
+                {s.size} {s.quantity === 0 && "(Out of Stock)"}{" "}
+                {/* Mostrar mensaje si está agotado */}
               </button>
             ))}
           </div>

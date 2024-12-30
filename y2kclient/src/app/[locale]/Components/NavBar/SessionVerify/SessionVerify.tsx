@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import LoginModal from "../../LoginModal/LoginModal";
 import setUserFromId from "@/lib/actions/AccountActions/getUserFromId";
+import { verifySession } from "@/lib/actions/AccountActions/verifyUser";
 
 const SessionVerify = () => {
 const [modal, setModal] = useState<boolean>(false)
@@ -12,13 +13,14 @@ const [modal, setModal] = useState<boolean>(false)
 
   useEffect(() => {
     const verifyToken = async () => {
-      const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
-      const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+      const numberUserId =
+        userId && !isNaN(Number(userId)) ? Number(userId) : null;
+      const token = document.cookie.slice(6);
 
       if (token) {
         try {
-          const response = "jasdhnljkd"
+          const response = await verifySession(token)
           if (response.success) {
             console.log("User verified successfully");
             if (numberUserId) {

@@ -5,3 +5,4 @@ export { putUser } from './putUser';
 export { deleteUser } from './deleteUser'
 export { getUserFromId } from './getUserFromId';
 export { checkEmail } from './checkEmail';
+export { verifySession } from './verifySession'

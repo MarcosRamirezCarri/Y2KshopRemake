@@ -40,6 +40,10 @@ const FirstView = () => {
   const handleChangeSize = (size: string) => {
     setSelectedSize(size);
   };
+  const isOutOfStock = stateDetail.colors.every((color) =>
+    color.sizes.every((size) => size.quantity === 0)
+  );
+  
 
   const renderSelectedInfo = () => (
     <div
