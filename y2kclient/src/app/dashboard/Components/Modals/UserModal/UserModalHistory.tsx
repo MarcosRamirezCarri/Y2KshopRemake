@@ -16,7 +16,20 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
   userId,
   setState,
 }) => {
-  const [stateUser, setStateUser] = useState<any>("No hay user");
+  const [stateUser, setStateUser] = useState<AccountType>({
+    name: "",
+    email: "",
+    location: {
+      city: "",
+      province: "",
+      country: "",
+    },
+    admin: false,
+    phone: "",
+    password: "",
+    id: 0,
+    history: [],
+  });
 
   useEffect(() => {
     const getUser = async (userId: number) => {
@@ -34,6 +47,19 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
     getUser(userId);
   }, [userId]);
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const productsPerPage = 4;
+
+  const indexOflastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOflastProduct - productsPerPage;
+  const currentProduct =
+    stateUser.id !== 0
+      ? stateUser.history.slice(indexOfFirstProduct, indexOflastProduct)
+      : null;
+
+  // Calculate total pages
+  const totalPages = Math.ceil(stateUser.history.length / productsPerPage);
+
   const place = "AdminHistory";
 
   return (
@@ -45,13 +71,13 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`w-[80%] font-titilium bg-Lightblue-300 gap-2 justify-center transition-all duration-250 grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
+        className={`w-[80%] font-titilium min-h-[61vh] bg-Lightblue-300 gap-2 justify-center transition-all duration-250 grid grid-cols-2 p-6 rounded-lg shadow-lg transition-all duration-300 ${
           state ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >
-        {stateUser !== "No hay user" ? (
+        {stateUser.id !== 0 ? (
           stateUser.history.length > 0 ? (
-            stateUser?.history.map((his: any, index: any) => (
+            currentProduct?.map((his: any, index: any) => (
               <CardHistory key={index} history={his} place={place} />
             ))
           ) : (
@@ -69,6 +95,29 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
             </p>
           </div>
         )}
+        <div
+          className={` col-span-2 ${
+            totalPages === 0 ? "hidden" : "flex flex-row"
+          } justify-center items-center my-4`}
+        >
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="px-4 py-2 mx-1 bg-orange-300 rounded disabled:bg-gray-300"
+          >
+            Previous
+          </button>
+          <span className="px-4">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            disabled={currentPage === totalPages || totalPages === 0}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="px-4 py-2 mx-1 bg-orange-300 rounded disabled:bg-gray-300"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

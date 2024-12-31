@@ -1,20 +1,30 @@
 import React, { useState } from "react";
+import { useAppSelector } from "@/lib/hooks/hooks";
+import { Product } from "@/helpers/types/Types";
 
 interface ClasificationSelectorProps {
-  existingClasifications: string[];
   value: string;
   onChange: (newValue: string) => void;
   error: string;
 }
 
 const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
-  existingClasifications,
   value,
   onChange,
   error,
 }) => {
   const [newClasification, setNewClasification] = useState("");
 
+  const stateProducts = useAppSelector((state) => state.products.sortProducts);
+
+  const getUniqueCategories = (items: Product[]): string[] => {
+    const categoriesSet = new Set<string>();
+    items.forEach((item) => {
+      categoriesSet.add(item.clasification);
+    });
+    return Array.from(categoriesSet);
+  };
+  const existingClasifications = getUniqueCategories(stateProducts);
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     if (selectedValue === "new") {
@@ -35,11 +45,11 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      <label className="font-titilium text-lg">Clasification</label>
+      <label className="font-titilium text-lg  focus:outline-Lightblue-400">Clasification</label>
       <select
         value={existingClasifications.includes(value) ? value : "new"}
         onChange={handleSelectChange}
-        className="border p-2 rounded mb-2"
+        className="border p-2 rounded mb-2  focus:outline-Lightblue-400"
       >
         <option value="" disabled>
           Select a classification
@@ -57,7 +67,7 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
           value={newClasification}
           onChange={handleNewClasificationChange}
           placeholder="Enter a new classification"
-          className="border p-2 rounded"
+          className="border p-2 rounded  focus:outline-Lightblue-400"
         />
       ) : null}
       {error && <p className="text-pink-950 text-sm">{error}</p>}

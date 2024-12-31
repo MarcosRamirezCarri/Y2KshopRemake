@@ -10,6 +10,8 @@ const UsersTable = () => {
   const dispatch = useAppDispatch();
 
   const [stateModal, setStateModal] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const usersPerPage = 10;
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -21,7 +23,7 @@ const UsersTable = () => {
     isAdmin: boolean
   ) => {
     Swal.fire({
-      title: `You want ${name} be an admin?`,
+      title: `You want ${name} to be an admin?`,
       icon: "question",
       showDenyButton: true,
       showConfirmButton: true,
@@ -32,7 +34,7 @@ const UsersTable = () => {
             Swal.fire("Saved!", "", "success");
           } else {
             Swal.fire({
-              title: "Somtehing Failed!",
+              title: "Something Failed!",
               text: response.message,
               icon: "error",
               confirmButtonText: "Ok",
@@ -50,6 +52,14 @@ const UsersTable = () => {
     setUserId(id);
     setStateModal(!stateModal);
   };
+
+  // Derive paginated users
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (
     <div className="relative font-titilium left-[23%] flex flex-col top-[7.5rem] w-[75%]">
@@ -74,8 +84,8 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {users.length > 0 ? (
-            users.map((user) => (
+          {currentUsers.length > 0 ? (
+            currentUsers.map((user) => (
               <tr key={user.id}>
                 <td className="border-l-2 border-b-2 border-r-2 px-2 py-3 text-md font-medium">
                   {user.name}
@@ -104,19 +114,42 @@ const UsersTable = () => {
                 </td>
                 <td className="border-l-2 border-b-2 border-r-2 p-1 text-md font-medium">
                   <button onClick={() => handleClick(user.id)}>
-                    {" "}
-                    see history{" "}
+                    see history
                   </button>
                 </td>
               </tr>
             ))
           ) : (
-            <div>
-              <p>No hay usuarios</p>
-            </div>
+            <tr>
+              <td colSpan={5} className="text-center py-4">
+                No users available
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center my-4">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          className="px-4 py-2 mx-1 bg-orange-300 rounded disabled:bg-gray-300"
+        >
+          Previous
+        </button>
+        <span className="px-4">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          className="px-4 py-2 mx-1 bg-orange-300 rounded disabled:bg-gray-300"
+        >
+          Next
+        </button>
+      </div>
+
       <UserHistoryModal
         state={stateModal}
         userId={userId}

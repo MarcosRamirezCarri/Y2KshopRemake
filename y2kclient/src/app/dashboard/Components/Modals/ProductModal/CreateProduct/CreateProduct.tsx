@@ -10,6 +10,7 @@ import { createProduct } from "@/lib/actions/AdminActions/createProduct";
 import Swal from "sweetalert2";
 import LabelForm from "./Labels/LabelForm";
 import CreateModalColors from "./ModalColors/ModaLColors";
+import ClasificationSelector from "./Selectors/ClasificationSelector";
 
 interface ModalProps {
   setStateAdmin: (arg: string) => void;
@@ -40,9 +41,14 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   });
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: name === "price" ? Number(value) : value });
+    setProduct({
+      ...product,
+      [name]: name === "price" ? Number(value) : value,
+    });
     setErrors({ ...errors, [name]: "" });
   };
 
@@ -58,14 +64,22 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   };
 
   const handleSave = () => {
-    const combinedErrors = { ...validateProduct(product), ...validateColors(product.colors) };
+    const combinedErrors = {
+      ...validateProduct(product),
+      ...validateColors(product.colors),
+    };
     setErrors(combinedErrors);
 
     const hasErrors = Object.values(combinedErrors).some((error) =>
       Array.isArray(error) ? error.some((subError) => subError) : error
     );
 
-    if (!hasErrors && Object.values(product).every((value) => (Array.isArray(value) ? value.length : value))) {
+    if (
+      !hasErrors &&
+      Object.values(product).every((value) =>
+        Array.isArray(value) ? value.length : value
+      )
+    ) {
       dispatch(createProduct(product)).then((result: any) => {
         result?.success
           ? Swal.fire("Product Created!", "", "success").then(() =>
@@ -109,10 +123,14 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     >
       <div
         className={`w-[40%] bg-Lightblue-200 gap-2 justify-center transition-all duration-250 flex flex-col p-6 rounded-lg shadow-lg ${
-          stateAdmin === "CreateProduct" ? "scale-100 opacity-100" : "scale-125 opacity-0"
+          stateAdmin === "CreateProduct"
+            ? "scale-100 opacity-100"
+            : "scale-125 opacity-0"
         }`}
       >
-        <h2 className="flex justify-center font-titilium text-2xl font-semibold">Create a New Product</h2>
+        <h2 className="flex justify-center font-titilium text-2xl font-semibold">
+          Create a New Product
+        </h2>
         <div className="flex flex-col items-center">
           {renderLabel("name", "Name")}
           <label
@@ -131,14 +149,24 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             />
           </label>
           {uploading && <p>Uploading...</p>}
-          {errors.images && <p className="text-pink-950 font-titilium text-sm">{errors.images}</p>}
+          {errors.images && (
+            <p className="text-pink-950 font-titilium text-sm">
+              {errors.images}
+            </p>
+          )}
           <div className="flex gap-3">
             {product.images.map((image, index) => (
               <div
                 key={index}
                 className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 rounded hover:scale-105 transition-all"
               >
-                <Image width={400} height={400} src={image} alt="Uploaded" className="w-20 h-20 object-cover" />
+                <Image
+                  width={400}
+                  height={400}
+                  src={image}
+                  alt="Uploaded"
+                  className="w-20 h-20 object-cover"
+                />
                 <button
                   type="button"
                   className="absolute bottom-0 self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950"
@@ -155,11 +183,20 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             ))}
           </div>
           {renderLabel("price", "Price", "number")}
-          {renderLabel("clasification", "Clasification")}
+          <ClasificationSelector
+            value={product.clasification}
+            onChange={(newValue) => {
+              setProduct({ ...product, clasification: newValue });
+              setErrors({ ...errors, clasification: "" });
+            }}
+            error={errors.clasification}
+          />
           {renderLabel("description", "Description")}
           <button
             type="button"
-            className="bg-Lightblue-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ring-Lightblue-600 transition-all hover:ring-Lightblue-700 hover:scale-105"
+            className={`bg-Lightblue-500 text-white rounded px-4 py-2 m-1 font-titilium ring-2 ${
+              errors.colors ? "ring-pink-950" : "ring-Lightblue-600"
+            } transition-all hover:ring-Lightblue-700 hover:scale-105`}
             onClick={() => setStateModal(!stateModal)}
           >
             Colors, Sizes, and Quantity

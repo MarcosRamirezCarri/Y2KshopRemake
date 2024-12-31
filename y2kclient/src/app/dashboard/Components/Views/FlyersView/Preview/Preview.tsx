@@ -33,7 +33,7 @@ const PreviewFlyers = () => {
           <SwiperSlide  key={index}>
             <Image
               src={fly.image}
-              className="h-[100%] w-[100%]"
+              className="h-[100%] w-[100%] object-fit"
               width={980}
               height={800}
               alt="PhCarousel"
