@@ -9,7 +9,7 @@ import * as userRoutes from "../routes/userRoutes/zndexUser";
 
 const router = Router();
 
-router.post("/product", authenticateToken , productRoutes.postProduct);
+router.post("/product" , authenticateToken , productRoutes.postProduct);
 
 router.post("/login", userRoutes.loginUser);
 

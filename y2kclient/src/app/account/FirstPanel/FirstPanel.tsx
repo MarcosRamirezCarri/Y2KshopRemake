@@ -21,7 +21,7 @@ const AccountFirstPanel = () => {
   const user: any = useAppSelector((state) => state.account.user);
 
   return (
-    <div className="bg-pink-300 flex flex-col items-center p-[0.75rem] lg:p-[1rem] gap-5">
+    <div className="bg-pink-300 flex flex-col items-center p-[0.65rem] lg:p-[1rem] gap-5">
       <p className="font-titilium text-xl lg:text-2xl self-center font-medium text-pink-950">
         {user.name}
       </p>
@@ -32,14 +32,16 @@ const AccountFirstPanel = () => {
               key={user.id}
               className="flex flex-col col-span-2 w-[100%] gap-10 p-5 font-titilium text-pink-950"
             >
-              <UserInfo label="Email" value={user.email} />
+            
               <UserInfo label="Phone" value={user.phone} />
               <UserInfo label="City" value={user.location?.city} />
+              <UserInfo label="Email" value={user.email} />
             </div>
             <div className=" flex flex-col col-span-2 w-[100%] gap-10 p-5 font-titilium text-pink-950">
              
               <UserInfo label="Province" value={user.location?.province} />
               <UserInfo label="Country" value={user.location?.country} />
+
             </div>
           </div>
         ) : (
@@ -59,7 +61,7 @@ const AccountFirstPanel = () => {
 };
 
 const UserInfo = ({ label, value }: any) => (
-  <div className="gap-2  flex flex-row ">
+  <div className="gap-1  flex flex-row ">
     <p className="font-semibold self-center  text-md lg:text-2xl">{label}:</p>
     <p className="font-medium self-center  text-sm lg:text-xl">{value}</p>
   </div>

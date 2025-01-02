@@ -17,7 +17,7 @@ const AllCart = () => {
       userId && !isNaN(Number(userId)) ? Number(userId) : null;
     if (numberUserId) {
       setLogged(!logged);
-      setUser(numberUserId)
+      setUser(numberUserId);
       dispatch(getCartFromId(numberUserId));
     }
   }, [dispatch]);

@@ -1,4 +1,4 @@
-const Validate = async(name: string, email: string, phone: string, password: string, location: any) => {
+export const controllerUser = async(name: string, email: string, phone: string, password: string, location: any) => {
     const errors = [];
 
     if (!name || typeof name !== 'string' || name.length > 128) {
@@ -24,4 +24,4 @@ const Validate = async(name: string, email: string, phone: string, password: str
     return errors;
   };
 
-export default Validate;
+

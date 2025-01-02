@@ -50,12 +50,12 @@ const LogOutBtn = () => {
   };
   return (
     <div
-      className={` items-center ${
+      className={`w-[100%] flex flex-row items-center ${
         token === "undefined" || token === "null" ? "hidden" : "content"
       } `}
     >
       <button
-        className="py-2 px-2 lg:py-4 lg:px-6 text-lg lg:text-xl font-medium font-tiltneon text-pink-950 bg-orange-500/[0.7] rounded-lg ring-2 ring-orange-700 transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-200"
+        className="py-2 px-2 lg:py-4 lg:px-6 text-lg lg:text-xl font-medium font-tiltneon text-pink-950 bg-orange-500/[0.7] rounded-lg ring-2 ring-orange-700 transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-orange-800"
         onClick={handleLogout}
       >
         Log Out

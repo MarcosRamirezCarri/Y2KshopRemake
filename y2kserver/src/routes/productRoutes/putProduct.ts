@@ -1,6 +1,6 @@
 import ProductModel from "../../models/Products";
 import { Response, Request } from "express";
-import Product from "../../routesTypes/Types";
+import Product from "../../types/Types";
 
 
 export const updateProduct = async (req: Request, res: Response) => {

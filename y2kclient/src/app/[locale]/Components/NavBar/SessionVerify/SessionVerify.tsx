@@ -32,7 +32,8 @@ const SessionVerify = () => {
           }
         } catch (error) {
           console.error("Error verifying token:", error);
-          localStorage.clear();
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
  
         }
       } 

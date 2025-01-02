@@ -1,5 +1,5 @@
 import UserModel from "../../models/User";
-import Validate from "./Validator/ValidatorUser";
+import { controllerUser } from "./controllers/controllerUser";
 import { Request, Response } from "express";
 
 export const postUser = async (req: Request, res: Response) => {
@@ -8,7 +8,7 @@ export const postUser = async (req: Request, res: Response) => {
 
   try {
 
-    const errors = await Validate(name, email, phone, password, location);
+    const errors = await controllerUser(name, email, phone, password, location);
     if (errors.length > 0) {
       return res.status(400).json({ errors }); 
     }

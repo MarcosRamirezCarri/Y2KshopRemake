@@ -49,7 +49,7 @@ const CartCard: React.FC<CartProduct> = ({
               "success"
             );
           } else {
-            Swal.fire("An error Occurried in the purchase", "", "info");
+            Swal.fire("An error Occurried in the purchase", response.message , "info");
           }
         });
       } else {
@@ -67,9 +67,7 @@ const CartCard: React.FC<CartProduct> = ({
     }).then((result) => {
       if (result.isConfirmed) {
         setModal(!modal);
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
+      } 
     });
   };
   const handleDelete = () => {
@@ -82,8 +80,6 @@ const CartCard: React.FC<CartProduct> = ({
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "", "success");
         dispatch(deleteCartItem(userId, id));
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
       }
     });
   };
