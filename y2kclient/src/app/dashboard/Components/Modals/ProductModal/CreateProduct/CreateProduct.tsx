@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/lib/hooks/hooks";
 import validateProduct from "@/helpers/validators/validatorProducts";
 import validateColors from "@/helpers/validators/validateColors";
 import { createProduct } from "@/lib/actions/AdminActions/createProduct";
+import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import Swal from "sweetalert2";
 import LabelForm from "./Labels/LabelForm";
 import CreateModalColors from "./ModalColors/ModaLColors";
@@ -81,8 +82,9 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
       )
     ) {
       dispatch(createProduct(product)).then((result: any) => {
-        result?.success
-          ? Swal.fire("Product Created!", "", "success").then(() =>
+        if (result?.success) {
+          dispatch(getAllProducts()),
+            Swal.fire("Product Created!", "", "success").then(() =>
               setProduct({
                 id: 0,
                 name: "",
@@ -92,8 +94,10 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                 clasification: "",
                 description: "",
               })
-            )
-          : Swal.fire("Something Failed!", result.message, "error");
+            );
+        } else {
+          Swal.fire("Something Failed!", result.message, "error");
+        }
       });
     } else {
       Swal.fire("Fix the errors before uploading", "", "error");

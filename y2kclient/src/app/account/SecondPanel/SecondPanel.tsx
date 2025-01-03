@@ -21,7 +21,7 @@ export default function AccountSecondPanel() {
   });
 
   return (
-    <div className="bg-Lightblue-300 w-[100%] flex flex-col  p-3">
+    <div className="bg-Lightblue-300 w-[100%] min-h-[30rem] max-h-[30rem] flex flex-col  p-3">
       <p className="font-titilium text-2xl self-center mb-2 font-medium text-Lightblue-950">
         My History
       </p>

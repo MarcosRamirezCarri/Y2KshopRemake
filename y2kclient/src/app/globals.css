@@ -55,9 +55,6 @@ body {
   font-family: "Titilium";
   color: #12323a;
   background-color: #d3f5f5;
-  border: solid;
-  border-width: 2px;
-  border-color: #80dde0;
   border-radius: 0.375rem;
   transition-duration: 300ms
 }

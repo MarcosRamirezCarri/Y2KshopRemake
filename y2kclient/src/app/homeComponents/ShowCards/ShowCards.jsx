@@ -24,7 +24,7 @@ export default function ShowCards() {
   if (Array.isArray(products) && products.length > 0) all.push(...products);
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 h-[60vh] w-[85%] items-center relative content-around">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5  w-[85%] items-center relative content-around">
       <p className="col-span-2 lg:col-span-4 text-center font-tiltneon text-lg lg:text-2xl text-Lightblue-950 font-bold">You can see our products</p>
       {all.length === 0 ? (
         <div>

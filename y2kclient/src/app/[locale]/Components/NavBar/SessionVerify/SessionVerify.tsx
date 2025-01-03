@@ -1,13 +1,15 @@
-"use client"
-import { useEffect } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
+import { usePathname } from "next/navigation";
+import { setUserFromId } from "@/lib/actions/AccountActions/getUserFromId";
 import { verifySession } from "@/lib/actions/AccountActions/verifyUser";
+import LoginModal from "../../LoginModal/LoginModal";
 
 const SessionVerify = () => {
+  const [modal, setModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
-  
+  const path = usePathname();
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -18,34 +20,32 @@ const SessionVerify = () => {
 
       if (token) {
         try {
-          const response = await verifySession(token)
+          const response = await verifySession(token);
           if (response.success) {
             console.log("User verified successfully");
             if (numberUserId) {
               dispatch(setUserFromId(numberUserId));
             }
           } else {
-            console.warn("Invalid token, clearing localStorage");
+            setModal(true);
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
-           
           }
         } catch (error) {
-          console.error("Error verifying token:", error);
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
- 
         }
-      } 
+      }
     };
 
     verifyToken();
   }, []);
- 
-  return(
-    <div className="absolute"></div>
-  )
-
+  if (path === "/")
+    return (
+      <div className="absolute">
+        <LoginModal modal={modal} />
+      </div>
+    );
 };
 
 export default SessionVerify;

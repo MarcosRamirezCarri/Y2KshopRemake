@@ -1,10 +1,9 @@
 import ProductModel from "../../models/Products";
 import { Response, Request } from "express";
-import Product from "../../types/Types";
 
 
 export const updateProduct = async (req: Request, res: Response) => {
-  const { id, name, price, colors, clasification, images, description }: Partial<Product> = req.body;
+  const { id, name, price, colors, clasification, images, description } = req.body;
 
   try {
     const product: any = await ProductModel.findByPk(id);
