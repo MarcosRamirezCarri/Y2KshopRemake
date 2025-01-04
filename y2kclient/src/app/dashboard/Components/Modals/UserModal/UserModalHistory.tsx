@@ -3,7 +3,7 @@ import { Server } from "@/helpers/services/server";
 import { BsFillCartXFill } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import CardHistory from "@/app/[locale]/Components/CardHistory/CardHistory";
+import CardHistory from "@/app/components/Cards/CardHistory/CardHistory";
 
 interface HistoryModalProps {
   state: boolean;

@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import AOS from "aos";
 import '../../../../node_modules/aos/dist/aos.css'
-import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
+import CardProductComplete from "@/app/components/Cards/CardProduct/CardProduct";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { useEffect } from "react";
 

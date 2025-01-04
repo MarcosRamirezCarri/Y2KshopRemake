@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import ModifyProductModal from "../../Modals/ProductModal/ModifyProduct/ModifyProductModal";
 import CreateModal from "../../Modals/ProductModal/CreateProduct/CreateProduct";
 import CardProductControl from "./CardProduct/CardProductControl";
-import SideBar from "@/app/[locale]/Components/FiltersProduct/SideBar";
+import SideBar from "@/app/components/ui/FiltersProduct/SideBar";
 
 const ProductsControl = () => {
   const [stateAdmin, setStateAdmin] = useState<string>("");

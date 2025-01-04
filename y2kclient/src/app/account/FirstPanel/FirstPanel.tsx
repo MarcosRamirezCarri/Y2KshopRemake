@@ -1,5 +1,5 @@
 "use client";
-import LogOutBtn from "@/app/[locale]/Components/LoginModal/LogOutBtn";
+import LogOutBtn from "@/app/components/ui/LoginModal/LogOutBtn";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAppSelector } from "@/lib/hooks/hooks";
-import CardHistory from "@/app/[locale]/Components/CardHistory/CardHistory";
+import CardHistory from "@/app/components/Cards/CardHistory/CardHistory";
 
 export default function AccountSecondPanel() {
   const user: any = useAppSelector((state) => state.account.user);

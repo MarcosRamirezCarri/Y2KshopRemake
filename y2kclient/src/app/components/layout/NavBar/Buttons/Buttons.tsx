@@ -3,7 +3,7 @@ import NavLink from "./NavLink/NavLinks";
 import { usePathname } from "next/navigation";
 import { useState,  } from "react";
 import { useAppSelector } from "@/lib/hooks/hooks";
-import LoginModal from "../../LoginModal/LoginModal";
+import LoginModal from "@/app/components/ui/LoginModal/LoginModal";
 import {
   FaCartShopping,
   FaBagShopping,

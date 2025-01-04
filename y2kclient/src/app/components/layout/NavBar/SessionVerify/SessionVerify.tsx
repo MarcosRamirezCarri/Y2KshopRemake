@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { usePathname } from "next/navigation";
 import { setUserFromId } from "@/lib/actions/AccountActions/getUserFromId";
 import { verifySession } from "@/lib/actions/AccountActions/verifyUser";
-import LoginModal from "../../LoginModal/LoginModal";
+import LoginModal from "@/app/components/ui/LoginModal/LoginModal";
 
 const SessionVerify = () => {
   const [modal, setModal] = useState<boolean>(false);

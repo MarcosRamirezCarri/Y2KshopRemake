@@ -1,5 +1,5 @@
 import AllCart from "./allCart";
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+import Navbar from "../components/layout/NavBar/NavBar";
 
 const Cart = () => {
   

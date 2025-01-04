@@ -1,4 +1,4 @@
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+import Navbar from "../components/layout/NavBar/NavBar";
 import AccountFirstPanel from "./FirstPanel/FirstPanel";
 import AccountSecondPanel from "./SecondPanel/SecondPanel";
 

@@ -1,27 +1,24 @@
 import { Metadata } from "next";
-import Navbar from "@/app/[locale]/Components/NavBar/NavBar";
+import Navbar from "@/app/components/layout/NavBar/NavBar";
+import Footer from "@/app/components/layout/Footer/Footer";
+import { about_us } from "../data/aboutData";
+import { faq } from "../data/faqData";
+import { shipping } from "../data/shippingData";
 
 type PageProps = {
   params: { page: string };
 };
 
 const pagesData = {
-  faq: {
-    title: "Frequently Asked Questions",
-    content: "Here you'll find answers to the most common questions about our store and services.",
-  },
-  about_us: {
-    title: "About Us",
-    content: "We are RetroFuture Threads, a store committed to bringing Y2K fashion back to life.",
-  },
-  policy: {
-    title: "Privacy Policy",
-    content: "We value your privacy and are committed to protecting your personal information.",
-  },
+  faq,
+  about_us,
+  shipping,
 };
 
 // Metadata opcional para SEO
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const pageData = pagesData[params.page];
   return {
     title: pageData?.title || "Page Not Found",
@@ -41,13 +38,53 @@ const StaticPage = ({ params }: PageProps) => {
   }
 
   return (
-    <div className="flex flex-col w-full h-full items-center">
-      <Navbar/>
-      <div className="flex relative flex-col items-center top-[7.5rem]">
-      <h1 className="text-3xl font-bold mb-4">{pageData.title}</h1>
-      <p className="text-lg">{pageData.content}</p>
+    <div className="flex flex-col  w-full h-full items-center">
+      <Navbar />
+      <div className="flex font-titilium w-[90%] text-gray-950 relative flex-col gap-4 items-center top-[7.5rem]">
+        <h1 className="text-2xl font-bold mb-4">{pageData.title}</h1>
+        <p
+          className={`text-lg ${
+            pageData.text1.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.text1}
+        </p>
+        <p
+          className={`text-lg ${
+            pageData.text2.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.text2}
+        </p>
+        <p
+          className={`text-lg ${
+            pageData.text3.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.text3}
+        </p>
+        <p
+          className={`text-lg ${
+            pageData.text4.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.text4}
+        </p>
+        <p
+          className={`text-lg ${
+            pageData.text5.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.text5}
+        </p>
+        <p
+          className={`text-lg ${
+            pageData.final.length > 2 ? "visible" : "hidden"
+          } `}
+        >
+          {pageData.final}
+        </p>
       </div>
-  
     </div>
   );
 };

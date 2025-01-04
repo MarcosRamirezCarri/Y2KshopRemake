@@ -1,7 +1,7 @@
-import Navbar from "./[locale]/Components/NavBar/NavBar";
-import ShowCards from '../app/homeComponents/ShowCards/ShowCards';
-import Carousel from "./homeComponents/Carousel/Carousel";
-import Footer from "./[locale]/Components/Footer/Footer";
+import Navbar from './components/layout/NavBar/NavBar';
+import ShowCards from '../app/home/ShowCards/ShowCards';
+import Carousel from "./home/Carousel/Carousel";
+import Footer from './components/layout/Footer/Footer';
 
 export default function Home() {
   

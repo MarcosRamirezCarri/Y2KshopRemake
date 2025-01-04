@@ -1,4 +1,4 @@
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+import Navbar from "../components/layout/NavBar/NavBar";
 import FirstView from "./detailComponents/Firstiew/FirstView";
 import SecondView from "./detailComponents/SecondView/SecondView";
 

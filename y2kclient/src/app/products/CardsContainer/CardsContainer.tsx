@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useEffect } from "react";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { BsBagXFill } from "react-icons/bs";
-import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
+import CardProductComplete from "@/app/components/Cards/CardProduct/CardProduct";
 
 export default function CardsContainer() {
   const dispatch = useAppDispatch();

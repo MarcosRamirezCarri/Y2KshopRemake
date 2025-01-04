@@ -1,5 +1,5 @@
 import ViewOfAll from "./Components/ViewOfAll";
-import Navbar from "../[locale]/Components/NavBar/NavBar";
+import Navbar from "../components/layout/NavBar/NavBar";
 
 const Dashboard = () =>{
     return(

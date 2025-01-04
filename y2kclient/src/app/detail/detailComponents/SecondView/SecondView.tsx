@@ -10,7 +10,7 @@ import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import { useSearchParams } from "next/navigation";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { Product } from "@/helpers/types/Types";
-import CardProductComplete from "@/app/[locale]/Components/CardProduct/CardProduct";
+import CardProductComplete from "@/app/components/Cards/CardProduct/CardProduct";
 
 const SecondView: React.FC = () => {
   const products = useAppSelector((state) => state.products.product);

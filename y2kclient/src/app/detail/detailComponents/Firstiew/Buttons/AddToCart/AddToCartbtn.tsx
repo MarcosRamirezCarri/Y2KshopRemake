@@ -5,7 +5,7 @@ import { getCartFromId } from "@/lib/actions/CartActions/getCart";
 import { useSearchParams } from "next/navigation";
 import { addToCart } from "@/lib/actions/CartActions/addToCart";
 import Swal from "sweetalert2";
-import LoginModal from "@/app/[locale]/Components/LoginModal/LoginModal";
+import LoginModal from "@/app/components/ui/LoginModal/LoginModal";
 
 interface CartProps {
   selectedColor: string | null;
