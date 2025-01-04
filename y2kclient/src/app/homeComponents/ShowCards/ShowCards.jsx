@@ -13,11 +13,14 @@ export default function ShowCards() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getAllProducts());
+      if (products.length === 0) { // Verifica si el estado está vacío
+        await dispatch(getAllProducts());
+      }
     };
+
     fetchData();
-    AOS.init({duration: 1000})
-  }, [dispatch]);
+    AOS.init({ duration: 1000 });
+  }, [dispatch, products]);
 
   const place = "home"
   const all = [];

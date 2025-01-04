@@ -6,6 +6,7 @@ import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
 
 const AccountFirstPanel = () => {
   const dispatch = useAppDispatch();
+  const user: any = useAppSelector((state) => state.account.user);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -18,7 +19,7 @@ const AccountFirstPanel = () => {
       dispatch(setUserFromId(numberUserId));
   }, [dispatch]);
 
-  const user: any = useAppSelector((state) => state.account.user);
+
 
   return (
     <div className="bg-pink-300 flex flex-col items-center p-[0.65rem] min-h-[30rem] max-h-[30rem] lg:p-[1rem] gap-5">

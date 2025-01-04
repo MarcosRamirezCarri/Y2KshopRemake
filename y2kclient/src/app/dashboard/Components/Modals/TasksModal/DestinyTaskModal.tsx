@@ -30,7 +30,7 @@ const DestinyTaksModal: React.FC<DestinyTaksModalProps> = ({
     };
 
     getUser(userId);
-  }, [userId]);
+  }, [userId, stateUser]);
 
   return (
     <div

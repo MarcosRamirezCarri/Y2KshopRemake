@@ -10,11 +10,10 @@ export default function CardsContainer() {
   const stateProducts = useAppSelector((state) => state.products.product);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getAllProducts());
-    };
-    fetchData();
-  }, []);
+    if (stateProducts.length === 0) {
+      dispatch(getAllProducts());
+    }
+  }, [dispatch, stateProducts]);
 
   const place = "products";
   return (

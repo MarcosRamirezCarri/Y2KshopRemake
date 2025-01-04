@@ -10,14 +10,18 @@ const TextFlyer = () => {
 
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    dispatch(getAllFlyers());
-  }, [path]);
-
   const flyers = useAppSelector((state) => state.flyers.allFlyers);
   const showFlyers = flyers.filter((fly) => fly.type === "text");
   const finalFlyers = showFlyers.filter((fly) => fly.status === true);
+
+  useEffect(() => {
+    if (flyers.length === 0) {
+      dispatch(getAllFlyers());
+    }
+
+  }, [dispatch, flyers]);
+
+
 
   useEffect(() => {
     const handleScroll = () => {

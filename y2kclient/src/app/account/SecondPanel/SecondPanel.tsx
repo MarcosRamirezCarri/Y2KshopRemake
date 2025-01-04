@@ -7,12 +7,12 @@ export default function AccountSecondPanel() {
   const user: any = useAppSelector((state) => state.account.user);
   const place = "UserHistory";
 
-  // Estado para el filtro
+
   const [filter, setFilter] = useState<"pending" | "approved_sended">(
     "pending"
   );
 
-  // Filtrar el historial basado en el estado seleccionado
+
   const filteredHistory = user.history?.filter((his: any) => {
     if (filter === "pending") {
       return his.state === "pending";

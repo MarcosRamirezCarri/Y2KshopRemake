@@ -2,16 +2,18 @@ import CreateFlyer from "../../Modals/FlyerModal/CreateFlyer";
 import { useState, useEffect } from "react";
 import { getAllFlyers } from "@/lib/actions/FlyerActions/getAllFlyers";
 import ActivateFlyers from "./ActivatesFlyers.ts/ActivatesFlyers";
-import { useAppDispatch } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import PreviewFlyers from "./Preview/Preview";
 
 const FlyersConfig = () => {
   const [state, setState] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
+  const flyers = useAppSelector((state) => state.flyers.allFlyers);
   useEffect(() => {
-    dispatch(getAllFlyers());
-  }, [dispatch]);
+    if (flyers.length === 0) {
+      dispatch(getAllFlyers());
+    }
+  }, [dispatch, flyers]);
   return (
     <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[7.5rem]  w-[75%]">
       <button
@@ -20,7 +22,9 @@ const FlyersConfig = () => {
       >
         Create flyer
       </button>
-      <p className="text-xl text-Lightblue-950 font-bold ">Preview big flyers</p>
+      <p className="text-xl text-Lightblue-950 font-bold ">
+        Preview big flyers
+      </p>
       <PreviewFlyers />
       <ActivateFlyers />
       <CreateFlyer state={state} setState={setState} />

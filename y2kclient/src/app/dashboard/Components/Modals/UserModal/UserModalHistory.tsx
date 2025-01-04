@@ -45,7 +45,7 @@ const UserHistoryModal: React.FC<HistoryModalProps> = ({
       }
     };
     getUser(userId);
-  }, [userId]);
+  }, [userId, stateUser]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const productsPerPage = 4;

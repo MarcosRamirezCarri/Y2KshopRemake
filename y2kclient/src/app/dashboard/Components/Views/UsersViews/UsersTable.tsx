@@ -12,10 +12,14 @@ const UsersTable = () => {
   const [stateModal, setStateModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const usersPerPage = 10;
+  const users = useAppSelector((state) => state.admin.allUsers);
 
   useEffect(() => {
-    dispatch(getAllUsers());
-  }, []);
+    if (users.length === 0) {
+      dispatch(getAllUsers());
+    }
+    
+  }, [dispatch, users]);
 
   const handleAdminChange = (
     userId: number,
@@ -45,7 +49,7 @@ const UsersTable = () => {
     });
   };
 
-  const users = useAppSelector((state) => state.admin.allUsers);
+
   const [userId, setUserId] = useState<number>(-1);
 
   const handleClick = (id: number) => {
@@ -53,12 +57,10 @@ const UsersTable = () => {
     setStateModal(!stateModal);
   };
 
-  // Derive paginated users
+
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-  // Calculate total pages
   const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (

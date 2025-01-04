@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import {setUserFromId} from "@/lib/actions/AccountActions/getUserFromId";
+import { setUserFromId } from "@/lib/actions/AccountActions/getUserFromId";
 import UsersTable from "./Views/UsersViews/UsersTable";
 import TaskList from "./Views/TasksViews/TaskList";
 import SideBarDashboard from "./SideBarDashboard";
@@ -14,24 +14,17 @@ const ViewOfAll = () => {
   const user: any = useAppSelector((state) => state.account.user);
 
   useEffect(() => {
-   
-  const userId = localStorage.getItem("userId");
-  const numberUserId = userId && !isNaN(Number(userId)) ? Number(userId) : null;
+    const userId = localStorage.getItem("userId");
+    const numberUserId =
+      userId && !isNaN(Number(userId)) ? Number(userId) : null;
 
-  if (!numberUserId) {
-    return;
-  }
-      dispatch(setUserFromId(numberUserId));
-    
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (user.admin === true) {
-      console.log("El usuario es administrador");
-    } else {
-      console.log("El usuario no es administrador");
+    if (!numberUserId) {
+      return;
     }
-  }, [user]);
+    if (!user) {
+      dispatch(setUserFromId(numberUserId));
+    }
+  }, [dispatch, user]);
 
   return (
     <div className="w-[100%] flex flex-col  gap-5 ">

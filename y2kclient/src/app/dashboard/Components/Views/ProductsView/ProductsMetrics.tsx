@@ -26,11 +26,10 @@ const ProductsControl = () => {
   const products = useAppSelector((state) => state.products.product);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getAllProducts());
-    };
-    fetchData();
-  }, [dispatch]);
+    if (products.length === 0) {
+      dispatch(getAllProducts());
+    }
+  }, [dispatch, products]);
 
   const handleModify = (product: Product) => {
     setStateProduct(product);

@@ -25,12 +25,15 @@ const FirstView = () => {
   const numberId = Number(searchId);
 
   useEffect(() => {
-    const fetchDetail = async () => {
-      const DetailProduct: any = await fetchProduct(numberId);
+    const fetchDetail =  async() => {
+      if (stateDetail.id === 0) {
+        const DetailProduct: any = await fetchProduct(numberId);
       setStateDetail(DetailProduct[0]);
+      }
+      
     };
     fetchDetail();
-  }, [searchId]);
+  }, [searchId, stateDetail]);
 
   const handleChangeColor = (color: string) => {
     setSelectedColor(color);

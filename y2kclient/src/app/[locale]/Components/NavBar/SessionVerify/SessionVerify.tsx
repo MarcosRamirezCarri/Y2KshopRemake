@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { usePathname } from "next/navigation";
 import { setUserFromId } from "@/lib/actions/AccountActions/getUserFromId";
 import { verifySession } from "@/lib/actions/AccountActions/verifyUser";
@@ -9,6 +9,7 @@ import LoginModal from "../../LoginModal/LoginModal";
 const SessionVerify = () => {
   const [modal, setModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const user: any = useAppSelector((state) => state.account.user);
   const path = usePathname();
 
   useEffect(() => {
@@ -22,8 +23,7 @@ const SessionVerify = () => {
         try {
           const response = await verifySession(token);
           if (response.success) {
-            console.log("User verified successfully");
-            if (numberUserId) {
+            if (user.length === 0) {
               dispatch(setUserFromId(numberUserId));
             }
           } else {
@@ -39,7 +39,7 @@ const SessionVerify = () => {
     };
 
     verifyToken();
-  }, []);
+  }, [modal]);
   if (path === "/")
     return (
       <div className="absolute">

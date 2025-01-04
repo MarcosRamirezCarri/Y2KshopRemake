@@ -11,12 +11,17 @@ const TaskList = () => {
   const [stateModal, setStateModal] = useState<boolean>(false);
   const [userIdModal, setUserIdModal] = useState<number>(-1);
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllCarts());
-  }, []);
   const tasks: CartItem[] = useAppSelector((state) => state.admin.allCarts);
   const selectedState = useAppSelector((state) => state.admin.selectedState);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (tasks.length === 0) {
+      dispatch(getAllCarts());
+    }
+   
+  }, [dispatch, tasks]);
+ 
 
   const orderTasks = (tasks: CartItem[]) => {
     const order = ["pending", "approved", "sended", "adminCanceled"];

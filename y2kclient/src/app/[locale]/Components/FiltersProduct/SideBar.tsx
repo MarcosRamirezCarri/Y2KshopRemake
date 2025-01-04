@@ -1,8 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { sortByCategory, sortBySize } from "@/lib/slices/productsReducer";
-import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { Product } from "@/helpers/types/Types";
 import SideBarFilters from "./SideBarFilters/SideBarFilters";
 import style from "./SideBar.module.css";
@@ -21,13 +20,6 @@ import {
   const selectedSize = useAppSelector((state) => state.products.selectedSize)
 
   const stateProducts = useAppSelector((state) => state.products.sortProducts);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getAllProducts());
-    };
-    fetchData();
-  }, []);
 
   const handleFilterCategory = (category: string) => {
     dispatch(sortByCategory(category));

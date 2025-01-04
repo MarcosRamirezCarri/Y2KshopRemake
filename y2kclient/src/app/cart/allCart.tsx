@@ -11,6 +11,13 @@ const AllCart = () => {
   const [logged, setLogged] = useState<boolean>(false);
   const [user, setUser] = useState<number | null>(null);
 
+  const stateCart = useAppSelector((state) => state.cart.cart);
+  const showCart =
+    stateCart.length > 0
+      ? stateCart?.filter((item) => item.state === "inCart")
+      : [];
+
+
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     const numberUserId =
@@ -18,16 +25,14 @@ const AllCart = () => {
     if (numberUserId) {
       setLogged(!logged);
       setUser(numberUserId);
-      dispatch(getCartFromId(numberUserId));
+      if (stateCart.length === 0) {
+        dispatch(getCartFromId(numberUserId));
+      }
+     
     }
-  }, [dispatch]);
+  }, [dispatch, stateCart]);
 
-  const stateCart = useAppSelector((state) => state.cart.cart);
-  const showCart =
-    stateCart.length > 0
-      ? stateCart?.filter((item) => item.state === "inCart")
-      : [];
-
+ 
   return (
     <div className="relative top-[7.5rem] w-[90%] flex flex-col ">
       {logged ? (

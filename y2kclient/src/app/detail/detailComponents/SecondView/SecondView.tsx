@@ -30,11 +30,12 @@ const SecondView: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getAllProducts());
-    };
-    fetchData();
-  }, [dispatch]);
+   if (products.length === 0) {
+    dispatch(getAllProducts());
+   }
+     
+   
+  }, [dispatch, products]);
 
   useEffect(() => {
     const checkMobile = () => {
