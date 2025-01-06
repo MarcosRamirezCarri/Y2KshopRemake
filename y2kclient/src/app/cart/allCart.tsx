@@ -23,18 +23,18 @@ const AllCart = () => {
     const numberUserId =
       userId && !isNaN(Number(userId)) ? Number(userId) : null;
     if (numberUserId) {
-      setLogged(!logged);
+      setLogged(true);
       setUser(numberUserId);
-      if (stateCart.length === 0) {
+      if (showCart.length === 0) {
         dispatch(getCartFromId(numberUserId));
       }
      
     }
-  }, [dispatch, stateCart]);
+  }, [dispatch, showCart]);
 
  
   return (
-    <div className="relative top-[7.5rem] w-[90%] flex flex-col ">
+    <div className="relative top-[7.5rem] min-h-[100vh] w-[90%] flex flex-col ">
       {logged ? (
         <div className=" grid items-center gap-[1rem] ">
           {showCart.length > 0 ? (
@@ -42,12 +42,14 @@ const AllCart = () => {
               <div key={product.id}>
                 <CartCard
                   id={product.id}
-                  userId={user}
+                  userId={product.userId}
+                  lastUpdate={product.lastUpdate}
                   productId={product.productId}
                   color={product.color}
                   quantity={product.quantity}
                   size={product.size}
                   Product={product.Product}
+                  state={product.state}
                 />
               </div>
             ))

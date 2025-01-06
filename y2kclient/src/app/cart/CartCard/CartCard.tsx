@@ -1,29 +1,21 @@
 import Image from "next/image";
 import Swal from "sweetalert2";
+import { CartItem } from "@/helpers/types/CartItem";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { deleteCartItem } from "@/lib/actions/CartActions/deleteCart";
 import { changeCartState } from "@/lib/actions/CartActions/changeCartState";
 import { getCartFromId } from "@/lib/actions/CartActions/getCart";
-import { Product } from "@/helpers/types/Types";
 import ModalModify from "./ModalModify/ModalModify";
 
-interface CartProduct {
-  productId: number;
-  id: number;
-  quantity: number;
-  color: string;
-  size: string;
-  userId: any;
-  Product: Product;
-}
 
-const CartCard: React.FC<CartProduct> = ({
+const CartCard: React.FC<CartItem> = ({
   id,
   color,
   size,
   Product,
   userId,
+  lastUpdate
 }) => {
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
@@ -91,7 +83,10 @@ const CartCard: React.FC<CartProduct> = ({
   return (
     <div>
       <div className="grid grid-cols-6 p-5 font-tiltneon w-[100%] rounded-md gap-[0.5rem] bg-Lightblue-100 border-2 border-Lightblue-800">
-        <div className="col-span-2">
+        <div className="flex flex-col col-span-2">
+        <p className="text-[0.62rem] text-Lightblue-950 absolute lg:text-base self-start font-medium">
+            {lastUpdate}
+          </p>
           <Image
             width={680}
             height={680}
@@ -114,6 +109,9 @@ const CartCard: React.FC<CartProduct> = ({
             ${Product?.price}
           </p>
           <div className="flex flex-row gap-2 lg:hidden">
+          <p className="text-[0.62rem] lg:text-base self-end font-medium">
+            {lastUpdate}
+          </p>
             <button onClick={handleBuy} className={buttonStylesPhone}>
               Buy
             </button>
@@ -127,6 +125,7 @@ const CartCard: React.FC<CartProduct> = ({
         </div>
 
         <div className="lg:col-span-2  gap-3 hidden lg:flex lg:flex-col">
+       
           <button onClick={handleBuy} className={buttonStyles}>
             Buy
           </button>

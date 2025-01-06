@@ -5,7 +5,7 @@ export const about_us = {
   text2:
     "At Drake Threads, we draw inspiration from an era defined by optimism and innovation—a time when technology, music, and pop culture were merging to create new forms of self-expression. The Y2K aesthetic captures the excitement of a rapidly changing world, with shimmering metallics, glossy finishes, and futuristic details that reflect the aspirations of the early digital age. Frutiger Aero, with its smooth gradients, soft curves, and dreamlike compositions, offers a vibrant, almost utopian counterpoint to the tech-driven narrative of the time.",
   text3:
-    "For us, fashion is more than trends—it’s a way to stand out, connect with your identity, and embrace the fusion of past and future. Whether you're rediscovering the nostalgia of the early 2000s or exploring this iconic aesthetic for the first time, Drake Threads is your portal to a world where retro vibes meet futuristic flair.",
+    "For us, fashion is more than trends—it's a way to stand out, connect with your identity, and embrace the fusion of past and future. Whether you're rediscovering the nostalgia of the early 2000s or exploring this iconic aesthetic for the first time, Drake Threads is your portal to a world where retro vibes meet futuristic flair.",
   text4: "Step into our collection and find pieces that speak to your sense of style, creativity, and individuality. Let Drake Threads redefine how you express yourself in the modern age.",
   text5: "",
   final: "Drake Threads — Your Y2K-inspired style, redefined for today.",

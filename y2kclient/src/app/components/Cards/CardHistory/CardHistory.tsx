@@ -20,6 +20,8 @@ const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
     return null;
   }
 
+
+
   const handleCancel = () => {
     Swal.fire({
       title: `Cancel your order of ${history.name}?`,
@@ -31,11 +33,11 @@ const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
       if (result.isConfirmed) {
         dispatch(changeCartState(numberUserId, history.itemId, "cancel")).then(
           (response: any) => {
-            if (response.success) {
+            if (response?.success) {
               dispatch(setUserFromId(numberUserId));
               Swal.fire("Product cancelled successfully!", "", "success");
             } else {
-              Swal.fire("An error occurred!", "", "info");
+              Swal.fire("An error occurred!", response.message, "info");
             }
           }
         );
@@ -58,7 +60,7 @@ const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
 
   return (
     <div className="select-none bg-Lightblue-200 p-2 ring-2 gap-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
-      {/* Product Image and Name */}
+
       <div className="flex col-span-1 flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
         <Image
           alt={history.name}
@@ -76,7 +78,6 @@ const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
         <p>Size: {history.size}</p>
       </div>
 
-      {/* Order State and Actions */}
       <div className="flex flex-col col-span-1 justify-center items-center font-tiltneon text-sm lg:text-xl gap-2 text-Lightblue-950">
         {place !== "AdminHistory" && (
           <p className="text-[0.62rem] lg:text-base self-end font-medium">

@@ -32,11 +32,12 @@ export const changeCartState =
         return { success: true };
       }
     } catch (error: any) {
-      console.log(error.message)
       if (error instanceof Error) {
         console.log(error.message);
+        return { success: false, message: error.message };
       } else {
         console.log("Error desconocido:", error);
+        return { success: false, message: "Unknown desconocido" };
       }
     }
   };

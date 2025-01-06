@@ -58,8 +58,8 @@ const SecondView: React.FC = () => {
   }
   if (AllProducts.length > 0) {
     return (
-      <div className="flex flex-col items-left gap-5 m-10 w-[100%]">
-        <p className="font-titilium text-lg lg:text-2xl text-pink-950 font-normal">
+      <div className="flex flex-col items-center gap-5 m-10 w-[100%]">
+        <p className="font-titilium self-start text-lg lg:text-2xl text-pink-950 font-normal">
           Related Products
         </p>
         <div className="grid grid-cols-3 w-[90%] lg:w-[80%] gap-3 ">
@@ -70,7 +70,7 @@ const SecondView: React.FC = () => {
               clickable: true,
             }}
             modules={[Pagination, Navigation]}
-            className="col-span-3 w-[95%] border-2  rounded-md border-Lightblue-800"
+            className="col-span-3 w-[95%] rounded-md border-Lightblue-800"
           >
             {AllProducts.map((related, index) => (
               <SwiperSlide className=" p-5 " key={index}>

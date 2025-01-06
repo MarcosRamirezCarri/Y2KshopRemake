@@ -21,8 +21,8 @@ export default function AccountSecondPanel() {
   });
 
   return (
-    <div className="bg-Lightblue-300 w-[100%] min-h-[30rem] max-h-[30rem] flex flex-col  p-3">
-      <p className="font-titilium text-2xl self-center mb-2 font-medium text-Lightblue-950">
+    <div className="bg-Lightblue-300 font-titilium  w-[100%] min-h-[30rem] max-h-[30rem] flex flex-col  p-3">
+      <p className="text-2xl self-center mb-2 font-medium text-Lightblue-950">
         My History
       </p>
 
@@ -45,13 +45,13 @@ export default function AccountSecondPanel() {
         </button>
       </div>
 
-      <div className="flex flex-col p-5 border-2 border-Lightblue-600 rounded-bl-md rounded-br-md  rounded-tr-md overflow-auto gap-5 max-h-[22rem]">
+      <div className="flex flex-col p-5 border-2 border-Lightblue-600 rounded-bl-md rounded-br-md  rounded-tr-md overflow-auto gap-5 min-h-[22rem] max-h-[22rem]">
         {filteredHistory?.length > 0 ? (
           filteredHistory.map((his: any, index: any) => (
             <CardHistory key={index} history={his} place={place} />
           ))
         ) : (
-          <p className="text-Lightblue-950 self-center">
+          <p className="text-Lightblue-950 text-xl font-medium justify-center self-center">
             No items found for this filter.
           </p>
         )}

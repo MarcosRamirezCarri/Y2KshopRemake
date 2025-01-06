@@ -37,53 +37,27 @@ const StaticPage = ({ params }: PageProps) => {
     return <div>Page Not Found</div>;
   }
 
+  const renderText = (text: string) => (
+    <p
+    className={`text-lg ${
+      text.length > 2 ? "visible" : "hidden"
+    } `}
+  >
+    {text}
+  </p>
+  )
+
   return (
     <div className="flex flex-col  w-full h-full items-center">
       <Navbar />
       <div className="flex font-titilium w-[90%] text-gray-950 relative flex-col gap-4 items-center top-[7.5rem]">
         <h1 className="text-2xl font-bold mb-4">{pageData.title}</h1>
-        <p
-          className={`text-lg ${
-            pageData.text1.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.text1}
-        </p>
-        <p
-          className={`text-lg ${
-            pageData.text2.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.text2}
-        </p>
-        <p
-          className={`text-lg ${
-            pageData.text3.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.text3}
-        </p>
-        <p
-          className={`text-lg ${
-            pageData.text4.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.text4}
-        </p>
-        <p
-          className={`text-lg ${
-            pageData.text5.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.text5}
-        </p>
-        <p
-          className={`text-lg ${
-            pageData.final.length > 2 ? "visible" : "hidden"
-          } `}
-        >
-          {pageData.final}
-        </p>
+        {renderText(pageData.text1)}
+        {renderText(pageData.text2)}
+        {renderText(pageData.text3)}
+        {renderText(pageData.text4)}
+        {renderText(pageData.text5)}
+        {renderText(pageData.final)}
       </div>
     </div>
   );

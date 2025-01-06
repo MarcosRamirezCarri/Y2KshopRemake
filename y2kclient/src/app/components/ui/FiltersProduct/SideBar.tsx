@@ -59,15 +59,10 @@ import {
   };
   const handleFilter1 = () => {
     setStatusFilter1(!statusFilter1);
-    if (statusFilter2 === true) {
-      setStatusFilter2(false);
-    }
+  
   };
   const handleFilter2 = () => {
     setStatusFilter2(!statusFilter2);
-    if (statusFilter1 === true) {
-      setStatusFilter1(false);
-    }
   };
 
   return (
