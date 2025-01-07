@@ -1,10 +1,11 @@
-interface LabelFormProps {
-    name: any ;
-    onChange: any;
-    error: any;
-    label: string;
-    value: string;
-  }
+export interface LabelFormProps {
+  name: string;
+  label: string;
+  type?: "text" | "number"; // Asegúrate de incluir "type" aquí
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  value: string;
+  error?: string;
+}
 
 const LabelForm: React.FC<LabelFormProps> = ({
     label,

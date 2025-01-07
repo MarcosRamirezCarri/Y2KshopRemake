@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ValidateRegister } from "@/helpers/validators/validatorRegister";
-import { RegisterData } from "@/helpers/validators/validatorRegister";
+import { AccountType } from "@/helpers/types/Account";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import registerFunction from "@/lib/actions/AccountActions/registerFunction";
 import Swal from "sweetalert2";
@@ -22,11 +22,10 @@ const RegisterForm: React.FC<PropModal> = ({
   setModalR,
   modalR,
   setModalL,
-  modalL
+  modalL,
 }) => {
   const dispatch = useAppDispatch();
-  const [formData, setFormData] = useState<RegisterData>({
-    
+  const [formData, setFormData] = useState<AccountType>({
     email: "",
     password: "",
     phone: "",
@@ -37,6 +36,8 @@ const RegisterForm: React.FC<PropModal> = ({
       country: "",
     },
     admin: false,
+    history: [],
+    id: 0,
   });
   const [error, setError] = useState<Errors>({
     email: "",
@@ -101,6 +102,27 @@ const RegisterForm: React.FC<PropModal> = ({
     }
   };
 
+  const renderInputs = (
+    type: string,
+    name: string,
+    title: string,
+    value: string,
+    onChange: (arg: React.ChangeEvent<HTMLInputElement>) => void,
+    error: string
+  ) => (
+    <li>
+      <p>{title}</p>
+      <input
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
+      />
+      {error && <span className="text-gray-400">{error}</span>}
+    </li>
+  );
+
   return (
     <div
       onClick={() => setModalR(!modalR)}
@@ -125,90 +147,18 @@ const RegisterForm: React.FC<PropModal> = ({
 
         <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
-          <li>
-            <p>Full Name</p>
-            <input
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-            {error.name && <span className="text-gray-400">{error.name}</span>}
-          </li>
-          <li>
-            <p>Email</p>
-            <input
-              name="email"
-              type="text"
-              value={formData.email}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-            {error.email && (
-              <span className="text-gray-400">{error.email}</span>
-            )}
-          </li>
-          <li>
-            <p>Password</p>
-            <input
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-            {error.password && (
-              <span className="text-gray-400">{error.password}</span>
-            )}
-          </li>
-          <li>
-            <p>Phone</p>
-            <input
-              name="phone"
-              type="text"
-              value={formData.phone}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-            {error.phone && (
-              <span className="text-gray-400">{error.phone}</span>
-            )}
-          </li>
+            {renderInputs("text", "name", "Full Name", formData.name, handleChange, error.name)}
+            {renderInputs("text", "email", "Email", formData.email, handleChange, error.email)}
+            {renderInputs("password", "password", "Password", formData.password, handleChange, error.password)}
+            {renderInputs("text", "phone", "Phone", formData.phone, handleChange, error.phone)}
           </div>
-          <div  className="flex flex-col gap-2 ">
-          <li>
-            <p>City</p>
-            <input
-              name="city"
-              type="text"
-              value={formData.location.city}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-          </li>
-          <li>
-            <p>Province</p>
-            <input
-              name="province"
-              type="text"
-              value={formData.location.province}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-          </li>
-          <li>
-            <p>Country</p>
-            <input
-              name="country"
-              type="text"
-              value={formData.location.country}
-              onChange={handleChange}
-              className="rounded-md w-[100%] border-Lightblue-300 border-[0.05rem] focus:outline-Lightblue-300 focus:border-Lightblue-300 focus:border-[0.05rem] p-2 h-10"
-            />
-          </li>
+          <div className="flex flex-col gap-2 ">
+            {renderInputs("text", "province", "Province", formData.location.province, handleChange, "")}
+            {renderInputs("text", "city", "City", formData.location.city, handleChange, "")}
+            {renderInputs("text", "country", "Country", formData.location.country, handleChange, "")}
+            
           </div>
-         
+
           <button
             className="bg-Lightblue-200 w-[50%] justify-self-center col-span-2 py-4 px-6 font-titilium font-medium rounded-md text-lg ring-2 ring-Lightblue-100 transition-all duration-200 hover:ring-Lightblue-300"
             type="submit"
@@ -226,7 +176,5 @@ const RegisterForm: React.FC<PropModal> = ({
     </div>
   );
 };
-
-
 
 export default RegisterForm;

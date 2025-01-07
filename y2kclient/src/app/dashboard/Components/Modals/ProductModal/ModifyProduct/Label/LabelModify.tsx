@@ -3,7 +3,7 @@ interface LabelFormProps {
     onChange: any;
     error: string;
     label: string;
-    value: string;
+    value: string | number;
     id: number
   }
 

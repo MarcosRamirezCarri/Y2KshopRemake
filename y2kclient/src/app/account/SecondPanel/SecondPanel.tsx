@@ -46,7 +46,7 @@ export default function AccountSecondPanel() {
       </div>
 
       <div className="flex flex-col p-5 border-2 border-Lightblue-600 rounded-bl-md rounded-br-md  rounded-tr-md overflow-auto gap-5 min-h-[22rem] max-h-[22rem]">
-        {filteredHistory?.length > 0 ? (
+        {user.history?.length > 0 ? (  filteredHistory?.length > 0 ? (
           filteredHistory.map((his: any, index: any) => (
             <CardHistory key={index} history={his} place={place} />
           ))
@@ -54,6 +54,10 @@ export default function AccountSecondPanel() {
           <p className="text-Lightblue-950 text-xl font-medium justify-center self-center">
             No items found for this filter.
           </p>
+        )): (
+          <p className="text-Lightblue-950 text-xl font-medium justify-center self-center">
+          You dont have any purchase!
+        </p>
         )}
       </div>
     </div>

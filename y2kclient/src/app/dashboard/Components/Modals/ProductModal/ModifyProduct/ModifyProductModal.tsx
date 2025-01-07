@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { useState, useEffect } from "react";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import { useState } from "react";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/services/cloudinarySet";

@@ -18,6 +18,17 @@ interface ModalProps {
   stateAdmin: string;
 }
 
+interface Errors {
+  name: string;
+  images: string;
+  price: string;
+  description: string;
+  clasification: string;
+  colors: string;
+  colorErrors: string[];
+  sizeErrors: string[];
+}
+
 const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   const [product, setProduct] = useState<Product>({
     id: 0,
@@ -30,7 +41,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
   });
   const [uploading, setUploading] = useState(false);
   const [stateModal, setStateModal] = useState(false);
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<Errors>({
     name: "",
     images: "",
     price: "",
@@ -104,9 +115,9 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     }
   };
 
-  const renderLabel = <K extends keyof Product>(
+  const renderLabel = <K extends keyof Omit<Errors, "colorErrors" | "sizeErrors">>(
     name: K,
-    label: string,
+    label: string ,
     type: "text" | "number" = "text"
   ) => (
     <LabelForm
@@ -115,7 +126,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
       type={type}
       onChange={handleChange}
       value={product[name]?.toString() || ""}
-      error={errors[name] || ""}
+      error={errors[name]}
     />
   );
 

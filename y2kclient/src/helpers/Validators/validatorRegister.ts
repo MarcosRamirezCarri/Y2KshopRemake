@@ -82,12 +82,9 @@ export async function ValidateRegister(
     register.location.province,
     register.location.country,
   );
+  console.log(isValidLocation)
 
-  if (!isValidLocation) {
-    errors.city = "Ciudad, provincia o país inválidos";
-    errors.province = "Ciudad, provincia o país inválidos";
-    errors.country = "Ciudad, provincia o país inválidos";
-  }
+
 
   return errors;
 }

@@ -23,6 +23,7 @@ const LoginModal: React.FC<PropModal> = ({ modal }) => {
  if(modal) return (
     <div>
       <RegisterForm
+      modalL={modalL}
         modalR={modalR}
         setModalR={setModalR}
         setModalL={setModalL}
