@@ -26,7 +26,7 @@ const LoginForm: React.FC<PropModal> = ({ setModalR, setModalL, modalL }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("userId", user.id);
     }
-  }, [token]);
+  }, [token, user.id]);
 
   const [formData, setFormData] = useState<LoginData>({
     email: "",

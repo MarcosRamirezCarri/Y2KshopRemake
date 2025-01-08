@@ -27,7 +27,7 @@ const SecondView: React.FC = () => {
       setClassif(DetailProduct[0].clasification);
     };
     fetchDetail();
-  }, []);
+  }, [numberId]);
 
   useEffect(() => {
    if (products.length === 0) {
@@ -35,7 +35,7 @@ const SecondView: React.FC = () => {
    }
      
    
-  }, [dispatch, products]);
+  }, [dispatch, products ]);
 
   useEffect(() => {
     const checkMobile = () => {

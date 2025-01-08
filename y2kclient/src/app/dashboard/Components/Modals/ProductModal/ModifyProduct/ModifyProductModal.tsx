@@ -129,7 +129,7 @@ const ModifyProductModal: React.FC<ModifyProductModalProps> = ({
           }`}
         >
           <p className="text-2xl flex justify-center font-semibold col-span-2">
-            Modify '{stateProduct.name}'
+            Modify &apos;{stateProduct.name}&apos;
           </p>
           <div
             className={`flex flex-col items-center ${

@@ -17,7 +17,7 @@ const LogOutBtn = () => {
       token = localStorage.getItem("token");
       id = localStorage.getItem("userId");
     }
-  }, []);
+  }, [token, id]);
 
   const handleLogout = () => {
     if (token !== "undefined" && token !== "null") {

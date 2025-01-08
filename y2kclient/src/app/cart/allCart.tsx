@@ -30,7 +30,7 @@ const AllCart = () => {
       }
      
     }
-  }, [dispatch, showCart]);
+  }, [dispatch, showCart.length]);
 
  
   return (

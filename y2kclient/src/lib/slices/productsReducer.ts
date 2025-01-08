@@ -71,6 +71,10 @@ export const productsReducer = createSlice({
           );
         return matchesCategory && matchesSize;
       });
+      
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
   },
 });
@@ -82,6 +86,7 @@ export const {
   sortBySize,
   setSearch,
   deleteProd,
+  setLoading
 } = productsReducer.actions;
 
 export default productsReducer.reducer;

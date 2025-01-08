@@ -5,11 +5,13 @@ import { about_us } from "../data/aboutData";
 import { faq } from "../data/faqData";
 import { shipping } from "../data/shippingData";
 
+type PageKey = "faq" | "about_us" | "shipping";
+
 type PageProps = {
-  params: { page: string };
+  params: { page: PageKey };
 };
 
-const pagesData = {
+const pagesData: Record<PageKey, { title: string; text1: string; text2: string; text3: string; text4: string; text5: string; final: string }> = {
   faq,
   about_us,
   shipping,

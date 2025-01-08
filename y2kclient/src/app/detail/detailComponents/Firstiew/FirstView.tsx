@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Product } from "@/helpers/types/Types";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Swal from "sweetalert2"
+import Loader from "@/app/components/ui/Loader/Loader";
 import fetchProduct from "@/lib/actions/ProductActions/getDetail";
 import SelectButtons from "./Buttons/SelectButton/SelectButton";
 import ImagesDetail from "./Images/imagesDetail";
@@ -20,17 +22,27 @@ const FirstView = () => {
   });
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [loading ,setLoading] = useState<boolean>(false)
   const param = useSearchParams();
   const searchId = param.get("id");
   const numberId = Number(searchId);
 
   useEffect(() => {
     const fetchDetail =  async() => {
+      setLoading(true)
+      try {
         const DetailProduct: any = await fetchProduct(numberId);
-      setStateDetail(DetailProduct[0]);
+        setStateDetail(DetailProduct[0]);
+      } catch (error: any) {
+        console.log(error.message)
+        Swal.fire("An error occurred!", error.message, "info");
+      }finally{
+        setLoading(false)
+      }
+      
     };
     fetchDetail();
-  }, [searchId]);
+  }, [searchId, numberId]);
 
   const handleChangeColor = (color: string) => {
     setSelectedColor(color);
@@ -64,16 +76,15 @@ const FirstView = () => {
 
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 gap-3">
-      {/* Left: Image Thumbnails */}
       <ImagesDetail stateDetail={stateDetail} setStateDetail={setStateDetail}/>
 
-      {/* Center: Main Product Information */}
+ 
       <div className="col-span-2 flex flex-col items-center gap-3">
         <p className="font-tiltneon text-2xl lg:text-3xl text-pink-950 font-semibold">
           {stateDetail.name}
         </p>
         <Image
-          src={stateDetail.images[0]} // Imagen principal
+          src={stateDetail.images[0]} 
           alt="Main product image"
           className="rounded w-[18.25rem] lg:w-[24.25rem] h-[18.25rem] lg:h-[24.25rem] ring-2 ring-pink-300 bg-transparent"
           width={880}
@@ -82,7 +93,6 @@ const FirstView = () => {
         {renderSelectedInfo()}
       </div>
 
-      {/* Right: Product Details and Actions */}
       <div className="col-span-3 relative lg:col-span-2 flex flex-col gap-3 top-10">
         <div className="font-tiltneon text-xl text-pink-950">
           Category:
