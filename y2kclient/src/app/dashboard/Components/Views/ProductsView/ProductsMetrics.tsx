@@ -29,7 +29,7 @@ const ProductsControl = () => {
     if (products.length === 0) {
       dispatch(getAllProducts());
     }
-  }, [dispatch, products]);
+  }, [dispatch, products.length]);
 
   const handleModify = (product: Product) => {
     setStateProduct(product);

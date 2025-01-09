@@ -8,7 +8,7 @@ interface Size {
     sizes: Size[];
   }
   
-  const validateColors = (colors: Color[]) => {
+  export const validateColors = (colors: Color[]) => {
     let errors = {
       colors: "",
       colorErrors: [] as string[],
@@ -58,4 +58,3 @@ interface Size {
     return errors;
   };
   
-  export default validateColors;

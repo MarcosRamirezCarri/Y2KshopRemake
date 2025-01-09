@@ -19,7 +19,7 @@ const TextFlyer = () => {
       dispatch(getAllFlyers());
     }
 
-  }, [dispatch, flyers]);
+  }, [dispatch, flyers.length]);
 
 
 

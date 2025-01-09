@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ValidateRegister } from "@/helpers/validators/validatorRegister";
+import { ValidateRegister } from "@/helpers/Validators/validatorRegister";
 import { AccountType } from "@/helpers/types/Account";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import registerFunction from "@/lib/actions/AccountActions/registerFunction";

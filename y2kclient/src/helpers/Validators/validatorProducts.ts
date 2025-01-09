@@ -1,6 +1,6 @@
 import {Product} from "../types/Types";
 
-const validateProduct = (product: Product) => {
+export const validateProduct = (product: Product) => {
     const newErrors = {
       name: "",
       images: "",
@@ -52,4 +52,3 @@ const validateProduct = (product: Product) => {
     
   };
 
-  export default validateProduct;

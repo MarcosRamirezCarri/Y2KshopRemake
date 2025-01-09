@@ -19,7 +19,7 @@ const CardProductControl: React.FC<ControlProps> = ({
 
   return (
     <div
-      className={`p-4 col-span-1 rounded-md select-none grid grid-cols-3 transition-all duration-300 ${
+      className={`p-4 col-span-1 shadow-md rounded-md select-none grid grid-cols-3 transition-all duration-300 ${
         isOutOfStock
           ? "bg-orange-200 ring-2 ring-orange-300"
           : "bg-Lightblue-200 hover:ring-2 hover:ring-Lightblue-300"

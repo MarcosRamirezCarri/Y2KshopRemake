@@ -22,11 +22,13 @@ export const postProduct = async (req: Request, res: Response) => {
   }
 
   const errorsColors = await controlColors(colors);
-  const hasErrorColors = Object.values(errorsColors).some(
-    (error) => error !== ""
-  );
+  const hasErrorColors =
+    errorsColors.colors !== "" ||
+    errorsColors.colorErrors.length > 0 ||
+    errorsColors.sizeErrors.length > 0;
 
   if (hasErrorColors) {
+    console.log(errorsColors)
     return res.status(400).json({ errorsColors });
   }
   try {

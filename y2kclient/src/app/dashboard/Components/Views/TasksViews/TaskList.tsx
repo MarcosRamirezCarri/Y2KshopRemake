@@ -20,7 +20,7 @@ const TaskList = () => {
       dispatch(getAllCarts());
     }
    
-  }, [dispatch, tasks]);
+  }, [dispatch, tasks.length]);
  
 
   const orderTasks = (tasks: CartItem[]) => {

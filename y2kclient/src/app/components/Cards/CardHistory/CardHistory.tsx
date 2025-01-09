@@ -59,7 +59,7 @@ const CardHistory: React.FC<CardHistoryProps> = ({ history, place }) => {
   };
 
   return (
-    <div className="select-none bg-Lightblue-200 p-2 ring-2 gap-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
+    <div className="select-none shadow-md bg-Lightblue-200 p-2 ring-2 gap-2 ring-Lightblue-400 rounded-md grid grid-cols-3">
 
       <div className="flex col-span-1 flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
         <Image

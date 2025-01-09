@@ -13,7 +13,7 @@ const FlyersConfig = () => {
     if (flyers.length === 0) {
       dispatch(getAllFlyers());
     }
-  }, [dispatch, flyers]);
+  }, [dispatch, flyers.length]);
   return (
     <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[7.5rem]  w-[75%]">
       <button

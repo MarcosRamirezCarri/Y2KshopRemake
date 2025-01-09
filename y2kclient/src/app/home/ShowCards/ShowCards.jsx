@@ -21,7 +21,7 @@ export default function ShowCards() {
 
     fetchData();
     AOS.init({ duration: 1000 });
-  }, [dispatch, products]);
+  }, [dispatch, products.length]);
 
   const place = "home"
   const all = [];

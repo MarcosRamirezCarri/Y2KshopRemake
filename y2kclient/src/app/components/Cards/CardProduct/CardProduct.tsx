@@ -28,7 +28,7 @@ const CardProductComplete: React.FC<CardProductProps> = ({
         isOutOfStock
           ? "bg-orange-200 hover:ring-2 cursor-not-allowed ring-orange-400"
           : "bg-Lightblue-200 hover:ring-2 hover:ring-Lightblue-300"
-      } gap-4 z-5 select-none flex flex-col  transition-all duration-300 hover:scale-105 `}
+      } gap-4 z-5 select-none shadow-md flex flex-col  transition-all duration-300 hover:scale-105 `}
     >
       <p className="font-tiltneon text-xl text-Lightblue-900 font-semibold">
         {product.name}

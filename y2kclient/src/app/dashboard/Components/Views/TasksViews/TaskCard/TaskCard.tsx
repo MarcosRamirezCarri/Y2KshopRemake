@@ -43,7 +43,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ cartItem, handleClick }) => {
     }`;
 
   return (
-    <div className="bg-Lightblue-200 ring-2 ring-Lightblue-300 rounded-md grid grid-cols-3">
+    <div className="bg-Lightblue-200 shadow-md ring-2 ring-Lightblue-300 rounded-md grid grid-cols-3">
       <div className="flex flex-col items-center font-tiltneon text-md lg:text-xl text-Lightblue-950 font-semibold">
         <Image
           alt="history"

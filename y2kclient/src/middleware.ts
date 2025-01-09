@@ -4,9 +4,10 @@ import { isAuthenticated } from "./helpers/services/jwtControl";
 
 const SECRET_KEY: any = process.env.SECRET_JWT;
 
+
+
 if (!SECRET_KEY) {
-  throw new Error(
-    "JWT_SECRET no está definido. Configúralo en las variables de entorno."
+  throw new Error("JWT_SECRET no está definido. Configúralo en las variables de entorno."
   );
 }
 

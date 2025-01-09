@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Product } from "@/helpers/types/Types";
 import { uploadImage } from "@/helpers/services/cloudinarySet";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import validateProduct from "@/helpers/validators/validatorProducts";
-import validateColors from "@/helpers/validators/validateColors";
+import {validateColors} from "@/helpers/Validators/validateColors";
+import {validateProduct} from "@/helpers/Validators/validatorProducts";
 import { createProduct } from "@/lib/actions/AdminActions/createProduct";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import Swal from "sweetalert2";
@@ -82,15 +82,15 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
     };
     setErrors(combinedErrors);
 
+
     const hasErrors = Object.values(combinedErrors).some((error) =>
       Array.isArray(error) ? error.some((subError) => subError) : error
     );
+  
+    console.log(hasErrors, errors, product)
 
     if (
-      !hasErrors &&
-      Object.values(product).every((value) =>
-        Array.isArray(value) ? value.length : value
-      )
+      !hasErrors
     ) {
       dispatch(createProduct(product)).then((result: any) => {
         if (result?.success) {
@@ -173,7 +173,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
             {product.images.map((image, index) => (
               <div
                 key={index}
-                className="relative p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 rounded hover:scale-105 transition-all"
+                className="relative flex flex-col p-1 bg-Lightblue-400 ring-2 ring-Lightblue-500 rounded hover:scale-105 transition-all"
               >
                 <Image
                   width={400}
@@ -184,7 +184,7 @@ const CreateModal: React.FC<ModalProps> = ({ setStateAdmin, stateAdmin }) => {
                 />
                 <button
                   type="button"
-                  className="absolute bottom-0 self-center bg-Lightblue-400 text-white rounded-full px-1 hover:text-pink-950"
+                  className="absolute bottom-0 self-center bg-Lightblue-400 text-white rounded-full px-2 hover:text-pink-950"
                   onClick={() =>
                     setProduct((prev) => ({
                       ...prev,

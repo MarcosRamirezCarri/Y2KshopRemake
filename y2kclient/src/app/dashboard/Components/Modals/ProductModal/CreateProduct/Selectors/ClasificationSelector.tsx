@@ -13,6 +13,7 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
   onChange,
   error,
 }) => {
+  const [isNewClasification, setIsNewClasification] = useState(false);
   const [newClasification, setNewClasification] = useState("");
 
   const stateProducts = useAppSelector((state) => state.products.sortProducts);
@@ -24,13 +25,17 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
     });
     return Array.from(categoriesSet);
   };
+
   const existingClasifications = getUniqueCategories(stateProducts);
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     if (selectedValue === "new") {
+      setIsNewClasification(true);
       setNewClasification("");
-      onChange("");
+      onChange(""); // Clear value when new classification is selected
     } else {
+      setIsNewClasification(false);
       onChange(selectedValue);
     }
   };
@@ -45,11 +50,13 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      <label className="font-titilium text-lg  focus:outline-Lightblue-400">Clasification</label>
+      <label className="font-titilium text-lg focus:outline-Lightblue-400">
+        Clasification
+      </label>
       <select
-        value={existingClasifications.includes(value) ? value : "new"}
+        value={isNewClasification ? "new" : value}
         onChange={handleSelectChange}
-        className="border p-2 rounded mb-2  focus:outline-Lightblue-400"
+        className="border p-2 rounded mb-2 focus:outline-Lightblue-400"
       >
         <option value="" disabled>
           Select a classification
@@ -61,15 +68,15 @@ const ClasificationSelector: React.FC<ClasificationSelectorProps> = ({
         ))}
         <option value="new">New Classification</option>
       </select>
-      {value === "" || value === "new" ? (
+      {isNewClasification && (
         <input
           type="text"
           value={newClasification}
           onChange={handleNewClasificationChange}
           placeholder="Enter a new classification"
-          className="border p-2 rounded  focus:outline-Lightblue-400"
+          className="border p-2 rounded focus:outline-Lightblue-400"
         />
-      ) : null}
+      )}
       {error && <p className="text-pink-950 text-sm">{error}</p>}
     </div>
   );

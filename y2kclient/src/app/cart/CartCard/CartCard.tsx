@@ -4,6 +4,7 @@ import { CartItem } from "@/helpers/types/CartItem";
 import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { deleteCartItem } from "@/lib/actions/CartActions/deleteCart";
+import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { changeCartState } from "@/lib/actions/CartActions/changeCartState";
 import { getCartFromId } from "@/lib/actions/CartActions/getCart";
 import ModalModify from "./ModalModify/ModalModify";
@@ -34,6 +35,7 @@ const CartCard: React.FC<CartItem> = ({
       if (result.isConfirmed) {
         dispatch(changeCartState(userId, id, state)).then((response: any) => {
           if (response?.success) {
+            dispatch(getAllProducts())
             dispatch(getCartFromId(userId));
             Swal.fire(
               `Buyed for ${Product.price}`,

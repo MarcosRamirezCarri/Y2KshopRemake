@@ -45,7 +45,7 @@ router.put("/product/modify", authenticateToken, productRoutes.updateProduct);
 
 router.put("/cart/update", authenticateToken, cartRoutes.addToHistoryItem);
 
-router.put("/user", authenticateToken, userRoutes.putUser);
+router.put("/user", userRoutes.putUser);
 
 router.put("/flyer/:id", authenticateToken, flyerRoutes.putFlyer)
 

@@ -77,13 +77,6 @@ export async function ValidateRegister(
   if (!register.location.country) {
     errors.country = "Country is required";
   }
-  const isValidLocation = await validateLocationGeoNames(
-    register.location.city,
-    register.location.province,
-    register.location.country,
-  );
-  console.log(isValidLocation)
-
 
 
   return errors;

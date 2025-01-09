@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { uploadImage } from "@/helpers/services/cloudinarySet";
-import validateProduct from "@/helpers/validators/validatorProducts";
+import {validateProduct} from "@/helpers/Validators/validatorProducts";
 import { Product } from "@/helpers/types/Types";
 import { modProduct } from "@/lib/actions/AdminActions/modifyProduct";
 import ModalColors from "./ModalColors/ModalColors";

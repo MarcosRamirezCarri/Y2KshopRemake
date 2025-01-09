@@ -17,7 +17,7 @@ export default function CardsContainer() {
     if (stateProducts.length === 0 && stateSize === "all" && stateCategory ==="all") {
       dispatch(getAllProducts());
     }
-  }, [dispatch, stateProducts, stateSize, stateCategory]);
+  }, [dispatch, stateProducts.length, stateSize, stateCategory]);
 
   const place = "products";
   return (

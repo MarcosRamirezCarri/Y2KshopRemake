@@ -1,5 +1,5 @@
 import {Product} from "@/helpers/types/Types";
-import validateColors from "@/helpers/validators/validateColors";
+import { validateColors } from "@/helpers/Validators/validateColors";
 import Swal from "sweetalert2";
 
 interface ModalColorsProps {
