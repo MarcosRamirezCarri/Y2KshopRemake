@@ -14,14 +14,18 @@ export const isAuthenticated = async (req: NextRequest) => {
       const decoded = await jose.jwtVerify(token, jwtConfig.secret);
 
       if (decoded.payload?.userId) {
-        return true;
+        if (decoded.payload?.admin) {
+          return {success: true, admin:true};
+        }
+        return {success: true, admin:false};
+      
       } else {
-        return false;
+        return {success: false, admin:false};
       }
     } catch (err) {
-      return false;
+      return {success: false, admin:false};
     }
   } else {
-    return false;
+    return {success: false, admin:false};
   }
 };

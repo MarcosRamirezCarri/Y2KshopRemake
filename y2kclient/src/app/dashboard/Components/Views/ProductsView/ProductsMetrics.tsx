@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { Product } from "@/helpers/types/Types";
@@ -66,7 +67,7 @@ const ProductsControl = () => {
 
   return (
     <div
-      className={`relative font-titilium left-[23%] grid grid-cols-2 gap-5 top-[7.5rem]  w-[75%]`}
+      className={`relative font-titilium left-[10%] grid grid-cols-2 gap-5 top-[7.5rem]  w-[75%]`}
     >
       <SideBar />
       <div className="flex flex-row justify-center  col-span-2">

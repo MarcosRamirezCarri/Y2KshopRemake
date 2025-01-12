@@ -14,13 +14,11 @@ const path = usePathname();
       <p>{text}</p>
     </Link>
   );
-if (path !== "/dashboard") 
+if (!path.startsWith("/dashboard")) 
   return (
     <footer className="bg-[#00080a] font-titilium  mt-32  text-Lightblue-50 p-8">
       <div className="container mx-auto">
-        {/* Store Information */}
 
-        {/* Navigation Links */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           <div className="flex justify-self-center flex-col">
             <h3 className="font-semibold text-Lightblue-100 text-xl">Quick Links</h3>

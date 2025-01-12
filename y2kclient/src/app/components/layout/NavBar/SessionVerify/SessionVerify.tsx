@@ -40,6 +40,7 @@ const SessionVerify = () => {
 
     verifyToken();
   }, [modal, user.length, dispatch]);
+  
   if (path === "/")
     return (
       <div className="absolute">

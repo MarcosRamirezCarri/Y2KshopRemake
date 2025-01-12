@@ -25,7 +25,7 @@ const ButtonsNavBar = () => {
       <div className="gap-6 font-tiltneon text-gray-50 lg:gap-[5.8rem] flex flex-row">
         {user?.admin && (
           <NavLink
-            href="/dashboard"
+            href="/dashboard/tasks"
             icon={BsArchiveFill}
             label="Dashboard"
             isActive={stateButton === "dash" || path === "/dashboard"}

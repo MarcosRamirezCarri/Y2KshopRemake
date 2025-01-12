@@ -7,7 +7,7 @@ dotenv.config();
 const JWT_SECRET: any = process.env.SECRET_JWT;
 
 interface AuthRequest extends Request {
-  user?: { userId: number; email: string };
+  user?: { userId: number; email: string; admin: boolean };
 }
 
 const authenticateToken = (
@@ -24,7 +24,9 @@ const authenticateToken = (
     const decoded = jwt.verify(token, JWT_SECRET) as {
       userId: number;
       email: string;
+      admin: boolean
     };
+ 
     req.user = decoded;
 
     next();

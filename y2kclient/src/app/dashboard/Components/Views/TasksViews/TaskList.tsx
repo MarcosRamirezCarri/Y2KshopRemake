@@ -1,3 +1,4 @@
+"use client"
 import { getAllCarts } from "@/lib/actions/AdminActions/getAllCarts";
 import { setSelectedState } from "@/lib/slices/adminReducer";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
@@ -54,7 +55,7 @@ const TaskList = () => {
   };
 
   return (
-    <div className="relative font-titilium left-[23%] flex flex-col gap-5 top-[7.5rem] w-[75%]">
+    <div className="relative font-titilium left-[10%] flex flex-col gap-5 top-[7.5rem] w-[75%]">
       <div className="flex flex-row self-center gap-5 ">
         <select
           value={selectedState}
