@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import Navbar from "@/app/components/layout/NavBar/NavBar";
-import Footer from "@/app/components/layout/Footer/Footer";
 import { about_us } from "../data/aboutData";
 import { faq } from "../data/faqData";
 import { shipping } from "../data/shippingData";
@@ -51,7 +49,6 @@ const StaticPage = ({ params }: PageProps) => {
 
   return (
     <div className="flex flex-col  w-full h-full items-center">
-      <Navbar />
       <div className="flex font-titilium w-[90%] text-gray-950 relative flex-col gap-4 items-center top-[7.5rem]">
         <h1 className="text-2xl font-bold mb-4">{pageData.title}</h1>
         {renderText(pageData.text1)}

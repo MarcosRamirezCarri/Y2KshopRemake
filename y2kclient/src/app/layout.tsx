@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "./Provider";
+import Navbar from "./components/layout/NavBar/NavBar";
+import Footer from "./components/layout/Footer/Footer";
 import { store } from "@/lib/store";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -19,7 +21,11 @@ export default function RootLayout({
   return (
     <Providers>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <Navbar/>
+      {children}
+      <Footer/>
+      </body>
     </html>
     </Providers>
   );

@@ -1,32 +1,28 @@
-import { Product } from "@/helpers/types/Types";
 import Image from "next/image";
 
 interface ImagesDetailProps {
-  setStateDetail: (arg: any) => void;
-  stateDetail: Product
+  setStateImg: (arg: string[]) => void; 
+  stateImg: string[]; 
 }
 
-const ImagesDetail: React.FC<ImagesDetailProps> = ({stateDetail, setStateDetail}) => {
+const ImagesDetail: React.FC<ImagesDetailProps> = ({ stateImg, setStateImg }) => {
   const handleImageClick = (index: number) => {
-    setStateDetail((prevState: any) => {
-      const currentImages = [...prevState.images];
+    setStateImg((prevState: any) => {
+      const currentImages = [...prevState];
       const clickedImage = currentImages[index];
 
-      if (currentImages.includes(clickedImage)) {
-        [currentImages[0], currentImages[index]] = [
-          currentImages[index],
-          currentImages[0],
-        ];
-      }
 
-      return {
-        ...prevState,
-        images: currentImages,
-      };
+      [currentImages[0], currentImages[index]] = [
+        currentImages[index],
+        currentImages[0],
+      ];
+
+      return currentImages; 
     });
   };
+
   const renderImages = () =>
-    stateDetail.images
+    stateImg
       .slice(1) 
       .map((img, index) => (
         <Image
@@ -39,9 +35,12 @@ const ImagesDetail: React.FC<ImagesDetailProps> = ({stateDetail, setStateDetail}
           height={400}
         />
       ));
-  return <div className="col-span-1 flex flex-col items-center gap-5 relative top-5">
-    {renderImages()}
-  </div>;
+
+  return (
+    <div className="col-span-1 flex flex-col items-center gap-5 relative top-5">
+      {renderImages()}
+    </div>
+  );
 };
 
 export default ImagesDetail;

@@ -6,36 +6,27 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import fetchProduct from "@/lib/actions/ProductActions/getDetail";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { getAllProducts } from "@/lib/actions/ProductActions/getAllProducts";
 import { Product } from "@/helpers/types/Types";
 import CardProductComplete from "@/app/components/Cards/CardProduct/CardProduct";
 
-const SecondView: React.FC = () => {
+interface SecondViewProps {
+  classif: string;
+}
+
+const SecondView: React.FC<SecondViewProps> = ({ classif }) => {
   const products = useAppSelector((state) => state.products.product);
   const [isMobile, setIsMobile] = useState(false);
-  const [classif, setClassif] = useState<string>("none");
   const dispatch = useAppDispatch();
-  const param = useSearchParams();
-  const searchId = param.get("id");
-  const numberId = Number(searchId);
+  const { page } = useParams();
+  const numberId = Number(page);
 
   useEffect(() => {
-    const fetchDetail = async () => {
-      const DetailProduct: any = await fetchProduct(numberId);
-      setClassif(DetailProduct[0].clasification);
-    };
-    fetchDetail();
-  }, [numberId]);
-
-  useEffect(() => {
-   if (products.length === 0) {
-    dispatch(getAllProducts());
-   }
-     
-   
-  }, [dispatch, products ]);
+    if (products.length === 0) {
+      dispatch(getAllProducts());
+    }
+  }, [dispatch, products]);
 
   useEffect(() => {
     const checkMobile = () => {

@@ -1,48 +1,20 @@
 "use client";
 import Image from "next/image";
 import { Product } from "@/helpers/types/Types";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import Swal from "sweetalert2"
-import Loader from "@/app/components/ui/Loader/Loader";
-import fetchProduct from "@/lib/actions/ProductActions/getDetail";
+import { useState } from "react";
 import SelectButtons from "./Buttons/SelectButton/SelectButton";
 import ImagesDetail from "./Images/imagesDetail";
 import AddToCart from "./Buttons/AddToCart/AddToCartbtn";
 
-const FirstView = () => {
-  const [stateDetail, setStateDetail] = useState<Product>({
-    id: 0,
-    name: "",
-    images: [],
-    price: 0,
-    colors: [],
-    clasification: "",
-    description: "",
-  });
+interface FirstViewProps {
+  product: Product
+}
+
+const FirstView: React.FC<FirstViewProps> = ({product}) => {
+  const [stateImg, setStateImg] = useState<string[]>(product.images);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [loading ,setLoading] = useState<boolean>(false)
-  const param = useSearchParams();
-  const searchId = param.get("id");
-  const numberId = Number(searchId);
-
-  useEffect(() => {
-    const fetchDetail =  async() => {
-      setLoading(true)
-      try {
-        const DetailProduct: any = await fetchProduct(numberId);
-        setStateDetail(DetailProduct[0]);
-      } catch (error: any) {
-        console.log(error.message)
-        Swal.fire("An error occurred!", error.message, "info");
-      }finally{
-        setLoading(false)
-      }
-      
-    };
-    fetchDetail();
-  }, [searchId, numberId]);
+  
 
   const handleChangeColor = (color: string) => {
     setSelectedColor(color);
@@ -52,7 +24,7 @@ const FirstView = () => {
   const handleChangeSize = (size: string) => {
     setSelectedSize(size);
   };
-  const isOutOfStock = stateDetail.colors.every((color) =>
+  const isOutOfStock = product.colors.every((color) =>
     color.sizes.every((size) => size.quantity === 0)
   );
   
@@ -76,15 +48,15 @@ const FirstView = () => {
 
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 col-span-3 gap-3">
-      <ImagesDetail stateDetail={stateDetail} setStateDetail={setStateDetail}/>
+      <ImagesDetail stateImg={stateImg} setStateImg={setStateImg}/>
 
  
       <div className="col-span-2 flex flex-col items-center gap-3">
         <p className="font-tiltneon text-2xl lg:text-3xl text-pink-950 font-semibold">
-          {stateDetail.name}
+          {product.name}
         </p>
         <Image
-          src={stateDetail.images[0]} 
+          src={stateImg[0]} 
           alt="Main product image"
           className="rounded w-[18.25rem] lg:w-[24.25rem] h-[18.25rem] lg:h-[24.25rem] ring-2 ring-pink-300 bg-transparent"
           width={880}
@@ -97,19 +69,19 @@ const FirstView = () => {
         <div className="font-tiltneon text-xl text-pink-950">
           Category:
           <span className="font-light text-gray-950 px-2">
-            - {stateDetail.clasification}
+            - {product.clasification}
           </span>
         </div>
         <div className="font-tiltneon w-[90%] text-xl text-pink-950">
           Description:
           <p className="font-light text-gray-950">
-            - {stateDetail.description}
+            - {product.description}
           </p>
         </div>
         <div className="font-tiltneon text-xl text-pink-950">
           Price:
           <span className="font-light text-gray-950 px-2">
-            - ${stateDetail.price}
+            - ${product.price}
           </span>
         </div>
 
@@ -119,7 +91,7 @@ const FirstView = () => {
             handleChangeSize={handleChangeSize}
             selectedSize={selectedSize}
             selectedColor={selectedColor}
-            colors={stateDetail.colors}
+            colors={product.colors}
           />
           <AddToCart
             selectedColor={selectedColor}

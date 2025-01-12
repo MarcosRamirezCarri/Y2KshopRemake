@@ -2,7 +2,7 @@
 import { useAppSelector, useAppDispatch } from "@/lib/hooks/hooks";
 import { useState, useEffect, useCallback } from "react";
 import { getCartFromId } from "@/lib/actions/CartActions/getCart";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { addToCart } from "@/lib/actions/CartActions/addToCart";
 import Swal from "sweetalert2";
 import LoginModal from "@/app/components/ui/LoginModal/LoginModal";
@@ -16,8 +16,8 @@ const AddToCart: React.FC<CartProps> = ({ selectedColor, selectedSize }) => {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState<number | null>(null);
 
-  const param = useSearchParams();
-  const productId = Number(param.get("id") || 0);
+  const { page } = useParams();
+  const productId = Number(page);
 
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.cart);

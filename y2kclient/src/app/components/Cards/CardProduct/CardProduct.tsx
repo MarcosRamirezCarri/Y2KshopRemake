@@ -34,7 +34,7 @@ const CardProductComplete: React.FC<CardProductProps> = ({
         {product.name}
       </p>
       <Link
-        href={isOutOfStock ? "#" : { pathname: "/detail", query: { id } }}
+        href={isOutOfStock ? "#" : { pathname: `/detail/${id}` }}
         onClick={handlePreventClick}
       >
         <Image

@@ -1,6 +1,10 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Footer: React.FC = () => {
+const path = usePathname();
+
   const renderList = (place: string, text: string) => (
     <Link
       className="hover:decoration-Lightblue-50 underline text-lg font-medium decoration-[#00080a] transition-all duration-150 hover:scale-105"
@@ -10,7 +14,7 @@ const Footer: React.FC = () => {
       <p>{text}</p>
     </Link>
   );
-
+if (path !== "/dashboard") 
   return (
     <footer className="bg-[#00080a] font-titilium  mt-32  text-Lightblue-50 p-8">
       <div className="container mx-auto">

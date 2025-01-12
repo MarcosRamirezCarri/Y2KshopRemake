@@ -1,18 +1,17 @@
 import { Server } from "@/helpers/services/server";
 import axios from "axios";
+import { Product } from "@/helpers/types/Types";
 
-const fetchProduct = async (productId: number) => {
+export const getProductDetail = async (productId: number) => {
   try {
     const data = await axios.get(`${Server}/product/${productId}`);
-    const detail = data.data;
+    const detail: Product = data.data;
+    const status = data.status;
 
-    const formatedProduct = [];
-    formatedProduct.push(detail);
-
-    return formatedProduct;
-  } catch (error) {
-    console.error("Error fetching product data:", error);
+    if (status === 200) {
+      return { detail, success: true };
+    }
+  } catch (error: any) {
+    console.error("Error fetching product data:", error.message);
   }
 };
-
-export default fetchProduct;
